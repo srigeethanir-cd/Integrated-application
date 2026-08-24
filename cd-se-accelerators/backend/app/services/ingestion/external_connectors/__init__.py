@@ -1,1 +1,0 @@
-﻿# ingestion\external_connectors

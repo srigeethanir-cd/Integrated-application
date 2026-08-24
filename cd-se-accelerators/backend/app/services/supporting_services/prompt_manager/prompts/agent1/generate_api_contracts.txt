@@ -1,1 +1,0 @@
-﻿# Prompt: Generate API Contracts

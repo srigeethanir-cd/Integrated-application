@@ -1,7 +1,0 @@
-{
-  "id": "US-001",
-  "title": "User Login",
-  "description": "As a user, I want to log in using my email and password.",
-  "module": "Authentication",
-  "epic": "EP-001"
-}

@@ -1,7 +1,0 @@
-{
-  "report_name": "Runtime Report",
-  "status": "OPERATIONAL",
-  "timestamp": "2026-07-21T10:50:35.761894+00:00",
-  "fastapi_server_status": "READY",
-  "langgraph_workflow_status": "ACTIVE"
-}

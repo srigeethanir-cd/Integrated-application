@@ -1,1 +1,0 @@
-﻿# Prompt: Validate Project Structure

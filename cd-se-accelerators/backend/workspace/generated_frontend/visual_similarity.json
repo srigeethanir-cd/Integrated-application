@@ -1,7 +1,0 @@
-{
-  "SSIM": 0.99,
-  "pixel_similarity": 0.99,
-  "color_similarity": 0.99,
-  "layout_similarity": 0.98,
-  "overall_similarity_score": 0.99
-}

@@ -1,8 +1,0 @@
-{
-  "theme": "dark",
-  "components": [
-    "Login",
-    "SignUp",
-    "Sidebar"
-  ]
-}

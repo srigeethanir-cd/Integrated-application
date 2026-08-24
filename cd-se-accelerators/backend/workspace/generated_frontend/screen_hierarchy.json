@@ -1,8 +1,0 @@
-{
-  "root": "AuthLayout",
-  "children": [
-    "LoginScreen",
-    "SignUpScreen",
-    "SidebarNavigation"
-  ]
-}

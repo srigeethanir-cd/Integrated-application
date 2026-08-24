@@ -1,7 +1,0 @@
-[
-  "frontend/us004_component.tsx",
-  "backend/us004_service.py",
-  "backend/database/us004_schema.sql",
-  "backend/us004_router.py",
-  "backend/tests/test_us004.py"
-]

@@ -1,8 +1,0 @@
-[
-  {
-    "story_key": "US005",
-    "endpoint": "/api/v1/edit_tasks",
-    "method": "GET/POST/PUT/DELETE",
-    "db_table": "edit_tasks"
-  }
-]

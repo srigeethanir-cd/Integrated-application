@@ -1,7 +1,0 @@
-{
-  "story_key": "US101",
-  "title": "Auth Portal",
-  "acceptance_criteria": [
-    "Email format validation"
-  ]
-}

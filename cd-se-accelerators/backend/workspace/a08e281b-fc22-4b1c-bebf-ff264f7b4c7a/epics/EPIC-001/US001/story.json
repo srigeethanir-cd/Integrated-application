@@ -1,6 +1,0 @@
-{
-  "story_key": "US001",
-  "epic_key": "EPIC-001",
-  "title": "User Registration",
-  "description": "Allow new users to register an account with username, email, and password."
-}

@@ -1,1 +1,0 @@
--- Database migration schema for US101 - User login

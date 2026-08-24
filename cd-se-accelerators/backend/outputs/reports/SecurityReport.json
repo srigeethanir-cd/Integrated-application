@@ -1,7 +1,0 @@
-{
-  "report_name": "Security Report",
-  "jwt_authentication": "ENABLED",
-  "secrets_management": "VERIFIED",
-  "vulnerabilities": 0,
-  "generated_at": "2026-07-21T10:48:23.427687+00:00"
-}

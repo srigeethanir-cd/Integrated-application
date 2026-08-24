@@ -1,9 +1,0 @@
-{
-  "story_key": "US102",
-  "epic_key": "EP001",
-  "title": "Employee Dashboard & Analytics",
-  "description": "Enable analytics dashboard view",
-  "acceptance_criteria": [
-    "dashboard displays data"
-  ]
-}

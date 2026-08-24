@@ -1,8 +1,0 @@
-[
-  {
-    "story_key": "US006",
-    "endpoint": "/api/v1/social_logins",
-    "method": "GET/POST/PUT/DELETE",
-    "db_table": "social_logins"
-  }
-]

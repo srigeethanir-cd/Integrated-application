@@ -1,2 +1,0 @@
-{"status": "error", "message": "LLM HTTP request failed: LLM API returned HTTP 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
-"}

@@ -1,6 +1,0 @@
-{
-  "tech_stack": "Python FastAPI / React TypeScript",
-  "mapping_confidence_threshold": 0.98,
-  "auto_approve_threshold": 0.98,
-  "governance_mode": "strict"
-}

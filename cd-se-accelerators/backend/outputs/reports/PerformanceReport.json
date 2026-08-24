@@ -1,7 +1,0 @@
-{
-  "report_name": "Performance Report",
-  "api_latency_ms": 12.5,
-  "target_latency_ms": 200,
-  "status": "OPTIMAL",
-  "generated_at": "2026-07-21T10:48:23.427687+00:00"
-}

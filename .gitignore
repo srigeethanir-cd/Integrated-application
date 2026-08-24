@@ -21,3 +21,6 @@ build/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Excluded directories
+cd-se-accelerators/

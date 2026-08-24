@@ -1,9 +1,0 @@
-{
-  "status": "VALID",
-  "errors": [],
-  "checks_run": [
-    "boundaries_complete",
-    "layout_verified",
-    "accessibility_compliance"
-  ]
-}
