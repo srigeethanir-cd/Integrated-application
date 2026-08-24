@@ -1,0 +1,30 @@
+{
+  "nodes": [
+    {
+      "story_key": "US101",
+      "depends_on": [],
+      "execution_tier": 1
+    },
+    {
+      "story_key": "US102",
+      "depends_on": [
+        "US101"
+      ],
+      "execution_tier": 2
+    },
+    {
+      "story_key": "US103",
+      "depends_on": [
+        "US101"
+      ],
+      "execution_tier": 2
+    }
+  ],
+  "execution_order": [
+    "US101",
+    "US102",
+    "US103"
+  ],
+  "max_tiers": 2,
+  "is_acyclic": true
+}

@@ -1,0 +1,21 @@
+{
+  "story_id": "US010",
+  "title": "User Logout",
+  "status": "GENERATED",
+  "approval_status": "PENDING",
+  "provider": "Groq",
+  "model": "llama-3.3-70b-versatile",
+  "worker": "Agent-2",
+  "created_timestamp": "2026-08-24T13:14:24.997019+00:00",
+  "updated_timestamp": "2026-08-24T13:14:24.997019+00:00",
+  "generation_time": "0.06s",
+  "total_file_count": 6,
+  "generated_files": [
+    "LogoutButton.tsx",
+    "LogoutModal.tsx",
+    "logout_router.py",
+    "logout_service.py",
+    "preview.html",
+    "preview.png"
+  ]
+}

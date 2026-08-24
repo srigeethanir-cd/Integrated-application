@@ -1,0 +1,25 @@
+{
+  "project_name": "Employee Management System",
+  "tech_stack": "FastAPI (Backend) / React + TypeScript (Frontend) / PostgreSQL (Database) / SQLAlchemy (ORM)",
+  "generated_at": "2026-08-10T07:26:07.717878+00:00",
+  "phases": [
+    {
+      "phase": "Scaffolding & Architecture",
+      "status": "completed",
+      "description": "Project foundation, database setup, and folder structure"
+    },
+    {
+      "phase": "Story Execution & Merging",
+      "status": "pending",
+      "stories": [
+        "US001",
+        "US002"
+      ]
+    },
+    {
+      "phase": "Validation & Quality Audit",
+      "status": "pending",
+      "description": "Automated AST, security, and contract verification"
+    }
+  ]
+}

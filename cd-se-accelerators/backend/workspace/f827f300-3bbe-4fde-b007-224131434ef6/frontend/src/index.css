@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+nav {
+  @apply bg-primary text-white p-4 flex justify-between items-center;
+}
+
+nav h1 {
+  @apply text-2xl font-bold;
+}
+
+section {
+  @apply h-200 bg-secondary p-4 flex justify-center items-center;
+}
+
+section h2 {
+  @apply text-3xl font-bold text-white;
+}
+
+ul {
+  @apply flex-1 p-4 overflow-y-scroll;
+}
+
+li {
+  @apply mb-4;
+}
+
+li h3 {
+  @apply text-xl font-bold;
+}
+
+li ul {
+  @apply text-gray-600;
+}
+
+form {
+  @apply mt-4;
+}
+
+input {
+  @apply block w-full p-2 mb-4 border border-gray-400 rounded;
+}
+
+button {
+  @apply bg-primary text-white p-2 rounded;
+}

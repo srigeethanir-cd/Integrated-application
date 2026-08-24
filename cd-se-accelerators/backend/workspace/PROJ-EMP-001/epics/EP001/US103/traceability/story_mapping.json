@@ -1,0 +1,130 @@
+{
+  "epic_id": "EP001",
+  "epic_title": "User Authentication & Dashboard Settings Workspace",
+  "mapped_screens": [
+    {
+      "screen_id": "SCREEN_001",
+      "route": "/login",
+      "user_story": {
+        "id": "US101",
+        "title": "Create Product"
+      },
+      "acceptance_criteria": [
+        "Product name is mandatory.",
+        "SKU must be unique.",
+        "Product is saved successfully."
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US101_INPUT",
+        "COMP_US101_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_002",
+      "route": "/signup",
+      "user_story": {
+        "id": "US102",
+        "title": "Update Product"
+      },
+      "acceptance_criteria": [
+        "Existing product can be edited.",
+        "Updated details are saved successfully."
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US102_INPUT",
+        "COMP_US102_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US103",
+        "title": "Track Stock"
+      },
+      "acceptance_criteria": [
+        "Current stock quantity is displayed.",
+        "Low-stock products are highlighted."
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US103_INPUT",
+        "COMP_US103_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US201",
+        "title": "Register Supplier"
+      },
+      "acceptance_criteria": [
+        "Supplier name is mandatory.",
+        "Duplicate suppliers are not allowed."
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US201_INPUT",
+        "COMP_US201_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US202",
+        "title": "Generate Purchase Order"
+      },
+      "acceptance_criteria": [
+        "Purchase order number is generated automatically.",
+        "Supplier must be selected."
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US202_INPUT",
+        "COMP_US202_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US203",
+        "title": "View Supplier Performance"
+      },
+      "acceptance_criteria": [
+        "Supplier ratings are displayed.",
+        "Delivery performance is calculated."
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US203_INPUT",
+        "COMP_US203_ACTION"
+      ]
+    }
+  ],
+  "shared_components": [
+    {
+      "component_id": "COMP_SHARED_SIDEBAR",
+      "reusable_type": "Sidebar",
+      "screens_referenced": [
+        "SCREEN_003"
+      ]
+    }
+  ]
+}

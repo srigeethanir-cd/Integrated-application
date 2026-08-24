@@ -1,0 +1,36 @@
+{
+  "story_id": "US002",
+  "file_count": 6,
+  "files": [
+    {
+      "name": "Login.tsx",
+      "path": "frontend/Login.tsx",
+      "type": "frontend"
+    },
+    {
+      "name": "LoginForm.tsx",
+      "path": "frontend/LoginForm.tsx",
+      "type": "frontend"
+    },
+    {
+      "name": "login_router.py",
+      "path": "backend/login_router.py",
+      "type": "backend"
+    },
+    {
+      "name": "login_service.py",
+      "path": "backend/login_service.py",
+      "type": "backend"
+    },
+    {
+      "name": "preview.html",
+      "path": "preview.html",
+      "type": "preview"
+    },
+    {
+      "name": "preview.png",
+      "path": "preview.png",
+      "type": "asset"
+    }
+  ]
+}

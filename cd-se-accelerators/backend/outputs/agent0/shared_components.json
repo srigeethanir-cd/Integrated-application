@@ -1,0 +1,21 @@
+{
+  "shared": [
+    {
+      "name": "FormInput",
+      "props": [
+        "label",
+        "type",
+        "value",
+        "onChange"
+      ]
+    },
+    {
+      "name": "ArrowActionButton",
+      "props": [
+        "onClick",
+        "bgColor",
+        "borderRadius"
+      ]
+    }
+  ]
+}

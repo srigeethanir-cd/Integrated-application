@@ -1,0 +1,18 @@
+[
+  {
+    "name": "User Profile",
+    "owner": "shared"
+  },
+  {
+    "name": "Audit Log",
+    "owner": "platform"
+  },
+  {
+    "name": "Notification Service",
+    "owner": "shared"
+  },
+  {
+    "name": "Story Orchestrator",
+    "owner": "workflow"
+  }
+]

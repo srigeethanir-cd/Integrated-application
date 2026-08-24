@@ -1,0 +1,18 @@
+{
+  "traceability_links": [
+    {
+      "story_key": "US101",
+      "epic_key": "EPIC-001",
+      "screen_id": "SCREEN_001",
+      "api_endpoint": "/api/v1/secure_member_login_s",
+      "db_table": "secure_member_login_s"
+    },
+    {
+      "story_key": "US102",
+      "epic_key": "EPIC-002",
+      "screen_id": "SCREEN_002",
+      "api_endpoint": "/api/v1/member_registration_s",
+      "db_table": "member_registration_s"
+    }
+  ]
+}

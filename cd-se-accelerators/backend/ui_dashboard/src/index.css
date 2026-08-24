@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-indigo: #1A237D;
+  --primary-indigo-light: #2A3287;
+
+  --primary-orange: #FE7642;
+  --orange-hover: #F56632;
+
+  --page-bg: #F7F9FB;
+  --card-bg: #FFFDFB;
+  --warm-bg: #FFF9F1;
+
+  --text-primary: #1F232A;
+  --text-secondary: #6B7188;
+  --text-muted: #8F95A4;
+
+  --border: #E1D6D5;
+
+  --success: #1CAB5F;
+  --info: #0268D1;
+
+  --white: #FFFFFF;
+}
+
+
+@layer base {
+  body {
+    @apply bg-[#F6F8FC] text-slate-800 antialiased font-sans min-h-screen selection:bg-blue-100 selection:text-blue-900;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.premium-card {
+  @apply bg-white border border-slate-100/80 shadow-premium rounded-20px transition-all duration-300 hover:shadow-premium-hover;
+}

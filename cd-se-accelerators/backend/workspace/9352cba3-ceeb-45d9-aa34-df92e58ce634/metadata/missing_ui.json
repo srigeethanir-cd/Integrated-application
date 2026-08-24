@@ -1,0 +1,10 @@
+{
+  "missing_components": [
+    {
+      "story_key": "US009",
+      "title": "Filter Tasks",
+      "reason": "Absent from wireframe mockup visual reference",
+      "severity": "high"
+    }
+  ]
+}

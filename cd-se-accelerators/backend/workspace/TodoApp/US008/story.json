@@ -1,0 +1,37 @@
+{
+  "id": "US008",
+  "story_id": "US008",
+  "title": "Search Tasks",
+  "description": "As a user, I want to search tasks by title so that I can quickly find them.",
+  "priority": "Low",
+  "actor": "User",
+  "acceptance_criteria": [
+    "Search filters tasks instantly.",
+    "Search is case-insensitive.",
+    "Empty search displays all tasks."
+  ],
+  "status": "Generated",
+  "epic": "Todo Module",
+  "project": "TodoApp",
+  "folder_path": "backend/workspace/TodoApp/US008",
+  "created_timestamp": "2026-08-24T13:14:24.206730+00:00",
+  "updated_timestamp": "2026-08-24T13:14:24.206730+00:00",
+  "generation_time": "0.16s",
+  "frontend_files": [
+    "SearchBar.tsx",
+    "SearchResults.tsx"
+  ],
+  "backend_files": [
+    "search_task_router.py",
+    "search_service.py"
+  ],
+  "generated_files": [
+    "SearchBar.tsx",
+    "SearchResults.tsx",
+    "search_task_router.py",
+    "search_service.py",
+    "preview.html",
+    "preview.png"
+  ],
+  "total_file_count": 6
+}

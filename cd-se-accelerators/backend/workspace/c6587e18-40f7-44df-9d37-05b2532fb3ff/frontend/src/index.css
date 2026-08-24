@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background;
+  @apply text-text;
+}
+
+.primary {
+  @apply bg-primary;
+  @apply text-white;
+}
+
+.secondary {
+  @apply bg-secondary;
+  @apply text-white;
+}
+
+.header {
+  @apply h-64;
+  @apply w-full;
+  @apply flex;
+  @apply justify-center;
+  @apply items-center;
+}
+
+.hero-image {
+  @apply h-200;
+  @apply w-full;
+  @apply object-cover;
+}
+
+.title {
+  @apply text-3xl;
+  @apply font-bold;
+  @apply mb-4;
+}
+
+.description {
+  @apply text-sm;
+  @apply mb-4;
+}
+
+.call-to-action {
+  @apply bg-primary;
+  @apply text-white;
+  @apply py-2;
+  @apply px-4;
+  @apply rounded;
+  @apply cursor-pointer;
+}
+
+.call-to-action:hover {
+  @apply bg-secondary;
+}

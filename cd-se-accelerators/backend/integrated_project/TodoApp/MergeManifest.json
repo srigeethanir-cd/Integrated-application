@@ -1,0 +1,19 @@
+{
+  "project_name": "TodoApp",
+  "merged_stories": [
+    "US001",
+    "US002",
+    "US003",
+    "US004",
+    "US005",
+    "US006",
+    "US007",
+    "US008",
+    "US009",
+    "US010"
+  ],
+  "total_merged_stories": 10,
+  "total_merged_files": 43,
+  "integrated_path": "C:\\Users\\SriGeethani\\Desktop\\ba-2\\cd-se-accelerators\\backend\\integrated_project\\TodoApp",
+  "status": "SUCCESS"
+}

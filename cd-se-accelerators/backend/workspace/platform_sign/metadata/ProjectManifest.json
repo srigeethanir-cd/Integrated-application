@@ -1,0 +1,15 @@
+{
+  "description": "Generated from 1 user stories using NLP-normalized configuration",
+  "features": [
+    "user can sign up"
+  ],
+  "project_name": "Platform Sign",
+  "status": "draft",
+  "story_count": 1,
+  "tech_stack": {
+    "backend": "python",
+    "database": "postgresql",
+    "frontend": "react",
+    "infrastructure": "docker"
+  }
+}

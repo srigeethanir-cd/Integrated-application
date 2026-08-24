@@ -1,0 +1,11 @@
+{
+  "traceability_links": [
+    {
+      "story_key": "US008",
+      "epic_key": "EPIC-001",
+      "screen_id": "SCREEN_003",
+      "api_endpoint": "/api/v1/search_taskss",
+      "db_table": "search_taskss"
+    }
+  ]
+}

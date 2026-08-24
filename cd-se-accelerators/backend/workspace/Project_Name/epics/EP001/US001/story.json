@@ -1,0 +1,8 @@
+{
+  "id": "US001",
+  "story_id": "US001",
+  "title": "User Story US001",
+  "description": "Features for user story US001",
+  "status": "Approved",
+  "epic": "Authentication"
+}

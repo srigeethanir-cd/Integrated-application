@@ -1,0 +1,136 @@
+{
+  "epic_id": "EP001",
+  "epic_title": "User Authentication & Dashboard Settings Workspace",
+  "mapped_screens": [
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US001",
+        "title": "User Login"
+      },
+      "acceptance_criteria": [
+        "User can enter email and password",
+        "Successful login redirects to dashboard",
+        "Error shown on invalid credentials",
+        "Password field is masked"
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US001_INPUT",
+        "COMP_US001_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US002",
+        "title": "Remember Me"
+      },
+      "acceptance_criteria": [
+        "Checkbox available on login form",
+        "Session persists across browser restarts when checked",
+        "Session expires normally when unchecked"
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US002_INPUT",
+        "COMP_US002_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US003",
+        "title": "Forgot Password"
+      },
+      "acceptance_criteria": [
+        "User can request reset link via email",
+        "Reset link expires after a set time",
+        "User can set a new password via the link"
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US003_INPUT",
+        "COMP_US003_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US004",
+        "title": "Account Lockout"
+      },
+      "acceptance_criteria": [
+        "Account locks after 5 consecutive failed attempts",
+        "User is notified of lockout via email",
+        "Lockout auto-resets after a cooldown period"
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US004_INPUT",
+        "COMP_US004_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US005",
+        "title": "Logout"
+      },
+      "acceptance_criteria": [
+        "Logout button available in navigation",
+        "Session is invalidated on logout",
+        "User is redirected to login page"
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US005_INPUT",
+        "COMP_US005_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US006",
+        "title": "Social Login"
+      },
+      "acceptance_criteria": [
+        "OAuth login option shown on login page",
+        "New account auto-created on first OAuth login",
+        "Existing email matched to OAuth account if present"
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US006_INPUT",
+        "COMP_US006_ACTION"
+      ]
+    }
+  ],
+  "shared_components": [
+    {
+      "component_id": "COMP_SHARED_SIDEBAR",
+      "reusable_type": "Sidebar",
+      "screens_referenced": [
+        "SCREEN_003"
+      ]
+    }
+  ]
+}

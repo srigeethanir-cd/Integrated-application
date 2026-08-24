@@ -1,0 +1,13 @@
+{
+  "story_key": "US-001",
+  "title": "User Registration",
+  "description": "Allow new users to register with email and password",
+  "acceptance_criteria": {
+    "criteria": [
+      "User can enter email and password",
+      "Email must be validated",
+      "Password is hashed before storage",
+      "Success response with user ID"
+    ]
+  }
+}

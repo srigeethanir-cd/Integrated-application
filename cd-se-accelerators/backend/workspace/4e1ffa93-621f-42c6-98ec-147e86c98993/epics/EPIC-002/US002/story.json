@@ -1,0 +1,16 @@
+{
+  "id": "US002",
+  "story_key": "US002",
+  "epic_key": "EPIC-002",
+  "title": "User Login",
+  "description": "",
+  "generation_status": "VALIDATED",
+  "validation_status": "VALIDATED",
+  "preview_status": "PREVIEW_READY",
+  "approval_status": "PENDING",
+  "merge_status": "VALIDATED",
+  "export_status": "PENDING",
+  "version": 1,
+  "retry_count": 0,
+  "assigned_agent": "Agent2"
+}

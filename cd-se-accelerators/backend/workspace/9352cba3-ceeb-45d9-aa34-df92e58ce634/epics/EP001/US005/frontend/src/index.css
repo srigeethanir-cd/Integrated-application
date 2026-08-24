@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+header {
+  @apply bg-primary text-white;
+}
+
+.hero-image {
+  @apply bg-secondary text-white;
+}
+
+.title input {
+  @apply w-full p-2 border border-gray-400 rounded;
+}
+
+.description input {
+  @apply w-full p-2 border border-gray-400 rounded;
+}
+
+.call-to-action button {
+  @apply bg-primary text-white p-2 rounded;
+}

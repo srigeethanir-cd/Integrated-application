@@ -1,0 +1,22 @@
+[
+  {
+    "table_name": "logouts",
+    "columns": [
+      {
+        "name": "id",
+        "type": "String(36)",
+        "primary_key": true
+      },
+      {
+        "name": "created_at",
+        "type": "DateTime",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DateTime",
+        "nullable": false
+      }
+    ]
+  }
+]

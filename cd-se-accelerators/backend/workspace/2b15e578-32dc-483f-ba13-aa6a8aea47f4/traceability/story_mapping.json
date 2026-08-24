@@ -1,0 +1,52 @@
+{
+  "epic_id": "EP001",
+  "epic_title": "User Authentication & Dashboard Settings Workspace",
+  "mapped_screens": [
+    {
+      "screen_id": "SCREEN_001",
+      "route": "/login",
+      "user_story": {
+        "id": "US101",
+        "title": "Secure Member Login Integration"
+      },
+      "acceptance_criteria": [
+        "Validate email format",
+        "Secure password field input"
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US101_INPUT",
+        "COMP_US101_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_002",
+      "route": "/signup",
+      "user_story": {
+        "id": "US102",
+        "title": "Member Registration Scaffolding"
+      },
+      "acceptance_criteria": [
+        "Validate password confirmation match"
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US102_INPUT",
+        "COMP_US102_ACTION"
+      ]
+    }
+  ],
+  "shared_components": [
+    {
+      "component_id": "COMP_SHARED_SIDEBAR",
+      "reusable_type": "Sidebar",
+      "screens_referenced": [
+        "SCREEN_003"
+      ]
+    }
+  ]
+}

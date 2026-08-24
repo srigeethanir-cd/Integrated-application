@@ -1,0 +1,11 @@
+{
+  "name": "TodoApp",
+  "version": "0.1.0",
+  "tech_stack": "Python FastAPI / React TypeScript",
+  "manifest_version": "1.0",
+  "blueprint_summary": {
+    "api_count": 10,
+    "table_count": 10
+  },
+  "project_name": "TodoApp"
+}

@@ -1,0 +1,22 @@
+{
+  "component_mappings": [
+    {
+      "component_id": "COMP_US001_REG",
+      "story_key": "US001",
+      "screen_name": "Registration Screen",
+      "acceptance_criterion": "Register with credentials"
+    },
+    {
+      "component_id": "COMP_US002_INPUT",
+      "story_key": "US002",
+      "screen_name": "Login Screen",
+      "acceptance_criterion": "Login with credentials"
+    },
+    {
+      "component_id": "COMP_US003_METRICS",
+      "story_key": "US003",
+      "screen_name": "Dashboard Screen",
+      "acceptance_criterion": "View live metrics"
+    }
+  ]
+}

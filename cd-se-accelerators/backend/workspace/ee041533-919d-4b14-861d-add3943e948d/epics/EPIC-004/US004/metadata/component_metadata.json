@@ -1,0 +1,134 @@
+{
+  "components": [
+    {
+      "id": "COMP_001_TITLE",
+      "name": "Login Title",
+      "type": "Label",
+      "semantic_role": "Title header displaying Login text",
+      "position": {
+        "x": 450,
+        "y": 150,
+        "width": 300,
+        "height": 60
+      },
+      "screen_id": "SCREEN_001"
+    },
+    {
+      "id": "COMP_001_EMAIL",
+      "name": "Email Input",
+      "type": "Input",
+      "semantic_role": "Email text input field",
+      "position": {
+        "x": 450,
+        "y": 250,
+        "width": 300,
+        "height": 50
+      },
+      "screen_id": "SCREEN_001"
+    },
+    {
+      "id": "COMP_001_PASSWORD",
+      "name": "Password Input",
+      "type": "Input",
+      "semantic_role": "Password field with hidden character masking",
+      "position": {
+        "x": 450,
+        "y": 350,
+        "width": 300,
+        "height": 50
+      },
+      "screen_id": "SCREEN_001"
+    },
+    {
+      "id": "COMP_001_SUBMIT",
+      "name": "Sign In Button",
+      "type": "Button",
+      "semantic_role": "Call-to-action button submitting user credentials",
+      "position": {
+        "x": 450,
+        "y": 450,
+        "width": 300,
+        "height": 50
+      },
+      "screen_id": "SCREEN_001"
+    },
+    {
+      "id": "COMP_002_TITLE",
+      "name": "SignUp Title",
+      "type": "Label",
+      "semantic_role": "Title header displaying SignUp text",
+      "position": {
+        "x": 100,
+        "y": 150,
+        "width": 300,
+        "height": 60
+      },
+      "screen_id": "SCREEN_002"
+    },
+    {
+      "id": "COMP_002_CONFIRM",
+      "name": "Confirm Password Input",
+      "type": "Input",
+      "semantic_role": "Password verification field",
+      "position": {
+        "x": 100,
+        "y": 350,
+        "width": 300,
+        "height": 50
+      },
+      "screen_id": "SCREEN_002"
+    },
+    {
+      "id": "COMP_003_HOME",
+      "name": "Home Link",
+      "type": "Link",
+      "semantic_role": "Navigates to application dashboard screen",
+      "position": {
+        "x": 20,
+        "y": 100,
+        "width": 200,
+        "height": 40
+      },
+      "screen_id": "SCREEN_003"
+    },
+    {
+      "id": "COMP_003_PROFILE",
+      "name": "Profile Link",
+      "type": "Link",
+      "semantic_role": "Navigates to user profile management",
+      "position": {
+        "x": 20,
+        "y": 150,
+        "width": 200,
+        "height": 40
+      },
+      "screen_id": "SCREEN_003"
+    },
+    {
+      "id": "COMP_003_MENU",
+      "name": "Menu Drawer Icon",
+      "type": "Icon",
+      "semantic_role": "Sidebar menu collapse trigger control",
+      "position": {
+        "x": 20,
+        "y": 200,
+        "width": 50,
+        "height": 50
+      },
+      "screen_id": "SCREEN_003"
+    },
+    {
+      "id": "COMP_003_SETTINGS",
+      "name": "Setting Link",
+      "type": "Link",
+      "semantic_role": "Navigates to configuration control panels",
+      "position": {
+        "x": 20,
+        "y": 250,
+        "width": 200,
+        "height": 40
+      },
+      "screen_id": "SCREEN_003"
+    }
+  ]
+}

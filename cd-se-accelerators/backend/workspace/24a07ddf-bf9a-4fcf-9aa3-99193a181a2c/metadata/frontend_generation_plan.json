@@ -1,0 +1,22 @@
+{
+  "project_name": "Employee Management System",
+  "tech_stack": "FastAPI (Backend) / React + TypeScript (Frontend) / PostgreSQL (Database) / SQLAlchemy (ORM)",
+  "generation_steps": [
+    {
+      "step": 1,
+      "task": "Configure Tailwind theme & breakpoints"
+    },
+    {
+      "step": 2,
+      "task": "Scaffold React Router navigation structure"
+    },
+    {
+      "step": 3,
+      "task": "Generate page views for Login, SignUp, and Dashboard"
+    },
+    {
+      "step": 4,
+      "task": "Inject simulated generated specifications for missing pages"
+    }
+  ]
+}

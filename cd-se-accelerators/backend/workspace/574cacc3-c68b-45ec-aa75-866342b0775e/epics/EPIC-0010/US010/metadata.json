@@ -1,0 +1,15 @@
+{
+  "story_id": "US010",
+  "title": "Logout",
+  "epic": "EPIC-0010",
+  "status": "Generated",
+  "generated_files": 5,
+  "frontend_files": 1,
+  "backend_files": 4,
+  "validation_score": 96,
+  "confidence": 95,
+  "preview_image": "preview.png",
+  "preview_html": "preview.html",
+  "generated_at": "2026-08-24T08:26:01.178516+00:00",
+  "updated_at": "2026-08-24T08:26:01.178544+00:00"
+}

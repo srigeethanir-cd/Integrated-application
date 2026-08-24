@@ -1,0 +1,13 @@
+{
+  "id": "US002",
+  "actor": "User",
+  "title": "User Login",
+  "epic_key": "EP001",
+  "priority": "High",
+  "story_key": "US002",
+  "description": "As a user, I want to log in to access my dashboard.",
+  "acceptance_criteria": [
+    "Login with credentials",
+    "Error on invalid credentials"
+  ]
+}

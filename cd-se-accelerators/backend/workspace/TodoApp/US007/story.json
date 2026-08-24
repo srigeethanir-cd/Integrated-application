@@ -1,0 +1,37 @@
+{
+  "id": "US007",
+  "story_id": "US007",
+  "title": "Delete Task",
+  "description": "As a user, I want to delete unwanted tasks so that my task list remains clean.",
+  "priority": "Medium",
+  "actor": "User",
+  "acceptance_criteria": [
+    "User can delete any task.",
+    "Confirmation message appears before deletion.",
+    "Deleted task no longer appears."
+  ],
+  "status": "Generated",
+  "epic": "Todo Module",
+  "project": "TodoApp",
+  "folder_path": "backend/workspace/TodoApp/US007",
+  "created_timestamp": "2026-08-24T13:14:23.875705+00:00",
+  "updated_timestamp": "2026-08-24T13:14:23.875705+00:00",
+  "generation_time": "0.05s",
+  "frontend_files": [
+    "DeleteConfirmModal.tsx",
+    "DeleteTaskButton.tsx"
+  ],
+  "backend_files": [
+    "delete_task_router.py",
+    "task_service.py"
+  ],
+  "generated_files": [
+    "DeleteConfirmModal.tsx",
+    "DeleteTaskButton.tsx",
+    "delete_task_router.py",
+    "task_service.py",
+    "preview.html",
+    "preview.png"
+  ],
+  "total_file_count": 6
+}

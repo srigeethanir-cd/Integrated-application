@@ -1,0 +1,15 @@
+{
+  "story_id": "US006",
+  "title": "Social Login",
+  "epic": "EPIC-006",
+  "status": "Generated",
+  "generated_files": 5,
+  "frontend_files": 1,
+  "backend_files": 4,
+  "validation_score": 96,
+  "confidence": 95,
+  "preview_image": "preview.png",
+  "preview_html": "preview.html",
+  "generated_at": "2026-08-24T13:13:44.509557+00:00",
+  "updated_at": "2026-08-24T13:13:44.509572+00:00"
+}

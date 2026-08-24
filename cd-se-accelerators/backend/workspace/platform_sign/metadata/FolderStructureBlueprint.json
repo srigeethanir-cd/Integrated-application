@@ -1,0 +1,80 @@
+{
+  "files": [
+    {
+      "path": "backend/main.py",
+      "template_key": "python_main"
+    },
+    {
+      "path": "backend/requirements.txt",
+      "template_key": "python_reqs"
+    },
+    {
+      "path": "backend/config.py",
+      "template_key": "python_config"
+    },
+    {
+      "path": "backend/authentication/__init__.py",
+      "template_key": "empty"
+    },
+    {
+      "module_name": "Authentication",
+      "path": "backend/authentication/service.py",
+      "template_key": "python_service"
+    },
+    {
+      "module_name": "Authentication",
+      "path": "backend/authentication/models.py",
+      "template_key": "python_models"
+    },
+    {
+      "module_name": "Authentication",
+      "path": "backend/authentication/routes.py",
+      "template_key": "python_routes"
+    },
+    {
+      "path": "frontend/package.json",
+      "template_key": "react_package"
+    },
+    {
+      "path": "frontend/src/App.jsx",
+      "template_key": "react_app"
+    },
+    {
+      "path": "frontend/src/index.jsx",
+      "template_key": "react_index"
+    },
+    {
+      "path": "frontend/public/index.html",
+      "template_key": "react_html"
+    },
+    {
+      "path": "shared/README.md",
+      "template_key": "shared_readme"
+    },
+    {
+      "path": ".env.example",
+      "template_key": "env_example"
+    },
+    {
+      "path": "README.md",
+      "template_key": "readme"
+    }
+  ],
+  "folders": [
+    "backend",
+    "frontend",
+    "shared",
+    "workspace",
+    "metadata",
+    "backend/authentication",
+    "frontend/public",
+    "frontend/src",
+    "frontend/src/components",
+    "frontend/src/pages",
+    "shared/contracts",
+    "shared/utils",
+    "shared/types",
+    "shared/middleware"
+  ],
+  "project_name": "Platform Sign"
+}

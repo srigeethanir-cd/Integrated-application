@@ -1,0 +1,38 @@
+{
+  "id": "US001",
+  "story_id": "US001",
+  "title": "User Registration",
+  "description": "As a new user, I want to create an account so that I can manage my personal tasks.",
+  "priority": "High",
+  "actor": "User",
+  "acceptance_criteria": [
+    "User can register using name, email, and password.",
+    "Email must be unique.",
+    "Password must contain at least 8 characters.",
+    "Successful registration redirects to the login page."
+  ],
+  "status": "Approved",
+  "epic": "Todo Module",
+  "project": "TodoApp",
+  "folder_path": "backend/workspace/TodoApp/US001",
+  "created_timestamp": "2026-08-24T13:14:21.501192+00:00",
+  "updated_timestamp": "2026-08-24T13:14:44.358106+00:00",
+  "generation_time": "0.12s",
+  "frontend_files": [
+    "Register.tsx",
+    "RegisterForm.tsx"
+  ],
+  "backend_files": [
+    "register_router.py",
+    "register_service.py"
+  ],
+  "generated_files": [
+    "Register.tsx",
+    "RegisterForm.tsx",
+    "register_router.py",
+    "register_service.py",
+    "preview.html",
+    "preview.png"
+  ],
+  "total_file_count": 6
+}

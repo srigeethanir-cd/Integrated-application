@@ -1,0 +1,27 @@
+{
+  "story_id": "US006",
+  "steps": {
+    "setup": "Done",
+    "frontend": "Done",
+    "backend": "Done",
+    "preview": "Done",
+    "metadata": "Done"
+  },
+  "progress_percent": 100,
+  "logs": [
+    "[INFO] Starting Agent-2 for US006 - Mark Task Complete",
+    "Reading story.json",
+    "Generating React components",
+    "Generated TaskItem.tsx",
+    "Generated CompleteTaskButton.tsx",
+    "Generating FastAPI backend",
+    "Generated complete_task_router.py",
+    "Generated task_service.py",
+    "Generating Preview",
+    "Generated preview.html",
+    "Generated preview.png",
+    "Updating metadata.json",
+    "Completed US006"
+  ],
+  "timing": "0.05s"
+}

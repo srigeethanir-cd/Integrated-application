@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background;
+  @apply text-text;
+}
+
+.primary {
+  @apply bg-primary;
+  @apply text-white;
+}
+
+.secondary {
+  @apply bg-secondary;
+  @apply text-white;
+}
+
+.spacing-small {
+  @apply mx-spacing-small;
+  @apply my-spacing-small;
+}
+
+.spacing-medium {
+  @apply mx-spacing-medium;
+  @apply my-spacing-medium;
+}
+
+.spacing-large {
+  @apply mx-spacing-large;
+  @apply my-spacing-large;
+}
+
+.corners-small {
+  @apply rounded-corners-small;
+}
+
+.corners-medium {
+  @apply rounded-corners-medium;
+}
+
+.corners-large {
+  @apply rounded-corners-large;
+}

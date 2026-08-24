@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+.header {
+  @apply w-full h-64 bg-primary flex justify-center items-center;
+}
+
+.hero-image {
+  @apply w-full h-200 bg-hero-image bg-cover bg-center flex justify-center items-center;
+}
+
+.text-block {
+  @apply w-343 h-100 bg-white shadow-md rounded-md p-4 flex flex-col items-center justify-center;
+}
+
+.call-to-action {
+  @apply w-343 h-50 bg-white shadow-md rounded-md p-4 flex flex-col items-center justify-center;
+}
+
+input {
+  @apply w-full h-10 bg-gray-100 p-2 rounded-md mb-4;
+}
+
+button {
+  @apply w-full h-10 bg-primary text-white rounded-md hover:bg-secondary;
+}
+
+button:hover {
+  @apply bg-secondary;
+}

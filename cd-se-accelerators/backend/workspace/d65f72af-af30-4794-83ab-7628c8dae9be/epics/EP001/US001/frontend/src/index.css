@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background;
+  @apply text-text;
+}
+
+header {
+  @apply bg-primary;
+  @apply text-white;
+}
+
+main {
+  @apply flex-1;
+  @apply overflow-y-auto;
+  @apply p-4;
+}
+
+footer {
+  @apply bg-primary;
+  @apply text-white;
+}
+
+.button {
+  @apply bg-secondary;
+  @apply hover:bg-secondary-dark;
+  @apply text-white;
+  @apply font-bold;
+  @apply py-2;
+  @apply px-4;
+  @apply rounded;
+}
+
+.hero-image {
+  @apply h-48;
+  @apply w-full;
+  @apply object-cover;
+  @apply rounded;
+}

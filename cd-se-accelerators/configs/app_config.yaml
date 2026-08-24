@@ -1,0 +1,47 @@
+# AI BA Accelerator — Central System Configuration Specification
+
+app:
+  name: "AI BA Accelerator"
+  version: "0.1.0"
+  environment: "development"
+  python_version: "3.12"
+
+system:
+  max_concurrent_agents: 4
+  workspace_cleanup_on_failure: true
+  enable_traceability: true
+
+database:
+  dialect: "postgresql"
+  fallback_sqlite: true
+  pool_size: 10
+  max_overflow: 20
+
+llm:
+  default_provider: "openai"
+  default_model: "gpt-4o"
+  temperature: 0.2
+  max_tokens: 4096
+  retry_attempts: 3
+
+agents:
+  agent0_wireframe:
+    enabled: true
+    vision_model: "gpt-4o"
+  agent1_blueprint:
+    enabled: true
+    model: "gpt-4o"
+    auto_approve: false
+  agent2_story_generator:
+    enabled: true
+    model: "gpt-4o"
+    isolated_workspace: true
+  agent3_merge_validation:
+    enabled: true
+    strict_mode: true
+
+paths:
+  workspace: "workspace"
+  outputs: "outputs"
+  configs: "configs"
+  logs: "logs"

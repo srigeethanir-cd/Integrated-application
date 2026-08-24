@@ -1,0 +1,356 @@
+{
+  "story_key": "US010",
+  "epic_key": "EP001",
+  "master_blueprint": {
+    "project_name": "Employee Management System",
+    "tech_stack": "Python FastAPI / React TypeScript",
+    "generated_at": "2026-08-06T09:23:19.900219+00:00",
+    "architecture": {
+      "backend": "FastAPI Async / SQLAlchemy 2.0 / Alembic",
+      "frontend": "React TypeScript / React Router v6 / Tailwind CSS",
+      "database": "PostgreSQL 16 / SQLite Fallback"
+    },
+    "modules": [
+      {
+        "name": "user_registrations",
+        "description": "Module handling User Registration and related services.",
+        "endpoints": [
+          "/api/v1/user_registrations"
+        ]
+      },
+      {
+        "name": "user_logins",
+        "description": "Module handling User Login and related services.",
+        "endpoints": [
+          "/api/v1/user_logins"
+        ]
+      },
+      {
+        "name": "view_dashboards",
+        "description": "Module handling View Dashboard and related services.",
+        "endpoints": [
+          "/api/v1/view_dashboards"
+        ]
+      },
+      {
+        "name": "create_tasks",
+        "description": "Module handling Create Task and related services.",
+        "endpoints": [
+          "/api/v1/create_tasks"
+        ]
+      },
+      {
+        "name": "edit_tasks",
+        "description": "Module handling Edit Task and related services.",
+        "endpoints": [
+          "/api/v1/edit_tasks"
+        ]
+      },
+      {
+        "name": "mark_task_completes",
+        "description": "Module handling Mark Task Complete and related services.",
+        "endpoints": [
+          "/api/v1/mark_task_completes"
+        ]
+      },
+      {
+        "name": "delete_tasks",
+        "description": "Module handling Delete Task and related services.",
+        "endpoints": [
+          "/api/v1/delete_tasks"
+        ]
+      },
+      {
+        "name": "search_taskss",
+        "description": "Module handling Search Tasks and related services.",
+        "endpoints": [
+          "/api/v1/search_taskss"
+        ]
+      },
+      {
+        "name": "filter_taskss",
+        "description": "Module handling Filter Tasks and related services.",
+        "endpoints": [
+          "/api/v1/filter_taskss"
+        ]
+      },
+      {
+        "name": "logouts",
+        "description": "Module handling Logout and related services.",
+        "endpoints": [
+          "/api/v1/logouts"
+        ]
+      }
+    ],
+    "api_contracts": [
+      {
+        "story_key": "US001",
+        "endpoint": "/api/v1/user_registrations",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "user_registrations"
+      },
+      {
+        "story_key": "US002",
+        "endpoint": "/api/v1/user_logins",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "user_logins"
+      },
+      {
+        "story_key": "US003",
+        "endpoint": "/api/v1/view_dashboards",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "view_dashboards"
+      },
+      {
+        "story_key": "US004",
+        "endpoint": "/api/v1/create_tasks",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "create_tasks"
+      },
+      {
+        "story_key": "US005",
+        "endpoint": "/api/v1/edit_tasks",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "edit_tasks"
+      },
+      {
+        "story_key": "US006",
+        "endpoint": "/api/v1/mark_task_completes",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "mark_task_completes"
+      },
+      {
+        "story_key": "US007",
+        "endpoint": "/api/v1/delete_tasks",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "delete_tasks"
+      },
+      {
+        "story_key": "US008",
+        "endpoint": "/api/v1/search_taskss",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "search_taskss"
+      },
+      {
+        "story_key": "US009",
+        "endpoint": "/api/v1/filter_taskss",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "filter_taskss"
+      },
+      {
+        "story_key": "US010",
+        "endpoint": "/api/v1/logouts",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "logouts"
+      }
+    ],
+    "database_schemas": [
+      {
+        "table_name": "user_registrations",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "user_logins",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "view_dashboards",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "create_tasks",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "edit_tasks",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "mark_task_completes",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "delete_tasks",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "search_taskss",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "filter_taskss",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "logouts",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      }
+    ],
+    "non_functional_requirements": [
+      "API response time < 200ms",
+      "JWT bearer token authentication",
+      "SQLAlchemy 2.0 async/sync ORM compatibility",
+      "React Router v6 lazy-loaded SPA routes"
+    ]
+  }
+}

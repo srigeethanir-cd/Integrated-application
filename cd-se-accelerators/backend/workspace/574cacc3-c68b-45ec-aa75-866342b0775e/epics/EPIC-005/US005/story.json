@@ -1,0 +1,21 @@
+{
+  "story_key": "US005",
+  "epic_key": "EPIC-005",
+  "title": "Edit Task",
+  "user_role": "User",
+  "goal": "Perform Edit Task actions",
+  "benefit": "Streamline user workflow and automation",
+  "acceptance_criteria": [
+    "Modify task title",
+    "Modify task status"
+  ],
+  "api_endpoint": "/api/v1/edit_tasks",
+  "db_table": "edit_tasks",
+  "target_files": {
+    "backend": "backend/app/services/edit_task_service.py",
+    "api": "backend/app/api/v1/edit_task_routes.py",
+    "frontend": "frontend/src/pages/EditTaskPage.tsx",
+    "database": "backend/alembic/versions/us005_edit_task_schema.py",
+    "test": "backend/tests/test_edit_task.py"
+  }
+}

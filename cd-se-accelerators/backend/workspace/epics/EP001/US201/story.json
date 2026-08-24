@@ -1,0 +1,11 @@
+{
+  "story_key": "US201",
+  "title": "User Registration",
+  "description": "Allow new users to register an account",
+  "acceptance_criteria": {
+    "criteria": [
+      "Email validation",
+      "Password hashing"
+    ]
+  }
+}

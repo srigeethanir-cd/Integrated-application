@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background;
+  @apply text-text;
+}
+
+.header {
+  @apply bg-primary;
+  @apply text-white;
+}
+
+.hero-image {
+  @apply bg-hero-image;
+}
+
+.text-block {
+  @apply bg-white;
+  @apply text-text;
+}
+
+.call-to-action {
+  @apply bg-secondary;
+  @apply text-white;
+}
+
+.button {
+  @apply bg-primary;
+  @apply text-white;
+  @apply font-bold;
+  @apply py-2;
+  @apply px-4;
+  @apply rounded;
+}
+
+.small-spacing {
+  @apply mx-small;
+  @apply my-small;
+}
+
+.medium-spacing {
+  @apply mx-medium;
+  @apply my-medium;
+}
+
+.large-spacing {
+  @apply mx-large;
+  @apply my-large;
+}
+
+.small-corners {
+  @apply rounded-small;
+}
+
+.medium-corners {
+  @apply rounded-medium;
+}
+
+.large-corners {
+  @apply rounded-large;
+}

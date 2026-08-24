@@ -1,0 +1,41 @@
+{
+  "story_key": "US002",
+  "epic_key": "EP001",
+  "source_workspace": "workspace\\PROJ-EMP-001\\epics\\EP001\\US002",
+  "total_actions": 5,
+  "create_count": 5,
+  "modify_count": 0,
+  "conflict_count": 0,
+  "actions": [
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\us002_router.py",
+      "target_file": "backend\\us002_router.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\us002_service.py",
+      "target_file": "backend\\us002_service.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\database\\us002_schema.sql",
+      "target_file": "backend\\database\\us002_schema.sql",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\tests\\test_us002.py",
+      "target_file": "backend\\tests\\test_us002.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "frontend\\us002_component.tsx",
+      "target_file": "frontend\\us002_component.tsx",
+      "conflict_risk": "NONE"
+    }
+  ]
+}

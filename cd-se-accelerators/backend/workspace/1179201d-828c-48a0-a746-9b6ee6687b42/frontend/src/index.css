@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @apply bg-white;
+}
+
+@layer components {
+  .hero-image {
+    @apply bg-cover bg-center;
+    background-image: url('https://example.com/hero-image.jpg');
+  }
+}
+
+@layer utilities {
+  .bg-hero-image {
+    @apply bg-cover bg-center;
+    background-image: url('https://example.com/hero-image.jpg');
+  }
+}
+
+body {
+  @apply font-sans;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold;
+}
+
+input[type="email"], input[type="password"] {
+  @apply w-full p-2 border border-gray-400 rounded;
+}
+
+button {
+  @apply w-full p-2 bg-primary text-white rounded;
+}
+
+button:hover {
+  @apply bg-secondary;
+}

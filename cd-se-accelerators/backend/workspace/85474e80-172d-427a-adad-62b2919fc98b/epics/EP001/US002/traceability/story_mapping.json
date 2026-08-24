@@ -1,0 +1,53 @@
+{
+  "epic_id": "EP001",
+  "epic_title": "User Authentication & Dashboard Settings Workspace",
+  "mapped_screens": [
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US001",
+        "title": "User Registration"
+      },
+      "acceptance_criteria": [
+        "Register using name, email, password",
+        "Email unique"
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US001_INPUT",
+        "COMP_US001_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US002",
+        "title": "User Login"
+      },
+      "acceptance_criteria": [
+        "Login with credentials",
+        "Error on invalid credentials"
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US002_INPUT",
+        "COMP_US002_ACTION"
+      ]
+    }
+  ],
+  "shared_components": [
+    {
+      "component_id": "COMP_SHARED_SIDEBAR",
+      "reusable_type": "Sidebar",
+      "screens_referenced": [
+        "SCREEN_003"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @apply bg-background;
+}
+
+@layer components {
+  .hero-image {
+    @apply bg-hero-image;
+  }
+}
+
+@layer utilities {
+  .text-text {
+    @apply text-text;
+  }
+  .bg-primary {
+    @apply bg-primary;
+  }
+  .bg-secondary {
+    @apply bg-secondary;
+  }
+  .bg-background {
+    @apply bg-background;
+  }
+}
+
+.hero-image {
+  background-image: url('https://via.placeholder.com/375x200');
+  background-size: cover;
+  background-position: center;
+}
+
+.text-block {
+  padding: 16px;
+}
+
+.call-to-action {
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.call-to-action:hover {
+  opacity: 0.8;
+}

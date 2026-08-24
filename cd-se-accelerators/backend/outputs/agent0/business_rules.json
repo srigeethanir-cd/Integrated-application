@@ -1,0 +1,19 @@
+{
+  "rules": [
+    {
+      "rule_id": "BR_LOGIN_VALIDATION",
+      "trigger": "OnSubmit",
+      "logic": "Verify credentials database match"
+    },
+    {
+      "rule_id": "BR_PASSWORD_MATCH",
+      "trigger": "OnChangeConfirmPassword",
+      "logic": "confirm_password must match password exactly"
+    },
+    {
+      "rule_id": "BR_EMAIL_FORMAT",
+      "trigger": "OnBlurEmail",
+      "logic": "Validate standard email regex format"
+    }
+  ]
+}

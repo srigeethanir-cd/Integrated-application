@@ -1,0 +1,10 @@
+{
+  "story_key": "US001",
+  "epic_key": "EP001",
+  "title": "User Login",
+  "description": "As a registered user, I want to log in using my email and password so that I can securely access my account.",
+  "acceptance_criteria": [
+    "User can log in with valid credentials",
+    "Display an error message for invalid credentials"
+  ]
+}

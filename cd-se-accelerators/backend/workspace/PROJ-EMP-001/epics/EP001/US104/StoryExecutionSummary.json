@@ -1,0 +1,78 @@
+{
+  "story_key": "US104",
+  "epic_key": "EP001",
+  "status": "completed",
+  "db_persisted": true,
+  "db_persist_error": null,
+  "story_workspace": "workspace\\PROJ-EMP-001\\epics\\EP001\\US104",
+  "generated_files": [
+    "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\frontend\\us104_component.tsx",
+    "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\us104_service.py",
+    "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\database\\us104_schema.sql",
+    "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\us104_router.py",
+    "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\tests\\test_us104.py"
+  ],
+  "validation_report": {
+    "story_key": "US104",
+    "attempts": 1,
+    "passed": true,
+    "checks": [
+      {
+        "check_name": "Backend Python AST Check",
+        "passed": true,
+        "error": null
+      },
+      {
+        "check_name": "Frontend Component Check",
+        "passed": true,
+        "error": null
+      },
+      {
+        "check_name": "API & Database Schema Contract Check",
+        "passed": true,
+        "error": null
+      }
+    ],
+    "errors": []
+  },
+  "merge_manifest_summary": {
+    "total_actions": 11,
+    "create_count": 11,
+    "modify_count": 0
+  },
+  "traceability": {
+    "story_key": "US104",
+    "epic_key": "EP001",
+    "traceability_matrix": {
+      "requirement_id": "REQ-US104",
+      "epic_id": "EP001",
+      "user_story_id": "US104",
+      "frontend_components": [
+        "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\frontend\\us104_component.tsx"
+      ],
+      "backend_services": [
+        "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\us104_service.py",
+        "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\database\\us104_schema.sql",
+        "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\us104_router.py",
+        "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\tests\\test_us104.py"
+      ],
+      "api_endpoints": [
+        "/api/v1/resource"
+      ],
+      "database_tables": [
+        "resources"
+      ],
+      "tests": [
+        "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\tests\\test_us104.py"
+      ],
+      "all_generated_files": [
+        "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\frontend\\us104_component.tsx",
+        "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\us104_service.py",
+        "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\database\\us104_schema.sql",
+        "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\us104_router.py",
+        "workspace\\PROJ-EMP-001\\epics\\EP001\\US104\\backend\\tests\\test_us104.py"
+      ]
+    }
+  },
+  "merged": true
+}

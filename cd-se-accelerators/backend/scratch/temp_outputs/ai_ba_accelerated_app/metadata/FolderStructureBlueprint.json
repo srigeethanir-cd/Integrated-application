@@ -1,0 +1,72 @@
+{
+  "project_name": "AI_BA_Accelerated_App",
+  "tech_stack": "Python FastAPI React PostgreSQL",
+  "created_at": "2026-07-31T08:14:01.147269+00:00",
+  "status": "awaiting_human_approval",
+  "epics_count": 2,
+  "stories_count": 1,
+  "epics": [
+    {
+      "epic_key": "EPIC-001",
+      "title": "Authentication & System Core Setup",
+      "description": "Core application setup, database infrastructure, user sign in, and token management",
+      "target_module": "auth",
+      "features": [
+        "User Login",
+        "Token Authentication",
+        "System Configuration"
+      ]
+    },
+    {
+      "epic_key": "EPIC-002",
+      "title": "User login Management",
+      "description": "As a user, I want to login with username and password.",
+      "target_module": "user_login",
+      "features": [
+        "User login",
+        "User login API",
+        "User login Database Schema"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "story_key": "US101",
+      "epic_key": "EPIC-001",
+      "title": "User login",
+      "user_role": "User",
+      "goal": "Perform User login actions",
+      "benefit": "Streamline user workflow and automation",
+      "acceptance_criteria": [
+        "Implement User login API",
+        "Return 200 OK"
+      ],
+      "api_endpoint": "/api/v1/user_logins",
+      "db_table": "user_logins",
+      "target_files": {
+        "backend": "backend/app/services/user_login_service.py",
+        "api": "backend/app/api/v1/user_login_routes.py",
+        "frontend": "frontend/src/pages/UserloginPage.tsx",
+        "database": "backend/alembic/versions/us101_user_login_schema.py",
+        "test": "backend/tests/test_user_login.py"
+      }
+    }
+  ],
+  "dependency_graph": {
+    "nodes": [
+      {
+        "story_key": "US101",
+        "depends_on": [],
+        "execution_tier": 1
+      }
+    ],
+    "execution_order": [
+      "US101"
+    ],
+    "max_tiers": 1,
+    "is_acyclic": true
+  },
+  "workspace_status": {
+    "US101": "pending"
+  }
+}

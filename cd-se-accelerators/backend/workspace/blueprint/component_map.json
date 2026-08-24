@@ -1,0 +1,25 @@
+{
+  "component_mappings": [
+    {
+      "component_id": "COMP_US006_INPUT",
+      "story_key": "US006",
+      "screen_name": "Login Screen",
+      "acceptance_criterion": "OAuth login option shown on login page"
+    },
+    {
+      "component_id": "COMP_US006_ACTION",
+      "story_key": "US006",
+      "screen_name": "Login Screen",
+      "acceptance_criterion": "OAuth login option shown on login page"
+    }
+  ],
+  "shared_components": [
+    {
+      "component_id": "COMP_SHARED_SIDEBAR",
+      "reusable_type": "Sidebar",
+      "screens_referenced": [
+        "SCREEN_003"
+      ]
+    }
+  ]
+}

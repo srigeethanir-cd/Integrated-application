@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+.text-primary {
+  @apply text-blue-500;
+}
+
+.text-gray-600 {
+  @apply text-gray-600;
+}
+
+.bg-primary {
+  @apply bg-blue-500;
+}
+
+.border-gray-400 {
+  @apply border-gray-400;
+}
+
+.rounded {
+  @apply rounded;
+}
+
+.mb-2 {
+  @apply mb-2;
+}
+
+.mb-4 {
+  @apply mb-4;
+}
+
+.mt-4 {
+  @apply mt-4;
+}
+
+.p-2 {
+  @apply p-2;
+}
+
+.p-4 {
+  @apply p-4;
+}
+
+.px-4 {
+  @apply px-4;
+}
+
+.py-4 {
+  @apply py-4;
+}
+
+.w-full {
+  @apply w-full;
+}
+
+.h-14 {
+  @apply h-14;
+}
+
+.h-48 {
+  @apply h-48;
+}
+
+.flex-1 {
+  @apply flex-1;
+}
+
+.overflow-y-scroll {
+  @apply overflow-y-scroll;
+}
+
+.justify-between {
+  @apply justify-between;
+}
+
+.items-center {
+  @apply items-center;
+}
+
+.flex {
+  @apply flex;
+}
+
+.flex-col {
+  @apply flex-col;
+}
+
+.justify-center {
+  @apply justify-center;
+}
+
+.text-2xl {
+  @apply text-2xl;
+}
+
+.text-3xl {
+  @apply text-3xl;
+}
+
+.text-xl {
+  @apply text-xl;
+}
+
+.text-lg {
+  @apply text-lg;
+}

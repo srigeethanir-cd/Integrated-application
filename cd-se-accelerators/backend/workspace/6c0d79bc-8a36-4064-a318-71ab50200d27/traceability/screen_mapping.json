@@ -1,0 +1,28 @@
+{
+  "screen_mappings": [
+    {
+      "story_key": "US006",
+      "screen_name": "Login Screen",
+      "exists_in_wireframe": true,
+      "confidence_score": 0.99,
+      "components_mapped": [
+        "COMP_US006_INPUT",
+        "COMP_US006_ACTION"
+      ]
+    },
+    {
+      "story_key": "US101",
+      "screen_name": "SignUp Screen",
+      "exists_in_wireframe": true,
+      "confidence_score": 0.95,
+      "components_mapped": []
+    },
+    {
+      "story_key": "US101",
+      "screen_name": "Sidebar / Menu Drawer",
+      "exists_in_wireframe": true,
+      "confidence_score": 0.95,
+      "components_mapped": []
+    }
+  ]
+}

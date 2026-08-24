@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @apply bg-white;
+}
+
+@layer components {
+  .hero_image {
+    background-image: url('https://via.placeholder.com/375x200');
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@layer utilities {
+  .bg-hero_image {
+    @apply bg-cover bg-center;
+  }
+}
+
+body {
+  @apply bg-white;
+}
+
+h1 {
+  @apply text-2xl;
+}
+
+input {
+  @apply w-full p-2 border border-gray-400 rounded-md;
+}
+
+button {
+  @apply w-full p-2 bg-primary text-white rounded-md;
+}
+
+.bg-primary {
+  background-color: #3498db;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.text-gray-400 {
+  color: #333333;
+}

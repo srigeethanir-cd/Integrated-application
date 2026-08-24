@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+h1, h2 {
+  @apply text-gray-800;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+  @apply border-gray-300;
+}
+
+button[type="submit"] {
+  @apply bg-blue-500 hover:bg-blue-700;
+}
+
+/* Override tailwind classes with design tokens */
+.spacing-margin {
+  margin: 16px;
+}
+
+.spacing-padding {
+  padding: 16px;
+}
+
+.border-radius {
+  border-radius: 4px;
+}

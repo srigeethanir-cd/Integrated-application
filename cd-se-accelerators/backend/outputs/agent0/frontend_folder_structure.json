@@ -1,0 +1,10 @@
+{
+  "folders": [
+    "src/components/InputField",
+    "src/components/SubmitButton",
+    "src/pages/Login",
+    "src/pages/SignUp",
+    "src/pages/DrawerMenu",
+    "src/styles"
+  ]
+}

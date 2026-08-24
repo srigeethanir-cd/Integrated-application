@@ -1,0 +1,8 @@
+{
+  "report_name": "Duplicate Removal Report",
+  "status": "COMPLETED",
+  "timestamp": "2026-07-21T10:50:35.761894+00:00",
+  "duplicates_detected": 0,
+  "duplicates_consolidated": 0,
+  "import_references_updated": "ALL_SYNCHRONIZED"
+}

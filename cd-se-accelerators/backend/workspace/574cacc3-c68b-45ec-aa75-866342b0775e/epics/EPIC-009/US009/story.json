@@ -1,0 +1,20 @@
+{
+  "story_key": "US009",
+  "epic_key": "EPIC-009",
+  "title": "Filter Tasks",
+  "user_role": "User",
+  "goal": "Perform Filter Tasks actions",
+  "benefit": "Streamline user workflow and automation",
+  "acceptance_criteria": [
+    "Filter by completed or pending status"
+  ],
+  "api_endpoint": "/api/v1/filter_taskss",
+  "db_table": "filter_taskss",
+  "target_files": {
+    "backend": "backend/app/services/filter_tasks_service.py",
+    "api": "backend/app/api/v1/filter_tasks_routes.py",
+    "frontend": "frontend/src/pages/FilterTasksPage.tsx",
+    "database": "backend/alembic/versions/us009_filter_tasks_schema.py",
+    "test": "backend/tests/test_filter_tasks.py"
+  }
+}

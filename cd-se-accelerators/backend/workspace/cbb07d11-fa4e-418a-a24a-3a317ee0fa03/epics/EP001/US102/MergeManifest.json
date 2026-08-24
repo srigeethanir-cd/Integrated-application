@@ -1,0 +1,35 @@
+{
+  "story_key": "US102",
+  "epic_key": "EP001",
+  "source_workspace": "workspace\\cbb07d11-fa4e-418a-a24a-3a317ee0fa03\\epics\\EP001\\US102",
+  "total_actions": 4,
+  "create_count": 4,
+  "modify_count": 0,
+  "conflict_count": 0,
+  "actions": [
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\us102_router.py",
+      "target_file": "backend\\us102_router.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\us102_service.py",
+      "target_file": "backend\\us102_service.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\database\\us102_schema.sql",
+      "target_file": "backend\\database\\us102_schema.sql",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\tests\\test_us102.py",
+      "target_file": "backend\\tests\\test_us102.py",
+      "conflict_risk": "NONE"
+    }
+  ]
+}

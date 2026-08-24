@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Preview - US010 User Logout</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; margin: 0; padding: 24px; color: #0f172a; }
+    .card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); max-width: 900px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 20px; }
+    .badge { background: #eff6ff; color: #2563eb; font-weight: bold; font-size: 12px; padding: 4px 12px; border-radius: 9999px; border: 1px solid #bfdbfe; }
+    .criteria { background: #f8fafc; padding: 12px; border-radius: 8px; font-size: 13px; color: #475569; margin-bottom: 20px; border-left: 4px solid #3b82f6; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div>
+        <span class="badge">US010</span>
+        <h2 style="margin: 8px 0 4px 0; font-size: 20px;">User Logout</h2>
+        <p style="margin: 0; font-size: 13px; color: #64748b;">As a user, I want to securely log out so that no one else can access my account.</p>
+      </div>
+    </div>
+    <div class="criteria">
+      <strong>Acceptance Criteria:</strong>
+      <ul style="margin: 8px 0 0 0; padding-left: 20px;">
+        <li>Session is cleared.</li><li>User is redirected to login.</li><li>Protected pages cannot be accessed after logout.</li>
+      </ul>
+    </div>
+    <h3 style="font-size: 15px; margin-bottom: 12px;">Generated Frontend Components</h3>
+    
+        <div style="margin-bottom: 24px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;">
+          <div style="background: #f8fafc; padding: 10px 16px; border-bottom: 1px solid #e2e8f0; font-weight: bold; font-size: 13px; color: #334155; font-family: monospace;">
+            📄 LogoutButton.tsx
+          </div>
+          <pre style="padding: 16px; margin: 0; font-size: 12px; background: #0f172a; color: #f8fafc; overflow-x: auto; font-family: Consolas, monospace;"><code>import React from 'react';
+
+export default function LogoutButton() {
+  const handleLogout = () =&gt; {
+    localStorage.clear();
+    window.location.href = '/login';
+  };
+  return (
+    &lt;button onClick={handleLogout} className="px-4 py-2 bg-red-50 text-red-600 rounded-lg text-sm font-bold border border-red-200 hover:bg-red-100"&gt;Log Out&lt;/button&gt;
+  );
+}
+</code></pre>
+        </div>
+        
+        <div style="margin-bottom: 24px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;">
+          <div style="background: #f8fafc; padding: 10px 16px; border-bottom: 1px solid #e2e8f0; font-weight: bold; font-size: 13px; color: #334155; font-family: monospace;">
+            📄 LogoutModal.tsx
+          </div>
+          <pre style="padding: 16px; margin: 0; font-size: 12px; background: #0f172a; color: #f8fafc; overflow-x: auto; font-family: Consolas, monospace;"><code>import React from 'react';
+
+export default function LogoutModal({ onClose }: { onClose: () =&gt; void }) {
+  return (
+    &lt;div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4"&gt;
+      &lt;div className="bg-white p-6 rounded-xl max-w-xs w-full text-center space-y-4"&gt;
+        &lt;h3 className="text-lg font-bold text-slate-900"&gt;Confirm Logout&lt;/h3&gt;
+        &lt;p className="text-xs text-slate-500"&gt;You will need to sign in again to access your tasks.&lt;/p&gt;
+        &lt;div className="flex justify-center gap-2"&gt;
+          &lt;button onClick={onClose} className="px-4 py-2 border rounded text-xs"&gt;Cancel&lt;/button&gt;
+          &lt;button onClick={() =&gt; window.location.href = '/login'} className="px-4 py-2 bg-red-600 text-white rounded font-bold text-xs"&gt;Logout&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+        </div>
+        
+  </div>
+</body>
+</html>

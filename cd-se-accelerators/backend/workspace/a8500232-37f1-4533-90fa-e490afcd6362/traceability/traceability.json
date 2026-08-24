@@ -1,0 +1,11 @@
+{
+  "traceability_links": [
+    {
+      "story_key": "US010",
+      "epic_key": "EPIC-001",
+      "screen_id": "SCREEN_003",
+      "api_endpoint": "/api/v1/logouts",
+      "db_table": "logouts"
+    }
+  ]
+}

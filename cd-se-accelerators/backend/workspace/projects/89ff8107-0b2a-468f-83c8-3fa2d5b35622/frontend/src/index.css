@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+header {
+  @apply h-16 bg-white border-b border-gray-200;
+}
+
+main {
+  @apply h-full p-4;
+}
+
+form {
+  @apply max-w-md mx-auto p-4 bg-white rounded-lg shadow-md;
+}
+
+label {
+  @apply block text-gray-700 text-sm font-bold mb-2;
+}
+
+input {
+  @apply block w-full p-2 border border-gray-200 rounded-lg focus:outline-none focus:ring focus:ring-blue-500;
+}
+
+button {
+  @apply w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500;
+}

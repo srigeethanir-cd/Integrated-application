@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+h1 {
+  @apply text-2xl font-bold;
+}
+
+label {
+  @apply block text-lg font-medium mb-2;
+}
+
+input {
+  @apply block w-full p-2 mb-4 border border-gray-300 rounded-lg;
+}
+
+button {
+  @apply w-full p-2 bg-primary text-white rounded-lg;
+}
+
+footer {
+  @apply h-12 flex justify-center items-center;
+}
+
+.primary {
+  background-color: #3498db;
+}
+
+.secondary {
+  background-color: #f1c40f;
+}
+
+.text {
+  color: #333333;
+}
+
+.background {
+  background-color: #ffffff;
+}

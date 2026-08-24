@@ -1,0 +1,12 @@
+{
+  "id": "US009",
+  "actor": "User",
+  "title": "Filter Tasks",
+  "epic_key": "EP001",
+  "priority": "Low",
+  "story_key": "US009",
+  "description": "As a user, I want to filter tasks by status.",
+  "acceptance_criteria": [
+    "Filter by completed or pending status"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "story_key": "US-003",
+  "epic_key": "EP001",
+  "status": "completed",
+  "story_workspace": "workspace\\epics\\EP001\\US-003",
+  "generated_files": [
+    "workspace\\epics\\EP001\\US-003\\backend\\us-003_service.py",
+    "workspace\\epics\\EP001\\US-003\\frontend\\us-003_page.tsx",
+    "workspace\\epics\\EP001\\US-003\\database\\us-003_schema.sql",
+    "workspace\\epics\\EP001\\US-003\\backend\\us-003_router.py",
+    "workspace\\epics\\EP001\\US-003\\tests\\test_us-003.py"
+  ],
+  "validation_report": {
+    "story_key": "US-003",
+    "attempts": 1,
+    "passed": true,
+    "checks": [
+      {
+        "check_name": "Backend Python AST Check",
+        "passed": true,
+        "error": null
+      },
+      {
+        "check_name": "Frontend Component Check",
+        "passed": true,
+        "error": null
+      },
+      {
+        "check_name": "API & Database Schema Contract Check",
+        "passed": true,
+        "error": null
+      }
+    ],
+    "errors": []
+  },
+  "merge_manifest_summary": {
+    "total_actions": 5,
+    "create_count": 5,
+    "modify_count": 0
+  },
+  "traceability": {
+    "story_key": "US-003",
+    "epic_key": "EP001",
+    "traceability_matrix": {
+      "requirement_id": "REQ-US-003",
+      "epic_id": "EP001",
+      "user_story_id": "US-003",
+      "frontend_components": [
+        "workspace\\epics\\EP001\\US-003\\frontend\\us-003_page.tsx"
+      ],
+      "backend_services": [
+        "workspace\\epics\\EP001\\US-003\\backend\\us-003_service.py",
+        "workspace\\epics\\EP001\\US-003\\backend\\us-003_router.py"
+      ],
+      "api_endpoints": [
+        "/api/v1/resource"
+      ],
+      "database_tables": [
+        "resources"
+      ],
+      "tests": [
+        "workspace\\epics\\EP001\\US-003\\tests\\test_us-003.py"
+      ],
+      "all_generated_files": [
+        "workspace\\epics\\EP001\\US-003\\backend\\us-003_service.py",
+        "workspace\\epics\\EP001\\US-003\\frontend\\us-003_page.tsx",
+        "workspace\\epics\\EP001\\US-003\\database\\us-003_schema.sql",
+        "workspace\\epics\\EP001\\US-003\\backend\\us-003_router.py",
+        "workspace\\epics\\EP001\\US-003\\tests\\test_us-003.py"
+      ]
+    }
+  }
+}

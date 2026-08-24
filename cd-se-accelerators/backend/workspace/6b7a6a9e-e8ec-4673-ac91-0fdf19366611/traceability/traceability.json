@@ -1,0 +1,11 @@
+{
+  "traceability_links": [
+    {
+      "story_key": "US003",
+      "epic_key": "EPIC-001",
+      "screen_id": "SCREEN_003",
+      "api_endpoint": "/api/v1/view_dashboards",
+      "db_table": "view_dashboards"
+    }
+  ]
+}

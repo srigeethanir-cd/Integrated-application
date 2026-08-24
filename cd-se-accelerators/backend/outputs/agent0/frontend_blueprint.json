@@ -1,0 +1,9 @@
+{
+  "framework": "React TypeScript",
+  "styling": "Vanilla CSS modules",
+  "pages": {
+    "LoginView": "Centered login card with custom square submit button",
+    "SignUpView": "Centered signup card with confirm password field and black circular submit button",
+    "DrawerView": "Navigation side panel with icon matching list elements"
+  }
+}

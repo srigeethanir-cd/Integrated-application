@@ -1,0 +1,207 @@
+{
+  "project_name": "integrated_project",
+  "generated_at": "2026-08-24T11:52:29.581586+00:00",
+  "promoted_shared_modules_count": 0,
+  "merged_files_count": 33,
+  "promoted_modules": [],
+  "merged_records": [
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "backend/us001_router.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "backend/us001_service.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "backend/database/us001_schema.sql",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "backend/tests/test_us001.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "frontend/component_tree.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "frontend/design_tokens.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "frontend/responsive_metadata.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "frontend/style.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "frontend/us001_component.tsx",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "frontend/src/App.tsx",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "frontend/src/index.css",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "backend/us002_router.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "backend/us002_service.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "backend/database/us002_schema.sql",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "backend/tests/test_us002.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "frontend/component_tree.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "frontend/design_tokens.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "frontend/responsive_metadata.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "frontend/style.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "frontend/us002_component.tsx",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "frontend/src/App.tsx",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "frontend/src/index.css",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "backend/us003_router.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "backend/us003_service.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "backend/database/us003_schema.sql",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "backend/tests/test_us003.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "frontend/component_tree.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "frontend/design_tokens.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "frontend/responsive_metadata.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "frontend/style.json",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "frontend/us003_component.tsx",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "frontend/src/App.tsx",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "frontend/src/index.css",
+      "status": "SUCCESS"
+    }
+  ]
+}

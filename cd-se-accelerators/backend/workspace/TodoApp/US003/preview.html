@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Preview - US003 View Dashboard</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; margin: 0; padding: 24px; color: #0f172a; }
+    .card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); max-width: 900px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 20px; }
+    .badge { background: #eff6ff; color: #2563eb; font-weight: bold; font-size: 12px; padding: 4px 12px; border-radius: 9999px; border: 1px solid #bfdbfe; }
+    .criteria { background: #f8fafc; padding: 12px; border-radius: 8px; font-size: 13px; color: #475569; margin-bottom: 20px; border-left: 4px solid #3b82f6; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div>
+        <span class="badge">US003</span>
+        <h2 style="margin: 8px 0 4px 0; font-size: 20px;">View Dashboard</h2>
+        <p style="margin: 0; font-size: 13px; color: #64748b;">As a logged-in user, I want to view my dashboard so that I can see all my tasks.</p>
+      </div>
+    </div>
+    <div class="criteria">
+      <strong>Acceptance Criteria:</strong>
+      <ul style="margin: 8px 0 0 0; padding-left: 20px;">
+        <li>Dashboard displays all tasks.</li><li>Completed and pending tasks are shown separately.</li><li>Task count is displayed.</li>
+      </ul>
+    </div>
+    <h3 style="font-size: 15px; margin-bottom: 12px;">Generated Frontend Components</h3>
+    
+        <div style="margin-bottom: 24px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;">
+          <div style="background: #f8fafc; padding: 10px 16px; border-bottom: 1px solid #e2e8f0; font-weight: bold; font-size: 13px; color: #334155; font-family: monospace;">
+            📄 Dashboard.tsx
+          </div>
+          <pre style="padding: 16px; margin: 0; font-size: 12px; background: #0f172a; color: #f8fafc; overflow-x: auto; font-family: Consolas, monospace;"><code>import React from 'react';
+import TaskSummaryCards from './TaskSummaryCards';
+
+export default function Dashboard() {
+  return (
+    &lt;div className="p-6 space-y-6 bg-slate-50 min-h-screen"&gt;
+      &lt;h1 className="text-3xl font-bold text-slate-800"&gt;Todo Dashboard&lt;/h1&gt;
+      &lt;TaskSummaryCards total={12} completed={8} pending={4} /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+        </div>
+        
+        <div style="margin-bottom: 24px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;">
+          <div style="background: #f8fafc; padding: 10px 16px; border-bottom: 1px solid #e2e8f0; font-weight: bold; font-size: 13px; color: #334155; font-family: monospace;">
+            📄 TaskSummaryCards.tsx
+          </div>
+          <pre style="padding: 16px; margin: 0; font-size: 12px; background: #0f172a; color: #f8fafc; overflow-x: auto; font-family: Consolas, monospace;"><code>import React from 'react';
+
+interface Props { total: number; completed: number; pending: number; }
+
+export default function TaskSummaryCards({ total, completed, pending }: Props) {
+  return (
+    &lt;div className="grid grid-cols-3 gap-4"&gt;
+      &lt;div className="p-4 bg-blue-50 border border-blue-200 rounded-xl"&gt;
+        &lt;span className="text-xs text-blue-600 uppercase font-bold"&gt;Total Tasks&lt;/span&gt;
+        &lt;p className="text-2xl font-extrabold text-blue-900"&gt;{total}&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl"&gt;
+        &lt;span className="text-xs text-emerald-600 uppercase font-bold"&gt;Completed&lt;/span&gt;
+        &lt;p className="text-2xl font-extrabold text-emerald-900"&gt;{completed}&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div className="p-4 bg-amber-50 border border-amber-200 rounded-xl"&gt;
+        &lt;span className="text-xs text-amber-600 uppercase font-bold"&gt;Pending&lt;/span&gt;
+        &lt;p className="text-2xl font-extrabold text-amber-900"&gt;{pending}&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+        </div>
+        
+  </div>
+</body>
+</html>

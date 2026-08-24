@@ -1,0 +1,22 @@
+{
+  "story_key": "US006",
+  "epic_key": "EPIC-006",
+  "title": "Social Login",
+  "user_role": "User",
+  "goal": "Perform Social Login actions",
+  "benefit": "Streamline user workflow and automation",
+  "acceptance_criteria": [
+    "OAuth login option shown on login page",
+    "New account auto-created on first OAuth login",
+    "Existing email matched to OAuth account if present"
+  ],
+  "api_endpoint": "/api/v1/social_logins",
+  "db_table": "social_logins",
+  "target_files": {
+    "backend": "backend/app/services/social_login_service.py",
+    "api": "backend/app/api/v1/social_login_routes.py",
+    "frontend": "frontend/src/pages/SocialLoginPage.tsx",
+    "database": "backend/alembic/versions/us006_social_login_schema.py",
+    "test": "backend/tests/test_social_login.py"
+  }
+}

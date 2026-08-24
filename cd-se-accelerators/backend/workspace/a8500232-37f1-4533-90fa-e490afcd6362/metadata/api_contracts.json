@@ -1,0 +1,8 @@
+[
+  {
+    "story_key": "US010",
+    "endpoint": "/api/v1/logouts",
+    "method": "GET/POST/PUT/DELETE",
+    "db_table": "logouts"
+  }
+]

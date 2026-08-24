@@ -1,0 +1,14 @@
+{
+  "story_key": "US101",
+  "epic_key": "EP001",
+  "epic_name": "Appointment Management",
+  "title": "Book Appointment",
+  "description": "As a Patient, I want to book an appointment with a doctor so that I can receive medical consultation.",
+  "acceptance_criteria": [
+    "Patient can select a doctor.",
+    "Patient can select an available date and time.",
+    "Appointment is confirmed successfully."
+  ],
+  "priority": "High",
+  "status": "Approved"
+}

@@ -1,0 +1,153 @@
+{
+  "project_name": "AI_BA_Accelerated_App",
+  "tech_stack": "Python FastAPI / React TypeScript",
+  "created_at": "2026-07-23T11:09:53.038692+00:00",
+  "status": "awaiting_human_approval",
+  "epics_count": 4,
+  "stories_count": 3,
+  "epics": [
+    {
+      "epic_key": "EPIC-001",
+      "title": "Authentication & System Core Setup",
+      "description": "Core application setup, database infrastructure, user sign in, and token management",
+      "target_module": "auth",
+      "features": [
+        "User Login",
+        "Token Authentication",
+        "System Configuration"
+      ]
+    },
+    {
+      "epic_key": "EPIC-002",
+      "title": "Secure Member Login Integration Management",
+      "description": "Secure login form with email, password.",
+      "target_module": "secure_member_login_",
+      "features": [
+        "Secure Member Login Integration",
+        "Secure Member Login Integration API",
+        "Secure Member Login Integration Database Schema"
+      ]
+    },
+    {
+      "epic_key": "EPIC-003",
+      "title": "Member Registration Scaffolding Management",
+      "description": "Registration form with password confirmation.",
+      "target_module": "member_registration_",
+      "features": [
+        "Member Registration Scaffolding",
+        "Member Registration Scaffolding API",
+        "Member Registration Scaffolding Database Schema"
+      ]
+    },
+    {
+      "epic_key": "EPIC-004",
+      "title": "User Administration & Role Management Control Panel Management",
+      "description": "Admin panel for user search and editing.",
+      "target_module": "user_administration_",
+      "features": [
+        "User Administration & Role Management Control Panel",
+        "User Administration & Role Management Control Panel API",
+        "User Administration & Role Management Control Panel Database Schema"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "story_key": "US101",
+      "epic_key": "EPIC-001",
+      "title": "Secure Member Login Integration",
+      "user_role": "User",
+      "goal": "Perform Secure Member Login Integration actions",
+      "benefit": "Streamline user workflow and automation",
+      "acceptance_criteria": [
+        "Validate email format",
+        "Validate password length >= 8"
+      ],
+      "api_endpoint": "/api/v1/secure_member_login_s",
+      "db_table": "secure_member_login_s",
+      "target_files": {
+        "backend": "backend/app/services/secure_member_login__service.py",
+        "api": "backend/app/api/v1/secure_member_login__routes.py",
+        "frontend": "frontend/src/pages/SecureMemberLoginIntegrationPage.tsx",
+        "database": "backend/alembic/versions/us101_secure_member_login__schema.py",
+        "test": "backend/tests/test_secure_member_login_.py"
+      }
+    },
+    {
+      "story_key": "US102",
+      "epic_key": "EPIC-002",
+      "title": "Member Registration Scaffolding",
+      "user_role": "User",
+      "goal": "Perform Member Registration Scaffolding actions",
+      "benefit": "Streamline user workflow and automation",
+      "acceptance_criteria": [
+        "Verify password confirmation matches"
+      ],
+      "api_endpoint": "/api/v1/member_registration_s",
+      "db_table": "member_registration_s",
+      "target_files": {
+        "backend": "backend/app/services/member_registration__service.py",
+        "api": "backend/app/api/v1/member_registration__routes.py",
+        "frontend": "frontend/src/pages/MemberRegistrationScaffoldingPage.tsx",
+        "database": "backend/alembic/versions/us102_member_registration__schema.py",
+        "test": "backend/tests/test_member_registration_.py"
+      }
+    },
+    {
+      "story_key": "US103",
+      "epic_key": "EPIC-003",
+      "title": "User Administration & Role Management Control Panel",
+      "user_role": "User",
+      "goal": "Perform User Administration & Role Management Control Panel actions",
+      "benefit": "Streamline user workflow and automation",
+      "acceptance_criteria": [
+        "Display user records",
+        "Support role edits"
+      ],
+      "api_endpoint": "/api/v1/user_administration_s",
+      "db_table": "user_administration_s",
+      "target_files": {
+        "backend": "backend/app/services/user_administration__service.py",
+        "api": "backend/app/api/v1/user_administration__routes.py",
+        "frontend": "frontend/src/pages/UserAdministration&RoleManagementControlPanelPage.tsx",
+        "database": "backend/alembic/versions/us103_user_administration__schema.py",
+        "test": "backend/tests/test_user_administration_.py"
+      }
+    }
+  ],
+  "dependency_graph": {
+    "nodes": [
+      {
+        "story_key": "US101",
+        "depends_on": [],
+        "execution_tier": 1
+      },
+      {
+        "story_key": "US102",
+        "depends_on": [
+          "US101"
+        ],
+        "execution_tier": 2
+      },
+      {
+        "story_key": "US103",
+        "depends_on": [
+          "US101"
+        ],
+        "execution_tier": 2
+      }
+    ],
+    "execution_order": [
+      "US101",
+      "US102",
+      "US103"
+    ],
+    "max_tiers": 2,
+    "is_acyclic": true
+  },
+  "workspace_status": {
+    "US101": "pending",
+    "US102": "pending",
+    "US103": "pending"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "story_id": "US004",
+  "title": "Create Task",
+  "epic": "EPIC-004",
+  "status": "Generated",
+  "generated_files": 5,
+  "frontend_files": 1,
+  "backend_files": 4,
+  "validation_score": 96,
+  "confidence": 95,
+  "preview_image": "preview.png",
+  "preview_html": "preview.html",
+  "generated_at": "2026-08-24T10:06:41.235980+00:00",
+  "updated_at": "2026-08-24T10:06:41.235996+00:00"
+}

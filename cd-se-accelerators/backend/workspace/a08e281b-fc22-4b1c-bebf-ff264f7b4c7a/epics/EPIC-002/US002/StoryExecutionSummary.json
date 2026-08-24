@@ -1,0 +1,78 @@
+{
+  "story_key": "US002",
+  "epic_key": "EPIC-002",
+  "status": "completed",
+  "db_persisted": true,
+  "db_persist_error": null,
+  "story_workspace": "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002",
+  "generated_files": [
+    "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\frontend\\us002_component.tsx",
+    "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\us002_service.py",
+    "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\database\\us002_schema.sql",
+    "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\us002_router.py",
+    "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\tests\\test_us002.py"
+  ],
+  "validation_report": {
+    "story_key": "US002",
+    "attempts": 1,
+    "passed": true,
+    "checks": [
+      {
+        "check_name": "Backend Python AST Check",
+        "passed": true,
+        "error": null
+      },
+      {
+        "check_name": "Frontend Component Check",
+        "passed": true,
+        "error": null
+      },
+      {
+        "check_name": "API & Database Schema Contract Check",
+        "passed": true,
+        "error": null
+      }
+    ],
+    "errors": []
+  },
+  "merge_manifest_summary": {
+    "total_actions": 28,
+    "create_count": 28,
+    "modify_count": 0
+  },
+  "traceability": {
+    "story_key": "US002",
+    "epic_key": "EPIC-002",
+    "traceability_matrix": {
+      "requirement_id": "REQ-US002",
+      "epic_id": "EPIC-002",
+      "user_story_id": "US002",
+      "frontend_components": [
+        "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\frontend\\us002_component.tsx"
+      ],
+      "backend_services": [
+        "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\us002_service.py",
+        "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\database\\us002_schema.sql",
+        "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\us002_router.py",
+        "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\tests\\test_us002.py"
+      ],
+      "api_endpoints": [
+        "/api/v1/resource"
+      ],
+      "database_tables": [
+        "resources"
+      ],
+      "tests": [
+        "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\tests\\test_us002.py"
+      ],
+      "all_generated_files": [
+        "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\frontend\\us002_component.tsx",
+        "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\us002_service.py",
+        "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\database\\us002_schema.sql",
+        "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\us002_router.py",
+        "workspace\\a08e281b-fc22-4b1c-bebf-ff264f7b4c7a\\epics\\EPIC-002\\US002\\backend\\tests\\test_us002.py"
+      ]
+    }
+  },
+  "merged": true
+}

@@ -1,0 +1,40 @@
+{
+  "components": [
+    {
+      "name": "API Gateway",
+      "role": "Entry point for business operations"
+    },
+    {
+      "name": "Service Layer",
+      "role": "Coordinates orchestration and business rules"
+    },
+    {
+      "name": "Data Store",
+      "role": "Persists domain state"
+    }
+  ],
+  "integration_points": [
+    {
+      "name": "Authentication",
+      "type": "service"
+    },
+    {
+      "name": "Email Notifications",
+      "type": "integration"
+    }
+  ],
+  "modules": [
+    {
+      "description": "Handles authentication concerns for Platform Sign",
+      "name": "Authentication",
+      "responsibilities": [
+        "Domain model",
+        "Service layer",
+        "Validation"
+      ]
+    }
+  ],
+  "project_name": "Platform Sign",
+  "summary": "Platform Sign is built with python on the backend and react on the frontend.",
+  "text_blueprint": "Blueprint for Platform Sign\n\nOverview: Platform Sign is planned as a python backend application with a react frontend and postgresql persistence.\n\nModules:\n- Authentication: Handles authentication concerns for Platform Sign\n\nCore components:\n- API Gateway for inbound requests\n- Service Layer for business orchestration\n- Data Store for persistence"
+}

@@ -1,0 +1,22 @@
+{
+  "story_key": "US002",
+  "epic_key": "EPIC-002",
+  "title": "Remember Me",
+  "user_role": "User",
+  "goal": "Perform Remember Me actions",
+  "benefit": "Streamline user workflow and automation",
+  "acceptance_criteria": [
+    "Checkbox available on login form",
+    "Session persists across browser restarts when checked",
+    "Session expires normally when unchecked"
+  ],
+  "api_endpoint": "/api/v1/remember_mes",
+  "db_table": "remember_mes",
+  "target_files": {
+    "backend": "backend/app/services/remember_me_service.py",
+    "api": "backend/app/api/v1/remember_me_routes.py",
+    "frontend": "frontend/src/pages/RememberMePage.tsx",
+    "database": "backend/alembic/versions/us002_remember_me_schema.py",
+    "test": "backend/tests/test_remember_me.py"
+  }
+}

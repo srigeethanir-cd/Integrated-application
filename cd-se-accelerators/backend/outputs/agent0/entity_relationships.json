@@ -1,0 +1,22 @@
+{
+  "entities": [
+    {
+      "name": "UserAccount",
+      "fields": [
+        {
+          "name": "account_id",
+          "type": "uuid",
+          "key": "PK"
+        },
+        {
+          "name": "email",
+          "type": "string"
+        },
+        {
+          "name": "password_hash",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}

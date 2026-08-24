@@ -1,0 +1,14 @@
+{
+  "story_id": "US101",
+  "epic_id": "EP001",
+  "epic_name": "Patient Management",
+  "title": "Register Patient",
+  "description": "As a receptionist, I want to register a patient so that patient records are maintained digitally.",
+  "acceptance_criteria": [
+    "Receptionist can enter patient details.",
+    "System validates mandatory fields.",
+    "Unique Patient ID is generated.",
+    "Patient information is stored successfully."
+  ],
+  "priority": "High"
+}

@@ -1,0 +1,72 @@
+{
+  "project_name": "Employee Management System",
+  "tech_stack": "Python FastAPI / React TypeScript",
+  "created_at": "2026-08-07T10:13:38.823275+00:00",
+  "status": "awaiting_human_approval",
+  "epics_count": 2,
+  "stories_count": 1,
+  "epics": [
+    {
+      "epic_key": "EPIC-001",
+      "title": "Authentication & System Core Setup",
+      "description": "Core application setup, database infrastructure, user sign in, and token management",
+      "target_module": "auth",
+      "features": [
+        "User Login",
+        "Token Authentication",
+        "System Configuration"
+      ]
+    },
+    {
+      "epic_key": "EPIC-002",
+      "title": "Search Tasks Management",
+      "description": "As a user, I want to search tasks by title.",
+      "target_module": "search_tasks",
+      "features": [
+        "Search Tasks",
+        "Search Tasks API",
+        "Search Tasks Database Schema"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "story_key": "US008",
+      "epic_key": "EPIC-001",
+      "title": "Search Tasks",
+      "user_role": "User",
+      "goal": "Perform Search Tasks actions",
+      "benefit": "Streamline user workflow and automation",
+      "acceptance_criteria": [
+        "Search is case-insensitive",
+        "Filters list dynamically"
+      ],
+      "api_endpoint": "/api/v1/search_taskss",
+      "db_table": "search_taskss",
+      "target_files": {
+        "backend": "backend/app/services/search_tasks_service.py",
+        "api": "backend/app/api/v1/search_tasks_routes.py",
+        "frontend": "frontend/src/pages/SearchTasksPage.tsx",
+        "database": "backend/alembic/versions/us008_search_tasks_schema.py",
+        "test": "backend/tests/test_search_tasks.py"
+      }
+    }
+  ],
+  "dependency_graph": {
+    "nodes": [
+      {
+        "story_key": "US008",
+        "depends_on": [],
+        "execution_tier": 1
+      }
+    ],
+    "execution_order": [
+      "US008"
+    ],
+    "max_tiers": 1,
+    "is_acyclic": true
+  },
+  "workspace_status": {
+    "US008": "pending"
+  }
+}

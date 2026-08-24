@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+header {
+  @apply bg-primary text-white;
+}
+
+.hero-image {
+  @apply h-48 w-full object-cover;
+}
+
+.text-block {
+  @apply w-80 h-24 bg-white shadow-md rounded-md p-4;
+}
+
+.call-to-action {
+  @apply h-8 w-full bg-primary text-white rounded-md;
+}
+
+.login-button {
+  @apply h-8 w-full bg-secondary text-white rounded-md;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  @apply h-8 w-full border border-gray-400 rounded-md p-2 mb-2;
+}

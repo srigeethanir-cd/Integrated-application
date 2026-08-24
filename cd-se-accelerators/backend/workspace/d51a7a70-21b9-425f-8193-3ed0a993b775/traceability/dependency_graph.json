@@ -1,0 +1,78 @@
+{
+  "nodes": [
+    {
+      "story_key": "US001",
+      "depends_on": [],
+      "execution_tier": 1
+    },
+    {
+      "story_key": "US002",
+      "depends_on": [
+        "US001"
+      ],
+      "execution_tier": 2
+    },
+    {
+      "story_key": "US003",
+      "depends_on": [
+        "US001"
+      ],
+      "execution_tier": 2
+    },
+    {
+      "story_key": "US004",
+      "depends_on": [
+        "US001"
+      ],
+      "execution_tier": 2
+    },
+    {
+      "story_key": "US005",
+      "depends_on": [
+        "US001"
+      ],
+      "execution_tier": 2
+    },
+    {
+      "story_key": "US006",
+      "depends_on": [
+        "US001"
+      ],
+      "execution_tier": 2
+    },
+    {
+      "story_key": "US007",
+      "depends_on": [
+        "US001"
+      ],
+      "execution_tier": 2
+    },
+    {
+      "story_key": "US008",
+      "depends_on": [
+        "US001"
+      ],
+      "execution_tier": 2
+    },
+    {
+      "story_key": "US009",
+      "depends_on": [
+        "US001"
+      ],
+      "execution_tier": 2
+    }
+  ],
+  "execution_order": [
+    "US001",
+    "US002",
+    "US003",
+    "US004",
+    "US005",
+    "US006",
+    "US007",
+    "US008",
+    "US009"
+  ],
+  "max_tiers": 2,
+  "is_acyclic": true
+}

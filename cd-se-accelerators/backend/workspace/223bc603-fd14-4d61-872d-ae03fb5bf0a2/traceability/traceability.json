@@ -1,0 +1,14 @@
+{
+  "traceability_links": [
+    {
+      "story_key": "US002",
+      "epic_key": "EPIC-001",
+      "screen_id": "SCREEN_003",
+      "api_endpoint": "/api/v1/user_logins",
+      "db_table": "user_logins"
+    }
+  ]
+}
+    }
+  ]
+}

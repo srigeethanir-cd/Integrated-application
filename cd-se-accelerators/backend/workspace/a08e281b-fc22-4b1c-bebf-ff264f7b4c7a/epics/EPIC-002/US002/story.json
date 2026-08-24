@@ -1,0 +1,6 @@
+{
+  "story_key": "US002",
+  "epic_key": "EPIC-002",
+  "title": "User Login",
+  "description": "Allow users to authenticate and receive session tokens."
+}

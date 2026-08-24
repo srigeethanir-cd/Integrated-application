@@ -1,0 +1,21 @@
+{
+  "story_id": "US007",
+  "title": "Delete Task",
+  "status": "GENERATED",
+  "approval_status": "PENDING",
+  "provider": "Groq",
+  "model": "llama-3.3-70b-versatile",
+  "worker": "Agent-2",
+  "created_timestamp": "2026-08-24T13:14:23.875705+00:00",
+  "updated_timestamp": "2026-08-24T13:14:23.875705+00:00",
+  "generation_time": "0.05s",
+  "total_file_count": 6,
+  "generated_files": [
+    "DeleteConfirmModal.tsx",
+    "DeleteTaskButton.tsx",
+    "delete_task_router.py",
+    "task_service.py",
+    "preview.html",
+    "preview.png"
+  ]
+}

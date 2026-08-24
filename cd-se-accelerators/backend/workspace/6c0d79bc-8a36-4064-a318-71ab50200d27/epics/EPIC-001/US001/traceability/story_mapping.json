@@ -1,0 +1,36 @@
+{
+  "epic_id": "EP001",
+  "epic_title": "User Authentication & Dashboard Settings Workspace",
+  "mapped_screens": [
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US001",
+        "title": "User Login"
+      },
+      "acceptance_criteria": [
+        "User can enter email and password",
+        "Successful login redirects to dashboard",
+        "Error shown on invalid credentials",
+        "Password field is masked"
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US001_INPUT",
+        "COMP_US001_ACTION"
+      ]
+    }
+  ],
+  "shared_components": [
+    {
+      "component_id": "COMP_SHARED_SIDEBAR",
+      "reusable_type": "Sidebar",
+      "screens_referenced": [
+        "SCREEN_003"
+      ]
+    }
+  ]
+}

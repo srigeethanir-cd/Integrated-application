@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+nav {
+  @apply bg-primary text-white p-4 flex justify-between items-center;
+}
+
+nav h1 {
+  @apply text-lg font-bold;
+}
+
+section {
+  @apply h-200 bg-hero bg-cover bg-center;
+}
+
+section h2 {
+  @apply text-3xl font-bold text-white p-4;
+}
+
+ul {
+  @apply list-none p-4;
+}
+
+li {
+  @apply mb-4;
+}
+
+li h3 {
+  @apply text-xl font-bold;
+}
+
+li ul {
+  @apply list-none pl-4;
+}
+
+li ul li {
+  @apply mb-2;
+}
+
+form {
+  @apply p-4;
+}
+
+label {
+  @apply block text-lg font-bold mb-2;
+}
+
+input {
+  @apply block w-full p-2 border border-gray-400 rounded-sm;
+}
+
+button {
+  @apply bg-primary text-white p-2 rounded-sm w-full mt-4;
+}
+
+.bg-hero {
+  background-image: url('https://via.placeholder.com/1920x1080');
+}
+
+.h-200 {
+  height: 200px;
+}

@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+nav {
+  @apply fixed top-0 left-0 w-full h-14 bg-primary text-white flex justify-center items-center;
+}
+
+.hero {
+  @apply h-48 bg-hero mt-14 flex justify-center items-center;
+}
+
+.list {
+  @apply flex-1 overflow-y-auto;
+}
+
+.list ul {
+  @apply p-4;
+}
+
+.list li {
+  @apply p-4 border-b border-gray-200;
+}
+
+.list li h2 {
+  @apply text-lg font-bold;
+}
+
+.list li p {
+  @apply text-gray-600;
+}
+
+.list li ul {
+  @apply pl-4;
+}
+
+.list li ul li {
+  @apply pl-4;
+}
+
+.form {
+  @apply p-4;
+}
+
+.form input {
+  @apply w-full p-2 border border-gray-200 rounded-sm;
+}
+
+.form input[type='text'] {
+  @apply mt-0;
+}
+
+.form input[type='email'] {
+  @apply mt-4;
+}
+
+.form input[type='password'] {
+  @apply mt-4;
+}
+
+.form button {
+  @apply w-full p-2 bg-primary text-white rounded-sm mt-4;
+}
+
+.form button[type='button'] {
+  @apply bg-secondary;
+}

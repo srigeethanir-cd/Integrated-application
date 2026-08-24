@@ -1,0 +1,36 @@
+{
+  "story_id": "US001",
+  "file_count": 6,
+  "files": [
+    {
+      "name": "Register.tsx",
+      "path": "frontend/Register.tsx",
+      "type": "frontend"
+    },
+    {
+      "name": "RegisterForm.tsx",
+      "path": "frontend/RegisterForm.tsx",
+      "type": "frontend"
+    },
+    {
+      "name": "register_router.py",
+      "path": "backend/register_router.py",
+      "type": "backend"
+    },
+    {
+      "name": "register_service.py",
+      "path": "backend/register_service.py",
+      "type": "backend"
+    },
+    {
+      "name": "preview.html",
+      "path": "preview.html",
+      "type": "preview"
+    },
+    {
+      "name": "preview.png",
+      "path": "preview.png",
+      "type": "asset"
+    }
+  ]
+}

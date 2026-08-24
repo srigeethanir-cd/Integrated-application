@@ -1,0 +1,224 @@
+{
+  "story_key": "US006",
+  "epic_key": "EP001",
+  "master_blueprint": {
+    "project_name": "Employee Management System",
+    "tech_stack": "FastAPI (Backend) / React + TypeScript (Frontend) / PostgreSQL (Database) / SQLAlchemy (ORM)",
+    "generated_at": "2026-08-24T12:53:58.813981+00:00",
+    "architecture": {
+      "backend": "FastAPI Async / SQLAlchemy 2.0 / Alembic",
+      "frontend": "React TypeScript / React Router v6 / Tailwind CSS",
+      "database": "PostgreSQL 16 / SQLite Fallback"
+    },
+    "modules": [
+      {
+        "name": "user_logins",
+        "description": "Module handling User Login and related services.",
+        "endpoints": [
+          "/api/v1/user_logins"
+        ]
+      },
+      {
+        "name": "remember_mes",
+        "description": "Module handling Remember Me and related services.",
+        "endpoints": [
+          "/api/v1/remember_mes"
+        ]
+      },
+      {
+        "name": "forgot_passwords",
+        "description": "Module handling Forgot Password and related services.",
+        "endpoints": [
+          "/api/v1/forgot_passwords"
+        ]
+      },
+      {
+        "name": "account_lockouts",
+        "description": "Module handling Account Lockout and related services.",
+        "endpoints": [
+          "/api/v1/account_lockouts"
+        ]
+      },
+      {
+        "name": "logouts",
+        "description": "Module handling Logout and related services.",
+        "endpoints": [
+          "/api/v1/logouts"
+        ]
+      },
+      {
+        "name": "social_logins",
+        "description": "Module handling Social Login and related services.",
+        "endpoints": [
+          "/api/v1/social_logins"
+        ]
+      }
+    ],
+    "api_contracts": [
+      {
+        "story_key": "US001",
+        "endpoint": "/api/v1/user_logins",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "user_logins"
+      },
+      {
+        "story_key": "US002",
+        "endpoint": "/api/v1/remember_mes",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "remember_mes"
+      },
+      {
+        "story_key": "US003",
+        "endpoint": "/api/v1/forgot_passwords",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "forgot_passwords"
+      },
+      {
+        "story_key": "US004",
+        "endpoint": "/api/v1/account_lockouts",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "account_lockouts"
+      },
+      {
+        "story_key": "US005",
+        "endpoint": "/api/v1/logouts",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "logouts"
+      },
+      {
+        "story_key": "US006",
+        "endpoint": "/api/v1/social_logins",
+        "method": "GET/POST/PUT/DELETE",
+        "db_table": "social_logins"
+      }
+    ],
+    "database_schemas": [
+      {
+        "table_name": "user_logins",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "remember_mes",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "forgot_passwords",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "account_lockouts",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "logouts",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "table_name": "social_logins",
+        "columns": [
+          {
+            "name": "id",
+            "type": "String(36)",
+            "primary_key": true
+          },
+          {
+            "name": "created_at",
+            "type": "DateTime",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "type": "DateTime",
+            "nullable": false
+          }
+        ]
+      }
+    ],
+    "non_functional_requirements": [
+      "API response time < 200ms",
+      "JWT bearer token authentication",
+      "SQLAlchemy 2.0 async/sync ORM compatibility",
+      "React Router v6 lazy-loaded SPA routes"
+    ]
+  }
+}

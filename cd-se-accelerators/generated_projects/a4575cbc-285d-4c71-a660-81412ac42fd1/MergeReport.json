@@ -1,0 +1,27 @@
+{
+  "project_name": "a4575cbc-285d-4c71-a660-81412ac42fd1",
+  "generated_at": "2026-08-24T12:39:42.628191+00:00",
+  "promoted_shared_modules_count": 0,
+  "merged_files_count": 3,
+  "promoted_modules": [],
+  "merged_records": [
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "backend\\tests\\test_dummy.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US002",
+      "action_type": "CREATE",
+      "relative_path": "backend\\tests\\test_dummy.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "backend\\tests\\test_dummy.py",
+      "status": "SUCCESS"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .hero-image {
+    background-image: url('https://via.placeholder.com/375x200');
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@layer utilities {
+  .bg-primary {
+    background-color: #3498db;
+  }
+  .bg-secondary {
+    background-color: #f1c40f;
+  }
+  .bg-background {
+    background-color: #ffffff;
+  }
+  .text-text {
+    color: #333333;
+  }
+}

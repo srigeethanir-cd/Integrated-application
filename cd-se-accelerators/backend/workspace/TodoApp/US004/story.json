@@ -1,0 +1,38 @@
+{
+  "id": "US004",
+  "story_id": "US004",
+  "title": "Create Task",
+  "description": "As a user, I want to create a new task so that I can keep track of my work.",
+  "priority": "High",
+  "actor": "User",
+  "acceptance_criteria": [
+    "User can enter task title.",
+    "User can enter task description.",
+    "User can select a due date.",
+    "Task is saved successfully."
+  ],
+  "status": "Approved",
+  "epic": "Todo Module",
+  "project": "TodoApp",
+  "folder_path": "backend/workspace/TodoApp/US004",
+  "created_timestamp": "2026-08-24T13:14:22.876551+00:00",
+  "updated_timestamp": "2026-08-24T13:14:45.422929+00:00",
+  "generation_time": "0.05s",
+  "frontend_files": [
+    "CreateTaskModal.tsx",
+    "TaskForm.tsx"
+  ],
+  "backend_files": [
+    "create_task_router.py",
+    "task_service.py"
+  ],
+  "generated_files": [
+    "CreateTaskModal.tsx",
+    "TaskForm.tsx",
+    "create_task_router.py",
+    "task_service.py",
+    "preview.html",
+    "preview.png"
+  ],
+  "total_file_count": 6
+}

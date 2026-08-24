@@ -1,0 +1,37 @@
+{
+  "id": "US002",
+  "story_id": "US002",
+  "title": "User Login",
+  "description": "As a registered user, I want to log into the application so that I can access my tasks.",
+  "priority": "High",
+  "actor": "User",
+  "acceptance_criteria": [
+    "User can log in using valid credentials.",
+    "Invalid credentials display an error.",
+    "Successful login redirects to the dashboard."
+  ],
+  "status": "Approved",
+  "epic": "Todo Module",
+  "project": "TodoApp",
+  "folder_path": "backend/workspace/TodoApp/US002",
+  "created_timestamp": "2026-08-24T13:14:22.075977+00:00",
+  "updated_timestamp": "2026-08-24T13:14:44.732352+00:00",
+  "generation_time": "0.11s",
+  "frontend_files": [
+    "Login.tsx",
+    "LoginForm.tsx"
+  ],
+  "backend_files": [
+    "login_router.py",
+    "login_service.py"
+  ],
+  "generated_files": [
+    "Login.tsx",
+    "LoginForm.tsx",
+    "login_router.py",
+    "login_service.py",
+    "preview.html",
+    "preview.png"
+  ],
+  "total_file_count": 6
+}

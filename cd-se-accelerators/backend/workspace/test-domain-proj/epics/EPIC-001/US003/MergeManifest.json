@@ -1,0 +1,65 @@
+{
+  "story_key": "US003",
+  "epic_key": "EPIC-001",
+  "source_workspace": "workspace\\test-domain-proj\\epics\\EPIC-001\\US003",
+  "total_actions": 9,
+  "create_count": 9,
+  "modify_count": 0,
+  "conflict_count": 0,
+  "actions": [
+    {
+      "action_type": "CREATE",
+      "source_file": "generated_files.json",
+      "target_file": "generated_files.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "metadata.json",
+      "target_file": "metadata.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "preview.html",
+      "target_file": "preview.html",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "StoryExecutionSummary.json",
+      "target_file": "StoryExecutionSummary.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\us003_router.py",
+      "target_file": "backend\\us003_router.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\us003_service.py",
+      "target_file": "backend\\us003_service.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\database\\us003_schema.sql",
+      "target_file": "backend\\database\\us003_schema.sql",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\tests\\test_us003.py",
+      "target_file": "backend\\tests\\test_us003.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "frontend\\us003_component.tsx",
+      "target_file": "frontend\\us003_component.tsx",
+      "conflict_risk": "NONE"
+    }
+  ]
+}

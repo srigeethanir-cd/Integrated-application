@@ -1,0 +1,17 @@
+{
+  "dependencies": [
+    {
+      "required": true,
+      "source": "backend/authentication",
+      "target": "database",
+      "type": "database_connection"
+    },
+    {
+      "required": true,
+      "source": "backend/authentication",
+      "target": "shared",
+      "type": "shared_utility_import"
+    }
+  ],
+  "project_name": "Platform Sign"
+}

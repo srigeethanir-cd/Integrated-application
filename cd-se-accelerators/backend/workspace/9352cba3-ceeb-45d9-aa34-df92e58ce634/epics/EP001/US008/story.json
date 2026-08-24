@@ -1,0 +1,13 @@
+{
+  "id": "US008",
+  "actor": "User",
+  "title": "Search Tasks",
+  "epic_key": "EP001",
+  "priority": "Low",
+  "story_key": "US008",
+  "description": "As a user, I want to search tasks by title.",
+  "acceptance_criteria": [
+    "Search is case-insensitive",
+    "Filters list dynamically"
+  ]
+}

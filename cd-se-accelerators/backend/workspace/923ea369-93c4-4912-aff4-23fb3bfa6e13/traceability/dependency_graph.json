@@ -1,0 +1,14 @@
+{
+  "nodes": [
+    {
+      "story_key": "US002",
+      "depends_on": [],
+      "execution_tier": 1
+    }
+  ],
+  "execution_order": [
+    "US002"
+  ],
+  "max_tiers": 1,
+  "is_acyclic": true
+}

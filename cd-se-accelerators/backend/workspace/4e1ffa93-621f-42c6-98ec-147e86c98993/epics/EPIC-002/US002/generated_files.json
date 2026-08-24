@@ -1,0 +1,7 @@
+[
+  "frontend/us002_component.tsx",
+  "backend/us002_service.py",
+  "backend/database/us002_schema.sql",
+  "backend/us002_router.py",
+  "backend/tests/test_us002.py"
+]

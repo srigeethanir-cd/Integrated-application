@@ -1,0 +1,36 @@
+{
+  "story_id": "US008",
+  "file_count": 6,
+  "files": [
+    {
+      "name": "SearchBar.tsx",
+      "path": "frontend/SearchBar.tsx",
+      "type": "frontend"
+    },
+    {
+      "name": "SearchResults.tsx",
+      "path": "frontend/SearchResults.tsx",
+      "type": "frontend"
+    },
+    {
+      "name": "search_task_router.py",
+      "path": "backend/search_task_router.py",
+      "type": "backend"
+    },
+    {
+      "name": "search_service.py",
+      "path": "backend/search_service.py",
+      "type": "backend"
+    },
+    {
+      "name": "preview.html",
+      "path": "preview.html",
+      "type": "preview"
+    },
+    {
+      "name": "preview.png",
+      "path": "preview.png",
+      "type": "asset"
+    }
+  ]
+}

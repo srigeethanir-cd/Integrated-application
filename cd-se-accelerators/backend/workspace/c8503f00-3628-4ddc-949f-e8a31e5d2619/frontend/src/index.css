@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background;
+  @apply text-text;
+}
+
+.primary {
+  @apply bg-primary;
+  @apply hover:bg-primary-dark;
+}
+
+.secondary {
+  @apply bg-secondary;
+  @apply hover:bg-secondary-dark;
+}
+
+.button {
+  @apply py-2;
+  @apply px-4;
+  @apply rounded;
+}
+
+.input {
+  @apply bg-gray-200;
+  @apply p-2;
+  @apply rounded;
+}
+
+.select {
+  @apply bg-gray-200;
+  @apply p-2;
+  @apply rounded;
+}
+
+.header {
+  @apply h-16;
+  @apply bg-primary;
+  @apply text-white;
+  @apply p-4;
+  @apply flex;
+  @apply justify-between;
+}
+
+.hero {
+  @apply h-200;
+  @apply bg-hero;
+  @apply text-white;
+  @apply p-4;
+  @apply flex;
+  @apply justify-center;
+}
+
+.button-hero {
+  @apply bg-primary;
+  @apply hover:bg-primary-dark;
+  @apply text-white;
+  @apply font-bold;
+  @apply py-2;
+  @apply px-4;
+  @apply rounded;
+}
+
+.footer {
+  @apply h-10;
+  @apply bg-primary;
+  @apply text-white;
+  @apply p-4;
+  @apply flex;
+  @apply justify-between;
+}

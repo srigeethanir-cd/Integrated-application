@@ -1,0 +1,79 @@
+.app {
+  background-color: #ffffff;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image {
+  margin-top: 16px;
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-block {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.call-to-action {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #f1c40f;
+  color: #333333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.call-to-action:hover {
+  background-color: #e0cc00;
+}
+
+.user-story-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 400px;
+}
+
+.user-story-modal h2 {
+  margin-top: 0;
+}
+
+.user-story-modal ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-story-modal li {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-story-modal li:last-child {
+  border-bottom: none;
+}

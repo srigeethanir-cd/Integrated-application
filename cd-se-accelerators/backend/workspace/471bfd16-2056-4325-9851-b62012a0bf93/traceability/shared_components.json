@@ -1,0 +1,9 @@
+[
+  {
+    "component_id": "COMP_SHARED_SIDEBAR",
+    "reusable_type": "Sidebar",
+    "screens_referenced": [
+      "SCREEN_003"
+    ]
+  }
+]

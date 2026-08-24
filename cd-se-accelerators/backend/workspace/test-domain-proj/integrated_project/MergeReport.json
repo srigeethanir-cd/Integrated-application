@@ -1,0 +1,39 @@
+{
+  "project_name": "integrated_project",
+  "generated_at": "2026-08-24T13:07:47.477984+00:00",
+  "promoted_shared_modules_count": 0,
+  "merged_files_count": 5,
+  "promoted_modules": [],
+  "merged_records": [
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "backend/us003_router.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "backend/us003_service.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "backend/database/us003_schema.sql",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "backend/tests/test_us003.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US003",
+      "action_type": "CREATE",
+      "relative_path": "frontend/us003_component.tsx",
+      "status": "SUCCESS"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "validation_status": "PASS",
+  "metrics": {
+    "total_user_stories": 2,
+    "mapped_user_stories": 2,
+    "user_stories_mapping_percentage": 100.0,
+    "total_screens": 3,
+    "mapped_screens": 3,
+    "screens_mapping_percentage": 100.0,
+    "total_components": 4,
+    "traced_components": 4,
+    "components_tracing_percentage": 100.0
+  }
+}

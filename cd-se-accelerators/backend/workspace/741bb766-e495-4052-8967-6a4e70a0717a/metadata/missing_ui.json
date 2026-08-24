@@ -1,0 +1,10 @@
+{
+  "missing_components": [
+    {
+      "story_key": "US010",
+      "title": "Logout",
+      "reason": "Absent from wireframe mockup visual reference",
+      "severity": "high"
+    }
+  ]
+}

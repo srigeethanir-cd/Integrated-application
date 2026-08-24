@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background;
+  }
+}
+
+@layer components {
+  .text-primary {
+    color: #6366f1;
+  }
+}
+
+@layer utilities {
+  .spacing {
+    margin: 8px;
+  }
+}

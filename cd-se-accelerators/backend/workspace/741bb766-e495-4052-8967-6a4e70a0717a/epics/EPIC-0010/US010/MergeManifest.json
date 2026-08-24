@@ -1,0 +1,155 @@
+{
+  "story_key": "US010",
+  "epic_key": "EPIC-0010",
+  "source_workspace": "workspace\\741bb766-e495-4052-8967-6a4e70a0717a\\epics\\EPIC-0010\\US010",
+  "total_actions": 24,
+  "create_count": 24,
+  "modify_count": 0,
+  "conflict_count": 0,
+  "actions": [
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\us010_router.py",
+      "target_file": "backend\\us010_router.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\us010_service.py",
+      "target_file": "backend\\us010_service.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\database\\us010_schema.sql",
+      "target_file": "backend\\database\\us010_schema.sql",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\tests\\test_us010.py",
+      "target_file": "backend\\tests\\test_us010.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "frontend\\component_tree.json",
+      "target_file": "frontend\\component_tree.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "frontend\\design_tokens.json",
+      "target_file": "frontend\\design_tokens.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "frontend\\responsive_metadata.json",
+      "target_file": "frontend\\responsive_metadata.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "frontend\\style.json",
+      "target_file": "frontend\\style.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "frontend\\us010_component.tsx",
+      "target_file": "frontend\\us010_component.tsx",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "frontend\\src\\App.tsx",
+      "target_file": "frontend\\src\\App.tsx",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "frontend\\src\\index.css",
+      "target_file": "frontend\\src\\index.css",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "metadata\\blueprint.json",
+      "target_file": "metadata\\blueprint.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "metadata\\component_metadata.json",
+      "target_file": "metadata\\component_metadata.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "metadata\\layout.json",
+      "target_file": "metadata\\layout.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "metadata\\navigation_graph.json",
+      "target_file": "metadata\\navigation_graph.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "metadata\\screen_metadata.json",
+      "target_file": "metadata\\screen_metadata.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "metadata\\wireframe_analysis.json",
+      "target_file": "metadata\\wireframe_analysis.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "traceability\\story_mapping.json",
+      "target_file": "traceability\\story_mapping.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "traceability\\traceability_update.json",
+      "target_file": "traceability\\traceability_update.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "validation\\agent0_execution_report.json",
+      "target_file": "validation\\agent0_execution_report.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "validation\\mapping_confidence_report.json",
+      "target_file": "validation\\mapping_confidence_report.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "validation\\mapping_validation_report.json",
+      "target_file": "validation\\mapping_validation_report.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "validation\\repair_report.json",
+      "target_file": "validation\\repair_report.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "validation\\visual_validation.json",
+      "target_file": "validation\\visual_validation.json",
+      "conflict_risk": "NONE"
+    }
+  ]
+}

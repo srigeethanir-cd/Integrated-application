@@ -1,0 +1,34 @@
+{
+  "database_type": "PostgreSQL",
+  "project_name": "User Portal",
+  "schema_sql": "CREATE TABLE users (\n    id SERIAL PRIMARY KEY NOT NULL,\n    email VARCHAR(255) UNIQUE NOT NULL,\n    password_hash VARCHAR(255) NOT NULL,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n",
+  "tables": [
+    {
+      "columns": [
+        {
+          "name": "id",
+          "nullable": false,
+          "primary_key": true,
+          "type": "SERIAL"
+        },
+        {
+          "name": "email",
+          "nullable": false,
+          "type": "VARCHAR(255)",
+          "unique": true
+        },
+        {
+          "name": "password_hash",
+          "nullable": false,
+          "type": "VARCHAR(255)"
+        },
+        {
+          "default": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "name": "users"
+    }
+  ]
+}

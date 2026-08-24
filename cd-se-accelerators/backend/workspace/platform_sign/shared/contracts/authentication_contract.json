@@ -1,0 +1,36 @@
+{
+  "module": "Authentication",
+  "description": "Handles authentication concerns for Platform Sign",
+  "responsibilities": [
+    "Domain model",
+    "Service layer",
+    "Validation"
+  ],
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/authentication",
+      "description": "List Authentication records"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/authentication",
+      "description": "Create Authentication"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/authentication/{id}",
+      "description": "Get Authentication by ID"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/authentication/{id}",
+      "description": "Update Authentication"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/authentication/{id}",
+      "description": "Delete Authentication"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "project_name": "cbb07d11-fa4e-418a-a24a-3a317ee0fa03",
+  "generated_at": "2026-07-24T09:51:33.955387+00:00",
+  "promoted_shared_modules_count": 0,
+  "merged_files_count": 8,
+  "promoted_modules": [],
+  "merged_records": [
+    {
+      "story_key": "US101",
+      "action_type": "CREATE",
+      "relative_path": "backend\\us101_router.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US101",
+      "action_type": "CREATE",
+      "relative_path": "backend\\us101_service.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US101",
+      "action_type": "CREATE",
+      "relative_path": "backend\\database\\us101_schema.sql",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US101",
+      "action_type": "CREATE",
+      "relative_path": "backend\\tests\\test_us101.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US102",
+      "action_type": "CREATE",
+      "relative_path": "backend\\us102_router.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US102",
+      "action_type": "CREATE",
+      "relative_path": "backend\\us102_service.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US102",
+      "action_type": "CREATE",
+      "relative_path": "backend\\database\\us102_schema.sql",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US102",
+      "action_type": "CREATE",
+      "relative_path": "backend\\tests\\test_us102.py",
+      "status": "SUCCESS"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "story_key": "US001",
+    "endpoint": "/api/v1/user_registrations",
+    "method": "GET/POST/PUT/DELETE",
+    "db_table": "user_registrations"
+  },
+  {
+    "story_key": "US002",
+    "endpoint": "/api/v1/user_logins",
+    "method": "GET/POST/PUT/DELETE",
+    "db_table": "user_logins"
+  },
+  {
+    "story_key": "US003",
+    "endpoint": "/api/v1/view_dashboards",
+    "method": "GET/POST/PUT/DELETE",
+    "db_table": "view_dashboards"
+  },
+  {
+    "story_key": "US004",
+    "endpoint": "/api/v1/create_tasks",
+    "method": "GET/POST/PUT/DELETE",
+    "db_table": "create_tasks"
+  },
+  {
+    "story_key": "US005",
+    "endpoint": "/api/v1/edit_tasks",
+    "method": "GET/POST/PUT/DELETE",
+    "db_table": "edit_tasks"
+  }
+]

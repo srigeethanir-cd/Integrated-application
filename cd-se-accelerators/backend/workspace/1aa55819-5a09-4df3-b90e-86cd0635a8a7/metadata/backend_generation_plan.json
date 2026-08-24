@@ -1,0 +1,22 @@
+{
+  "project_name": "Employee Management System",
+  "tech_stack": "Python FastAPI / React TypeScript",
+  "generation_steps": [
+    {
+      "step": 1,
+      "task": "Scaffold FastAPI application structure"
+    },
+    {
+      "step": 2,
+      "task": "Generate database models and tables for users"
+    },
+    {
+      "step": 3,
+      "task": "Generate api endpoints mapping auth operations"
+    },
+    {
+      "step": 4,
+      "task": "Integrate SQLAlchemy async context dependencies"
+    }
+  ]
+}

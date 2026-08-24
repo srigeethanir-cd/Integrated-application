@@ -1,0 +1,34 @@
+{
+  "story_key": "US001",
+  "epic_key": "EPIC-001",
+  "traceability_matrix": {
+    "requirement_id": "REQ-US001",
+    "epic_id": "EPIC-001",
+    "user_story_id": "US001",
+    "frontend_components": [
+      "workspace\\1aa55819-5a09-4df3-b90e-86cd0635a8a7\\epics\\EPIC-001\\US001\\frontend\\us001_component.tsx"
+    ],
+    "backend_services": [
+      "workspace\\1aa55819-5a09-4df3-b90e-86cd0635a8a7\\epics\\EPIC-001\\US001\\backend\\us001_service.py",
+      "workspace\\1aa55819-5a09-4df3-b90e-86cd0635a8a7\\epics\\EPIC-001\\US001\\backend\\database\\us001_schema.sql",
+      "workspace\\1aa55819-5a09-4df3-b90e-86cd0635a8a7\\epics\\EPIC-001\\US001\\backend\\us001_router.py",
+      "workspace\\1aa55819-5a09-4df3-b90e-86cd0635a8a7\\epics\\EPIC-001\\US001\\backend\\tests\\test_us001.py"
+    ],
+    "api_endpoints": [
+      "/api/v1/user_registrations"
+    ],
+    "database_tables": [
+      "user_registrations"
+    ],
+    "tests": [
+      "workspace\\1aa55819-5a09-4df3-b90e-86cd0635a8a7\\epics\\EPIC-001\\US001\\backend\\tests\\test_us001.py"
+    ],
+    "all_generated_files": [
+      "workspace\\1aa55819-5a09-4df3-b90e-86cd0635a8a7\\epics\\EPIC-001\\US001\\frontend\\us001_component.tsx",
+      "workspace\\1aa55819-5a09-4df3-b90e-86cd0635a8a7\\epics\\EPIC-001\\US001\\backend\\us001_service.py",
+      "workspace\\1aa55819-5a09-4df3-b90e-86cd0635a8a7\\epics\\EPIC-001\\US001\\backend\\database\\us001_schema.sql",
+      "workspace\\1aa55819-5a09-4df3-b90e-86cd0635a8a7\\epics\\EPIC-001\\US001\\backend\\us001_router.py",
+      "workspace\\1aa55819-5a09-4df3-b90e-86cd0635a8a7\\epics\\EPIC-001\\US001\\backend\\tests\\test_us001.py"
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "epic_id": "EP001",
+  "epic_title": "User Authentication & Dashboard Settings Workspace",
+  "mapped_screens": [
+    {
+      "screen_id": "SCREEN_001",
+      "route": "/login",
+      "user_story": {
+        "id": "US101",
+        "title": "Book Appointment"
+      },
+      "acceptance_criteria": [
+        "Patient can select a doctor.",
+        "Patient can select an available date.",
+        "Appointment is confirmed successfully."
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US101_INPUT",
+        "COMP_US101_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_002",
+      "route": "/signup",
+      "user_story": {
+        "id": "US102",
+        "title": "Cancel Appointment"
+      },
+      "acceptance_criteria": [
+        "Patient can cancel an upcoming appointment.",
+        "Cancelled slot becomes available."
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US102_INPUT",
+        "COMP_US102_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US201",
+        "title": "View Medical History"
+      },
+      "acceptance_criteria": [
+        "Doctor can access previous consultations.",
+        "Medical records are displayed securely."
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US201_INPUT",
+        "COMP_US201_ACTION"
+      ]
+    },
+    {
+      "screen_id": "SCREEN_003",
+      "route": "/dashboard",
+      "user_story": {
+        "id": "US202",
+        "title": "Update Prescription"
+      },
+      "acceptance_criteria": [
+        "Doctor can add medicines.",
+        "Prescription history is maintained."
+      ],
+      "business_rules": [
+        "Enforce standard security validations"
+      ],
+      "components": [
+        "COMP_US202_INPUT",
+        "COMP_US202_ACTION"
+      ]
+    }
+  ],
+  "shared_components": [
+    {
+      "component_id": "COMP_SHARED_SIDEBAR",
+      "reusable_type": "Sidebar",
+      "screens_referenced": [
+        "SCREEN_003"
+      ]
+    }
+  ]
+}

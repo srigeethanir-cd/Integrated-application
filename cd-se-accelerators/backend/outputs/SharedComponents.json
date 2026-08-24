@@ -1,0 +1,62 @@
+[
+  {
+    "description": "Handles password hashing and verification",
+    "name": "password_hashing",
+    "owner": "shared",
+    "type": "utility",
+    "used_by": [
+      "auth_service"
+    ]
+  },
+  {
+    "description": "Handles token generation and validation",
+    "name": "token_generation",
+    "owner": "shared",
+    "type": "utility",
+    "used_by": [
+      "auth_service",
+      "auth_component"
+    ]
+  },
+  {
+    "description": "Provides access to user data",
+    "name": "user_repository",
+    "owner": "platform",
+    "type": "library",
+    "used_by": [
+      "auth_service",
+      "database_service"
+    ]
+  },
+  {
+    "description": "Handles requests to the backend API",
+    "name": "api_client",
+    "owner": "shared",
+    "type": "library",
+    "used_by": [
+      "auth_component"
+    ]
+  },
+  {
+    "description": "Handles logging for the application",
+    "name": "logging",
+    "owner": "infrastructure",
+    "type": "utility",
+    "used_by": [
+      "auth_service",
+      "database_service",
+      "auth_component"
+    ]
+  },
+  {
+    "description": "Manages application configuration",
+    "name": "config_manager",
+    "owner": "infrastructure",
+    "type": "config",
+    "used_by": [
+      "auth_service",
+      "database_service",
+      "auth_component"
+    ]
+  }
+]

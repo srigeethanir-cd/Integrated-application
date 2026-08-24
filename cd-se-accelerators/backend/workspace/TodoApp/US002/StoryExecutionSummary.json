@@ -1,0 +1,27 @@
+{
+  "story_id": "US002",
+  "steps": {
+    "setup": "Done",
+    "frontend": "Done",
+    "backend": "Done",
+    "preview": "Done",
+    "metadata": "Done"
+  },
+  "progress_percent": 100,
+  "logs": [
+    "[INFO] Starting Agent-2 for US002 - User Login",
+    "Reading story.json",
+    "Generating React components",
+    "Generated Login.tsx",
+    "Generated LoginForm.tsx",
+    "Generating FastAPI backend",
+    "Generated login_router.py",
+    "Generated login_service.py",
+    "Generating Preview",
+    "Generated preview.html",
+    "Generated preview.png",
+    "Updating metadata.json",
+    "Completed US002"
+  ],
+  "timing": "0.11s"
+}

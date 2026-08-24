@@ -1,0 +1,9 @@
+{
+  "story_key": "US101",
+  "epic_key": "EP001",
+  "title": "Secure Member Login Integration",
+  "acceptance_criteria": [
+    "Validate email format",
+    "Secure password field input"
+  ]
+}

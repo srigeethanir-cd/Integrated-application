@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background;
+  @apply text-text;
+}
+
+header {
+  @apply bg-primary;
+  @apply text-white;
+}
+
+main {
+  @apply h-full;
+  @apply w-full;
+}
+
+footer {
+  @apply bg-primary;
+  @apply text-white;
+}
+
+.fixed {
+  @apply fixed;
+  @apply top-0;
+  @apply left-0;
+  @apply w-full;
+  @apply h-full;
+}
+
+.bg-black {
+  @apply bg-black;
+}
+
+.bg-opacity-50 {
+  @apply bg-opacity-50;
+}
+
+.bg-white {
+  @apply bg-white;
+}
+
+.p-4 {
+  @apply p-4;
+}
+
+.rounded-lg {
+  @apply rounded-lg;
+}
+
+.shadow-lg {
+  @apply shadow-lg;
+}
+
+.text-gray-600 {
+  @apply text-gray-600;
+}
+
+.text-lg {
+  @apply text-lg;
+}
+
+.font-bold {
+  @apply font-bold;
+}
+
+.text-sm {
+  @apply text-sm;
+}
+
+.text-2xl {
+  @apply text-2xl;
+}

@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background;
+}
+
+header {
+  @apply bg-primary text-text;
+}
+
+main {
+  @apply bg-hero;
+}
+
+button {
+  @apply bg-primary text-text;
+}
+
+input {
+  @apply w-full p-2 pl-10 text-text border border-secondary rounded-lg;
+}
+
+input:focus {
+  @apply outline-none ring-2 ring-secondary;
+}
+
+footer {
+  @apply bg-primary text-text;
+}

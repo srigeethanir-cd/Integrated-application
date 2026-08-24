@@ -1,0 +1,13 @@
+{
+  "project_name": "TodoApp",
+  "total_stories": 10,
+  "completed_stories": 10,
+  "running_stories": 0,
+  "waiting_stories": 0,
+  "failed_stories": 0,
+  "total_files": 60,
+  "estimated_time": "03m 45s",
+  "provider": "Groq",
+  "model": "llama-3.3-70b-versatile",
+  "worker": "Agent-2"
+}

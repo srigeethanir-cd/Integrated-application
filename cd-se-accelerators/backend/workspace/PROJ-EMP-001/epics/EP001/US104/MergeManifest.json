@@ -1,0 +1,77 @@
+{
+  "story_key": "US104",
+  "epic_key": "EP001",
+  "source_workspace": "workspace\\PROJ-EMP-001\\epics\\EP001\\US104",
+  "total_actions": 11,
+  "create_count": 11,
+  "modify_count": 0,
+  "conflict_count": 0,
+  "actions": [
+    {
+      "action_type": "CREATE",
+      "source_file": "generated_files.json",
+      "target_file": "generated_files.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "metadata.json",
+      "target_file": "metadata.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "preview.html",
+      "target_file": "preview.html",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "status.json",
+      "target_file": "status.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "StoryExecutionSummary.json",
+      "target_file": "StoryExecutionSummary.json",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\us104_router.py",
+      "target_file": "backend\\us104_router.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\us104_service.py",
+      "target_file": "backend\\us104_service.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\database\\us104_schema.sql",
+      "target_file": "backend\\database\\us104_schema.sql",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "backend\\tests\\test_us104.py",
+      "target_file": "backend\\tests\\test_us104.py",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "frontend\\us104_component.tsx",
+      "target_file": "frontend\\us104_component.tsx",
+      "conflict_risk": "NONE"
+    },
+    {
+      "action_type": "CREATE",
+      "source_file": "preview\\preview_summary.json",
+      "target_file": "preview\\preview_summary.json",
+      "conflict_risk": "NONE"
+    }
+  ]
+}

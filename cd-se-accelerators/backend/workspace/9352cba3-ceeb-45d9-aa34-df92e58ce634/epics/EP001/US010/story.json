@@ -1,0 +1,13 @@
+{
+  "id": "US010",
+  "actor": "User",
+  "title": "Logout",
+  "epic_key": "EP001",
+  "priority": "High",
+  "story_key": "US010",
+  "description": "As a user, I want to securely log out.",
+  "acceptance_criteria": [
+    "Invalidates session",
+    "Redirects to login page"
+  ]
+}

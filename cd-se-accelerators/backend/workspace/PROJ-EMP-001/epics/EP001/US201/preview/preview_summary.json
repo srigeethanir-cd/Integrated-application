@@ -1,0 +1,12 @@
+{
+  "story_key": "US201",
+  "generated_files": [
+    "workspace\\PROJ-EMP-001\\epics\\EP001\\US201\\frontend\\us201_component.tsx",
+    "workspace\\PROJ-EMP-001\\epics\\EP001\\US201\\backend\\us201_service.py",
+    "workspace\\PROJ-EMP-001\\epics\\EP001\\US201\\backend\\database\\us201_schema.sql",
+    "workspace\\PROJ-EMP-001\\epics\\EP001\\US201\\backend\\us201_router.py",
+    "workspace\\PROJ-EMP-001\\epics\\EP001\\US201\\backend\\tests\\test_us201.py"
+  ],
+  "api_endpoint": "/api/v1/resource",
+  "db_table": "resources"
+}

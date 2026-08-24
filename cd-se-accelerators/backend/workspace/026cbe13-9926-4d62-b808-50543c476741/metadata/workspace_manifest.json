@@ -1,0 +1,72 @@
+{
+  "project_name": "Employee Management System",
+  "tech_stack": "Python FastAPI / React TypeScript",
+  "created_at": "2026-08-24T10:06:41.778412+00:00",
+  "status": "awaiting_human_approval",
+  "epics_count": 2,
+  "stories_count": 1,
+  "epics": [
+    {
+      "epic_key": "EPIC-001",
+      "title": "Authentication & System Core Setup",
+      "description": "Core application setup, database infrastructure, user sign in, and token management",
+      "target_module": "auth",
+      "features": [
+        "User Login",
+        "Token Authentication",
+        "System Configuration"
+      ]
+    },
+    {
+      "epic_key": "EPIC-002",
+      "title": "Edit Task Management",
+      "description": "Epic covering Edit Task operations",
+      "target_module": "edit_task",
+      "features": [
+        "Edit Task",
+        "Edit Task API",
+        "Edit Task Database Schema"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "story_key": "US005",
+      "epic_key": "EPIC-001",
+      "title": "Edit Task",
+      "user_role": "User",
+      "goal": "Perform Edit Task actions",
+      "benefit": "Streamline user workflow and automation",
+      "acceptance_criteria": [
+        "Modify task title",
+        "Modify task status"
+      ],
+      "api_endpoint": "/api/v1/edit_tasks",
+      "db_table": "edit_tasks",
+      "target_files": {
+        "backend": "backend/app/services/edit_task_service.py",
+        "api": "backend/app/api/v1/edit_task_routes.py",
+        "frontend": "frontend/src/pages/EditTaskPage.tsx",
+        "database": "backend/alembic/versions/us005_edit_task_schema.py",
+        "test": "backend/tests/test_edit_task.py"
+      }
+    }
+  ],
+  "dependency_graph": {
+    "nodes": [
+      {
+        "story_key": "US005",
+        "depends_on": [],
+        "execution_tier": 1
+      }
+    ],
+    "execution_order": [
+      "US005"
+    ],
+    "max_tiers": 1,
+    "is_acyclic": true
+  },
+  "workspace_status": {
+    "US005": "pending"
+  }
+}

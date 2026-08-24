@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Preview - US009 Filter Tasks</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; margin: 0; padding: 24px; color: #0f172a; }
+    .card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); max-width: 900px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 20px; }
+    .badge { background: #eff6ff; color: #2563eb; font-weight: bold; font-size: 12px; padding: 4px 12px; border-radius: 9999px; border: 1px solid #bfdbfe; }
+    .criteria { background: #f8fafc; padding: 12px; border-radius: 8px; font-size: 13px; color: #475569; margin-bottom: 20px; border-left: 4px solid #3b82f6; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div>
+        <span class="badge">US009</span>
+        <h2 style="margin: 8px 0 4px 0; font-size: 20px;">Filter Tasks</h2>
+        <p style="margin: 0; font-size: 13px; color: #64748b;">As a user, I want to filter tasks by status so that I can easily manage my work.</p>
+      </div>
+    </div>
+    <div class="criteria">
+      <strong>Acceptance Criteria:</strong>
+      <ul style="margin: 8px 0 0 0; padding-left: 20px;">
+        <li>Filter by All.</li><li>Filter by Pending.</li><li>Filter by Completed.</li>
+      </ul>
+    </div>
+    <h3 style="font-size: 15px; margin-bottom: 12px;">Generated Frontend Components</h3>
+    
+        <div style="margin-bottom: 24px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;">
+          <div style="background: #f8fafc; padding: 10px 16px; border-bottom: 1px solid #e2e8f0; font-weight: bold; font-size: 13px; color: #334155; font-family: monospace;">
+            📄 FilterTabs.tsx
+          </div>
+          <pre style="padding: 16px; margin: 0; font-size: 12px; background: #0f172a; color: #f8fafc; overflow-x: auto; font-family: Consolas, monospace;"><code>import React from 'react';
+
+export default function FilterTabs({ activeFilter, setFilter }: { activeFilter: string; setFilter: (f: string) =&gt; void }) {
+  const filters = ['All', 'Pending', 'Completed'];
+  return (
+    &lt;div className="flex gap-2 border-b pb-2"&gt;
+      {filters.map(f =&gt; (
+        &lt;button key={f} onClick={() =&gt; setFilter(f)} className={`px-4 py-1.5 text-xs font-bold rounded-lg ${activeFilter === f ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'}`}&gt;
+          {f}
+        &lt;/button&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+        </div>
+        
+        <div style="margin-bottom: 24px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;">
+          <div style="background: #f8fafc; padding: 10px 16px; border-bottom: 1px solid #e2e8f0; font-weight: bold; font-size: 13px; color: #334155; font-family: monospace;">
+            📄 FilteredTaskList.tsx
+          </div>
+          <pre style="padding: 16px; margin: 0; font-size: 12px; background: #0f172a; color: #f8fafc; overflow-x: auto; font-family: Consolas, monospace;"><code>import React from 'react';
+
+export default function FilteredTaskList({ filter }: { filter: string }) {
+  return (
+    &lt;div className="p-4 bg-white rounded-xl shadow-sm border mt-4"&gt;
+      &lt;p className="text-xs font-bold text-slate-500 uppercase"&gt;Showing: {filter} Tasks&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+        </div>
+        
+  </div>
+</body>
+</html>

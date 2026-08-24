@@ -1,0 +1,11 @@
+{
+  "story_key": "US101",
+  "generated_files": [
+    "workspace\\f827f300-3bbe-4fde-b007-224131434ef6\\epics\\EP001\\US101\\backend\\us101_service.py",
+    "workspace\\f827f300-3bbe-4fde-b007-224131434ef6\\epics\\EP001\\US101\\backend\\database\\us101_schema.sql",
+    "workspace\\f827f300-3bbe-4fde-b007-224131434ef6\\epics\\EP001\\US101\\backend\\us101_router.py",
+    "workspace\\f827f300-3bbe-4fde-b007-224131434ef6\\epics\\EP001\\US101\\backend\\tests\\test_us101.py"
+  ],
+  "api_endpoint": "/api/v1/resource",
+  "db_table": "resources"
+}

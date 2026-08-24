@@ -1,0 +1,20 @@
+{
+  "story_key": "US006",
+  "epic_key": "EPIC-006",
+  "title": "Mark Task Complete",
+  "user_role": "User",
+  "goal": "Perform Mark Task Complete actions",
+  "benefit": "Streamline user workflow and automation",
+  "acceptance_criteria": [
+    "Task status updates to completed"
+  ],
+  "api_endpoint": "/api/v1/mark_task_completes",
+  "db_table": "mark_task_completes",
+  "target_files": {
+    "backend": "backend/app/services/mark_task_complete_service.py",
+    "api": "backend/app/api/v1/mark_task_complete_routes.py",
+    "frontend": "frontend/src/pages/MarkTaskCompletePage.tsx",
+    "database": "backend/alembic/versions/us006_mark_task_complete_schema.py",
+    "test": "backend/tests/test_mark_task_complete.py"
+  }
+}

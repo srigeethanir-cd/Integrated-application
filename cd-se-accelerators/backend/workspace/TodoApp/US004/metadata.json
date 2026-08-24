@@ -1,0 +1,21 @@
+{
+  "story_id": "US004",
+  "title": "Create Task",
+  "status": "APPROVED",
+  "approval_status": "APPROVED",
+  "provider": "Groq",
+  "model": "llama-3.3-70b-versatile",
+  "worker": "Agent-2",
+  "created_timestamp": "2026-08-24T13:14:22.876551+00:00",
+  "updated_timestamp": "2026-08-24T13:14:45.413935+00:00",
+  "generation_time": "0.05s",
+  "total_file_count": 6,
+  "generated_files": [
+    "CreateTaskModal.tsx",
+    "TaskForm.tsx",
+    "create_task_router.py",
+    "task_service.py",
+    "preview.html",
+    "preview.png"
+  ]
+}

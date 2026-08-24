@@ -1,0 +1,22 @@
+{
+  "story_key": "US005",
+  "epic_key": "EPIC-005",
+  "title": "Logout",
+  "user_role": "User",
+  "goal": "Perform Logout actions",
+  "benefit": "Streamline user workflow and automation",
+  "acceptance_criteria": [
+    "Logout button available in navigation",
+    "Session is invalidated on logout",
+    "User is redirected to login page"
+  ],
+  "api_endpoint": "/api/v1/logouts",
+  "db_table": "logouts",
+  "target_files": {
+    "backend": "backend/app/services/logout_service.py",
+    "api": "backend/app/api/v1/logout_routes.py",
+    "frontend": "frontend/src/pages/LogoutPage.tsx",
+    "database": "backend/alembic/versions/us005_logout_schema.py",
+    "test": "backend/tests/test_logout.py"
+  }
+}

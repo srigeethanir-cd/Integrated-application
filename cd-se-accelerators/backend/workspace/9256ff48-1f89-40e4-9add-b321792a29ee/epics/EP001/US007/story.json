@@ -1,0 +1,12 @@
+{
+  "id": "US007",
+  "actor": "User",
+  "title": "Delete Task",
+  "epic_key": "EP001",
+  "priority": "Medium",
+  "story_key": "US007",
+  "description": "As a user, I want to delete tasks.",
+  "acceptance_criteria": [
+    "Remove task from database"
+  ]
+}

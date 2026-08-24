@@ -1,0 +1,247 @@
+{
+  "project_name": "Employee Management System",
+  "tech_stack": "Python FastAPI / React TypeScript",
+  "created_at": "2026-08-07T05:03:01.371031+00:00",
+  "status": "awaiting_human_approval",
+  "epics_count": 6,
+  "stories_count": 5,
+  "epics": [
+    {
+      "epic_key": "EPIC-001",
+      "title": "Authentication & System Core Setup",
+      "description": "Core application setup, database infrastructure, user sign in, and token management",
+      "target_module": "auth",
+      "features": [
+        "User Login",
+        "Token Authentication",
+        "System Configuration"
+      ]
+    },
+    {
+      "epic_key": "EPIC-002",
+      "title": "User Registration Management",
+      "description": "As a new user, I want to register an account so that I can access the application.",
+      "target_module": "user_registration",
+      "features": [
+        "User Registration",
+        "User Registration API",
+        "User Registration Database Schema"
+      ]
+    },
+    {
+      "epic_key": "EPIC-003",
+      "title": "User Login Management",
+      "description": "As a registered user, I want to log in using my credentials so that I can access my account.",
+      "target_module": "user_login",
+      "features": [
+        "User Login",
+        "User Login API",
+        "User Login Database Schema"
+      ]
+    },
+    {
+      "epic_key": "EPIC-004",
+      "title": "View Dashboard Management",
+      "description": "As a user, I want to view my dashboard so that I can see an overview of my tasks.",
+      "target_module": "view_dashboard",
+      "features": [
+        "View Dashboard",
+        "View Dashboard API",
+        "View Dashboard Database Schema"
+      ]
+    },
+    {
+      "epic_key": "EPIC-005",
+      "title": "Create Task Management",
+      "description": "As a user, I want to create a new task so that I can track work that needs to be completed.",
+      "target_module": "create_task",
+      "features": [
+        "Create Task",
+        "Create Task API",
+        "Create Task Database Schema"
+      ]
+    },
+    {
+      "epic_key": "EPIC-006",
+      "title": "Edit Task Management",
+      "description": "As a user, I want to edit my task information so that I can keep task details up to date.",
+      "target_module": "edit_task",
+      "features": [
+        "Edit Task",
+        "Edit Task API",
+        "Edit Task Database Schema"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "story_key": "US001",
+      "epic_key": "EPIC-001",
+      "title": "User Registration",
+      "user_role": "User",
+      "goal": "Perform User Registration actions",
+      "benefit": "Streamline user workflow and automation",
+      "acceptance_criteria": [
+        "User can register using name, email, and password",
+        "Email address must be unique",
+        "Password must meet the required security rules",
+        "Successful registration creates a user account"
+      ],
+      "api_endpoint": "/api/v1/user_registrations",
+      "db_table": "user_registrations",
+      "target_files": {
+        "backend": "backend/app/services/user_registration_service.py",
+        "api": "backend/app/api/v1/user_registration_routes.py",
+        "frontend": "frontend/src/pages/UserRegistrationPage.tsx",
+        "database": "backend/alembic/versions/us001_user_registration_schema.py",
+        "test": "backend/tests/test_user_registration.py"
+      }
+    },
+    {
+      "story_key": "US002",
+      "epic_key": "EPIC-002",
+      "title": "User Login",
+      "user_role": "User",
+      "goal": "Perform User Login actions",
+      "benefit": "Streamline user workflow and automation",
+      "acceptance_criteria": [
+        "User can log in using a registered email and password",
+        "Valid credentials allow access to the dashboard",
+        "Invalid credentials display an appropriate error message",
+        "Login session is created successfully after authentication"
+      ],
+      "api_endpoint": "/api/v1/user_logins",
+      "db_table": "user_logins",
+      "target_files": {
+        "backend": "backend/app/services/user_login_service.py",
+        "api": "backend/app/api/v1/user_login_routes.py",
+        "frontend": "frontend/src/pages/UserLoginPage.tsx",
+        "database": "backend/alembic/versions/us002_user_login_schema.py",
+        "test": "backend/tests/test_user_login.py"
+      }
+    },
+    {
+      "story_key": "US003",
+      "epic_key": "EPIC-003",
+      "title": "View Dashboard",
+      "user_role": "User",
+      "goal": "Perform View Dashboard actions",
+      "benefit": "Streamline user workflow and automation",
+      "acceptance_criteria": [
+        "Dashboard displays the user's tasks",
+        "Dashboard shows the total number of tasks",
+        "Only tasks belonging to the logged-in user are displayed",
+        "Dashboard loads successfully after login"
+      ],
+      "api_endpoint": "/api/v1/view_dashboards",
+      "db_table": "view_dashboards",
+      "target_files": {
+        "backend": "backend/app/services/view_dashboard_service.py",
+        "api": "backend/app/api/v1/view_dashboard_routes.py",
+        "frontend": "frontend/src/pages/ViewDashboardPage.tsx",
+        "database": "backend/alembic/versions/us003_view_dashboard_schema.py",
+        "test": "backend/tests/test_view_dashboard.py"
+      }
+    },
+    {
+      "story_key": "US004",
+      "epic_key": "EPIC-004",
+      "title": "Create Task",
+      "user_role": "User",
+      "goal": "Perform Create Task actions",
+      "benefit": "Streamline user workflow and automation",
+      "acceptance_criteria": [
+        "User can enter a task title",
+        "User can submit the task successfully",
+        "Created task is stored in the database",
+        "New task appears in the user's task list"
+      ],
+      "api_endpoint": "/api/v1/create_tasks",
+      "db_table": "create_tasks",
+      "target_files": {
+        "backend": "backend/app/services/create_task_service.py",
+        "api": "backend/app/api/v1/create_task_routes.py",
+        "frontend": "frontend/src/pages/CreateTaskPage.tsx",
+        "database": "backend/alembic/versions/us004_create_task_schema.py",
+        "test": "backend/tests/test_create_task.py"
+      }
+    },
+    {
+      "story_key": "US005",
+      "epic_key": "EPIC-005",
+      "title": "Edit Task",
+      "user_role": "User",
+      "goal": "Perform Edit Task actions",
+      "benefit": "Streamline user workflow and automation",
+      "acceptance_criteria": [
+        "User can select an existing task for editing",
+        "User can modify the task title",
+        "User can modify the task status",
+        "Updated task information is saved in the database",
+        "Updated information is immediately reflected in the task list"
+      ],
+      "api_endpoint": "/api/v1/edit_tasks",
+      "db_table": "edit_tasks",
+      "target_files": {
+        "backend": "backend/app/services/edit_task_service.py",
+        "api": "backend/app/api/v1/edit_task_routes.py",
+        "frontend": "frontend/src/pages/EditTaskPage.tsx",
+        "database": "backend/alembic/versions/us005_edit_task_schema.py",
+        "test": "backend/tests/test_edit_task.py"
+      }
+    }
+  ],
+  "dependency_graph": {
+    "nodes": [
+      {
+        "story_key": "US001",
+        "depends_on": [],
+        "execution_tier": 1
+      },
+      {
+        "story_key": "US002",
+        "depends_on": [
+          "US001"
+        ],
+        "execution_tier": 2
+      },
+      {
+        "story_key": "US003",
+        "depends_on": [
+          "US001"
+        ],
+        "execution_tier": 2
+      },
+      {
+        "story_key": "US004",
+        "depends_on": [
+          "US001"
+        ],
+        "execution_tier": 2
+      },
+      {
+        "story_key": "US005",
+        "depends_on": [
+          "US001"
+        ],
+        "execution_tier": 2
+      }
+    ],
+    "execution_order": [
+      "US001",
+      "US002",
+      "US003",
+      "US004",
+      "US005"
+    ],
+    "max_tiers": 2,
+    "is_acyclic": true
+  },
+  "workspace_status": {
+    "US001": "pending",
+    "US002": "pending",
+    "US003": "pending",
+    "US004": "pending",
+    "US005": "pending"
+  }
+}

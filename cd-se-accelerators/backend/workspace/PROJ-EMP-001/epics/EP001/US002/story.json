@@ -1,0 +1,55 @@
+{
+  "id": "US002",
+  "story_id": "US002",
+  "title": "User Registration",
+  "description": "Perform User Registration actions",
+  "status": "Approved",
+  "epic": "EPIC-002",
+  "project": "Employee Management System",
+  "folder_path": "C:/Users/SriGeethaniRavindrak/Desktop/acc-2/cd-se-accelerators/backend/workspace/e2e_test_project/workspace/US002",
+  "frontend_file_path": "frontend/user_login/Component.jsx",
+  "backend_file_path": "backend/tests/test_user_login.py",
+  "frontend_folder_path": "frontend/frontend/user_login",
+  "backend_folder_path": "backend/backend/tests",
+  "frontend_files": [
+    "frontend/user_login/Component.jsx"
+  ],
+  "backend_files": [
+    "backend/tests/test_user_login.py",
+    "backend/user_login/router.py",
+    "backend/user_login/service.py",
+    "backend/user_login/__pycache__/router.cpython-314.pyc",
+    "backend/user_login/__pycache__/service.cpython-314.pyc",
+    "backend/tests/__pycache__/test_user_login.cpython-314.pyc"
+  ],
+  "generated_files": [
+    "frontend/user_login/Component.jsx",
+    "backend/tests/test_user_login.py",
+    "backend/user_login/router.py",
+    "backend/user_login/service.py",
+    "backend/user_login/__pycache__/router.cpython-314.pyc",
+    "backend/user_login/__pycache__/service.cpython-314.pyc",
+    "backend/tests/__pycache__/test_user_login.cpython-314.pyc"
+  ],
+  "frontend_file_count": 1,
+  "backend_file_count": 6,
+  "total_file_count": 7,
+  "validation_score": 96,
+  "confidence": 94,
+  "generation_time": "3.8s",
+  "has_preview": false,
+  "has_live_preview": false,
+  "preview_image": "preview.png",
+  "preview_html": "preview.html",
+  "preview_image_path": "/stories/placeholder/preview",
+  "live_preview_url": "/stories/US002/live-preview",
+  "acceptance_criteria": [
+    "Verify User Story US002 form inputs and validation rules",
+    "Ensure secure API response for US002",
+    "Persist state changes in database schema"
+  ],
+  "created_timestamp": "2026-07-30T11:29:37Z",
+  "updated_timestamp": "2026-07-30T11:29:37Z",
+  "generated_at": "2026-07-30T11:29:37Z",
+  "updated_at": "2026-07-30T11:29:37Z"
+}

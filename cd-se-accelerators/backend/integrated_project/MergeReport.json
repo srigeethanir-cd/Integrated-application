@@ -1,0 +1,27 @@
+{
+  "project_name": "integrated_project",
+  "generated_at": "2026-07-31T10:46:05.691767+00:00",
+  "promoted_shared_modules_count": 0,
+  "merged_files_count": 3,
+  "promoted_modules": [],
+  "merged_records": [
+    {
+      "story_key": "US101",
+      "action_type": "CREATE",
+      "relative_path": "backend\\us101_router.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US101",
+      "action_type": "CREATE",
+      "relative_path": "backend\\us101_service.py",
+      "status": "SUCCESS"
+    },
+    {
+      "story_key": "US101",
+      "action_type": "CREATE",
+      "relative_path": "frontend\\us101_page.tsx",
+      "status": "SUCCESS"
+    }
+  ]
+}

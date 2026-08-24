@@ -1,0 +1,140 @@
+{
+  "components": [
+    {
+      "component_id": "COMP_001",
+      "screen_id": "SCREEN_001",
+      "name": "LoginContainerCard",
+      "type": "container",
+      "parent_component": "ROOT",
+      "confidence_score": 1.0
+    },
+    {
+      "component_id": "COMP_002",
+      "screen_id": "SCREEN_001",
+      "name": "EmailInput",
+      "type": "input_field",
+      "parent_component": "LoginContainerCard",
+      "confidence_score": 0.99
+    },
+    {
+      "component_id": "COMP_003",
+      "screen_id": "SCREEN_001",
+      "name": "PasswordInput",
+      "type": "input_field",
+      "parent_component": "LoginContainerCard",
+      "confidence_score": 0.99
+    },
+    {
+      "component_id": "COMP_004",
+      "screen_id": "SCREEN_001",
+      "name": "SignUpRedirectLink",
+      "type": "link",
+      "parent_component": "LoginContainerCard",
+      "confidence_score": 0.98
+    },
+    {
+      "component_id": "COMP_005",
+      "screen_id": "SCREEN_001",
+      "name": "ForgotPasswordRedirectLink",
+      "type": "link",
+      "parent_component": "LoginContainerCard",
+      "confidence_score": 0.98
+    },
+    {
+      "component_id": "COMP_006",
+      "screen_id": "SCREEN_001",
+      "name": "SubmitLoginArrowBtn",
+      "type": "button",
+      "parent_component": "LoginContainerCard",
+      "confidence_score": 1.0
+    },
+    {
+      "component_id": "COMP_007",
+      "screen_id": "SCREEN_002",
+      "name": "SignUpContainerCard",
+      "type": "container",
+      "parent_component": "ROOT",
+      "confidence_score": 1.0
+    },
+    {
+      "component_id": "COMP_008",
+      "screen_id": "SCREEN_002",
+      "name": "SignUpEmailInput",
+      "type": "input_field",
+      "parent_component": "SignUpContainerCard",
+      "confidence_score": 0.99
+    },
+    {
+      "component_id": "COMP_009",
+      "screen_id": "SCREEN_002",
+      "name": "SignUpPasswordInput",
+      "type": "input_field",
+      "parent_component": "SignUpContainerCard",
+      "confidence_score": 0.99
+    },
+    {
+      "component_id": "COMP_010",
+      "screen_id": "SCREEN_002",
+      "name": "ConfirmPasswordInput",
+      "type": "input_field",
+      "parent_component": "SignUpContainerCard",
+      "confidence_score": 0.99
+    },
+    {
+      "component_id": "COMP_011",
+      "screen_id": "SCREEN_002",
+      "name": "LoginRedirectLink",
+      "type": "link",
+      "parent_component": "SignUpContainerCard",
+      "confidence_score": 0.98
+    },
+    {
+      "component_id": "COMP_012",
+      "screen_id": "SCREEN_002",
+      "name": "SubmitSignUpArrowBtn",
+      "type": "button",
+      "parent_component": "SignUpContainerCard",
+      "confidence_score": 1.0
+    },
+    {
+      "component_id": "COMP_013",
+      "screen_id": "SCREEN_003",
+      "name": "MenuDrawerPanel",
+      "type": "panel",
+      "parent_component": "ROOT",
+      "confidence_score": 1.0
+    },
+    {
+      "component_id": "COMP_014",
+      "screen_id": "SCREEN_003",
+      "name": "HomeMenuItem",
+      "type": "menu_item",
+      "parent_component": "MenuDrawerPanel",
+      "confidence_score": 0.99
+    },
+    {
+      "component_id": "COMP_015",
+      "screen_id": "SCREEN_003",
+      "name": "ProfileMenuItem",
+      "type": "menu_item",
+      "parent_component": "MenuDrawerPanel",
+      "confidence_score": 0.99
+    },
+    {
+      "component_id": "COMP_016",
+      "screen_id": "SCREEN_003",
+      "name": "SubMenuMenuItem",
+      "type": "menu_item",
+      "parent_component": "MenuDrawerPanel",
+      "confidence_score": 0.99
+    },
+    {
+      "component_id": "COMP_017",
+      "screen_id": "SCREEN_003",
+      "name": "SettingMenuItem",
+      "type": "menu_item",
+      "parent_component": "MenuDrawerPanel",
+      "confidence_score": 0.99
+    }
+  ]
+}

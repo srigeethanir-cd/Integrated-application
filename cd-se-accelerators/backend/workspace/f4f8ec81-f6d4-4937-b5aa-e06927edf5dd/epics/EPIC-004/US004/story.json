@@ -1,0 +1,16 @@
+{
+  "id": "US004",
+  "story_key": "US004",
+  "epic_key": "EPIC-004",
+  "title": "Create Task",
+  "description": "",
+  "generation_status": "VALIDATED",
+  "validation_status": "VALIDATED",
+  "preview_status": "PREVIEW_READY",
+  "approval_status": "PENDING",
+  "merge_status": "VALIDATED",
+  "export_status": "PENDING",
+  "version": 1,
+  "retry_count": 0,
+  "assigned_agent": "Agent2"
+}

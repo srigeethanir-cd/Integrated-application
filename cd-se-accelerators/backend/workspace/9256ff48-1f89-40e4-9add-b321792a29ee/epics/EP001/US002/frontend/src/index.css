@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+header {
+  @apply bg-primary text-white;
+}
+
+h1 {
+  @apply text-2xl;
+}
+
+h2 {
+  @apply text-xl text-primary;
+}
+
+input {
+  @apply w-full p-2 border border-gray-400 rounded-sm;
+}
+
+button {
+  @apply w-full p-2 bg-primary text-white rounded-sm;
+}
+
+button:hover {
+  @apply bg-secondary;
+}
+
+.error {
+  @apply text-red-500;
+}

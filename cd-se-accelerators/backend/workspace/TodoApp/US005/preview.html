@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Preview - US005 Edit Task</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; margin: 0; padding: 24px; color: #0f172a; }
+    .card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); max-width: 900px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 20px; }
+    .badge { background: #eff6ff; color: #2563eb; font-weight: bold; font-size: 12px; padding: 4px 12px; border-radius: 9999px; border: 1px solid #bfdbfe; }
+    .criteria { background: #f8fafc; padding: 12px; border-radius: 8px; font-size: 13px; color: #475569; margin-bottom: 20px; border-left: 4px solid #3b82f6; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div>
+        <span class="badge">US005</span>
+        <h2 style="margin: 8px 0 4px 0; font-size: 20px;">Edit Task</h2>
+        <p style="margin: 0; font-size: 13px; color: #64748b;">As a user, I want to edit an existing task so that I can update its information.</p>
+      </div>
+    </div>
+    <div class="criteria">
+      <strong>Acceptance Criteria:</strong>
+      <ul style="margin: 8px 0 0 0; padding-left: 20px;">
+        <li>User can modify title.</li><li>User can modify description.</li><li>User can modify due date.</li><li>Updated task is saved.</li>
+      </ul>
+    </div>
+    <h3 style="font-size: 15px; margin-bottom: 12px;">Generated Frontend Components</h3>
+    
+        <div style="margin-bottom: 24px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;">
+          <div style="background: #f8fafc; padding: 10px 16px; border-bottom: 1px solid #e2e8f0; font-weight: bold; font-size: 13px; color: #334155; font-family: monospace;">
+            📄 EditTaskModal.tsx
+          </div>
+          <pre style="padding: 16px; margin: 0; font-size: 12px; background: #0f172a; color: #f8fafc; overflow-x: auto; font-family: Consolas, monospace;"><code>import React, { useState } from 'react';
+import TaskEditForm from './TaskEditForm';
+
+export default function EditTaskModal({ task }: { task: any }) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    &lt;div&gt;
+      &lt;button onClick={() =&gt; setIsOpen(true)} className="text-sm text-amber-600 font-bold hover:underline"&gt;Edit&lt;/button&gt;
+      {isOpen && (
+        &lt;div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4"&gt;
+          &lt;div className="bg-white p-6 rounded-xl max-w-md w-full"&gt;
+            &lt;h3 className="text-xl font-bold mb-4"&gt;Edit Task&lt;/h3&gt;
+            &lt;TaskEditForm initialTask={task} onClose={() =&gt; setIsOpen(false)} /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+        </div>
+        
+        <div style="margin-bottom: 24px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;">
+          <div style="background: #f8fafc; padding: 10px 16px; border-bottom: 1px solid #e2e8f0; font-weight: bold; font-size: 13px; color: #334155; font-family: monospace;">
+            📄 TaskEditForm.tsx
+          </div>
+          <pre style="padding: 16px; margin: 0; font-size: 12px; background: #0f172a; color: #f8fafc; overflow-x: auto; font-family: Consolas, monospace;"><code>import React, { useState } from 'react';
+
+export default function TaskEditForm({ initialTask, onClose }: { initialTask: any; onClose: () =&gt; void }) {
+  const [title, setTitle] = useState(initialTask?.title || '');
+  const [description, setDescription] = useState(initialTask?.description || '');
+  const [dueDate, setDueDate] = useState(initialTask?.due_date || '');
+
+  const handleSave = (e: React.FormEvent) =&gt; {
+    e.preventDefault();
+    console.log('Task Updated:', { title, description, dueDate });
+    onClose();
+  };
+
+  return (
+    &lt;form onSubmit={handleSave} className="space-y-4"&gt;
+      &lt;input type="text" value={title} onChange={e =&gt; setTitle(e.target.value)} className="w-full p-2 border rounded" required /&gt;
+      &lt;textarea value={description} onChange={e =&gt; setDescription(e.target.value)} className="w-full p-2 border rounded" /&gt;
+      &lt;input type="date" value={dueDate} onChange={e =&gt; setDueDate(e.target.value)} className="w-full p-2 border rounded" /&gt;
+      &lt;div className="flex justify-end gap-2"&gt;
+        &lt;button type="button" onClick={onClose} className="px-4 py-2 border rounded"&gt;Cancel&lt;/button&gt;
+        &lt;button type="submit" className="px-4 py-2 bg-amber-600 text-white rounded font-bold"&gt;Update&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  );
+}
+</code></pre>
+        </div>
+        
+  </div>
+</body>
+</html>

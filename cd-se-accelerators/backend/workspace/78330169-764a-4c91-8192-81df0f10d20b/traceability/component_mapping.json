@@ -1,0 +1,40 @@
+{
+  "component_mappings": [
+    {
+      "component_id": "COMP_US001_INPUT",
+      "story_key": "US001",
+      "screen_name": "SignUp Screen",
+      "acceptance_criterion": "Register using name, email, password"
+    },
+    {
+      "component_id": "COMP_US001_ACTION",
+      "story_key": "US001",
+      "screen_name": "SignUp Screen",
+      "acceptance_criterion": "Register using name, email, password"
+    },
+    {
+      "component_id": "COMP_US002_INPUT",
+      "story_key": "US002",
+      "screen_name": "Login Screen",
+      "acceptance_criterion": "Login with credentials"
+    },
+    {
+      "component_id": "COMP_US002_ACTION",
+      "story_key": "US002",
+      "screen_name": "Login Screen",
+      "acceptance_criterion": "Login with credentials"
+    },
+    {
+      "component_id": "COMP_US003_INPUT",
+      "story_key": "US003",
+      "screen_name": "Sidebar / Menu Drawer",
+      "acceptance_criterion": "Display tasks list"
+    },
+    {
+      "component_id": "COMP_US003_ACTION",
+      "story_key": "US003",
+      "screen_name": "Sidebar / Menu Drawer",
+      "acceptance_criterion": "Display tasks list"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "US003",
+  "story_id": "US003",
+  "title": "View Dashboard",
+  "description": "As a logged-in user, I want to view my dashboard so that I can see all my tasks.",
+  "priority": "Medium",
+  "actor": "User",
+  "acceptance_criteria": [
+    "Dashboard displays all tasks.",
+    "Completed and pending tasks are shown separately.",
+    "Task count is displayed."
+  ],
+  "status": "Approved",
+  "epic": "Todo Module",
+  "project": "TodoApp",
+  "folder_path": "backend/workspace/TodoApp/US003",
+  "created_timestamp": "2026-08-24T13:14:22.542794+00:00",
+  "updated_timestamp": "2026-08-24T13:14:45.030712+00:00",
+  "generation_time": "0.05s",
+  "frontend_files": [
+    "Dashboard.tsx",
+    "TaskSummaryCards.tsx"
+  ],
+  "backend_files": [
+    "dashboard_router.py",
+    "dashboard_service.py"
+  ],
+  "generated_files": [
+    "Dashboard.tsx",
+    "TaskSummaryCards.tsx",
+    "dashboard_router.py",
+    "dashboard_service.py",
+    "preview.html",
+    "preview.png"
+  ],
+  "total_file_count": 6
+}

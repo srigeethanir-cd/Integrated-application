@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+.header {
+  @apply w-full h-64 bg-primary text-white flex justify-center items-center;
+}
+
+.hero-image {
+  @apply w-full h-200 bg-hero-image bg-cover bg-center flex justify-center items-center;
+}
+
+.text-block {
+  @apply w-343 h-100 bg-white shadow-md rounded-md p-4 flex flex-col items-center justify-center;
+}
+
+.call-to-action {
+  @apply w-343 h-50 bg-primary text-white rounded-md hover:bg-secondary transition duration-300 ease-in-out;
+}
+
+input[type='email'],
+input[type='password'] {
+  @apply w-full h-12 bg-white border border-gray-400 rounded-md p-2 mb-4;
+}
+
+button[type='submit'] {
+  @apply w-full h-12 bg-primary text-white rounded-md hover:bg-secondary transition duration-300 ease-in-out;
+}

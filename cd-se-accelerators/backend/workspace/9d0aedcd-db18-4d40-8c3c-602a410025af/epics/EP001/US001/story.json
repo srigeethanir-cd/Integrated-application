@@ -1,0 +1,15 @@
+{
+  "story_id": "US201",
+  "project_id": "9d0aedcd-db18-4d40-8c3c-602a410025af",
+  "epic_id": "EP002",
+  "epic_name": "Appointment Management",
+  "title": "Book Appointment",
+  "description": "As a patient, I want to book an appointment with a doctor so that I can receive medical consultation.",
+  "priority": "High",
+  "acceptance_criteria": [
+    "Patient can search available doctors.",
+    "Patient can select an available time slot.",
+    "Appointment confirmation is generated.",
+    "Doctor schedule is updated automatically."
+  ]
+}

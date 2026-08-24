@@ -1,0 +1,1 @@
+export const App = () => { return <div>Fallback React UI</div>; };

@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.primary {
+  @apply bg-[#3498db] text-white;
+}
+
+.secondary {
+  @apply bg-[#f1c40f] text-white;
+}
+
+.background {
+  @apply bg-[#f9f9f9];
+}
+
+.text {
+  @apply text-[#333333];
+}
+
+.spacing-small {
+  @apply mx-[8px] my-[8px];
+}
+
+.spacing-medium {
+  @apply mx-[16px] my-[16px];
+}
+
+.spacing-large {
+  @apply mx-[24px] my-[24px];
+}
+
+.corners-small {
+  @apply rounded-[4px];
+}
+
+.corners-medium {
+  @apply rounded-[8px];
+}
+
+.corners-large {
+  @apply rounded-[12px];
+}

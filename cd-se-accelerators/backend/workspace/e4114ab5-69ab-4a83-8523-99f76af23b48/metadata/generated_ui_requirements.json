@@ -1,0 +1,116 @@
+{
+  "ui_requirements": [
+    {
+      "requirement_id": "REQ_US004_UI",
+      "story_key": "US004",
+      "generated_controls": [
+        {
+          "type": "Table",
+          "label": "Create Task Data List"
+        },
+        {
+          "type": "Button",
+          "label": "Create Create Task"
+        }
+      ],
+      "layout_hint": "Grid layout with paginated details",
+      "responsive_behavior": "Scale to mobile card views"
+    },
+    {
+      "requirement_id": "REQ_US005_UI",
+      "story_key": "US005",
+      "generated_controls": [
+        {
+          "type": "Table",
+          "label": "Edit Task Data List"
+        },
+        {
+          "type": "Button",
+          "label": "Create Edit Task"
+        }
+      ],
+      "layout_hint": "Grid layout with paginated details",
+      "responsive_behavior": "Scale to mobile card views"
+    },
+    {
+      "requirement_id": "REQ_US006_UI",
+      "story_key": "US006",
+      "generated_controls": [
+        {
+          "type": "Table",
+          "label": "Mark Task Complete Data List"
+        },
+        {
+          "type": "Button",
+          "label": "Create Mark Task Complete"
+        }
+      ],
+      "layout_hint": "Grid layout with paginated details",
+      "responsive_behavior": "Scale to mobile card views"
+    },
+    {
+      "requirement_id": "REQ_US007_UI",
+      "story_key": "US007",
+      "generated_controls": [
+        {
+          "type": "Table",
+          "label": "Delete Task Data List"
+        },
+        {
+          "type": "Button",
+          "label": "Create Delete Task"
+        }
+      ],
+      "layout_hint": "Grid layout with paginated details",
+      "responsive_behavior": "Scale to mobile card views"
+    },
+    {
+      "requirement_id": "REQ_US008_UI",
+      "story_key": "US008",
+      "generated_controls": [
+        {
+          "type": "Table",
+          "label": "Search Tasks Data List"
+        },
+        {
+          "type": "Button",
+          "label": "Create Search Tasks"
+        }
+      ],
+      "layout_hint": "Grid layout with paginated details",
+      "responsive_behavior": "Scale to mobile card views"
+    },
+    {
+      "requirement_id": "REQ_US009_UI",
+      "story_key": "US009",
+      "generated_controls": [
+        {
+          "type": "Table",
+          "label": "Filter Tasks Data List"
+        },
+        {
+          "type": "Button",
+          "label": "Create Filter Tasks"
+        }
+      ],
+      "layout_hint": "Grid layout with paginated details",
+      "responsive_behavior": "Scale to mobile card views"
+    },
+    {
+      "requirement_id": "REQ_US010_UI",
+      "story_key": "US010",
+      "generated_controls": [
+        {
+          "type": "Table",
+          "label": "Logout Data List"
+        },
+        {
+          "type": "Button",
+          "label": "Create Logout"
+        }
+      ],
+      "layout_hint": "Grid layout with paginated details",
+      "responsive_behavior": "Scale to mobile card views"
+    }
+  ]
+}

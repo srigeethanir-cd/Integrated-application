@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .hero-image {
+    background-image: url('https://via.placeholder.com/375x200');
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@layer utilities {
+  .bg-hero-image {
+    background-image: url('https://via.placeholder.com/375x200');
+    background-size: cover;
+    background-position: center;
+  }
+}

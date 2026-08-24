@@ -1,0 +1,37 @@
+{
+  "id": "US006",
+  "story_id": "US006",
+  "title": "Mark Task Complete",
+  "description": "As a user, I want to mark a task as completed so that I know it is finished.",
+  "priority": "Medium",
+  "actor": "User",
+  "acceptance_criteria": [
+    "Completed tasks display a completed status.",
+    "Completed tasks move to the completed section.",
+    "Task completion time is recorded."
+  ],
+  "status": "Approved",
+  "epic": "Todo Module",
+  "project": "TodoApp",
+  "folder_path": "backend/workspace/TodoApp/US006",
+  "created_timestamp": "2026-08-24T13:14:23.534442+00:00",
+  "updated_timestamp": "2026-08-24T13:14:46.250272+00:00",
+  "generation_time": "0.05s",
+  "frontend_files": [
+    "TaskItem.tsx",
+    "CompleteTaskButton.tsx"
+  ],
+  "backend_files": [
+    "complete_task_router.py",
+    "task_service.py"
+  ],
+  "generated_files": [
+    "TaskItem.tsx",
+    "CompleteTaskButton.tsx",
+    "complete_task_router.py",
+    "task_service.py",
+    "preview.html",
+    "preview.png"
+  ],
+  "total_file_count": 6
+}

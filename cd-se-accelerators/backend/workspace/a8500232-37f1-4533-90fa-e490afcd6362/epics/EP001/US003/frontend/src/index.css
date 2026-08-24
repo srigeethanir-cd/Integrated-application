@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard {
+  @apply flex flex-col items-center justify-center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.header {
+  @apply absolute top-0 left-0;
+  width: 375px;
+  height: 64px;
+  background-color: #3498db;
+  color: #333333;
+  padding: 16px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.hero-image {
+  @apply absolute top-64 left-0;
+  width: 375px;
+  height: 200px;
+  background-color: #f1c40f;
+  padding: 16px;
+}
+
+.text-block {
+  @apply absolute top-264 left-16;
+  width: 343px;
+  height: 100px;
+  background-color: #ffffff;
+  color: #333333;
+  padding: 16px;
+}
+
+.call-to-action {
+  @apply absolute top-364 left-16;
+  width: 343px;
+  height: 44px;
+  background-color: #3498db;
+  color: #333333;
+  padding: 16px;
+  border-radius: 2px;
+}

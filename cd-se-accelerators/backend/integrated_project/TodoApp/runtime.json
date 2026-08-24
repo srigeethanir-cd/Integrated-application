@@ -1,0 +1,10 @@
+{
+  "status": "running",
+  "frontend_url": "http://localhost:5175",
+  "backend_url": "http://localhost:8010",
+  "frontend_port": 5175,
+  "backend_port": 8010,
+  "backend_pid": 2892,
+  "frontend_pid": 10732,
+  "started_at": "2026-08-02T20:30:38.691870"
+}

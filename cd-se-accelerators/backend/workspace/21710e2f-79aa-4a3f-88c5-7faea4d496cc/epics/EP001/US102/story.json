@@ -1,0 +1,8 @@
+{
+  "story_key": "US102",
+  "epic_key": "EP001",
+  "title": "Member Registration Scaffolding",
+  "acceptance_criteria": [
+    "Validate password confirmation match"
+  ]
+}
