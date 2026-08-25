@@ -214,11 +214,23 @@ export function FeatureShell({ children }: { children: ReactNode }) {
           {/* Top Module Navigation Tabs */}
           <nav className="flex items-center gap-1.5 p-1 bg-muted/60 dark:bg-muted/30 border border-border/60 rounded-2xl">
             {moduleTabs.map(({ href, label, icon: Icon, exact }) => {
-              const active = exact ? pathname === href : pathname.startsWith(href);
+              const cleanCurrent = (pathname || '').replace(/^\/application-testing/, '').replace(/\/$/, '') || '/';
+              const cleanTarget = href.replace(/\/$/, '') || '/';
+              const active = exact ? cleanCurrent === cleanTarget : cleanCurrent.startsWith(cleanTarget);
+
               return (
                 <Link
                   key={href}
                   href={href}
+                  style={
+                    active
+                      ? {
+                          backgroundColor: '#FF5523',
+                          color: '#ffffff',
+                          boxShadow: '0 4px 14px rgba(255, 85, 35, 0.35)',
+                        }
+                      : undefined
+                  }
                   className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     active
                       ? 'bg-[#FF5523] hover:bg-[#E0481B] text-white shadow-md shadow-[#FF5523]/30'
