@@ -580,7 +580,7 @@ export default function App() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-gradient-to-r from-[#FF602B] via-[#7551FF] to-[#4318FF] text-white shadow-md shadow-indigo-900/30'
+                    ? 'bg-[#FF5523] hover:bg-[#E0481B] text-white shadow-md shadow-[#FF5523]/30'
                     : 'text-[#707EAE] dark:text-[#A3AED0] hover:text-[#1B2559] dark:hover:text-white hover:bg-white dark:hover:bg-[#11142D]/50'
                 }`}
               >
@@ -589,7 +589,7 @@ export default function App() {
                 {tab.badge === 'loading' ? (
                   <span className="w-3 h-3 rounded-full border-2 border-white border-t-transparent animate-spin inline-block shrink-0" />
                 ) : tab.badge ? (
-                  <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-full leading-tight ${isActive ? 'bg-white/20 text-white' : 'bg-[#FF5523] text-white'}`}>
+                  <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-full leading-tight ${isActive ? 'bg-white text-[#FF5523]' : 'bg-[#FF5523] text-white'}`}>
                     {tab.badge > 999 ? '999+' : tab.badge}
                   </span>
                 ) : null}
