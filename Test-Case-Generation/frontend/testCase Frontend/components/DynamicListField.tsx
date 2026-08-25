@@ -1,0 +1,46 @@
+'use client';
+
+import { Plus, Trash2 } from 'lucide-react';
+
+interface DynamicListFieldProps {
+  label: string;
+  values: string[];
+  required?: boolean;
+  recommended?: boolean;
+  error?: string;
+  onChange: (values: string[]) => void;
+}
+
+export function DynamicListField({ label, values, required, recommended, error, onChange }: DynamicListFieldProps) {
+  return (
+    <fieldset className="space-y-3">
+      <div>
+        <legend className="text-sm font-semibold">{label}{required && <span className="ml-1 text-red-500">*</span>}{recommended && <span className="ml-2 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary">Highly recommended</span>}</legend>
+        <p className="mt-1 text-xs text-muted-foreground">{recommended ? 'Used directly in coverage, traceability, and confidence scoring. Add each criterion separately.' : 'Add each item separately for cleaner traceability.'}</p>
+      </div>
+      {values.map((value, index) => (
+        <div key={index} className="group flex items-start gap-2 rounded-xl border border-transparent p-1 transition-colors focus-within:border-primary/20 focus-within:bg-primary/[0.02]">
+          <textarea
+            value={value}
+            onChange={(event) => onChange(values.map((item, itemIndex) => itemIndex === index ? event.target.value : item))}
+            aria-label={`${label} ${index + 1}`}
+            className="min-h-20 flex-1 resize-y rounded-lg border border-input bg-background px-3 py-2 text-sm shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+            placeholder={`Enter ${label.toLowerCase().replace(/s$/, '')}`}
+          />
+          <button
+            type="button"
+            onClick={() => onChange(values.length === 1 ? [''] : values.filter((_, itemIndex) => itemIndex !== index))}
+            className="mt-1 rounded-lg border border-transparent p-2 text-muted-foreground transition hover:border-red-500/20 hover:bg-red-500/10 hover:text-red-500"
+            aria-label={`Remove ${label} item ${index + 1}`}
+          >
+            <Trash2 className="h-4 w-4" />
+          </button>
+        </div>
+      ))}
+      <button type="button" onClick={() => onChange([...values, ''])} className="inline-flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/5 px-3 py-2 text-sm font-semibold text-primary transition hover:bg-primary/10">
+        <Plus className="h-4 w-4" /> Add another
+      </button>
+      {error && <p className="text-sm text-red-500" role="alert">{error}</p>}
+    </fieldset>
+  );
+}

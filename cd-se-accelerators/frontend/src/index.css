@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary-400: #7357FF;
+  --color-primary-600: #4318FF;
+  --color-accent-orange: #FF5523;
+  --color-dark-main: #11142D;
+  --color-dark-sidebar: #1B1E3A;
+  --color-dark-slate: #2B3674;
+  --color-dark-sub: #111827;
+  --color-bg-workspace: #F4F7FE;
+  --color-card-bg: #FFFFFF;
+  --color-border: #E0E5F2;
+  --color-text-muted: #A3AED0;
+  --color-text-medium: #707EAE;
+  --color-text-dark: #1B2559;
+  --color-success: #05CD99;
+  --color-success-light: #E6F9F0;
+  --color-warning: #FFB800;
+  --color-info: #3965FF;
+  --color-info-light: #D6E4FF;
+  --color-info-subtle: #EAEFFF;
+  --color-error: #EE5D50;
+  --color-error-light: #FDEDEC;
+}
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--color-bg-workspace);
+    color: var(--color-text-dark);
+  }
+}
+
+/* Custom StoryForge styles */
+.bg-storyforge-brand {
+  background: linear-gradient(135deg, #7357FF 0%, #4318FF 100%);
+}
+
+.bg-storyforge-accent {
+  background-color: #FF5523;
+}
+
+.bg-storyforge-cta {
+  background-color: #FF5523;
+  color: #FFFFFF;
+}
+
+.bg-storyforge-cta:hover {
+  background-color: #E0481B;
+}
+
+.text-storyforge-heading {
+  color: #1B2559;
+}
+
+.dark .text-storyforge-heading {
+  color: #FFFFFF;
+}
+
+/* Striped animation for active progress bar */
+.progress-striped {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #A3AED0;
+  border-radius: 9999px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #2B3674;
+}
+

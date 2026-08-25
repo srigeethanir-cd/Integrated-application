@@ -1,0 +1,2973 @@
+{
+  "generated_test_cases": [
+    {
+      "id": "TC1",
+      "title": "Verify get_db returns a session",
+      "description": "Ensure that invoking get_db provides a SQLAlchemy session object connected to the database.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Call get_db()",
+        "Check returned object is instance of Session"
+      ],
+      "expected_results": [
+        "A valid Session object is returned",
+        "It can perform a simple query"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          },
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "database.py",
+          "services/banking.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "accounts",
+          "open_account",
+          "make_transfer",
+          "get_db",
+          "transfer",
+          "test_authentication_is_required"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC2",
+      "title": "Verify get_db handles closed connection",
+      "description": "Test that get_db can recover if the database connection has been closed previously.",
+      "category": "negative",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "Database connection is closed"
+      ],
+      "steps": [
+        "Call get_db() after closing the connection",
+        "Attempt a simple query"
+      ],
+      "expected_results": [
+        "get_db() reopens the connection and query succeeds"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          },
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "database.py",
+          "services/banking.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "accounts",
+          "open_account",
+          "make_transfer",
+          "get_db",
+          "transfer",
+          "test_authentication_is_required"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC3",
+      "title": "Boundary test: get_db called concurrently",
+      "description": "Invoke get_db from multiple threads simultaneously to ensure thread safety.",
+      "category": "boundary",
+      "priority": "low",
+      "severity": "trivial",
+      "preconditions": [],
+      "steps": [
+        "Spawn 10 threads",
+        "Each thread calls get_db()",
+        "Each thread performs a simple query"
+      ],
+      "expected_results": [
+        "All threads receive valid sessions",
+        "No race conditions or exceptions occur"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          },
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "database.py",
+          "services/banking.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "accounts",
+          "open_account",
+          "make_transfer",
+          "get_db",
+          "transfer",
+          "test_authentication_is_required"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC4",
+      "title": "Security test: unauthorized access to get_db",
+      "description": "Attempt to access get_db without proper authentication context and verify access is denied or handled securely.",
+      "category": "security",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [
+        "User is unauthenticated"
+      ],
+      "steps": [
+        "Call get_db() in an unauthenticated request context",
+        "Attempt to use the session for a privileged query"
+      ],
+      "expected_results": [
+        "Access is denied or session is None",
+        "Error handling logs the attempt"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          },
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "database.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "accounts",
+          "open_account",
+          "make_transfer",
+          "get_db",
+          "transfer",
+          "test_authentication_is_required"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC5",
+      "title": "Exception test: get_db with invalid database URL",
+      "description": "Provide an invalid database URL configuration and verify that get_db raises an informative exception.",
+      "category": "exception/integration",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [
+        "Database URL is malformed"
+      ],
+      "steps": [
+        "Set database URL to an invalid value",
+        "Call get_db()"
+      ],
+      "expected_results": [
+        "get_db() raises an exception indicating connection failure",
+        "The exception is logged appropriately"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          },
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "database.py",
+          "services/banking.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "accounts",
+          "open_account",
+          "make_transfer",
+          "get_db",
+          "transfer",
+          "test_authentication_is_required"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC001",
+      "title": "Get all accounts - success",
+      "description": "Verify that the GET /api/banking/accounts endpoint returns a list of accounts with status 200.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Send a GET request to /api/banking/accounts with valid authentication.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 200.",
+        "Response body is a list of AccountOut objects."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/accounts.py"
+            ],
+            "symbols": [],
+            "description": "Condition: x_api_key != 'validation-bank-key'"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source.id == destination.id"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          },
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "tests/test_api.py",
+          "database.py"
+        ],
+        "symbols": [
+          "accounts",
+          "make_transfer",
+          "open_account",
+          "authenticate",
+          "transfer",
+          "list_accounts",
+          "test_authentication_is_required"
+        ],
+        "file": "routers/accounts.py",
+        "symbol": "accounts",
+        "route": "/api/banking/accounts",
+        "method": "GET",
+        "response_model": "list[AccountOut]"
+      }
+    },
+    {
+      "id": "TC002",
+      "title": "Open account - missing required field",
+      "description": "Attempt to create an account without providing the required 'owner' field, expecting a validation error.",
+      "category": "negative",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Send a POST request to /api/banking/accounts with JSON body { \"opening_balance\": 1000 }.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 422 (Unprocessable Entity).",
+        "Response contains a validation error indicating 'owner' is missing."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/accounts.py"
+            ],
+            "symbols": [],
+            "description": "Condition: x_api_key != 'validation-bank-key'"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "open_account",
+          "make_transfer",
+          "accounts",
+          "authenticate",
+          "test_open_account"
+        ],
+        "file": "routers/accounts.py",
+        "symbol": "accounts",
+        "route": "/api/banking/accounts",
+        "method": "GET",
+        "response_model": "list[AccountOut]"
+      }
+    },
+    {
+      "id": "TC003",
+      "title": "Make transfer - amount exceeds balance",
+      "description": "Attempt a transfer where the source account balance is insufficient, expecting a 409 conflict.",
+      "category": "boundary",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Create two accounts via POST /api/banking/accounts.",
+        "Set source account balance to 50.",
+        "Send a POST request to /api/banking/transfers with amount 100.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 409.",
+        "Response body indicates insufficient funds error."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          },
+          {
+            "files": [
+              "routers/accounts.py"
+            ],
+            "symbols": [],
+            "description": "Condition: x_api_key != 'validation-bank-key'"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "make_transfer",
+          "open_account",
+          "accounts",
+          "authenticate",
+          "transfer",
+          "test_open_account"
+        ],
+        "file": "routers/accounts.py",
+        "symbol": "accounts",
+        "route": "/api/banking/accounts",
+        "method": "GET",
+        "response_model": "list[AccountOut]"
+      }
+    },
+    {
+      "id": "TC004",
+      "title": "Authenticate - invalid API key",
+      "description": "Verify that requests with an invalid x_api_key are rejected according to the business rule.",
+      "category": "security",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Send a request to any protected endpoint with header x_api_key set to 'invalid-key'.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 403 or 401 (unauthorized).",
+        "Request is not processed further."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/accounts.py"
+            ],
+            "symbols": [],
+            "description": "Condition: x_api_key != 'validation-bank-key'"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          },
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "tests/test_api.py",
+          "services/banking.py"
+        ],
+        "symbols": [
+          "accounts",
+          "open_account",
+          "make_transfer",
+          "authenticate",
+          "test_open_account",
+          "transfer"
+        ],
+        "file": "routers/accounts.py",
+        "symbol": "authenticate"
+      }
+    },
+    {
+      "id": "TC005",
+      "title": "Make transfer - unexpected exception handling",
+      "description": "Simulate a database error during transfer to ensure the endpoint maps exceptions to proper HTTP status codes.",
+      "category": "exception/integration",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Mock the database layer to raise an exception when updating balances.",
+        "Send a valid POST request to /api/banking/transfers.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 500 (Internal Server Error) or appropriate mapped status.",
+        "Response contains error details without leaking internal stack trace."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/accounts.py"
+            ],
+            "symbols": [],
+            "description": "Condition: x_api_key != 'validation-bank-key'"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source.id == destination.id"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "database.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "make_transfer",
+          "open_account",
+          "accounts",
+          "authenticate",
+          "test_open_account",
+          "transfer"
+        ],
+        "file": "routers/accounts.py",
+        "symbol": "make_transfer",
+        "route": "/api/banking/transfers",
+        "method": "POST",
+        "request_model": "TransferRequest",
+        "response_model": "AccountOut"
+      }
+    },
+    {
+      "id": "B3-TC001",
+      "title": "Transfer with valid source and destination, sufficient funds",
+      "description": "Execute a transfer where both source and destination accounts are provided, have different IDs, and source balance exceeds the transfer amount.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Create source account with balance 1000",
+        "Create destination account with balance 500",
+        "Call transfer(source, destination, amount=200)"
+      ],
+      "expected_results": [
+        "Transfer succeeds",
+        "Source account balance becomes 800",
+        "Destination account balance becomes 700"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source.id == destination.id"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "models.py"
+        ],
+        "symbols": [
+          "make_transfer",
+          "accounts",
+          "open_account",
+          "transfer",
+          "create_account",
+          "list_accounts"
+        ],
+        "file": "services/banking.py",
+        "symbol": "transfer",
+        "route": "/api/banking/accounts",
+        "method": "GET",
+        "response_model": "list[AccountOut]"
+      }
+    },
+    {
+      "id": "B3-TC002",
+      "title": "Transfer where source is None",
+      "description": "Attempt a transfer with a null source account, which should be rejected according to business rule.",
+      "category": "negative",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Set source to null",
+        "Create destination account",
+        "Call transfer(source, destination, amount=100)"
+      ],
+      "expected_results": [
+        "Transfer raises validation error for missing source"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source.id == destination.id"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "models.py"
+        ],
+        "symbols": [
+          "open_account",
+          "make_transfer",
+          "transfer",
+          "create_account"
+        ],
+        "file": "services/banking.py",
+        "symbol": "transfer"
+      }
+    },
+    {
+      "id": "B3-TC003",
+      "title": "Transfer where destination is None",
+      "description": "Attempt a transfer with a null destination account, violating the source/destination presence rule.",
+      "category": "negative",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Create source account",
+        "Set destination to null",
+        "Call transfer(source, destination, amount=100)"
+      ],
+      "expected_results": [
+        "Transfer raises validation error for missing destination"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source.id == destination.id"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "models.py"
+        ],
+        "symbols": [
+          "open_account",
+          "make_transfer",
+          "transfer",
+          "create_account"
+        ],
+        "file": "services/banking.py",
+        "symbol": "transfer"
+      }
+    },
+    {
+      "id": "B3-TC004",
+      "title": "Transfer with same source and destination ID",
+      "description": "Attempt a transfer where source and destination refer to the same account, which should be rejected.",
+      "category": "negative",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Create account A with balance 500",
+        "Call transfer(account A, account A, amount=50)"
+      ],
+      "expected_results": [
+        "Transfer raises error due to identical source and destination IDs"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source.id == destination.id"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "models.py"
+        ],
+        "symbols": [
+          "open_account",
+          "make_transfer",
+          "transfer",
+          "create_account"
+        ],
+        "file": "services/banking.py",
+        "symbol": "transfer"
+      }
+    },
+    {
+      "id": "B3-TC005",
+      "title": "Transfer with insufficient funds (boundary)",
+      "description": "Execute a transfer where source balance equals the transfer amount, testing the boundary condition of sufficient funds.",
+      "category": "boundary",
+      "priority": "medium",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Create source account with balance 100",
+        "Create destination account with balance 200",
+        "Call transfer(source, destination, amount=100)"
+      ],
+      "expected_results": [
+        "Transfer succeeds",
+        "Source balance becomes 0",
+        "Destination balance becomes 300"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source.id == destination.id"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "models.py"
+        ],
+        "symbols": [
+          "make_transfer",
+          "accounts",
+          "open_account",
+          "transfer",
+          "create_account",
+          "list_accounts"
+        ],
+        "file": "services/banking.py",
+        "symbol": "transfer"
+      }
+    },
+    {
+      "id": "TC006",
+      "title": "Transfer with insufficient funds (exception)",
+      "description": "Attempt a transfer where source balance is less than the transfer amount, expecting an InsufficientFundsError.",
+      "category": "exception/integration",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Create source account with balance 50",
+        "Create destination account with balance 150",
+        "Call transfer(source, destination, amount=100)"
+      ],
+      "expected_results": [
+        "Transfer raises InsufficientFundsError"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source.id == destination.id"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "models.py"
+        ],
+        "symbols": [
+          "open_account",
+          "make_transfer",
+          "transfer",
+          "create_account"
+        ],
+        "file": "services/banking.py",
+        "symbol": "transfer"
+      }
+    },
+    {
+      "id": "TC-001",
+      "title": "Successful transfer with valid source and destination accounts",
+      "description": "Verifies that the transfer operation succeeds when both source and destination accounts are provided and are not None.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "Both source and destination accounts exist in the system.",
+        "Source account has a valid balance."
+      ],
+      "steps": [
+        "Arrange: Create source account with balance 1000.",
+        "Arrange: Create destination account with balance 500.",
+        "Act: Call transfer API with payload amount 200 from source to destination.",
+        "Assert: Transfer is successful and returns HTTP 200."
+      ],
+      "expected_results": [
+        "Transfer API responds with success.",
+        "Source balance decreases to 800.",
+        "Destination balance increases to 700."
+      ],
+      "requirement_ids": [
+        "transfer|positive|not-source-is-none-or-destination-is-none"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          },
+          {
+            "files": [
+              "routers/accounts.py"
+            ],
+            "symbols": [],
+            "description": "Condition: x_api_key != 'validation-bank-key'"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "make_transfer",
+          "accounts",
+          "open_account",
+          "transfer",
+          "create_account",
+          "list_accounts",
+          "authenticate"
+        ],
+        "file": "services/banking.py",
+        "symbol": "transfer",
+        "route": "/api/banking/accounts",
+        "method": "GET",
+        "response_model": "list[AccountOut]",
+        "coverage_requirements": [
+          "transfer|positive|not-source-is-none-or-destination-is-none",
+          "transfer|positive|not-decimal-source-balance-payload-amount"
+        ]
+      }
+    },
+    {
+      "id": "TC-002",
+      "title": "Successful transfer when source balance is sufficient",
+      "description": "Ensures that the transfer operation proceeds when the source account balance is not less than the transfer amount.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "Both source and destination accounts exist.",
+        "Source account balance is 500.",
+        "Payload amount is 300."
+      ],
+      "steps": [
+        "Arrange: Create source account with balance 500.",
+        "Arrange: Create destination account with balance 200.",
+        "Act: Call transfer API with amount 300 from source to destination.",
+        "Assert: Transfer is successful and returns HTTP 200."
+      ],
+      "expected_results": [
+        "Source balance decreases to 200.",
+        "Destination balance increases to 500.",
+        "Transfer API confirms success."
+      ],
+      "requirement_ids": [
+        "transfer|positive|not-decimal-source-balance-payload-amount"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source.id == destination.id"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "make_transfer",
+          "accounts",
+          "open_account",
+          "transfer",
+          "create_account",
+          "authenticate"
+        ],
+        "file": "services/banking.py",
+        "symbol": "transfer"
+      }
+    },
+    {
+      "id": "TC-003",
+      "title": "Failed transfer due to insufficient source balance",
+      "description": "Checks that the transfer operation fails when the source account balance is less than the transfer amount.",
+      "category": "negative",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [
+        "Both source and destination accounts exist.",
+        "Source account balance is 100.",
+        "Payload amount is 200."
+      ],
+      "steps": [
+        "Arrange: Create source account with balance 100.",
+        "Arrange: Create destination account with balance 300.",
+        "Act: Call transfer API with amount 200 from source to destination.",
+        "Assert: Transfer fails and returns HTTP 400."
+      ],
+      "expected_results": [
+        "Source balance remains 100.",
+        "Destination balance remains 300.",
+        "Error message indicates insufficient funds."
+      ],
+      "requirement_ids": [
+        "transfer|negative|not-decimal-source-balance-payload-amount"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source is None or destination is None"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: source.id == destination.id"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          },
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "make_transfer",
+          "accounts",
+          "open_account",
+          "transfer",
+          "create_account"
+        ],
+        "file": "services/banking.py",
+        "symbol": "transfer",
+        "coverage_requirements": [
+          "transfer|negative|not-decimal-source-balance-payload-amount"
+        ]
+      }
+    },
+    {
+      "id": "B4-TC001",
+      "title": "Authentication required for protected endpoint",
+      "description": "Verify that accessing a protected API endpoint without authentication returns a 401 error.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Send a GET request to the protected endpoint without Authorization header",
+        "Observe the response"
+      ],
+      "expected_results": [
+        "Response status code is 401 Unauthorized",
+        "Response body contains an authentication error message"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/accounts.py"
+            ],
+            "symbols": [],
+            "description": "Condition: x_api_key != 'validation-bank-key'"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          },
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "tests/test_api.py",
+          "database.py"
+        ],
+        "symbols": [
+          "accounts",
+          "open_account",
+          "make_transfer",
+          "test_authentication_is_required",
+          "test_open_account",
+          "get_db"
+        ],
+        "file": "routers/accounts.py",
+        "symbol": "open_account"
+      }
+    },
+    {
+      "id": "B4-TC002",
+      "title": "Missing owner key raises KeyError",
+      "description": "Ensure that when the 'owner' key is missing in the JSON response, the code raises a KeyError.",
+      "category": "exception/integration",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Mock the API response to return JSON without the 'owner' field",
+        "Call the function that accesses response.json()['owner']"
+      ],
+      "expected_results": [
+        "A KeyError is raised indicating the missing 'owner' key"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/accounts.py"
+            ],
+            "symbols": [],
+            "description": "Condition: x_api_key != 'validation-bank-key'"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          },
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "accounts",
+          "open_account",
+          "make_transfer",
+          "test_open_account",
+          "test_authentication_is_required",
+          "authenticate"
+        ],
+        "file": "routers/accounts.py",
+        "symbol": "open_account"
+      }
+    },
+    {
+      "id": "B4-TC003",
+      "title": "Open account with valid data",
+      "description": "Create a new account using valid input data and verify successful creation.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Prepare a request payload with all required fields",
+        "Send a POST request to the open account endpoint",
+        "Check the response status and content"
+      ],
+      "expected_results": [
+        "Response status code is 201 Created",
+        "Response body contains the newly created account details"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "open_account",
+          "make_transfer",
+          "test_open_account",
+          "test_authentication_is_required",
+          "create_account"
+        ],
+        "file": "routers/accounts.py",
+        "symbol": "open_account"
+      }
+    },
+    {
+      "id": "B4-TC004",
+      "title": "Open account with missing required field",
+      "description": "Attempt to open an account with a missing required field and verify appropriate error handling.",
+      "category": "negative",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Prepare a request payload missing a required field (e.g., 'email')",
+        "Send a POST request to the open account endpoint",
+        "Observe the response"
+      ],
+      "expected_results": [
+        "Response status code is 400 Bad Request",
+        "Response body includes a validation error for the missing field"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/accounts.py"
+            ],
+            "symbols": [],
+            "description": "Condition: x_api_key != 'validation-bank-key'"
+          },
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "tests/test_api.py",
+          "models.py"
+        ],
+        "symbols": [
+          "open_account",
+          "make_transfer",
+          "test_open_account",
+          "test_authentication_is_required",
+          "authenticate"
+        ],
+        "file": "routers/accounts.py",
+        "symbol": "open_account"
+      }
+    },
+    {
+      "id": "B4-TC005",
+      "title": "Boundary test for maximum payload size",
+      "description": "Send a request to the open account endpoint with payload size at the maximum allowed limit.",
+      "category": "boundary",
+      "priority": "low",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Create a payload with fields populated to the maximum allowed length",
+        "Send a POST request to the open account endpoint",
+        "Check the response"
+      ],
+      "expected_results": [
+        "Response status code is 201 Created",
+        "Account is created successfully without truncation"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/banking.py"
+            ],
+            "symbols": [],
+            "description": "Condition: Decimal(source.balance) < payload.amount"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke open_account",
+              "Call services.banking.create_account"
+            ],
+            "components": [],
+            "entrypoint": "open_account"
+          },
+          {
+            "name": "POST /api/banking/transfers",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke make_transfer",
+              "Call services.banking.transfer",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "make_transfer"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "services/banking.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "open_account",
+          "make_transfer",
+          "test_open_account",
+          "create_account"
+        ],
+        "file": "routers/accounts.py",
+        "symbol": "open_account"
+      }
+    },
+    {
+      "id": "B4-TC006",
+      "title": "Security test for authentication bypass",
+      "description": "Attempt to access the protected endpoint with an invalid token to ensure proper rejection.",
+      "category": "security",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Send a GET request to the protected endpoint with an invalid Authorization token",
+        "Observe the response"
+      ],
+      "expected_results": [
+        "Response status code is 401 Unauthorized",
+        "No sensitive data is returned"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/banking/accounts",
+            "handler": "accounts",
+            "file": "routers/accounts.py",
+            "response_type": "list[AccountOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/accounts",
+            "handler": "open_account",
+            "file": "routers/accounts.py",
+            "request_type": "AccountCreate",
+            "response_type": "AccountOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/banking/transfers",
+            "handler": "make_transfer",
+            "file": "routers/accounts.py",
+            "request_type": "TransferRequest",
+            "response_type": "AccountOut"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/banking/accounts",
+            "files": [
+              "routers/accounts.py"
+            ],
+            "steps": [
+              "Invoke accounts",
+              "Call fastapi.APIRouter",
+              "Call services.banking.list_accounts"
+            ],
+            "components": [],
+            "entrypoint": "accounts"
+          }
+        ],
+        "source_files": [
+          "routers/accounts.py",
+          "tests/test_api.py",
+          "database.py"
+        ],
+        "symbols": [
+          "accounts",
+          "open_account",
+          "make_transfer",
+          "test_authentication_is_required",
+          "test_open_account",
+          "get_db"
+        ],
+        "file": "routers/accounts.py",
+        "symbol": "open_account"
+      }
+    }
+  ],
+  "coverage_summary": {
+    "requirement_coverage": 100.0,
+    "category_coverage": 100.0,
+    "function_coverage": 100.0,
+    "branch_coverage": 66.67,
+    "target_coverage": 78.57,
+    "completeness": 94.74
+  },
+  "total_generated": 33,
+  "total_after_deduplication": 25,
+  "generation_status": "partial_coverage_incomplete",
+  "generation_reason": "all_providers_unavailable",
+  "uncovered_requirements": [
+    {
+      "symbol": "authenticate",
+      "requirement": "x_api_key != 'validation-bank-key'",
+      "category": "positive",
+      "requirement_id": "authenticate|positive|x-api-key-validation-bank-key"
+    },
+    {
+      "symbol": "authenticate",
+      "requirement": "x_api_key != 'validation-bank-key'",
+      "category": "negative",
+      "requirement_id": "authenticate|negative|x-api-key-validation-bank-key"
+    },
+    {
+      "symbol": "authenticate",
+      "requirement": "not (x_api_key != 'validation-bank-key')",
+      "category": "positive",
+      "requirement_id": "authenticate|positive|not-x-api-key-validation-bank-key"
+    },
+    {
+      "symbol": "authenticate",
+      "requirement": "not (x_api_key != 'validation-bank-key')",
+      "category": "negative",
+      "requirement_id": "authenticate|negative|not-x-api-key-validation-bank-key"
+    },
+    {
+      "symbol": "test_open_account",
+      "requirement": "missing key access may raise KeyError: response.json()['owner']",
+      "category": "positive",
+      "requirement_id": "test_open_account|positive|missing-key-access-may-raise-keyerror-response-json-owner"
+    },
+    {
+      "symbol": "test_open_account",
+      "requirement": "missing key access may raise KeyError: response.json()['owner']",
+      "category": "negative",
+      "requirement_id": "test_open_account|negative|missing-key-access-may-raise-keyerror-response-json-owner"
+    }
+  ]
+}

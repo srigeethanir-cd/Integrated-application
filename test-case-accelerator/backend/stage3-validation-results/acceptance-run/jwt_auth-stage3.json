@@ -1,0 +1,3289 @@
+{
+  "project_summary": "Python project with 7 modules, 19 callables, 9 classes, and 5 API endpoints.",
+  "architecture": "FastAPI application with deterministic Python static analysis.",
+  "modules": [
+    {
+      "name": "database",
+      "file": "database.py",
+      "imports": [
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "main",
+      "file": "main.py",
+      "imports": [
+        "database",
+        "fastapi",
+        "routers.auth"
+      ]
+    },
+    {
+      "name": "models",
+      "file": "models.py",
+      "imports": [
+        "database",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "routers.auth",
+      "file": "routers/auth.py",
+      "imports": [
+        "database",
+        "fastapi",
+        "fastapi.security",
+        "models",
+        "schemas",
+        "services.auth",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "schemas",
+      "file": "schemas.py",
+      "imports": [
+        "pydantic"
+      ]
+    },
+    {
+      "name": "services.auth",
+      "file": "services/auth.py",
+      "imports": [
+        "base64",
+        "hashlib",
+        "hmac",
+        "json",
+        "models",
+        "os",
+        "schemas",
+        "sqlalchemy",
+        "sqlalchemy.orm",
+        "time",
+        "uuid"
+      ]
+    },
+    {
+      "name": "tests.test_api",
+      "file": "tests/test_api.py",
+      "imports": [
+        "fastapi.testclient",
+        "main"
+      ]
+    }
+  ],
+  "imports": [
+    {
+      "module": "sqlalchemy",
+      "file": "database.py",
+      "names": [
+        "create_engine"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "database.py",
+      "names": [
+        "DeclarativeBase",
+        "sessionmaker"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "main.py",
+      "names": [
+        "Base",
+        "engine"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi",
+      "file": "main.py",
+      "names": [
+        "FastAPI"
+      ],
+      "level": 0
+    },
+    {
+      "module": "routers.auth",
+      "file": "main.py",
+      "names": [
+        "router"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "models.py",
+      "names": [
+        "Base"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy",
+      "file": "models.py",
+      "names": [
+        "ForeignKey",
+        "String"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "models.py",
+      "names": [
+        "Mapped",
+        "mapped_column",
+        "relationship"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "routers/auth.py",
+      "names": [
+        "get_db"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi",
+      "file": "routers/auth.py",
+      "names": [
+        "APIRouter",
+        "Depends",
+        "HTTPException",
+        "status"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi.security",
+      "file": "routers/auth.py",
+      "names": [
+        "OAuth2PasswordBearer",
+        "OAuth2PasswordRequestForm"
+      ],
+      "level": 0
+    },
+    {
+      "module": "models",
+      "file": "routers/auth.py",
+      "names": [
+        "User"
+      ],
+      "level": 0
+    },
+    {
+      "module": "schemas",
+      "file": "routers/auth.py",
+      "names": [
+        "RefreshRequest",
+        "RegisterRequest",
+        "TokenPair",
+        "UserOut"
+      ],
+      "level": 0
+    },
+    {
+      "module": "services.auth",
+      "file": "routers/auth.py",
+      "names": [
+        "InvalidCredentialsError",
+        "InvalidTokenError",
+        "authenticate",
+        "decode_token",
+        "issue_pair",
+        "register",
+        "rotate_refresh"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "routers/auth.py",
+      "names": [
+        "Session"
+      ],
+      "level": 0
+    },
+    {
+      "module": "pydantic",
+      "file": "schemas.py",
+      "names": [
+        "BaseModel",
+        "ConfigDict",
+        "Field",
+        "field_validator"
+      ],
+      "level": 0
+    },
+    {
+      "module": "base64",
+      "file": "services/auth.py",
+      "names": [
+        "base64"
+      ],
+      "level": 0
+    },
+    {
+      "module": "hashlib",
+      "file": "services/auth.py",
+      "names": [
+        "hashlib"
+      ],
+      "level": 0
+    },
+    {
+      "module": "hmac",
+      "file": "services/auth.py",
+      "names": [
+        "hmac"
+      ],
+      "level": 0
+    },
+    {
+      "module": "json",
+      "file": "services/auth.py",
+      "names": [
+        "json"
+      ],
+      "level": 0
+    },
+    {
+      "module": "models",
+      "file": "services/auth.py",
+      "names": [
+        "RefreshToken",
+        "User"
+      ],
+      "level": 0
+    },
+    {
+      "module": "os",
+      "file": "services/auth.py",
+      "names": [
+        "os"
+      ],
+      "level": 0
+    },
+    {
+      "module": "schemas",
+      "file": "services/auth.py",
+      "names": [
+        "RegisterRequest"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy",
+      "file": "services/auth.py",
+      "names": [
+        "select"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "services/auth.py",
+      "names": [
+        "Session"
+      ],
+      "level": 0
+    },
+    {
+      "module": "time",
+      "file": "services/auth.py",
+      "names": [
+        "time"
+      ],
+      "level": 0
+    },
+    {
+      "module": "uuid",
+      "file": "services/auth.py",
+      "names": [
+        "uuid"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi.testclient",
+      "file": "tests/test_api.py",
+      "names": [
+        "TestClient"
+      ],
+      "level": 0
+    },
+    {
+      "module": "main",
+      "file": "tests/test_api.py",
+      "names": [
+        "app"
+      ],
+      "level": 0
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_db",
+      "qualified_name": "database.get_db",
+      "file": "database.py",
+      "line": 7,
+      "end_line": 12,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "SessionLocal",
+        "db.close"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "SessionLocal()",
+        "db.close",
+        "yield db"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "admin",
+      "qualified_name": "routers.auth.admin",
+      "file": "routers/auth.py",
+      "line": 55,
+      "end_line": 56,
+      "is_async": false,
+      "parameters": [
+        "user"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.get('/admin', response_model=UserOut)"
+      ],
+      "calls": [],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "create_user",
+      "qualified_name": "routers.auth.create_user",
+      "file": "routers/auth.py",
+      "line": 28,
+      "end_line": 32,
+      "is_async": false,
+      "parameters": [
+        "payload",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.post('/register', response_model=UserOut, status_code=status.HTTP_201_CREATED)"
+      ],
+      "calls": [
+        "fastapi.HTTPException",
+        "services.auth.register",
+        "str"
+      ],
+      "exceptions": [
+        "HTTPException"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "get_current_user",
+      "qualified_name": "routers.auth.get_current_user",
+      "file": "routers/auth.py",
+      "line": 12,
+      "end_line": 20,
+      "is_async": false,
+      "parameters": [
+        "token",
+        "db"
+      ],
+      "return_type": "User",
+      "decorators": [],
+      "calls": [
+        "db.get",
+        "fastapi.HTTPException",
+        "int",
+        "services.auth.InvalidTokenError",
+        "services.auth.decode_token",
+        "str"
+      ],
+      "exceptions": [
+        "HTTPException",
+        "InvalidTokenError"
+      ],
+      "sqlalchemy_model_usage": [
+        "User",
+        "db.get"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "login",
+      "qualified_name": "routers.auth.login",
+      "file": "routers/auth.py",
+      "line": 35,
+      "end_line": 40,
+      "is_async": false,
+      "parameters": [
+        "form",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.post('/login', response_model=TokenPair)"
+      ],
+      "calls": [
+        "fastapi.HTTPException",
+        "schemas.TokenPair",
+        "services.auth.authenticate",
+        "services.auth.issue_pair",
+        "str"
+      ],
+      "exceptions": [
+        "HTTPException"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "me",
+      "qualified_name": "routers.auth.me",
+      "file": "routers/auth.py",
+      "line": 51,
+      "end_line": 52,
+      "is_async": false,
+      "parameters": [
+        "user"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.get('/me', response_model=UserOut)"
+      ],
+      "calls": [],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "refresh",
+      "qualified_name": "routers.auth.refresh",
+      "file": "routers/auth.py",
+      "line": 43,
+      "end_line": 48,
+      "is_async": false,
+      "parameters": [
+        "payload",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.post('/refresh', response_model=TokenPair)"
+      ],
+      "calls": [
+        "fastapi.HTTPException",
+        "schemas.TokenPair",
+        "services.auth.rotate_refresh",
+        "str"
+      ],
+      "exceptions": [
+        "HTTPException"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "require_admin",
+      "qualified_name": "routers.auth.require_admin",
+      "file": "routers/auth.py",
+      "line": 22,
+      "end_line": 25,
+      "is_async": false,
+      "parameters": [
+        "user"
+      ],
+      "return_type": "User",
+      "decorators": [],
+      "calls": [
+        "fastapi.HTTPException"
+      ],
+      "exceptions": [
+        "HTTPException"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "strong_password",
+      "qualified_name": "schemas.RegisterRequest.strong_password",
+      "file": "schemas.py",
+      "line": 8,
+      "end_line": 11,
+      "is_async": false,
+      "parameters": [
+        "cls",
+        "value"
+      ],
+      "return_type": "str",
+      "decorators": [
+        "field_validator('password')",
+        "classmethod"
+      ],
+      "calls": [
+        "ValueError",
+        "any",
+        "c.isdigit",
+        "c.isupper"
+      ],
+      "exceptions": [
+        "ValueError"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "authenticate",
+      "qualified_name": "services.auth.authenticate",
+      "file": "services/auth.py",
+      "line": 51,
+      "end_line": 55,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "username",
+        "password"
+      ],
+      "return_type": "User",
+      "decorators": [],
+      "calls": [
+        "db.scalar",
+        "services.auth.InvalidCredentialsError",
+        "services.auth.verify_password",
+        "sqlalchemy.select",
+        "sqlalchemy.select().where"
+      ],
+      "exceptions": [
+        "InvalidCredentialsError"
+      ],
+      "sqlalchemy_model_usage": [
+        "db.scalar"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "decode_token",
+      "qualified_name": "services.auth.decode_token",
+      "file": "services/auth.py",
+      "line": 33,
+      "end_line": 45,
+      "is_async": false,
+      "parameters": [
+        "token",
+        "expected_kind"
+      ],
+      "return_type": "dict",
+      "decorators": [],
+      "calls": [
+        "base64.urlsafe_b64decode",
+        "base64.urlsafe_b64encode",
+        "base64.urlsafe_b64encode().rstrip",
+        "base64.urlsafe_b64encode().rstrip().decode",
+        "body_text.encode",
+        "hmac.compare_digest",
+        "hmac.new",
+        "hmac.new().digest",
+        "json.loads",
+        "len",
+        "services.auth.InvalidTokenError",
+        "time.time",
+        "token.split"
+      ],
+      "exceptions": [
+        "InvalidTokenError"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "encode_token",
+      "qualified_name": "services.auth.encode_token",
+      "file": "services/auth.py",
+      "line": 28,
+      "end_line": 32,
+      "is_async": false,
+      "parameters": [
+        "subject",
+        "kind",
+        "token_id",
+        "lifetime"
+      ],
+      "return_type": "str",
+      "decorators": [],
+      "calls": [
+        "base64.urlsafe_b64encode",
+        "base64.urlsafe_b64encode().rstrip",
+        "body.decode",
+        "hmac.new",
+        "hmac.new().digest",
+        "int",
+        "json.dumps",
+        "json.dumps().encode",
+        "signature.decode",
+        "time.time"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "hash_password",
+      "qualified_name": "services.auth.hash_password",
+      "file": "services/auth.py",
+      "line": 20,
+      "end_line": 23,
+      "is_async": false,
+      "parameters": [
+        "password",
+        "salt"
+      ],
+      "return_type": "str",
+      "decorators": [],
+      "calls": [
+        "digest.hex",
+        "hashlib.pbkdf2_hmac",
+        "os.urandom",
+        "password.encode",
+        "salt.hex"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "issue_pair",
+      "qualified_name": "services.auth.issue_pair",
+      "file": "services/auth.py",
+      "line": 56,
+      "end_line": 59,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "user"
+      ],
+      "return_type": "tuple[str, str]",
+      "decorators": [],
+      "calls": [
+        "db.add",
+        "db.commit",
+        "models.RefreshToken",
+        "services.auth.encode_token",
+        "str",
+        "uuid.uuid4"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.add",
+        "db.commit"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "register",
+      "qualified_name": "services.auth.register",
+      "file": "services/auth.py",
+      "line": 46,
+      "end_line": 50,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "payload"
+      ],
+      "return_type": "User",
+      "decorators": [],
+      "calls": [
+        "ValueError",
+        "db.add",
+        "db.commit",
+        "db.refresh",
+        "db.scalar",
+        "models.User",
+        "services.auth.hash_password",
+        "sqlalchemy.select",
+        "sqlalchemy.select().where"
+      ],
+      "exceptions": [
+        "ValueError"
+      ],
+      "sqlalchemy_model_usage": [
+        "db.add",
+        "db.commit",
+        "db.refresh",
+        "db.scalar"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "rotate_refresh",
+      "qualified_name": "services.auth.rotate_refresh",
+      "file": "services/auth.py",
+      "line": 60,
+      "end_line": 66,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "token"
+      ],
+      "return_type": "tuple[str, str]",
+      "decorators": [],
+      "calls": [
+        "db.commit",
+        "db.scalar",
+        "services.auth.InvalidTokenError",
+        "services.auth.decode_token",
+        "services.auth.issue_pair",
+        "sqlalchemy.select",
+        "sqlalchemy.select().where"
+      ],
+      "exceptions": [
+        "InvalidTokenError"
+      ],
+      "sqlalchemy_model_usage": [
+        "db.commit",
+        "db.scalar"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "verify_password",
+      "qualified_name": "services.auth.verify_password",
+      "file": "services/auth.py",
+      "line": 24,
+      "end_line": 27,
+      "is_async": false,
+      "parameters": [
+        "password",
+        "encoded"
+      ],
+      "return_type": "bool",
+      "decorators": [],
+      "calls": [
+        "bytes.fromhex",
+        "encoded.split",
+        "hmac.compare_digest",
+        "services.auth.hash_password",
+        "services.auth.hash_password().split"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "test_authorization_required",
+      "qualified_name": "tests.test_api.test_authorization_required",
+      "file": "tests/test_api.py",
+      "line": 13,
+      "end_line": 14,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "client.get"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "test_register_login_and_current_user",
+      "qualified_name": "tests.test_api.test_register_login_and_current_user",
+      "file": "tests/test_api.py",
+      "line": 4,
+      "end_line": 12,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "client.get",
+        "client.post",
+        "login.json"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "classes": [
+    {
+      "name": "Base",
+      "qualified_name": "database.Base",
+      "file": "database.py",
+      "line": 5,
+      "end_line": 6,
+      "fields": [],
+      "bases": [
+        "DeclarativeBase"
+      ],
+      "inheritance": [
+        "DeclarativeBase"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "DeclarativeBase"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "RefreshToken",
+      "qualified_name": "models.RefreshToken",
+      "file": "models.py",
+      "line": 11,
+      "end_line": 17,
+      "fields": [
+        "__tablename__",
+        "id",
+        "token_id",
+        "user_id",
+        "revoked",
+        "user"
+      ],
+      "bases": [
+        "Base"
+      ],
+      "inheritance": [
+        "Base"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "ForeignKey",
+        "mapped_column",
+        "relationship"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "User",
+      "qualified_name": "models.User",
+      "file": "models.py",
+      "line": 4,
+      "end_line": 10,
+      "fields": [
+        "__tablename__",
+        "id",
+        "username",
+        "password_hash",
+        "role",
+        "refresh_tokens"
+      ],
+      "bases": [
+        "Base"
+      ],
+      "inheritance": [
+        "Base"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "mapped_column",
+        "relationship"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "RefreshRequest",
+      "qualified_name": "schemas.RefreshRequest",
+      "file": "schemas.py",
+      "line": 21,
+      "end_line": 22,
+      "fields": [
+        "refresh_token"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "RegisterRequest",
+      "qualified_name": "schemas.RegisterRequest",
+      "file": "schemas.py",
+      "line": 2,
+      "end_line": 11,
+      "fields": [
+        "username",
+        "password",
+        "role"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [
+        "strong_password"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "TokenPair",
+      "qualified_name": "schemas.TokenPair",
+      "file": "schemas.py",
+      "line": 17,
+      "end_line": 20,
+      "fields": [
+        "access_token",
+        "refresh_token",
+        "token_type"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "UserOut",
+      "qualified_name": "schemas.UserOut",
+      "file": "schemas.py",
+      "line": 12,
+      "end_line": 16,
+      "fields": [
+        "model_config",
+        "id",
+        "username",
+        "role"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "InvalidCredentialsError",
+      "qualified_name": "services.auth.InvalidCredentialsError",
+      "file": "services/auth.py",
+      "line": 15,
+      "end_line": 16,
+      "fields": [],
+      "bases": [
+        "Exception"
+      ],
+      "inheritance": [
+        "Exception"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "InvalidTokenError",
+      "qualified_name": "services.auth.InvalidTokenError",
+      "file": "services/auth.py",
+      "line": 17,
+      "end_line": 18,
+      "fields": [],
+      "bases": [
+        "Exception"
+      ],
+      "inheritance": [
+        "Exception"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "symbol_table": [
+    {
+      "name": "Base",
+      "qualified_name": "database.Base",
+      "kind": "class",
+      "file": "database.py",
+      "line": 5,
+      "end_line": 6,
+      "parent": null
+    },
+    {
+      "name": "get_db",
+      "qualified_name": "database.get_db",
+      "kind": "function",
+      "file": "database.py",
+      "line": 7,
+      "end_line": 12,
+      "parent": null
+    },
+    {
+      "name": "RefreshToken",
+      "qualified_name": "models.RefreshToken",
+      "kind": "class",
+      "file": "models.py",
+      "line": 11,
+      "end_line": 17,
+      "parent": null
+    },
+    {
+      "name": "User",
+      "qualified_name": "models.User",
+      "kind": "class",
+      "file": "models.py",
+      "line": 4,
+      "end_line": 10,
+      "parent": null
+    },
+    {
+      "name": "admin",
+      "qualified_name": "routers.auth.admin",
+      "kind": "function",
+      "file": "routers/auth.py",
+      "line": 55,
+      "end_line": 56,
+      "parent": null
+    },
+    {
+      "name": "create_user",
+      "qualified_name": "routers.auth.create_user",
+      "kind": "function",
+      "file": "routers/auth.py",
+      "line": 28,
+      "end_line": 32,
+      "parent": null
+    },
+    {
+      "name": "get_current_user",
+      "qualified_name": "routers.auth.get_current_user",
+      "kind": "function",
+      "file": "routers/auth.py",
+      "line": 12,
+      "end_line": 20,
+      "parent": null
+    },
+    {
+      "name": "login",
+      "qualified_name": "routers.auth.login",
+      "kind": "function",
+      "file": "routers/auth.py",
+      "line": 35,
+      "end_line": 40,
+      "parent": null
+    },
+    {
+      "name": "me",
+      "qualified_name": "routers.auth.me",
+      "kind": "function",
+      "file": "routers/auth.py",
+      "line": 51,
+      "end_line": 52,
+      "parent": null
+    },
+    {
+      "name": "refresh",
+      "qualified_name": "routers.auth.refresh",
+      "kind": "function",
+      "file": "routers/auth.py",
+      "line": 43,
+      "end_line": 48,
+      "parent": null
+    },
+    {
+      "name": "require_admin",
+      "qualified_name": "routers.auth.require_admin",
+      "kind": "function",
+      "file": "routers/auth.py",
+      "line": 22,
+      "end_line": 25,
+      "parent": null
+    },
+    {
+      "name": "RefreshRequest",
+      "qualified_name": "schemas.RefreshRequest",
+      "kind": "class",
+      "file": "schemas.py",
+      "line": 21,
+      "end_line": 22,
+      "parent": null
+    },
+    {
+      "name": "RegisterRequest",
+      "qualified_name": "schemas.RegisterRequest",
+      "kind": "class",
+      "file": "schemas.py",
+      "line": 2,
+      "end_line": 11,
+      "parent": null
+    },
+    {
+      "name": "strong_password",
+      "qualified_name": "schemas.RegisterRequest.strong_password",
+      "kind": "method",
+      "file": "schemas.py",
+      "line": 8,
+      "end_line": 11,
+      "parent": "schemas.RegisterRequest"
+    },
+    {
+      "name": "TokenPair",
+      "qualified_name": "schemas.TokenPair",
+      "kind": "class",
+      "file": "schemas.py",
+      "line": 17,
+      "end_line": 20,
+      "parent": null
+    },
+    {
+      "name": "UserOut",
+      "qualified_name": "schemas.UserOut",
+      "kind": "class",
+      "file": "schemas.py",
+      "line": 12,
+      "end_line": 16,
+      "parent": null
+    },
+    {
+      "name": "InvalidCredentialsError",
+      "qualified_name": "services.auth.InvalidCredentialsError",
+      "kind": "class",
+      "file": "services/auth.py",
+      "line": 15,
+      "end_line": 16,
+      "parent": null
+    },
+    {
+      "name": "InvalidTokenError",
+      "qualified_name": "services.auth.InvalidTokenError",
+      "kind": "class",
+      "file": "services/auth.py",
+      "line": 17,
+      "end_line": 18,
+      "parent": null
+    },
+    {
+      "name": "authenticate",
+      "qualified_name": "services.auth.authenticate",
+      "kind": "function",
+      "file": "services/auth.py",
+      "line": 51,
+      "end_line": 55,
+      "parent": null
+    },
+    {
+      "name": "decode_token",
+      "qualified_name": "services.auth.decode_token",
+      "kind": "function",
+      "file": "services/auth.py",
+      "line": 33,
+      "end_line": 45,
+      "parent": null
+    },
+    {
+      "name": "encode_token",
+      "qualified_name": "services.auth.encode_token",
+      "kind": "function",
+      "file": "services/auth.py",
+      "line": 28,
+      "end_line": 32,
+      "parent": null
+    },
+    {
+      "name": "hash_password",
+      "qualified_name": "services.auth.hash_password",
+      "kind": "function",
+      "file": "services/auth.py",
+      "line": 20,
+      "end_line": 23,
+      "parent": null
+    },
+    {
+      "name": "issue_pair",
+      "qualified_name": "services.auth.issue_pair",
+      "kind": "function",
+      "file": "services/auth.py",
+      "line": 56,
+      "end_line": 59,
+      "parent": null
+    },
+    {
+      "name": "register",
+      "qualified_name": "services.auth.register",
+      "kind": "function",
+      "file": "services/auth.py",
+      "line": 46,
+      "end_line": 50,
+      "parent": null
+    },
+    {
+      "name": "rotate_refresh",
+      "qualified_name": "services.auth.rotate_refresh",
+      "kind": "function",
+      "file": "services/auth.py",
+      "line": 60,
+      "end_line": 66,
+      "parent": null
+    },
+    {
+      "name": "verify_password",
+      "qualified_name": "services.auth.verify_password",
+      "kind": "function",
+      "file": "services/auth.py",
+      "line": 24,
+      "end_line": 27,
+      "parent": null
+    },
+    {
+      "name": "test_authorization_required",
+      "qualified_name": "tests.test_api.test_authorization_required",
+      "kind": "function",
+      "file": "tests/test_api.py",
+      "line": 13,
+      "end_line": 14,
+      "parent": null
+    },
+    {
+      "name": "test_register_login_and_current_user",
+      "qualified_name": "tests.test_api.test_register_login_and_current_user",
+      "kind": "function",
+      "file": "tests/test_api.py",
+      "line": 4,
+      "end_line": 12,
+      "parent": null
+    }
+  ],
+  "call_graph": [
+    {
+      "caller": "database",
+      "callee": "sqlalchemy.create_engine",
+      "file": "database.py",
+      "line": 3
+    },
+    {
+      "caller": "database",
+      "callee": "sqlalchemy.orm.sessionmaker",
+      "file": "database.py",
+      "line": 4
+    },
+    {
+      "caller": "database.get_db",
+      "callee": "SessionLocal",
+      "file": "database.py",
+      "line": 8
+    },
+    {
+      "caller": "database.get_db",
+      "callee": "db.close",
+      "file": "database.py",
+      "line": 12
+    },
+    {
+      "caller": "main",
+      "callee": "database.Base.metadata.create_all",
+      "file": "main.py",
+      "line": 4
+    },
+    {
+      "caller": "main",
+      "callee": "fastapi.FastAPI",
+      "file": "main.py",
+      "line": 5
+    },
+    {
+      "caller": "main",
+      "callee": "app.include_router",
+      "file": "main.py",
+      "line": 6
+    },
+    {
+      "caller": "routers.auth",
+      "callee": "fastapi.APIRouter",
+      "file": "routers/auth.py",
+      "line": 9
+    },
+    {
+      "caller": "routers.auth",
+      "callee": "fastapi.security.OAuth2PasswordBearer",
+      "file": "routers/auth.py",
+      "line": 10
+    },
+    {
+      "caller": "routers.auth.create_user",
+      "callee": "services.auth.register",
+      "file": "routers/auth.py",
+      "line": 30
+    },
+    {
+      "caller": "routers.auth.create_user",
+      "callee": "fastapi.HTTPException",
+      "file": "routers/auth.py",
+      "line": 32
+    },
+    {
+      "caller": "routers.auth.create_user",
+      "callee": "str",
+      "file": "routers/auth.py",
+      "line": 32
+    },
+    {
+      "caller": "routers.auth.get_current_user",
+      "callee": "services.auth.decode_token",
+      "file": "routers/auth.py",
+      "line": 14
+    },
+    {
+      "caller": "routers.auth.get_current_user",
+      "callee": "db.get",
+      "file": "routers/auth.py",
+      "line": 15
+    },
+    {
+      "caller": "routers.auth.get_current_user",
+      "callee": "int",
+      "file": "routers/auth.py",
+      "line": 15
+    },
+    {
+      "caller": "routers.auth.get_current_user",
+      "callee": "services.auth.InvalidTokenError",
+      "file": "routers/auth.py",
+      "line": 17
+    },
+    {
+      "caller": "routers.auth.get_current_user",
+      "callee": "fastapi.HTTPException",
+      "file": "routers/auth.py",
+      "line": 20
+    },
+    {
+      "caller": "routers.auth.get_current_user",
+      "callee": "str",
+      "file": "routers/auth.py",
+      "line": 20
+    },
+    {
+      "caller": "routers.auth.login",
+      "callee": "services.auth.authenticate",
+      "file": "routers/auth.py",
+      "line": 37
+    },
+    {
+      "caller": "routers.auth.login",
+      "callee": "services.auth.issue_pair",
+      "file": "routers/auth.py",
+      "line": 37
+    },
+    {
+      "caller": "routers.auth.login",
+      "callee": "schemas.TokenPair",
+      "file": "routers/auth.py",
+      "line": 38
+    },
+    {
+      "caller": "routers.auth.login",
+      "callee": "fastapi.HTTPException",
+      "file": "routers/auth.py",
+      "line": 40
+    },
+    {
+      "caller": "routers.auth.login",
+      "callee": "str",
+      "file": "routers/auth.py",
+      "line": 40
+    },
+    {
+      "caller": "routers.auth.refresh",
+      "callee": "services.auth.rotate_refresh",
+      "file": "routers/auth.py",
+      "line": 45
+    },
+    {
+      "caller": "routers.auth.refresh",
+      "callee": "schemas.TokenPair",
+      "file": "routers/auth.py",
+      "line": 46
+    },
+    {
+      "caller": "routers.auth.refresh",
+      "callee": "fastapi.HTTPException",
+      "file": "routers/auth.py",
+      "line": 48
+    },
+    {
+      "caller": "routers.auth.refresh",
+      "callee": "str",
+      "file": "routers/auth.py",
+      "line": 48
+    },
+    {
+      "caller": "routers.auth.require_admin",
+      "callee": "fastapi.HTTPException",
+      "file": "routers/auth.py",
+      "line": 24
+    },
+    {
+      "caller": "schemas.RegisterRequest.strong_password",
+      "callee": "any",
+      "file": "schemas.py",
+      "line": 9
+    },
+    {
+      "caller": "schemas.RegisterRequest.strong_password",
+      "callee": "any",
+      "file": "schemas.py",
+      "line": 9
+    },
+    {
+      "caller": "schemas.RegisterRequest.strong_password",
+      "callee": "c.isdigit",
+      "file": "schemas.py",
+      "line": 9
+    },
+    {
+      "caller": "schemas.RegisterRequest.strong_password",
+      "callee": "c.isupper",
+      "file": "schemas.py",
+      "line": 9
+    },
+    {
+      "caller": "schemas.RegisterRequest.strong_password",
+      "callee": "ValueError",
+      "file": "schemas.py",
+      "line": 10
+    },
+    {
+      "caller": "services.auth.authenticate",
+      "callee": "db.scalar",
+      "file": "services/auth.py",
+      "line": 52
+    },
+    {
+      "caller": "services.auth.authenticate",
+      "callee": "sqlalchemy.select",
+      "file": "services/auth.py",
+      "line": 52
+    },
+    {
+      "caller": "services.auth.authenticate",
+      "callee": "sqlalchemy.select().where",
+      "file": "services/auth.py",
+      "line": 52
+    },
+    {
+      "caller": "services.auth.authenticate",
+      "callee": "services.auth.verify_password",
+      "file": "services/auth.py",
+      "line": 53
+    },
+    {
+      "caller": "services.auth.authenticate",
+      "callee": "services.auth.InvalidCredentialsError",
+      "file": "services/auth.py",
+      "line": 54
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "token.split",
+      "file": "services/auth.py",
+      "line": 35
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "body_text.encode",
+      "file": "services/auth.py",
+      "line": 36
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "base64.urlsafe_b64encode",
+      "file": "services/auth.py",
+      "line": 37
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "base64.urlsafe_b64encode().rstrip",
+      "file": "services/auth.py",
+      "line": 37
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "base64.urlsafe_b64encode().rstrip().decode",
+      "file": "services/auth.py",
+      "line": 37
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "hmac.new",
+      "file": "services/auth.py",
+      "line": 37
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "hmac.new().digest",
+      "file": "services/auth.py",
+      "line": 37
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "hmac.compare_digest",
+      "file": "services/auth.py",
+      "line": 38
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "services.auth.InvalidTokenError",
+      "file": "services/auth.py",
+      "line": 39
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "base64.urlsafe_b64decode",
+      "file": "services/auth.py",
+      "line": 40
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "json.loads",
+      "file": "services/auth.py",
+      "line": 40
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "len",
+      "file": "services/auth.py",
+      "line": 40
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "time.time",
+      "file": "services/auth.py",
+      "line": 41
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "services.auth.InvalidTokenError",
+      "file": "services/auth.py",
+      "line": 42
+    },
+    {
+      "caller": "services.auth.decode_token",
+      "callee": "services.auth.InvalidTokenError",
+      "file": "services/auth.py",
+      "line": 45
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "int",
+      "file": "services/auth.py",
+      "line": 29
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "time.time",
+      "file": "services/auth.py",
+      "line": 29
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "base64.urlsafe_b64encode",
+      "file": "services/auth.py",
+      "line": 30
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "base64.urlsafe_b64encode().rstrip",
+      "file": "services/auth.py",
+      "line": 30
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "json.dumps",
+      "file": "services/auth.py",
+      "line": 30
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "json.dumps().encode",
+      "file": "services/auth.py",
+      "line": 30
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "base64.urlsafe_b64encode",
+      "file": "services/auth.py",
+      "line": 31
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "base64.urlsafe_b64encode().rstrip",
+      "file": "services/auth.py",
+      "line": 31
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "hmac.new",
+      "file": "services/auth.py",
+      "line": 31
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "hmac.new().digest",
+      "file": "services/auth.py",
+      "line": 31
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "body.decode",
+      "file": "services/auth.py",
+      "line": 32
+    },
+    {
+      "caller": "services.auth.encode_token",
+      "callee": "signature.decode",
+      "file": "services/auth.py",
+      "line": 32
+    },
+    {
+      "caller": "services.auth.hash_password",
+      "callee": "os.urandom",
+      "file": "services/auth.py",
+      "line": 21
+    },
+    {
+      "caller": "services.auth.hash_password",
+      "callee": "hashlib.pbkdf2_hmac",
+      "file": "services/auth.py",
+      "line": 22
+    },
+    {
+      "caller": "services.auth.hash_password",
+      "callee": "password.encode",
+      "file": "services/auth.py",
+      "line": 22
+    },
+    {
+      "caller": "services.auth.hash_password",
+      "callee": "digest.hex",
+      "file": "services/auth.py",
+      "line": 23
+    },
+    {
+      "caller": "services.auth.hash_password",
+      "callee": "salt.hex",
+      "file": "services/auth.py",
+      "line": 23
+    },
+    {
+      "caller": "services.auth.issue_pair",
+      "callee": "str",
+      "file": "services/auth.py",
+      "line": 57
+    },
+    {
+      "caller": "services.auth.issue_pair",
+      "callee": "str",
+      "file": "services/auth.py",
+      "line": 57
+    },
+    {
+      "caller": "services.auth.issue_pair",
+      "callee": "uuid.uuid4",
+      "file": "services/auth.py",
+      "line": 57
+    },
+    {
+      "caller": "services.auth.issue_pair",
+      "callee": "uuid.uuid4",
+      "file": "services/auth.py",
+      "line": 57
+    },
+    {
+      "caller": "services.auth.issue_pair",
+      "callee": "db.add",
+      "file": "services/auth.py",
+      "line": 58
+    },
+    {
+      "caller": "services.auth.issue_pair",
+      "callee": "db.commit",
+      "file": "services/auth.py",
+      "line": 58
+    },
+    {
+      "caller": "services.auth.issue_pair",
+      "callee": "models.RefreshToken",
+      "file": "services/auth.py",
+      "line": 58
+    },
+    {
+      "caller": "services.auth.issue_pair",
+      "callee": "services.auth.encode_token",
+      "file": "services/auth.py",
+      "line": 59
+    },
+    {
+      "caller": "services.auth.issue_pair",
+      "callee": "services.auth.encode_token",
+      "file": "services/auth.py",
+      "line": 59
+    },
+    {
+      "caller": "services.auth.issue_pair",
+      "callee": "str",
+      "file": "services/auth.py",
+      "line": 59
+    },
+    {
+      "caller": "services.auth.issue_pair",
+      "callee": "str",
+      "file": "services/auth.py",
+      "line": 59
+    },
+    {
+      "caller": "services.auth.register",
+      "callee": "db.scalar",
+      "file": "services/auth.py",
+      "line": 47
+    },
+    {
+      "caller": "services.auth.register",
+      "callee": "sqlalchemy.select",
+      "file": "services/auth.py",
+      "line": 47
+    },
+    {
+      "caller": "services.auth.register",
+      "callee": "sqlalchemy.select().where",
+      "file": "services/auth.py",
+      "line": 47
+    },
+    {
+      "caller": "services.auth.register",
+      "callee": "ValueError",
+      "file": "services/auth.py",
+      "line": 48
+    },
+    {
+      "caller": "services.auth.register",
+      "callee": "models.User",
+      "file": "services/auth.py",
+      "line": 49
+    },
+    {
+      "caller": "services.auth.register",
+      "callee": "services.auth.hash_password",
+      "file": "services/auth.py",
+      "line": 49
+    },
+    {
+      "caller": "services.auth.register",
+      "callee": "db.add",
+      "file": "services/auth.py",
+      "line": 50
+    },
+    {
+      "caller": "services.auth.register",
+      "callee": "db.commit",
+      "file": "services/auth.py",
+      "line": 50
+    },
+    {
+      "caller": "services.auth.register",
+      "callee": "db.refresh",
+      "file": "services/auth.py",
+      "line": 50
+    },
+    {
+      "caller": "services.auth.rotate_refresh",
+      "callee": "services.auth.decode_token",
+      "file": "services/auth.py",
+      "line": 61
+    },
+    {
+      "caller": "services.auth.rotate_refresh",
+      "callee": "db.scalar",
+      "file": "services/auth.py",
+      "line": 62
+    },
+    {
+      "caller": "services.auth.rotate_refresh",
+      "callee": "sqlalchemy.select",
+      "file": "services/auth.py",
+      "line": 62
+    },
+    {
+      "caller": "services.auth.rotate_refresh",
+      "callee": "sqlalchemy.select().where",
+      "file": "services/auth.py",
+      "line": 62
+    },
+    {
+      "caller": "services.auth.rotate_refresh",
+      "callee": "services.auth.InvalidTokenError",
+      "file": "services/auth.py",
+      "line": 64
+    },
+    {
+      "caller": "services.auth.rotate_refresh",
+      "callee": "db.commit",
+      "file": "services/auth.py",
+      "line": 65
+    },
+    {
+      "caller": "services.auth.rotate_refresh",
+      "callee": "services.auth.issue_pair",
+      "file": "services/auth.py",
+      "line": 66
+    },
+    {
+      "caller": "services.auth.verify_password",
+      "callee": "encoded.split",
+      "file": "services/auth.py",
+      "line": 25
+    },
+    {
+      "caller": "services.auth.verify_password",
+      "callee": "bytes.fromhex",
+      "file": "services/auth.py",
+      "line": 26
+    },
+    {
+      "caller": "services.auth.verify_password",
+      "callee": "services.auth.hash_password",
+      "file": "services/auth.py",
+      "line": 26
+    },
+    {
+      "caller": "services.auth.verify_password",
+      "callee": "services.auth.hash_password().split",
+      "file": "services/auth.py",
+      "line": 26
+    },
+    {
+      "caller": "services.auth.verify_password",
+      "callee": "hmac.compare_digest",
+      "file": "services/auth.py",
+      "line": 27
+    },
+    {
+      "caller": "tests.test_api",
+      "callee": "fastapi.testclient.TestClient",
+      "file": "tests/test_api.py",
+      "line": 3
+    },
+    {
+      "caller": "tests.test_api.test_authorization_required",
+      "callee": "client.get",
+      "file": "tests/test_api.py",
+      "line": 14
+    },
+    {
+      "caller": "tests.test_api.test_register_login_and_current_user",
+      "callee": "client.post",
+      "file": "tests/test_api.py",
+      "line": 5
+    },
+    {
+      "caller": "tests.test_api.test_register_login_and_current_user",
+      "callee": "client.post",
+      "file": "tests/test_api.py",
+      "line": 7
+    },
+    {
+      "caller": "tests.test_api.test_register_login_and_current_user",
+      "callee": "login.json",
+      "file": "tests/test_api.py",
+      "line": 9
+    },
+    {
+      "caller": "tests.test_api.test_register_login_and_current_user",
+      "callee": "client.get",
+      "file": "tests/test_api.py",
+      "line": 10
+    },
+    {
+      "caller": "tests.test_api.test_register_login_and_current_user",
+      "callee": "client.post",
+      "file": "tests/test_api.py",
+      "line": 12
+    }
+  ],
+  "sqlalchemy_session_factories": [
+    {
+      "name": "SessionLocal",
+      "file": "database.py",
+      "factory": "sessionmaker",
+      "bind": "engine"
+    }
+  ],
+  "security_findings": [],
+  "components": [
+    {
+      "name": "database",
+      "responsibility": "Python module",
+      "files": [
+        "database.py"
+      ],
+      "dependencies": [
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "main",
+      "responsibility": "Application entrypoint",
+      "files": [
+        "main.py"
+      ],
+      "dependencies": [
+        "database",
+        "fastapi",
+        "routers.auth"
+      ]
+    },
+    {
+      "name": "models",
+      "responsibility": "Python module",
+      "files": [
+        "models.py"
+      ],
+      "dependencies": [
+        "database",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "routers.auth",
+      "responsibility": "Python module",
+      "files": [
+        "routers/auth.py"
+      ],
+      "dependencies": [
+        "database",
+        "fastapi",
+        "fastapi.security",
+        "models",
+        "schemas",
+        "services.auth",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "schemas",
+      "responsibility": "Python module",
+      "files": [
+        "schemas.py"
+      ],
+      "dependencies": [
+        "pydantic"
+      ]
+    },
+    {
+      "name": "services.auth",
+      "responsibility": "Python module",
+      "files": [
+        "services/auth.py"
+      ],
+      "dependencies": [
+        "base64",
+        "hashlib",
+        "hmac",
+        "json",
+        "models",
+        "os",
+        "schemas",
+        "sqlalchemy",
+        "sqlalchemy.orm",
+        "time",
+        "uuid"
+      ]
+    },
+    {
+      "name": "tests.test_api",
+      "responsibility": "Python module",
+      "files": [
+        "tests/test_api.py"
+      ],
+      "dependencies": [
+        "fastapi.testclient",
+        "main"
+      ]
+    }
+  ],
+  "entrypoints": [
+    {
+      "path": "main.py",
+      "symbol": null,
+      "purpose": "Application entrypoint"
+    },
+    {
+      "path": "routers/auth.py",
+      "symbol": "admin",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "routers/auth.py",
+      "symbol": "login",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "routers/auth.py",
+      "symbol": "me",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "routers/auth.py",
+      "symbol": "refresh",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "routers/auth.py",
+      "symbol": "create_user",
+      "purpose": "API endpoint"
+    }
+  ],
+  "api_endpoints": [
+    {
+      "method": "GET",
+      "route": "/api/auth/admin",
+      "handler": "admin",
+      "file": "routers/auth.py",
+      "request_type": null,
+      "response_type": "UserOut",
+      "request_model": null,
+      "response_model": "UserOut",
+      "dependencies": [
+        "require_admin"
+      ],
+      "success_status_codes": [
+        200
+      ],
+      "error_status_codes": [],
+      "exception_status_mappings": [],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "POST",
+      "route": "/api/auth/login",
+      "handler": "login",
+      "file": "routers/auth.py",
+      "request_type": null,
+      "response_type": "TokenPair",
+      "request_model": null,
+      "response_model": "TokenPair",
+      "dependencies": [
+        "Depends",
+        "get_db"
+      ],
+      "success_status_codes": [
+        200
+      ],
+      "error_status_codes": [
+        401
+      ],
+      "exception_status_mappings": [
+        {
+          "exception": "HTTPException",
+          "status_code": 401
+        }
+      ],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "GET",
+      "route": "/api/auth/me",
+      "handler": "me",
+      "file": "routers/auth.py",
+      "request_type": null,
+      "response_type": "UserOut",
+      "request_model": null,
+      "response_model": "UserOut",
+      "dependencies": [
+        "get_current_user"
+      ],
+      "success_status_codes": [
+        200
+      ],
+      "error_status_codes": [],
+      "exception_status_mappings": [],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "POST",
+      "route": "/api/auth/refresh",
+      "handler": "refresh",
+      "file": "routers/auth.py",
+      "request_type": "RefreshRequest",
+      "response_type": "TokenPair",
+      "request_model": "RefreshRequest",
+      "response_model": "TokenPair",
+      "dependencies": [
+        "get_db"
+      ],
+      "success_status_codes": [
+        200
+      ],
+      "error_status_codes": [
+        401
+      ],
+      "exception_status_mappings": [
+        {
+          "exception": "HTTPException",
+          "status_code": 401
+        }
+      ],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "POST",
+      "route": "/api/auth/register",
+      "handler": "create_user",
+      "file": "routers/auth.py",
+      "request_type": "RegisterRequest",
+      "response_type": "UserOut",
+      "request_model": "RegisterRequest",
+      "response_model": "UserOut",
+      "dependencies": [
+        "get_db"
+      ],
+      "success_status_codes": [
+        201
+      ],
+      "error_status_codes": [
+        401,
+        409
+      ],
+      "exception_status_mappings": [
+        {
+          "exception": "HTTPException",
+          "status_code": 401
+        },
+        {
+          "exception": "HTTPException",
+          "status_code": 409
+        }
+      ],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    }
+  ],
+  "data_models": [
+    {
+      "name": "Base",
+      "file": "database.py",
+      "fields": [],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "DeclarativeBase"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "User",
+      "file": "models.py",
+      "fields": [
+        "__tablename__",
+        "id",
+        "username",
+        "password_hash",
+        "role",
+        "refresh_tokens"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "foreign_keys": [],
+          "nullable": false,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "username",
+          "type": "String(40)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": true,
+          "unique": true
+        },
+        {
+          "name": "password_hash",
+          "type": "String(200)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "role",
+          "type": "String(20)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": "user",
+          "index": false,
+          "unique": false
+        }
+      ],
+      "primary_keys": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "relationships": [
+        "refresh_tokens = relationship(back_populates='user', cascade='all, delete-orphan')"
+      ],
+      "constraints": [
+        "username"
+      ],
+      "indexes": [
+        "username"
+      ],
+      "unique_constraints": [
+        "username"
+      ],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "mapped_column",
+        "relationship"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "RefreshToken",
+      "file": "models.py",
+      "fields": [
+        "__tablename__",
+        "id",
+        "token_id",
+        "user_id",
+        "revoked",
+        "user"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "foreign_keys": [],
+          "nullable": false,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "token_id",
+          "type": "String(40)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": true,
+          "unique": true
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "primary_key": false,
+          "foreign_keys": [
+            "users.id"
+          ],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "revoked",
+          "type": "bool",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": false,
+          "index": false,
+          "unique": false
+        }
+      ],
+      "primary_keys": [
+        "id"
+      ],
+      "foreign_keys": [
+        "user_id -> users.id"
+      ],
+      "relationships": [
+        "user = relationship(back_populates='refresh_tokens')"
+      ],
+      "constraints": [
+        "user_id -> users.id",
+        "token_id"
+      ],
+      "indexes": [
+        "token_id"
+      ],
+      "unique_constraints": [
+        "token_id"
+      ],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "ForeignKey",
+        "mapped_column",
+        "relationship"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "RegisterRequest",
+      "file": "schemas.py",
+      "fields": [
+        "username",
+        "password",
+        "role"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [
+        "strong_password"
+      ],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "UserOut",
+      "file": "schemas.py",
+      "fields": [
+        "model_config",
+        "id",
+        "username",
+        "role"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "TokenPair",
+      "file": "schemas.py",
+      "fields": [
+        "access_token",
+        "refresh_token",
+        "token_type"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "RefreshRequest",
+      "file": "schemas.py",
+      "fields": [
+        "refresh_token"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "InvalidCredentialsError",
+      "file": "services/auth.py",
+      "fields": [],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "InvalidTokenError",
+      "file": "services/auth.py",
+      "fields": [],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "pydantic_schemas": [
+    {
+      "name": "RegisterRequest",
+      "file": "schemas.py",
+      "fields": [
+        {
+          "name": "username",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": 3,
+          "max_length": 40,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "password",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": 12,
+          "max_length": 128,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "role",
+          "type": "str",
+          "required": false,
+          "optional": false,
+          "has_default": true,
+          "default": "user",
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": "^(user|admin)$",
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [
+        {
+          "name": "strong_password",
+          "fields": [
+            "password"
+          ],
+          "mode": null,
+          "decorator": "field_validator('password')",
+          "is_async": false
+        }
+      ],
+      "examples": []
+    },
+    {
+      "name": "UserOut",
+      "file": "schemas.py",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "username",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "role",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    },
+    {
+      "name": "TokenPair",
+      "file": "schemas.py",
+      "fields": [
+        {
+          "name": "access_token",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "refresh_token",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "token_type",
+          "type": "str",
+          "required": false,
+          "optional": false,
+          "has_default": true,
+          "default": "bearer",
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    },
+    {
+      "name": "RefreshRequest",
+      "file": "schemas.py",
+      "fields": [
+        {
+          "name": "refresh_token",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": 20,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    }
+  ],
+  "business_rules": [
+    {
+      "description": "Condition: user.role != 'admin'",
+      "files": [
+        "routers/auth.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: user is None",
+      "files": [
+        "routers/auth.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: not any((c.isupper() for c in value)) or not any((c.isdigit() for c in value))",
+      "files": [
+        "schemas.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: db.scalar(select(User).where(User.username == payload.username))",
+      "files": [
+        "services/auth.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: user is None or not verify_password(password, user.password_hash)",
+      "files": [
+        "services/auth.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: stored is None or stored.revoked",
+      "files": [
+        "services/auth.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: not hmac.compare_digest(signature_text, expected)",
+      "files": [
+        "services/auth.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: payload['kind'] != expected_kind or payload['exp'] < time.time()",
+      "files": [
+        "services/auth.py"
+      ],
+      "symbols": []
+    }
+  ],
+  "execution_flows": [
+    {
+      "name": "GET /api/auth/admin",
+      "entrypoint": "admin",
+      "steps": [
+        "Invoke admin"
+      ],
+      "components": [],
+      "files": [
+        "routers/auth.py"
+      ]
+    },
+    {
+      "name": "POST /api/auth/login",
+      "entrypoint": "login",
+      "steps": [
+        "Invoke login",
+        "Call services.auth.issue_pair",
+        "Call services.auth.authenticate",
+        "Call schemas.TokenPair",
+        "Call fastapi.HTTPException",
+        "Call str"
+      ],
+      "components": [],
+      "files": [
+        "routers/auth.py"
+      ]
+    },
+    {
+      "name": "GET /api/auth/me",
+      "entrypoint": "me",
+      "steps": [
+        "Invoke me"
+      ],
+      "components": [],
+      "files": [
+        "routers/auth.py"
+      ]
+    },
+    {
+      "name": "POST /api/auth/refresh",
+      "entrypoint": "refresh",
+      "steps": [
+        "Invoke refresh",
+        "Call services.auth.rotate_refresh",
+        "Call schemas.TokenPair",
+        "Call fastapi.HTTPException",
+        "Call str"
+      ],
+      "components": [],
+      "files": [
+        "routers/auth.py"
+      ]
+    },
+    {
+      "name": "POST /api/auth/register",
+      "entrypoint": "create_user",
+      "steps": [
+        "Invoke create_user",
+        "Call services.auth.register",
+        "Call fastapi.HTTPException",
+        "Call str"
+      ],
+      "components": [],
+      "files": [
+        "routers/auth.py"
+      ]
+    }
+  ],
+  "external_dependencies": [
+    "base64",
+    "database",
+    "fastapi",
+    "hashlib",
+    "hmac",
+    "json",
+    "main",
+    "models",
+    "os",
+    "pydantic",
+    "routers",
+    "schemas",
+    "services",
+    "sqlalchemy",
+    "time",
+    "uuid"
+  ],
+  "test_targets": [
+    {
+      "symbol": "get_db",
+      "file": "database.py",
+      "behavior": "Execute get_db",
+      "dependencies": [
+        "SessionLocal",
+        "close"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "get_current_user",
+      "file": "routers/auth.py",
+      "behavior": "Execute get_current_user",
+      "dependencies": [
+        "HTTPException",
+        "InvalidTokenError",
+        "decode_token",
+        "get",
+        "int",
+        "str"
+      ],
+      "edge_cases": [
+        "missing key access may raise KeyError: payload['sub']"
+      ],
+      "branches": [
+        "user is None",
+        "not (user is None)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "require_admin",
+      "file": "routers/auth.py",
+      "behavior": "Execute require_admin",
+      "dependencies": [
+        "HTTPException"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "user.role != 'admin'",
+        "not (user.role != 'admin')"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "create_user",
+      "file": "routers/auth.py",
+      "behavior": "Execute create_user",
+      "dependencies": [
+        "HTTPException",
+        "register",
+        "str"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "login",
+      "file": "routers/auth.py",
+      "behavior": "Execute login",
+      "dependencies": [
+        "HTTPException",
+        "TokenPair",
+        "authenticate",
+        "issue_pair",
+        "str"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "refresh",
+      "file": "routers/auth.py",
+      "behavior": "Execute refresh",
+      "dependencies": [
+        "HTTPException",
+        "TokenPair",
+        "rotate_refresh",
+        "str"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "me",
+      "file": "routers/auth.py",
+      "behavior": "Execute me",
+      "dependencies": [],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "admin",
+      "file": "routers/auth.py",
+      "behavior": "Execute admin",
+      "dependencies": [],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "strong_password",
+      "file": "schemas.py",
+      "behavior": "Execute strong_password",
+      "dependencies": [
+        "ValueError",
+        "any",
+        "isdigit",
+        "isupper"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "not any((c.isupper() for c in value)) or not any((c.isdigit() for c in value))",
+        "not (not any((c.isupper() for c in value)) or not any((c.isdigit() for c in value)))"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "hash_password",
+      "file": "services/auth.py",
+      "behavior": "Execute hash_password",
+      "dependencies": [
+        "encode",
+        "hex",
+        "pbkdf2_hmac",
+        "urandom"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "verify_password",
+      "file": "services/auth.py",
+      "behavior": "Execute verify_password",
+      "dependencies": [
+        "compare_digest",
+        "fromhex",
+        "hash_password",
+        "split"
+      ],
+      "edge_cases": [
+        "missing key access may raise KeyError: hash_password(password, bytes.fromhex(salt_hex)).split(':', 1)[1]"
+      ],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "encode_token",
+      "file": "services/auth.py",
+      "behavior": "Execute encode_token",
+      "dependencies": [
+        "decode",
+        "digest",
+        "dumps",
+        "encode",
+        "int",
+        "new",
+        "rstrip",
+        "time",
+        "urlsafe_b64encode"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "decode_token",
+      "file": "services/auth.py",
+      "behavior": "Execute decode_token",
+      "dependencies": [
+        "InvalidTokenError",
+        "compare_digest",
+        "decode",
+        "digest",
+        "encode",
+        "len",
+        "loads",
+        "new",
+        "rstrip",
+        "split",
+        "time",
+        "urlsafe_b64decode",
+        "urlsafe_b64encode"
+      ],
+      "edge_cases": [
+        "missing key access may raise KeyError: payload['kind']",
+        "missing key access may raise KeyError: payload['exp']"
+      ],
+      "branches": [
+        "not hmac.compare_digest(signature_text, expected)",
+        "not (not hmac.compare_digest(signature_text, expected))",
+        "payload['kind'] != expected_kind or payload['exp'] < time.time()",
+        "not (payload['kind'] != expected_kind or payload['exp'] < time.time())"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "register",
+      "file": "services/auth.py",
+      "behavior": "Execute register",
+      "dependencies": [
+        "User",
+        "ValueError",
+        "add",
+        "commit",
+        "hash_password",
+        "refresh",
+        "scalar",
+        "select",
+        "where"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "db.scalar(select(User).where(User.username == payload.username))",
+        "not (db.scalar(select(User).where(User.username == payload.username)))"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "authenticate",
+      "file": "services/auth.py",
+      "behavior": "Execute authenticate",
+      "dependencies": [
+        "InvalidCredentialsError",
+        "scalar",
+        "select",
+        "verify_password",
+        "where"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "user is None or not verify_password(password, user.password_hash)",
+        "not (user is None or not verify_password(password, user.password_hash))"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "issue_pair",
+      "file": "services/auth.py",
+      "behavior": "Execute issue_pair",
+      "dependencies": [
+        "RefreshToken",
+        "add",
+        "commit",
+        "encode_token",
+        "str",
+        "uuid4"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "rotate_refresh",
+      "file": "services/auth.py",
+      "behavior": "Execute rotate_refresh",
+      "dependencies": [
+        "InvalidTokenError",
+        "commit",
+        "decode_token",
+        "issue_pair",
+        "scalar",
+        "select",
+        "where"
+      ],
+      "edge_cases": [
+        "missing key access may raise KeyError: payload['jti']"
+      ],
+      "branches": [
+        "stored is None or stored.revoked",
+        "not (stored is None or stored.revoked)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "test_register_login_and_current_user",
+      "file": "tests/test_api.py",
+      "behavior": "Execute test_register_login_and_current_user",
+      "dependencies": [
+        "get",
+        "json",
+        "post"
+      ],
+      "edge_cases": [
+        "missing key access may raise KeyError: tokens['access_token']",
+        "missing key access may raise KeyError: tokens['refresh_token']"
+      ],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "test_authorization_required",
+      "file": "tests/test_api.py",
+      "behavior": "Execute test_authorization_required",
+      "dependencies": [
+        "get"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    }
+  ],
+  "ambiguities": [],
+  "analyzed_files": [
+    {
+      "path": "database.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "Base",
+        "get_db"
+      ]
+    },
+    {
+      "path": "main.py",
+      "purpose": "Python module",
+      "key_symbols": []
+    },
+    {
+      "path": "models.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "User",
+        "RefreshToken"
+      ]
+    },
+    {
+      "path": "routers/auth.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "get_current_user",
+        "require_admin",
+        "create_user",
+        "login",
+        "refresh",
+        "me",
+        "admin"
+      ]
+    },
+    {
+      "path": "schemas.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "RegisterRequest",
+        "strong_password",
+        "UserOut",
+        "TokenPair",
+        "RefreshRequest"
+      ]
+    },
+    {
+      "path": "services/auth.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "InvalidCredentialsError",
+        "InvalidTokenError",
+        "hash_password",
+        "verify_password",
+        "encode_token",
+        "decode_token",
+        "register",
+        "authenticate",
+        "issue_pair",
+        "rotate_refresh"
+      ]
+    },
+    {
+      "path": "tests/test_api.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "test_register_login_and_current_user",
+        "test_authorization_required"
+      ]
+    }
+  ]
+}

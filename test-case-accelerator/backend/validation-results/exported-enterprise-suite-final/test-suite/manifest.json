@@ -1,0 +1,11 @@
+{
+  "export_version": "1.0",
+  "generated_tests": 50,
+  "generation_time": "2026-08-05T10:36:11.819244+00:00",
+  "generator_version": "unit-v13",
+  "project_name": "enterprise-validation-project",
+  "python_version": "3.12",
+  "quality_score": null,
+  "runtime_validation_status": "ready",
+  "verification_status": "verified"
+}

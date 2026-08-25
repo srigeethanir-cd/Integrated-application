@@ -1,0 +1,12 @@
+.git
+.gitignore
+.venv/
+venv/
+node_modules/
+dist/
+storage/
+.env
+.env.*
+!.env.example
+*.log
+*.db

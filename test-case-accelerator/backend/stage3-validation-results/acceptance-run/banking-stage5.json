@@ -1,0 +1,2177 @@
+{
+  "results": [
+    {
+      "test_case_id": "TC1",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 10,
+          "detail": "File exists: database.py"
+        },
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 10,
+              "detail": "File exists: database.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC2",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 10,
+          "detail": "File exists: database.py"
+        },
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 10,
+              "detail": "File exists: database.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC3",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 10,
+          "detail": "File exists: database.py"
+        },
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 10,
+              "detail": "File exists: database.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC4",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 10,
+          "detail": "File exists: database.py"
+        },
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 10,
+              "detail": "File exists: database.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC5",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 10,
+          "detail": "File exists: database.py"
+        },
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 10,
+              "detail": "File exists: database.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC001",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "File exists: routers/accounts.py"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 19,
+          "detail": "Referenced symbol exists at line 19"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "File exists: routers/accounts.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 19",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 19,
+              "detail": "Referenced symbol exists at line 19"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected list[AccountOut]; code-understanding reports list[AccountOut]",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "HTTP 200 is supported by endpoint metadata or the framework default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC002",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "File exists: routers/accounts.py"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 19,
+          "detail": "Referenced symbol exists at line 19"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "File exists: routers/accounts.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 19",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 19,
+              "detail": "Referenced symbol exists at line 19"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected list[AccountOut]; code-understanding reports list[AccountOut]",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC003",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "File exists: routers/accounts.py"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 19,
+          "detail": "Referenced symbol exists at line 19"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "File exists: routers/accounts.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 19",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 19,
+              "detail": "Referenced symbol exists at line 19"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected list[AccountOut]; code-understanding reports list[AccountOut]",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC004",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/accounts.py",
+          "symbol": "authenticate",
+          "line": 9,
+          "detail": "File exists: routers/accounts.py"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "authenticate",
+          "line": 9,
+          "detail": "Referenced symbol exists at line 9"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "authenticate",
+              "line": 9,
+              "detail": "File exists: routers/accounts.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 9",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "authenticate",
+              "line": 9,
+              "detail": "Referenced symbol exists at line 9"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC005",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/accounts.py",
+          "symbol": "make_transfer",
+          "line": 23,
+          "detail": "File exists: routers/accounts.py"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "make_transfer",
+          "line": 23,
+          "detail": "Referenced symbol exists at line 23"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "make_transfer",
+          "line": 23,
+          "detail": "POST /api/banking/transfers"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "File exists: routers/accounts.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 23",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "Referenced symbol exists at line 23"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "POST /api/banking/transfers"
+            }
+          ]
+        },
+        {
+          "check": "request_model",
+          "status": "Verified",
+          "detail": "Expected TransferRequest; code-understanding reports TransferRequest",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "POST /api/banking/transfers"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected AccountOut; code-understanding reports AccountOut",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "POST /api/banking/transfers"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "POST /api/banking/transfers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B3-TC001",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "File exists: services/banking.py"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "Referenced symbol exists at line 17"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "File exists: services/banking.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 17",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "Referenced symbol exists at line 17"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected list[AccountOut]; code-understanding reports list[AccountOut]",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B3-TC002",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "File exists: services/banking.py"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "Referenced symbol exists at line 17"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "ValueError is produced by an explicit raise"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "POST /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "File exists: services/banking.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 17",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "Referenced symbol exists at line 17"
+            }
+          ]
+        },
+        {
+          "check": "behavior_semantics",
+          "status": "Verified",
+          "detail": "Claimed behavior: ValueError. Found a matching raise statement in transfer.",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "ValueError is produced by an explicit raise"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B3-TC003",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "File exists: services/banking.py"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "Referenced symbol exists at line 17"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "ValueError is produced by an explicit raise"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "POST /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "File exists: services/banking.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 17",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "Referenced symbol exists at line 17"
+            }
+          ]
+        },
+        {
+          "check": "behavior_semantics",
+          "status": "Verified",
+          "detail": "Claimed behavior: ValueError. Found a matching raise statement in transfer.",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "ValueError is produced by an explicit raise"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B3-TC004",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "File exists: services/banking.py"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "Referenced symbol exists at line 17"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "POST /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "File exists: services/banking.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 17",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "Referenced symbol exists at line 17"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B3-TC005",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "File exists: services/banking.py"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "Referenced symbol exists at line 17"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "make_transfer",
+          "line": 23,
+          "detail": "POST /api/banking/transfers"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "File exists: services/banking.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 17",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "Referenced symbol exists at line 17"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "POST /api/banking/transfers"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "POST /api/banking/transfers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC006",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "File exists: services/banking.py"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "Referenced symbol exists at line 17"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "InsufficientFundsError is produced by an explicit raise"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "POST /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "File exists: services/banking.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 17",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "Referenced symbol exists at line 17"
+            }
+          ]
+        },
+        {
+          "check": "behavior_semantics",
+          "status": "Verified",
+          "detail": "Claimed behavior: InsufficientFundsError. Found a matching raise statement in transfer.",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "InsufficientFundsError is produced by an explicit raise"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC-001",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "File exists: services/banking.py"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "Referenced symbol exists at line 17"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "File exists: services/banking.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 17",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "Referenced symbol exists at line 17"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected list[AccountOut]; code-understanding reports list[AccountOut]",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "HTTP 200 is supported by endpoint metadata or the framework default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC-002",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "File exists: services/banking.py"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "Referenced symbol exists at line 17"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "make_transfer",
+          "line": 23,
+          "detail": "POST /api/banking/transfers"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "File exists: services/banking.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 17",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "Referenced symbol exists at line 17"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "POST /api/banking/transfers"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "HTTP 200 is supported by endpoint metadata or the framework default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "POST /api/banking/transfers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC-003",
+      "status": "Failed",
+      "confidence": 0.93,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "File exists: services/banking.py"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "Referenced symbol exists at line 17"
+        },
+        {
+          "file": "services/banking.py",
+          "symbol": "transfer",
+          "line": 17,
+          "detail": "Behavior analyzed from transfer"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "make_transfer",
+          "line": 23,
+          "detail": "POST /api/banking/transfers"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "File exists: services/banking.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 17",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "Referenced symbol exists at line 17"
+            }
+          ]
+        },
+        {
+          "check": "behavior_semantics",
+          "status": "Partial",
+          "detail": "Structural and control-flow evidence exists, but the behavioral expectation is not mechanically specific enough to prove",
+          "evidence": [
+            {
+              "file": "services/banking.py",
+              "symbol": "transfer",
+              "line": 17,
+              "detail": "Behavior analyzed from transfer"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "POST /api/banking/transfers"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Failed",
+          "detail": "HTTP 400 is not supported by the endpoint",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "make_transfer",
+              "line": 23,
+              "detail": "POST /api/banking/transfers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B4-TC001",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "File exists: routers/accounts.py"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 19,
+          "detail": "Referenced symbol exists at line 19"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "File exists: routers/accounts.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 19",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 19,
+              "detail": "Referenced symbol exists at line 19"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B4-TC002",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "File exists: routers/accounts.py"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 19,
+          "detail": "Referenced symbol exists at line 19"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "File exists: routers/accounts.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 19",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 19,
+              "detail": "Referenced symbol exists at line 19"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B4-TC003",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "File exists: routers/accounts.py"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "Referenced symbol exists at line 15"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "POST /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "File exists: routers/accounts.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 15",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "Referenced symbol exists at line 15"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B4-TC004",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "File exists: routers/accounts.py"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "Referenced symbol exists at line 15"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "POST /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "File exists: routers/accounts.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 15",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "Referenced symbol exists at line 15"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B4-TC005",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "File exists: routers/accounts.py"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "Referenced symbol exists at line 15"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "open_account",
+          "line": 15,
+          "detail": "POST /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "File exists: routers/accounts.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 15",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "Referenced symbol exists at line 15"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "open_account",
+              "line": 15,
+              "detail": "POST /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B4-TC006",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "File exists: routers/accounts.py"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 19,
+          "detail": "Referenced symbol exists at line 19"
+        },
+        {
+          "file": "routers/accounts.py",
+          "symbol": "accounts",
+          "line": 5,
+          "detail": "GET /api/banking/accounts"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "File exists: routers/accounts.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 19",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 19,
+              "detail": "Referenced symbol exists at line 19"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/accounts.py",
+              "symbol": "accounts",
+              "line": 5,
+              "detail": "GET /api/banking/accounts"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "verified": 24,
+    "partial": 0,
+    "failed": 1
+  },
+  "total_verified": 24
+}

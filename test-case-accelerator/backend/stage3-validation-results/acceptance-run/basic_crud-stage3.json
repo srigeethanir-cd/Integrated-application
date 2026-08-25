@@ -1,0 +1,2504 @@
+{
+  "project_summary": "Python project with 9 modules, 16 callables, 4 classes, and 5 API endpoints.",
+  "architecture": "FastAPI application with deterministic Python static analysis.",
+  "modules": [
+    {
+      "name": "app",
+      "file": "app/__init__.py",
+      "imports": []
+    },
+    {
+      "name": "app.database",
+      "file": "app/database.py",
+      "imports": [
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "app.models",
+      "file": "app/models.py",
+      "imports": [
+        "database",
+        "sqlalchemy"
+      ]
+    },
+    {
+      "name": "app.repositories.item_repository",
+      "file": "app/repositories/item_repository.py",
+      "imports": [
+        "app",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "app.routers",
+      "file": "app/routers/__init__.py",
+      "imports": []
+    },
+    {
+      "name": "app.routers.items",
+      "file": "app/routers/items.py",
+      "imports": [
+        "app",
+        "fastapi",
+        "sqlalchemy.orm",
+        "typing"
+      ]
+    },
+    {
+      "name": "app.schemas",
+      "file": "app/schemas.py",
+      "imports": [
+        "pydantic"
+      ]
+    },
+    {
+      "name": "app.services.item_service",
+      "file": "app/services/item_service.py",
+      "imports": [
+        "app",
+        "sqlalchemy.orm",
+        "typing"
+      ]
+    },
+    {
+      "name": "main",
+      "file": "main.py",
+      "imports": [
+        "app.routers",
+        "fastapi"
+      ]
+    }
+  ],
+  "imports": [
+    {
+      "module": "sqlalchemy",
+      "file": "app/database.py",
+      "names": [
+        "create_engine"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "app/database.py",
+      "names": [
+        "sessionmaker",
+        "declarative_base"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "app/models.py",
+      "names": [
+        "Base"
+      ],
+      "level": 1
+    },
+    {
+      "module": "sqlalchemy",
+      "file": "app/models.py",
+      "names": [
+        "Column",
+        "Integer",
+        "String"
+      ],
+      "level": 0
+    },
+    {
+      "module": "app",
+      "file": "app/repositories/item_repository.py",
+      "names": [
+        "models"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "app/repositories/item_repository.py",
+      "names": [
+        "Session"
+      ],
+      "level": 0
+    },
+    {
+      "module": "app",
+      "file": "app/routers/items.py",
+      "names": [
+        "schemas",
+        "models",
+        "database"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi",
+      "file": "app/routers/items.py",
+      "names": [
+        "APIRouter",
+        "Depends",
+        "HTTPException",
+        "status"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "app/routers/items.py",
+      "names": [
+        "Session"
+      ],
+      "level": 0
+    },
+    {
+      "module": "typing",
+      "file": "app/routers/items.py",
+      "names": [
+        "List"
+      ],
+      "level": 0
+    },
+    {
+      "module": "pydantic",
+      "file": "app/schemas.py",
+      "names": [
+        "BaseModel",
+        "Field"
+      ],
+      "level": 0
+    },
+    {
+      "module": "app",
+      "file": "app/services/item_service.py",
+      "names": [
+        "schemas",
+        "models"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "app/services/item_service.py",
+      "names": [
+        "Session"
+      ],
+      "level": 0
+    },
+    {
+      "module": "typing",
+      "file": "app/services/item_service.py",
+      "names": [
+        "List"
+      ],
+      "level": 0
+    },
+    {
+      "module": "app.routers",
+      "file": "main.py",
+      "names": [
+        "items"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi",
+      "file": "main.py",
+      "names": [
+        "FastAPI"
+      ],
+      "level": 0
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_db",
+      "qualified_name": "app.database.get_db",
+      "file": "app/database.py",
+      "line": 13,
+      "end_line": 18,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "SessionLocal",
+        "db.close"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "SessionLocal()",
+        "db.close",
+        "yield db"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "create_item",
+      "qualified_name": "app.repositories.item_repository.create_item",
+      "file": "app/repositories/item_repository.py",
+      "line": 15,
+      "end_line": 20,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "name",
+        "description"
+      ],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "app.models.Item",
+        "db.add",
+        "db.commit",
+        "db.refresh"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.add",
+        "db.commit",
+        "db.refresh"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "delete_item",
+      "qualified_name": "app.repositories.item_repository.delete_item",
+      "file": "app/repositories/item_repository.py",
+      "line": 36,
+      "end_line": 42,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "item_id"
+      ],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "db.commit",
+        "db.delete",
+        "db.query",
+        "db.query().filter",
+        "db.query().filter().first"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.commit",
+        "db.delete",
+        "db.query",
+        "db.query(models.Item).filter",
+        "models.Item"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "get_item",
+      "qualified_name": "app.repositories.item_repository.get_item",
+      "file": "app/repositories/item_repository.py",
+      "line": 7,
+      "end_line": 8,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "item_id"
+      ],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "db.query",
+        "db.query().filter",
+        "db.query().filter().first"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.query",
+        "db.query(models.Item).filter",
+        "models.Item"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "get_items",
+      "qualified_name": "app.repositories.item_repository.get_items",
+      "file": "app/repositories/item_repository.py",
+      "line": 11,
+      "end_line": 12,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "skip",
+        "limit"
+      ],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "db.query",
+        "db.query().offset",
+        "db.query().offset().limit",
+        "db.query().offset().limit().all"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.query",
+        "models.Item"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "update_item",
+      "qualified_name": "app.repositories.item_repository.update_item",
+      "file": "app/repositories/item_repository.py",
+      "line": 23,
+      "end_line": 33,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "item_id",
+        "name",
+        "description"
+      ],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "db.commit",
+        "db.query",
+        "db.query().filter",
+        "db.query().filter().first",
+        "db.refresh"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.commit",
+        "db.query",
+        "db.query(models.Item).filter",
+        "db.refresh",
+        "models.Item"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "create_item",
+      "qualified_name": "app.routers.items.create_item",
+      "file": "app/routers/items.py",
+      "line": 10,
+      "end_line": 15,
+      "is_async": false,
+      "parameters": [
+        "item",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.post('/', response_model=schemas.ItemOut, status_code=status.HTTP_201_CREATED)"
+      ],
+      "calls": [
+        "app.models.Item",
+        "db.add",
+        "db.commit",
+        "db.refresh"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.add",
+        "db.commit",
+        "db.refresh"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "delete_item",
+      "qualified_name": "app.routers.items.delete_item",
+      "file": "app/routers/items.py",
+      "line": 43,
+      "end_line": 49,
+      "is_async": false,
+      "parameters": [
+        "item_id",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.delete('/{item_id}', status_code=status.HTTP_204_NO_CONTENT)"
+      ],
+      "calls": [
+        "db.commit",
+        "db.delete",
+        "db.query",
+        "db.query().filter",
+        "db.query().filter().first",
+        "fastapi.HTTPException"
+      ],
+      "exceptions": [
+        "HTTPException"
+      ],
+      "sqlalchemy_model_usage": [
+        "db.commit",
+        "db.delete",
+        "db.query",
+        "db.query(models.Item).filter",
+        "models.Item"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "read_item",
+      "qualified_name": "app.routers.items.read_item",
+      "file": "app/routers/items.py",
+      "line": 23,
+      "end_line": 27,
+      "is_async": false,
+      "parameters": [
+        "item_id",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.get('/{item_id}', response_model=schemas.ItemOut)"
+      ],
+      "calls": [
+        "db.query",
+        "db.query().filter",
+        "db.query().filter().first",
+        "fastapi.HTTPException"
+      ],
+      "exceptions": [
+        "HTTPException"
+      ],
+      "sqlalchemy_model_usage": [
+        "db.query",
+        "db.query(models.Item).filter",
+        "models.Item"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "read_items",
+      "qualified_name": "app.routers.items.read_items",
+      "file": "app/routers/items.py",
+      "line": 18,
+      "end_line": 20,
+      "is_async": false,
+      "parameters": [
+        "skip",
+        "limit",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.get('/', response_model=List[schemas.ItemOut])"
+      ],
+      "calls": [
+        "db.query",
+        "db.query().offset",
+        "db.query().offset().limit",
+        "db.query().offset().limit().all"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.query",
+        "models.Item"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "update_item",
+      "qualified_name": "app.routers.items.update_item",
+      "file": "app/routers/items.py",
+      "line": 30,
+      "end_line": 40,
+      "is_async": false,
+      "parameters": [
+        "item_id",
+        "item",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.put('/{item_id}', response_model=schemas.ItemOut)"
+      ],
+      "calls": [
+        "db.commit",
+        "db.query",
+        "db.query().filter",
+        "db.query().filter().first",
+        "db.refresh",
+        "fastapi.HTTPException"
+      ],
+      "exceptions": [
+        "HTTPException"
+      ],
+      "sqlalchemy_model_usage": [
+        "db.commit",
+        "db.query",
+        "db.query(models.Item).filter",
+        "db.refresh",
+        "models.Item"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "create_item",
+      "qualified_name": "app.services.item_service.create_item",
+      "file": "app/services/item_service.py",
+      "line": 8,
+      "end_line": 13,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "item"
+      ],
+      "return_type": "models.Item",
+      "decorators": [],
+      "calls": [
+        "app.models.Item",
+        "db.add",
+        "db.commit",
+        "db.refresh"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.add",
+        "db.commit",
+        "db.refresh"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "delete_item",
+      "qualified_name": "app.services.item_service.delete_item",
+      "file": "app/services/item_service.py",
+      "line": 37,
+      "end_line": 43,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "item_id"
+      ],
+      "return_type": "bool",
+      "decorators": [],
+      "calls": [
+        "db.commit",
+        "db.delete",
+        "db.query",
+        "db.query().filter",
+        "db.query().filter().first"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.commit",
+        "db.delete",
+        "db.query",
+        "db.query(models.Item).filter",
+        "models.Item"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "get_item",
+      "qualified_name": "app.services.item_service.get_item",
+      "file": "app/services/item_service.py",
+      "line": 20,
+      "end_line": 21,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "item_id"
+      ],
+      "return_type": "models.Item",
+      "decorators": [],
+      "calls": [
+        "db.query",
+        "db.query().filter",
+        "db.query().filter().first"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.query",
+        "db.query(models.Item).filter",
+        "models.Item"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "get_items",
+      "qualified_name": "app.services.item_service.get_items",
+      "file": "app/services/item_service.py",
+      "line": 16,
+      "end_line": 17,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "skip",
+        "limit"
+      ],
+      "return_type": "List[models.Item]",
+      "decorators": [],
+      "calls": [
+        "db.query",
+        "db.query().offset",
+        "db.query().offset().limit",
+        "db.query().offset().limit().all"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.query",
+        "models.Item"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "update_item",
+      "qualified_name": "app.services.item_service.update_item",
+      "file": "app/services/item_service.py",
+      "line": 24,
+      "end_line": 34,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "item_id",
+        "item"
+      ],
+      "return_type": "models.Item",
+      "decorators": [],
+      "calls": [
+        "db.commit",
+        "db.query",
+        "db.query().filter",
+        "db.query().filter().first",
+        "db.refresh"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.commit",
+        "db.query",
+        "db.query(models.Item).filter",
+        "db.refresh",
+        "models.Item"
+      ],
+      "security_findings": []
+    }
+  ],
+  "classes": [
+    {
+      "name": "Item",
+      "qualified_name": "app.models.Item",
+      "file": "app/models.py",
+      "line": 4,
+      "end_line": 8,
+      "fields": [
+        "__tablename__",
+        "id",
+        "name",
+        "description"
+      ],
+      "bases": [
+        "Base"
+      ],
+      "inheritance": [
+        "Base"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "Column"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "ItemCreate",
+      "qualified_name": "app.schemas.ItemCreate",
+      "file": "app/schemas.py",
+      "line": 3,
+      "end_line": 5,
+      "fields": [
+        "name",
+        "description"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "ItemOut",
+      "qualified_name": "app.schemas.ItemOut",
+      "file": "app/schemas.py",
+      "line": 11,
+      "end_line": 17,
+      "fields": [
+        "id",
+        "name",
+        "description"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "ItemUpdate",
+      "qualified_name": "app.schemas.ItemUpdate",
+      "file": "app/schemas.py",
+      "line": 7,
+      "end_line": 9,
+      "fields": [
+        "name",
+        "description"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "symbol_table": [
+    {
+      "name": "get_db",
+      "qualified_name": "app.database.get_db",
+      "kind": "function",
+      "file": "app/database.py",
+      "line": 13,
+      "end_line": 18,
+      "parent": null
+    },
+    {
+      "name": "Item",
+      "qualified_name": "app.models.Item",
+      "kind": "class",
+      "file": "app/models.py",
+      "line": 4,
+      "end_line": 8,
+      "parent": null
+    },
+    {
+      "name": "create_item",
+      "qualified_name": "app.repositories.item_repository.create_item",
+      "kind": "function",
+      "file": "app/repositories/item_repository.py",
+      "line": 15,
+      "end_line": 20,
+      "parent": null
+    },
+    {
+      "name": "delete_item",
+      "qualified_name": "app.repositories.item_repository.delete_item",
+      "kind": "function",
+      "file": "app/repositories/item_repository.py",
+      "line": 36,
+      "end_line": 42,
+      "parent": null
+    },
+    {
+      "name": "get_item",
+      "qualified_name": "app.repositories.item_repository.get_item",
+      "kind": "function",
+      "file": "app/repositories/item_repository.py",
+      "line": 7,
+      "end_line": 8,
+      "parent": null
+    },
+    {
+      "name": "get_items",
+      "qualified_name": "app.repositories.item_repository.get_items",
+      "kind": "function",
+      "file": "app/repositories/item_repository.py",
+      "line": 11,
+      "end_line": 12,
+      "parent": null
+    },
+    {
+      "name": "update_item",
+      "qualified_name": "app.repositories.item_repository.update_item",
+      "kind": "function",
+      "file": "app/repositories/item_repository.py",
+      "line": 23,
+      "end_line": 33,
+      "parent": null
+    },
+    {
+      "name": "create_item",
+      "qualified_name": "app.routers.items.create_item",
+      "kind": "function",
+      "file": "app/routers/items.py",
+      "line": 10,
+      "end_line": 15,
+      "parent": null
+    },
+    {
+      "name": "delete_item",
+      "qualified_name": "app.routers.items.delete_item",
+      "kind": "function",
+      "file": "app/routers/items.py",
+      "line": 43,
+      "end_line": 49,
+      "parent": null
+    },
+    {
+      "name": "read_item",
+      "qualified_name": "app.routers.items.read_item",
+      "kind": "function",
+      "file": "app/routers/items.py",
+      "line": 23,
+      "end_line": 27,
+      "parent": null
+    },
+    {
+      "name": "read_items",
+      "qualified_name": "app.routers.items.read_items",
+      "kind": "function",
+      "file": "app/routers/items.py",
+      "line": 18,
+      "end_line": 20,
+      "parent": null
+    },
+    {
+      "name": "update_item",
+      "qualified_name": "app.routers.items.update_item",
+      "kind": "function",
+      "file": "app/routers/items.py",
+      "line": 30,
+      "end_line": 40,
+      "parent": null
+    },
+    {
+      "name": "ItemCreate",
+      "qualified_name": "app.schemas.ItemCreate",
+      "kind": "class",
+      "file": "app/schemas.py",
+      "line": 3,
+      "end_line": 5,
+      "parent": null
+    },
+    {
+      "name": "ItemOut",
+      "qualified_name": "app.schemas.ItemOut",
+      "kind": "class",
+      "file": "app/schemas.py",
+      "line": 11,
+      "end_line": 17,
+      "parent": null
+    },
+    {
+      "name": "ItemUpdate",
+      "qualified_name": "app.schemas.ItemUpdate",
+      "kind": "class",
+      "file": "app/schemas.py",
+      "line": 7,
+      "end_line": 9,
+      "parent": null
+    },
+    {
+      "name": "create_item",
+      "qualified_name": "app.services.item_service.create_item",
+      "kind": "function",
+      "file": "app/services/item_service.py",
+      "line": 8,
+      "end_line": 13,
+      "parent": null
+    },
+    {
+      "name": "delete_item",
+      "qualified_name": "app.services.item_service.delete_item",
+      "kind": "function",
+      "file": "app/services/item_service.py",
+      "line": 37,
+      "end_line": 43,
+      "parent": null
+    },
+    {
+      "name": "get_item",
+      "qualified_name": "app.services.item_service.get_item",
+      "kind": "function",
+      "file": "app/services/item_service.py",
+      "line": 20,
+      "end_line": 21,
+      "parent": null
+    },
+    {
+      "name": "get_items",
+      "qualified_name": "app.services.item_service.get_items",
+      "kind": "function",
+      "file": "app/services/item_service.py",
+      "line": 16,
+      "end_line": 17,
+      "parent": null
+    },
+    {
+      "name": "update_item",
+      "qualified_name": "app.services.item_service.update_item",
+      "kind": "function",
+      "file": "app/services/item_service.py",
+      "line": 24,
+      "end_line": 34,
+      "parent": null
+    }
+  ],
+  "call_graph": [
+    {
+      "caller": "app.database",
+      "callee": "sqlalchemy.create_engine",
+      "file": "app/database.py",
+      "line": 6
+    },
+    {
+      "caller": "app.database",
+      "callee": "sqlalchemy.orm.sessionmaker",
+      "file": "app/database.py",
+      "line": 9
+    },
+    {
+      "caller": "app.database",
+      "callee": "sqlalchemy.orm.declarative_base",
+      "file": "app/database.py",
+      "line": 11
+    },
+    {
+      "caller": "app.database.get_db",
+      "callee": "SessionLocal",
+      "file": "app/database.py",
+      "line": 14
+    },
+    {
+      "caller": "app.database.get_db",
+      "callee": "db.close",
+      "file": "app/database.py",
+      "line": 18
+    },
+    {
+      "caller": "app.repositories.item_repository.create_item",
+      "callee": "app.models.Item",
+      "file": "app/repositories/item_repository.py",
+      "line": 16
+    },
+    {
+      "caller": "app.repositories.item_repository.create_item",
+      "callee": "db.add",
+      "file": "app/repositories/item_repository.py",
+      "line": 17
+    },
+    {
+      "caller": "app.repositories.item_repository.create_item",
+      "callee": "db.commit",
+      "file": "app/repositories/item_repository.py",
+      "line": 18
+    },
+    {
+      "caller": "app.repositories.item_repository.create_item",
+      "callee": "db.refresh",
+      "file": "app/repositories/item_repository.py",
+      "line": 19
+    },
+    {
+      "caller": "app.repositories.item_repository.delete_item",
+      "callee": "db.query",
+      "file": "app/repositories/item_repository.py",
+      "line": 37
+    },
+    {
+      "caller": "app.repositories.item_repository.delete_item",
+      "callee": "db.query().filter",
+      "file": "app/repositories/item_repository.py",
+      "line": 37
+    },
+    {
+      "caller": "app.repositories.item_repository.delete_item",
+      "callee": "db.query().filter().first",
+      "file": "app/repositories/item_repository.py",
+      "line": 37
+    },
+    {
+      "caller": "app.repositories.item_repository.delete_item",
+      "callee": "db.delete",
+      "file": "app/repositories/item_repository.py",
+      "line": 40
+    },
+    {
+      "caller": "app.repositories.item_repository.delete_item",
+      "callee": "db.commit",
+      "file": "app/repositories/item_repository.py",
+      "line": 41
+    },
+    {
+      "caller": "app.repositories.item_repository.get_item",
+      "callee": "db.query",
+      "file": "app/repositories/item_repository.py",
+      "line": 8
+    },
+    {
+      "caller": "app.repositories.item_repository.get_item",
+      "callee": "db.query().filter",
+      "file": "app/repositories/item_repository.py",
+      "line": 8
+    },
+    {
+      "caller": "app.repositories.item_repository.get_item",
+      "callee": "db.query().filter().first",
+      "file": "app/repositories/item_repository.py",
+      "line": 8
+    },
+    {
+      "caller": "app.repositories.item_repository.get_items",
+      "callee": "db.query",
+      "file": "app/repositories/item_repository.py",
+      "line": 12
+    },
+    {
+      "caller": "app.repositories.item_repository.get_items",
+      "callee": "db.query().offset",
+      "file": "app/repositories/item_repository.py",
+      "line": 12
+    },
+    {
+      "caller": "app.repositories.item_repository.get_items",
+      "callee": "db.query().offset().limit",
+      "file": "app/repositories/item_repository.py",
+      "line": 12
+    },
+    {
+      "caller": "app.repositories.item_repository.get_items",
+      "callee": "db.query().offset().limit().all",
+      "file": "app/repositories/item_repository.py",
+      "line": 12
+    },
+    {
+      "caller": "app.repositories.item_repository.update_item",
+      "callee": "db.query",
+      "file": "app/repositories/item_repository.py",
+      "line": 24
+    },
+    {
+      "caller": "app.repositories.item_repository.update_item",
+      "callee": "db.query().filter",
+      "file": "app/repositories/item_repository.py",
+      "line": 24
+    },
+    {
+      "caller": "app.repositories.item_repository.update_item",
+      "callee": "db.query().filter().first",
+      "file": "app/repositories/item_repository.py",
+      "line": 24
+    },
+    {
+      "caller": "app.repositories.item_repository.update_item",
+      "callee": "db.commit",
+      "file": "app/repositories/item_repository.py",
+      "line": 31
+    },
+    {
+      "caller": "app.repositories.item_repository.update_item",
+      "callee": "db.refresh",
+      "file": "app/repositories/item_repository.py",
+      "line": 32
+    },
+    {
+      "caller": "app.routers.items",
+      "callee": "fastapi.APIRouter",
+      "file": "app/routers/items.py",
+      "line": 7
+    },
+    {
+      "caller": "app.routers.items.create_item",
+      "callee": "app.models.Item",
+      "file": "app/routers/items.py",
+      "line": 11
+    },
+    {
+      "caller": "app.routers.items.create_item",
+      "callee": "db.add",
+      "file": "app/routers/items.py",
+      "line": 12
+    },
+    {
+      "caller": "app.routers.items.create_item",
+      "callee": "db.commit",
+      "file": "app/routers/items.py",
+      "line": 13
+    },
+    {
+      "caller": "app.routers.items.create_item",
+      "callee": "db.refresh",
+      "file": "app/routers/items.py",
+      "line": 14
+    },
+    {
+      "caller": "app.routers.items.delete_item",
+      "callee": "db.query",
+      "file": "app/routers/items.py",
+      "line": 44
+    },
+    {
+      "caller": "app.routers.items.delete_item",
+      "callee": "db.query().filter",
+      "file": "app/routers/items.py",
+      "line": 44
+    },
+    {
+      "caller": "app.routers.items.delete_item",
+      "callee": "db.query().filter().first",
+      "file": "app/routers/items.py",
+      "line": 44
+    },
+    {
+      "caller": "app.routers.items.delete_item",
+      "callee": "fastapi.HTTPException",
+      "file": "app/routers/items.py",
+      "line": 46
+    },
+    {
+      "caller": "app.routers.items.delete_item",
+      "callee": "db.delete",
+      "file": "app/routers/items.py",
+      "line": 47
+    },
+    {
+      "caller": "app.routers.items.delete_item",
+      "callee": "db.commit",
+      "file": "app/routers/items.py",
+      "line": 48
+    },
+    {
+      "caller": "app.routers.items.read_item",
+      "callee": "db.query",
+      "file": "app/routers/items.py",
+      "line": 24
+    },
+    {
+      "caller": "app.routers.items.read_item",
+      "callee": "db.query().filter",
+      "file": "app/routers/items.py",
+      "line": 24
+    },
+    {
+      "caller": "app.routers.items.read_item",
+      "callee": "db.query().filter().first",
+      "file": "app/routers/items.py",
+      "line": 24
+    },
+    {
+      "caller": "app.routers.items.read_item",
+      "callee": "fastapi.HTTPException",
+      "file": "app/routers/items.py",
+      "line": 26
+    },
+    {
+      "caller": "app.routers.items.read_items",
+      "callee": "db.query",
+      "file": "app/routers/items.py",
+      "line": 19
+    },
+    {
+      "caller": "app.routers.items.read_items",
+      "callee": "db.query().offset",
+      "file": "app/routers/items.py",
+      "line": 19
+    },
+    {
+      "caller": "app.routers.items.read_items",
+      "callee": "db.query().offset().limit",
+      "file": "app/routers/items.py",
+      "line": 19
+    },
+    {
+      "caller": "app.routers.items.read_items",
+      "callee": "db.query().offset().limit().all",
+      "file": "app/routers/items.py",
+      "line": 19
+    },
+    {
+      "caller": "app.routers.items.update_item",
+      "callee": "db.query",
+      "file": "app/routers/items.py",
+      "line": 31
+    },
+    {
+      "caller": "app.routers.items.update_item",
+      "callee": "db.query().filter",
+      "file": "app/routers/items.py",
+      "line": 31
+    },
+    {
+      "caller": "app.routers.items.update_item",
+      "callee": "db.query().filter().first",
+      "file": "app/routers/items.py",
+      "line": 31
+    },
+    {
+      "caller": "app.routers.items.update_item",
+      "callee": "fastapi.HTTPException",
+      "file": "app/routers/items.py",
+      "line": 33
+    },
+    {
+      "caller": "app.routers.items.update_item",
+      "callee": "db.commit",
+      "file": "app/routers/items.py",
+      "line": 38
+    },
+    {
+      "caller": "app.routers.items.update_item",
+      "callee": "db.refresh",
+      "file": "app/routers/items.py",
+      "line": 39
+    },
+    {
+      "caller": "app.services.item_service.create_item",
+      "callee": "app.models.Item",
+      "file": "app/services/item_service.py",
+      "line": 9
+    },
+    {
+      "caller": "app.services.item_service.create_item",
+      "callee": "db.add",
+      "file": "app/services/item_service.py",
+      "line": 10
+    },
+    {
+      "caller": "app.services.item_service.create_item",
+      "callee": "db.commit",
+      "file": "app/services/item_service.py",
+      "line": 11
+    },
+    {
+      "caller": "app.services.item_service.create_item",
+      "callee": "db.refresh",
+      "file": "app/services/item_service.py",
+      "line": 12
+    },
+    {
+      "caller": "app.services.item_service.delete_item",
+      "callee": "db.query",
+      "file": "app/services/item_service.py",
+      "line": 38
+    },
+    {
+      "caller": "app.services.item_service.delete_item",
+      "callee": "db.query().filter",
+      "file": "app/services/item_service.py",
+      "line": 38
+    },
+    {
+      "caller": "app.services.item_service.delete_item",
+      "callee": "db.query().filter().first",
+      "file": "app/services/item_service.py",
+      "line": 38
+    },
+    {
+      "caller": "app.services.item_service.delete_item",
+      "callee": "db.delete",
+      "file": "app/services/item_service.py",
+      "line": 41
+    },
+    {
+      "caller": "app.services.item_service.delete_item",
+      "callee": "db.commit",
+      "file": "app/services/item_service.py",
+      "line": 42
+    },
+    {
+      "caller": "app.services.item_service.get_item",
+      "callee": "db.query",
+      "file": "app/services/item_service.py",
+      "line": 21
+    },
+    {
+      "caller": "app.services.item_service.get_item",
+      "callee": "db.query().filter",
+      "file": "app/services/item_service.py",
+      "line": 21
+    },
+    {
+      "caller": "app.services.item_service.get_item",
+      "callee": "db.query().filter().first",
+      "file": "app/services/item_service.py",
+      "line": 21
+    },
+    {
+      "caller": "app.services.item_service.get_items",
+      "callee": "db.query",
+      "file": "app/services/item_service.py",
+      "line": 17
+    },
+    {
+      "caller": "app.services.item_service.get_items",
+      "callee": "db.query().offset",
+      "file": "app/services/item_service.py",
+      "line": 17
+    },
+    {
+      "caller": "app.services.item_service.get_items",
+      "callee": "db.query().offset().limit",
+      "file": "app/services/item_service.py",
+      "line": 17
+    },
+    {
+      "caller": "app.services.item_service.get_items",
+      "callee": "db.query().offset().limit().all",
+      "file": "app/services/item_service.py",
+      "line": 17
+    },
+    {
+      "caller": "app.services.item_service.update_item",
+      "callee": "db.query",
+      "file": "app/services/item_service.py",
+      "line": 25
+    },
+    {
+      "caller": "app.services.item_service.update_item",
+      "callee": "db.query().filter",
+      "file": "app/services/item_service.py",
+      "line": 25
+    },
+    {
+      "caller": "app.services.item_service.update_item",
+      "callee": "db.query().filter().first",
+      "file": "app/services/item_service.py",
+      "line": 25
+    },
+    {
+      "caller": "app.services.item_service.update_item",
+      "callee": "db.commit",
+      "file": "app/services/item_service.py",
+      "line": 32
+    },
+    {
+      "caller": "app.services.item_service.update_item",
+      "callee": "db.refresh",
+      "file": "app/services/item_service.py",
+      "line": 33
+    },
+    {
+      "caller": "main",
+      "callee": "fastapi.FastAPI",
+      "file": "main.py",
+      "line": 4
+    },
+    {
+      "caller": "main",
+      "callee": "app.include_router",
+      "file": "main.py",
+      "line": 6
+    }
+  ],
+  "sqlalchemy_session_factories": [
+    {
+      "name": "SessionLocal",
+      "file": "app/database.py",
+      "factory": "sessionmaker",
+      "bind": "engine"
+    }
+  ],
+  "security_findings": [],
+  "components": [
+    {
+      "name": "app",
+      "responsibility": "Python module",
+      "files": [
+        "app/__init__.py"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "app.database",
+      "responsibility": "Python module",
+      "files": [
+        "app/database.py"
+      ],
+      "dependencies": [
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "app.models",
+      "responsibility": "Python module",
+      "files": [
+        "app/models.py"
+      ],
+      "dependencies": [
+        "database",
+        "sqlalchemy"
+      ]
+    },
+    {
+      "name": "app.repositories.item_repository",
+      "responsibility": "Python module",
+      "files": [
+        "app/repositories/item_repository.py"
+      ],
+      "dependencies": [
+        "app",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "app.routers",
+      "responsibility": "Python module",
+      "files": [
+        "app/routers/__init__.py"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "app.routers.items",
+      "responsibility": "Python module",
+      "files": [
+        "app/routers/items.py"
+      ],
+      "dependencies": [
+        "app",
+        "fastapi",
+        "sqlalchemy.orm",
+        "typing"
+      ]
+    },
+    {
+      "name": "app.schemas",
+      "responsibility": "Python module",
+      "files": [
+        "app/schemas.py"
+      ],
+      "dependencies": [
+        "pydantic"
+      ]
+    },
+    {
+      "name": "app.services.item_service",
+      "responsibility": "Python module",
+      "files": [
+        "app/services/item_service.py"
+      ],
+      "dependencies": [
+        "app",
+        "sqlalchemy.orm",
+        "typing"
+      ]
+    },
+    {
+      "name": "main",
+      "responsibility": "Application entrypoint",
+      "files": [
+        "main.py"
+      ],
+      "dependencies": [
+        "app.routers",
+        "fastapi"
+      ]
+    }
+  ],
+  "entrypoints": [
+    {
+      "path": "main.py",
+      "symbol": null,
+      "purpose": "Application entrypoint"
+    },
+    {
+      "path": "app/routers/items.py",
+      "symbol": "read_items",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "app/routers/items.py",
+      "symbol": "create_item",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "app/routers/items.py",
+      "symbol": "delete_item",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "app/routers/items.py",
+      "symbol": "read_item",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "app/routers/items.py",
+      "symbol": "update_item",
+      "purpose": "API endpoint"
+    }
+  ],
+  "api_endpoints": [
+    {
+      "method": "GET",
+      "route": "/items/",
+      "handler": "read_items",
+      "file": "app/routers/items.py",
+      "request_type": null,
+      "response_type": "List[schemas.ItemOut]",
+      "request_model": null,
+      "response_model": "List[schemas.ItemOut]",
+      "dependencies": [
+        "database.get_db"
+      ],
+      "success_status_codes": [
+        200
+      ],
+      "error_status_codes": [],
+      "exception_status_mappings": [],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "POST",
+      "route": "/items/",
+      "handler": "create_item",
+      "file": "app/routers/items.py",
+      "request_type": "ItemCreate",
+      "response_type": "schemas.ItemOut",
+      "request_model": "ItemCreate",
+      "response_model": "schemas.ItemOut",
+      "dependencies": [
+        "database.get_db"
+      ],
+      "success_status_codes": [
+        201
+      ],
+      "error_status_codes": [],
+      "exception_status_mappings": [],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "DELETE",
+      "route": "/items/{item_id}",
+      "handler": "delete_item",
+      "file": "app/routers/items.py",
+      "request_type": null,
+      "response_type": null,
+      "request_model": null,
+      "response_model": null,
+      "dependencies": [
+        "database.get_db"
+      ],
+      "success_status_codes": [
+        204
+      ],
+      "error_status_codes": [
+        404
+      ],
+      "exception_status_mappings": [
+        {
+          "exception": "HTTPException",
+          "status_code": 404
+        }
+      ],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "GET",
+      "route": "/items/{item_id}",
+      "handler": "read_item",
+      "file": "app/routers/items.py",
+      "request_type": null,
+      "response_type": "schemas.ItemOut",
+      "request_model": null,
+      "response_model": "schemas.ItemOut",
+      "dependencies": [
+        "database.get_db"
+      ],
+      "success_status_codes": [
+        200
+      ],
+      "error_status_codes": [
+        404
+      ],
+      "exception_status_mappings": [
+        {
+          "exception": "HTTPException",
+          "status_code": 404
+        }
+      ],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "PUT",
+      "route": "/items/{item_id}",
+      "handler": "update_item",
+      "file": "app/routers/items.py",
+      "request_type": "ItemUpdate",
+      "response_type": "schemas.ItemOut",
+      "request_model": "ItemUpdate",
+      "response_model": "schemas.ItemOut",
+      "dependencies": [
+        "database.get_db"
+      ],
+      "success_status_codes": [
+        200
+      ],
+      "error_status_codes": [
+        404
+      ],
+      "exception_status_mappings": [
+        {
+          "exception": "HTTPException",
+          "status_code": 404
+        }
+      ],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    }
+  ],
+  "data_models": [
+    {
+      "name": "Item",
+      "file": "app/models.py",
+      "fields": [
+        "__tablename__",
+        "id",
+        "name",
+        "description"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "type": "Integer",
+          "primary_key": true,
+          "foreign_keys": [],
+          "nullable": false,
+          "default": null,
+          "index": true,
+          "unique": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": false,
+          "default": null,
+          "index": true,
+          "unique": false
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": true,
+          "default": null,
+          "index": false,
+          "unique": false
+        }
+      ],
+      "primary_keys": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [
+        "id",
+        "name"
+      ],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "Column"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "ItemCreate",
+      "file": "app/schemas.py",
+      "fields": [
+        "name",
+        "description"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "ItemUpdate",
+      "file": "app/schemas.py",
+      "fields": [
+        "name",
+        "description"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "ItemOut",
+      "file": "app/schemas.py",
+      "fields": [
+        "id",
+        "name",
+        "description"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "pydantic_schemas": [
+    {
+      "name": "ItemCreate",
+      "file": "app/schemas.py",
+      "fields": [
+        {
+          "name": "name",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": 1,
+          "max_length": 100,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "description",
+          "type": "str | None",
+          "required": false,
+          "optional": true,
+          "has_default": true,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    },
+    {
+      "name": "ItemUpdate",
+      "file": "app/schemas.py",
+      "fields": [
+        {
+          "name": "name",
+          "type": "str | None",
+          "required": false,
+          "optional": true,
+          "has_default": true,
+          "default": null,
+          "examples": [],
+          "min_length": 1,
+          "max_length": 100,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "description",
+          "type": "str | None",
+          "required": false,
+          "optional": true,
+          "has_default": true,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    },
+    {
+      "name": "ItemOut",
+      "file": "app/schemas.py",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "description",
+          "type": "str | None",
+          "required": false,
+          "optional": true,
+          "has_default": true,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    }
+  ],
+  "business_rules": [
+    {
+      "description": "Condition: not db_item",
+      "files": [
+        "app/repositories/item_repository.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: name is not None",
+      "files": [
+        "app/repositories/item_repository.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: description is not None",
+      "files": [
+        "app/repositories/item_repository.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: not db_item",
+      "files": [
+        "app/repositories/item_repository.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: not item",
+      "files": [
+        "app/routers/items.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: not db_item",
+      "files": [
+        "app/routers/items.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: item.name is not None",
+      "files": [
+        "app/routers/items.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: item.description is not None",
+      "files": [
+        "app/routers/items.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: not db_item",
+      "files": [
+        "app/routers/items.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: not db_item",
+      "files": [
+        "app/services/item_service.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: item.name is not None",
+      "files": [
+        "app/services/item_service.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: item.description is not None",
+      "files": [
+        "app/services/item_service.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: not db_item",
+      "files": [
+        "app/services/item_service.py"
+      ],
+      "symbols": []
+    }
+  ],
+  "execution_flows": [
+    {
+      "name": "GET /items/",
+      "entrypoint": "read_items",
+      "steps": [
+        "Invoke read_items",
+        "Call db.query().offset().limit().all",
+        "Call db.query().offset().limit",
+        "Call db.query().offset",
+        "Call db.query"
+      ],
+      "components": [],
+      "files": [
+        "app/routers/items.py"
+      ]
+    },
+    {
+      "name": "POST /items/",
+      "entrypoint": "create_item",
+      "steps": [
+        "Invoke create_item",
+        "Call app.models.Item",
+        "Call db.add",
+        "Call db.commit",
+        "Call db.refresh",
+        "Call app.models.Item",
+        "Call db.add",
+        "Call db.commit",
+        "Call db.refresh",
+        "Call app.models.Item",
+        "Call db.add",
+        "Call db.commit",
+        "Call db.refresh"
+      ],
+      "components": [],
+      "files": [
+        "app/routers/items.py"
+      ]
+    },
+    {
+      "name": "DELETE /items/{item_id}",
+      "entrypoint": "delete_item",
+      "steps": [
+        "Invoke delete_item",
+        "Call db.query().filter().first",
+        "Call db.query().filter",
+        "Call db.query",
+        "Call db.delete",
+        "Call db.commit",
+        "Call db.query().filter().first",
+        "Call db.query().filter",
+        "Call db.query",
+        "Call fastapi.HTTPException",
+        "Call db.delete",
+        "Call db.commit",
+        "Call db.query().filter().first",
+        "Call db.query().filter",
+        "Call db.query",
+        "Call db.delete",
+        "Call db.commit"
+      ],
+      "components": [],
+      "files": [
+        "app/routers/items.py"
+      ]
+    },
+    {
+      "name": "GET /items/{item_id}",
+      "entrypoint": "read_item",
+      "steps": [
+        "Invoke read_item",
+        "Call db.query().filter().first",
+        "Call db.query().filter",
+        "Call db.query",
+        "Call fastapi.HTTPException"
+      ],
+      "components": [],
+      "files": [
+        "app/routers/items.py"
+      ]
+    },
+    {
+      "name": "PUT /items/{item_id}",
+      "entrypoint": "update_item",
+      "steps": [
+        "Invoke update_item",
+        "Call db.query().filter().first",
+        "Call db.query().filter",
+        "Call db.query",
+        "Call db.commit",
+        "Call db.refresh",
+        "Call db.query().filter().first",
+        "Call db.query().filter",
+        "Call db.query",
+        "Call fastapi.HTTPException",
+        "Call db.commit",
+        "Call db.refresh",
+        "Call db.query().filter().first",
+        "Call db.query().filter",
+        "Call db.query",
+        "Call db.commit",
+        "Call db.refresh"
+      ],
+      "components": [],
+      "files": [
+        "app/routers/items.py"
+      ]
+    }
+  ],
+  "external_dependencies": [
+    "app",
+    "fastapi",
+    "pydantic",
+    "sqlalchemy",
+    "typing"
+  ],
+  "test_targets": [
+    {
+      "symbol": "get_db",
+      "file": "app/database.py",
+      "behavior": "Execute get_db",
+      "dependencies": [
+        "SessionLocal",
+        "close"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "get_item",
+      "file": "app/repositories/item_repository.py",
+      "behavior": "Execute get_item",
+      "dependencies": [
+        "filter",
+        "first",
+        "query"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "get_items",
+      "file": "app/repositories/item_repository.py",
+      "behavior": "Execute get_items",
+      "dependencies": [
+        "all",
+        "limit",
+        "offset",
+        "query"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "create_item",
+      "file": "app/repositories/item_repository.py",
+      "behavior": "Execute create_item",
+      "dependencies": [
+        "Item",
+        "add",
+        "commit",
+        "refresh"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "update_item",
+      "file": "app/repositories/item_repository.py",
+      "behavior": "Execute update_item",
+      "dependencies": [
+        "commit",
+        "filter",
+        "first",
+        "query",
+        "refresh"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "not db_item",
+        "not (not db_item)",
+        "name is not None",
+        "not (name is not None)",
+        "description is not None",
+        "not (description is not None)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "delete_item",
+      "file": "app/repositories/item_repository.py",
+      "behavior": "Execute delete_item",
+      "dependencies": [
+        "commit",
+        "delete",
+        "filter",
+        "first",
+        "query"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "not db_item",
+        "not (not db_item)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "create_item",
+      "file": "app/routers/items.py",
+      "behavior": "Execute create_item",
+      "dependencies": [
+        "Item",
+        "add",
+        "commit",
+        "refresh"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "read_items",
+      "file": "app/routers/items.py",
+      "behavior": "Execute read_items",
+      "dependencies": [
+        "all",
+        "limit",
+        "offset",
+        "query"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "read_item",
+      "file": "app/routers/items.py",
+      "behavior": "Execute read_item",
+      "dependencies": [
+        "HTTPException",
+        "filter",
+        "first",
+        "query"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "not item",
+        "not (not item)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "update_item",
+      "file": "app/routers/items.py",
+      "behavior": "Execute update_item",
+      "dependencies": [
+        "HTTPException",
+        "commit",
+        "filter",
+        "first",
+        "query",
+        "refresh"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "not db_item",
+        "not (not db_item)",
+        "item.name is not None",
+        "not (item.name is not None)",
+        "item.description is not None",
+        "not (item.description is not None)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "delete_item",
+      "file": "app/routers/items.py",
+      "behavior": "Execute delete_item",
+      "dependencies": [
+        "HTTPException",
+        "commit",
+        "delete",
+        "filter",
+        "first",
+        "query"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "not db_item",
+        "not (not db_item)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "create_item",
+      "file": "app/services/item_service.py",
+      "behavior": "Execute create_item",
+      "dependencies": [
+        "Item",
+        "add",
+        "commit",
+        "refresh"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "get_items",
+      "file": "app/services/item_service.py",
+      "behavior": "Execute get_items",
+      "dependencies": [
+        "all",
+        "limit",
+        "offset",
+        "query"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "get_item",
+      "file": "app/services/item_service.py",
+      "behavior": "Execute get_item",
+      "dependencies": [
+        "filter",
+        "first",
+        "query"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "update_item",
+      "file": "app/services/item_service.py",
+      "behavior": "Execute update_item",
+      "dependencies": [
+        "commit",
+        "filter",
+        "first",
+        "query",
+        "refresh"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "not db_item",
+        "not (not db_item)",
+        "item.name is not None",
+        "not (item.name is not None)",
+        "item.description is not None",
+        "not (item.description is not None)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "delete_item",
+      "file": "app/services/item_service.py",
+      "behavior": "Execute delete_item",
+      "dependencies": [
+        "commit",
+        "delete",
+        "filter",
+        "first",
+        "query"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "not db_item",
+        "not (not db_item)"
+      ],
+      "security_findings": []
+    }
+  ],
+  "ambiguities": [],
+  "analyzed_files": [
+    {
+      "path": "app/__init__.py",
+      "purpose": "Python module",
+      "key_symbols": []
+    },
+    {
+      "path": "app/database.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "get_db"
+      ]
+    },
+    {
+      "path": "app/models.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "Item"
+      ]
+    },
+    {
+      "path": "app/repositories/item_repository.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "get_item",
+        "get_items",
+        "create_item",
+        "update_item",
+        "delete_item"
+      ]
+    },
+    {
+      "path": "app/routers/__init__.py",
+      "purpose": "Python module",
+      "key_symbols": []
+    },
+    {
+      "path": "app/routers/items.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "create_item",
+        "read_items",
+        "read_item",
+        "update_item",
+        "delete_item"
+      ]
+    },
+    {
+      "path": "app/schemas.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "ItemCreate",
+        "ItemUpdate",
+        "ItemOut"
+      ]
+    },
+    {
+      "path": "app/services/item_service.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "create_item",
+        "get_items",
+        "get_item",
+        "update_item",
+        "delete_item"
+      ]
+    },
+    {
+      "path": "main.py",
+      "purpose": "Python module",
+      "key_symbols": []
+    }
+  ]
+}

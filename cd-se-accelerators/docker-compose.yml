@@ -1,0 +1,73 @@
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db_data:
+  backend_uploads:
+  backend_generated_tests:
+
+services:
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=testcase_generator
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secretpassword
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d testcase_generator"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - app/.env
+    environment:
+      - DATABASE_URL=postgresql://postgres:secretpassword@db:5432/testcase_generator
+    command: >
+      sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    restart: always
+    networks:
+      - app-network
+    volumes:
+      - backend_uploads:/workspace/app/uploads
+      - backend_generated_tests:/workspace/generated_tests
+      - ./scratch:/workspace/scratch
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        - VITE_API_BASE_URL=http://localhost:8000
+    ports:
+      - "3000:80"
+    restart: always
+    networks:
+      - app-network
+    depends_on:
+      backend:
+        condition: service_healthy
+

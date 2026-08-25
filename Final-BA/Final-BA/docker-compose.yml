@@ -1,0 +1,215 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/docker/Dockerfile
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    env_file:
+      - path: ./backend/.env
+        required: false
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@postgres:5432/cd_se_accelerators}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      QDRANT_HOST: ${QDRANT_HOST:-qdrant}
+      QDRANT_PORT: ${QDRANT_PORT:-6333}
+      QDRANT_GRPC_PORT: ${QDRANT_GRPC_PORT:-6334}
+      RUN_DB_INIT: ${RUN_DB_INIT:-true}
+    depends_on:
+      - postgres
+      - redis
+      - qdrant
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-cd_se_accelerators}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_MULTIPLE_DATABASES: testcase_generator,testcase_generation_db,test_case_accelerator
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-multiple-databases.sh:/docker-entrypoint-initdb.d/init-multiple-databases.sh
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d cd_se_accelerators"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:v1.13.2
+    ports:
+      - "${QDRANT_HTTP_PORT:-6333}:6333"
+      - "${QDRANT_GRPC_PORT:-6334}:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+
+  unittest-backend:
+    build:
+      context: ../../cd-se-accelerators
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8001:8000"
+    env_file:
+      - path: ../../cd-se-accelerators/app/.env
+        required: false
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/testcase_generator
+    command: >
+      sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    restart: always
+    volumes:
+      - unittest_backend_uploads:/workspace/app/uploads
+      - unittest_backend_generated_tests:/workspace/generated_tests
+      - ../../cd-se-accelerators/scratch:/workspace/scratch
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  unittest-frontend:
+    build:
+      context: ../../cd-se-accelerators
+      dockerfile: Dockerfile.frontend
+      args:
+        - VITE_API_BASE_URL=/unit-test-cases/api
+    ports:
+      - "3001:80"
+    restart: always
+    depends_on:
+      unittest-backend:
+        condition: service_healthy
+
+  testcase-backend:
+    build:
+      context: ../../Test-Case-Generation
+      dockerfile: backend/Dockerfile
+    container_name: testcase-backend
+    env_file:
+      - path: ../../Test-Case-Generation/backend/.env
+        required: false
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/testcase_generation_db
+      REDIS_URL: redis://redis:6379/0
+    volumes:
+      - testcase_backend_storage:/app/backend/storage
+      - testcase_backend_artifacts:/app/backend/artifacts
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  testcase-frontend:
+    build:
+      context: ../../Test-Case-Generation/frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_BASE_URL=/application-testing
+        - NEXT_PUBLIC_TESTCASE_API_BASE_URL=/application-testing
+    container_name: testcase-frontend
+    depends_on:
+      - testcase-backend
+    restart: unless-stopped
+
+  testcase-accelerator-backend:
+    build:
+      context: ../../test-case-accelerator/backend
+      dockerfile: Dockerfile
+    container_name: testcase-accelerator-backend
+    entrypoint: []
+    command: >
+      sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    env_file:
+      - path: ../../test-case-accelerator/.env
+        required: false
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/test_case_accelerator
+      REDIS_URL: redis://redis:6379/0
+      RUN_DATABASE_MIGRATIONS: "true"
+    volumes:
+      - testcase_accelerator_project_storage:/app/storage/projects
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  testcase-accelerator-frontend:
+    build:
+      context: ../../test-case-accelerator/frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: /backend-unit-testcase-generator/api
+    container_name: testcase-accelerator-frontend
+    depends_on:
+      - testcase-accelerator-backend
+    restart: unless-stopped
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: main-nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - frontend
+      - backend
+      - unittest-frontend
+      - unittest-backend
+      - testcase-frontend
+      - testcase-backend
+      - testcase-accelerator-frontend
+      - testcase-accelerator-backend
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  qdrant_data:
+  unittest_backend_uploads:
+  unittest_backend_generated_tests:
+  testcase_backend_storage:
+  testcase_backend_artifacts:
+  testcase_accelerator_project_storage:

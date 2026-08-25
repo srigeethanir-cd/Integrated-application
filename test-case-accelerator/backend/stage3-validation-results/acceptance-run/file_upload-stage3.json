@@ -1,0 +1,1784 @@
+{
+  "project_summary": "Python project with 7 modules, 9 callables, 5 classes, and 3 API endpoints.",
+  "architecture": "FastAPI application with deterministic Python static analysis.",
+  "modules": [
+    {
+      "name": "database",
+      "file": "database.py",
+      "imports": [
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "main",
+      "file": "main.py",
+      "imports": [
+        "database",
+        "fastapi",
+        "routers.files"
+      ]
+    },
+    {
+      "name": "models",
+      "file": "models.py",
+      "imports": [
+        "database",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "routers.files",
+      "file": "routers/files.py",
+      "imports": [
+        "database",
+        "fastapi",
+        "fastapi.responses",
+        "models",
+        "schemas",
+        "services.files",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "schemas",
+      "file": "schemas.py",
+      "imports": [
+        "pydantic"
+      ]
+    },
+    {
+      "name": "services.files",
+      "file": "services/files.py",
+      "imports": [
+        "collections.abc",
+        "fastapi",
+        "models",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "tests.test_api",
+      "file": "tests/test_api.py",
+      "imports": [
+        "fastapi.testclient",
+        "main"
+      ]
+    }
+  ],
+  "imports": [
+    {
+      "module": "sqlalchemy",
+      "file": "database.py",
+      "names": [
+        "create_engine"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "database.py",
+      "names": [
+        "DeclarativeBase",
+        "sessionmaker"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "main.py",
+      "names": [
+        "Base",
+        "engine"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi",
+      "file": "main.py",
+      "names": [
+        "FastAPI"
+      ],
+      "level": 0
+    },
+    {
+      "module": "routers.files",
+      "file": "main.py",
+      "names": [
+        "router"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "models.py",
+      "names": [
+        "Base"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy",
+      "file": "models.py",
+      "names": [
+        "LargeBinary",
+        "String"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "models.py",
+      "names": [
+        "Mapped",
+        "mapped_column"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "routers/files.py",
+      "names": [
+        "get_db"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi",
+      "file": "routers/files.py",
+      "names": [
+        "APIRouter",
+        "Depends",
+        "File",
+        "Form",
+        "HTTPException",
+        "UploadFile"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi.responses",
+      "file": "routers/files.py",
+      "names": [
+        "StreamingResponse"
+      ],
+      "level": 0
+    },
+    {
+      "module": "models",
+      "file": "routers/files.py",
+      "names": [
+        "StoredFile"
+      ],
+      "level": 0
+    },
+    {
+      "module": "schemas",
+      "file": "routers/files.py",
+      "names": [
+        "FileMetadata"
+      ],
+      "level": 0
+    },
+    {
+      "module": "services.files",
+      "file": "routers/files.py",
+      "names": [
+        "FileTooLargeError",
+        "InvalidMimeTypeError",
+        "store_file",
+        "stream_content"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "routers/files.py",
+      "names": [
+        "Session"
+      ],
+      "level": 0
+    },
+    {
+      "module": "pydantic",
+      "file": "schemas.py",
+      "names": [
+        "BaseModel",
+        "ConfigDict",
+        "Field"
+      ],
+      "level": 0
+    },
+    {
+      "module": "collections.abc",
+      "file": "services/files.py",
+      "names": [
+        "AsyncIterator"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi",
+      "file": "services/files.py",
+      "names": [
+        "UploadFile"
+      ],
+      "level": 0
+    },
+    {
+      "module": "models",
+      "file": "services/files.py",
+      "names": [
+        "StoredFile"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "services/files.py",
+      "names": [
+        "Session"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi.testclient",
+      "file": "tests/test_api.py",
+      "names": [
+        "TestClient"
+      ],
+      "level": 0
+    },
+    {
+      "module": "main",
+      "file": "tests/test_api.py",
+      "names": [
+        "app"
+      ],
+      "level": 0
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_db",
+      "qualified_name": "database.get_db",
+      "file": "database.py",
+      "line": 7,
+      "end_line": 12,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "SessionLocal",
+        "db.close"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "SessionLocal()",
+        "db.close",
+        "yield db"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "delete",
+      "qualified_name": "routers.files.delete",
+      "file": "routers/files.py",
+      "line": 26,
+      "end_line": 30,
+      "is_async": false,
+      "parameters": [
+        "file_id",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.delete('/{file_id}', status_code=204)"
+      ],
+      "calls": [
+        "db.commit",
+        "db.delete",
+        "db.get",
+        "fastapi.HTTPException"
+      ],
+      "exceptions": [
+        "HTTPException"
+      ],
+      "sqlalchemy_model_usage": [
+        "StoredFile",
+        "db.commit",
+        "db.delete",
+        "db.get"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "download",
+      "qualified_name": "routers.files.download",
+      "file": "routers/files.py",
+      "line": 20,
+      "end_line": 24,
+      "is_async": false,
+      "parameters": [
+        "file_id",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.get('/{file_id}')"
+      ],
+      "calls": [
+        "db.get",
+        "fastapi.HTTPException",
+        "fastapi.responses.StreamingResponse",
+        "services.files.stream_content"
+      ],
+      "exceptions": [
+        "HTTPException"
+      ],
+      "sqlalchemy_model_usage": [
+        "StoredFile",
+        "db.get"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "upload",
+      "qualified_name": "routers.files.upload",
+      "file": "routers/files.py",
+      "line": 10,
+      "end_line": 18,
+      "is_async": true,
+      "parameters": [
+        "file",
+        "label",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.post('/', response_model=FileMetadata, status_code=201)"
+      ],
+      "calls": [
+        "fastapi.HTTPException",
+        "services.files.store_file",
+        "str"
+      ],
+      "exceptions": [
+        "HTTPException"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "read_chunks",
+      "qualified_name": "services.files.read_chunks",
+      "file": "services/files.py",
+      "line": 14,
+      "end_line": 22,
+      "is_async": true,
+      "parameters": [
+        "upload"
+      ],
+      "return_type": "bytes",
+      "decorators": [],
+      "calls": [
+        "b''.join",
+        "chunks.append",
+        "len",
+        "services.files.FileTooLargeError",
+        "upload.read"
+      ],
+      "exceptions": [
+        "FileTooLargeError"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "store_file",
+      "qualified_name": "services.files.store_file",
+      "file": "services/files.py",
+      "line": 24,
+      "end_line": 32,
+      "is_async": true,
+      "parameters": [
+        "db",
+        "upload",
+        "label"
+      ],
+      "return_type": "StoredFile",
+      "decorators": [],
+      "calls": [
+        "ValueError",
+        "db.add",
+        "db.commit",
+        "db.refresh",
+        "len",
+        "models.StoredFile",
+        "services.files.InvalidMimeTypeError",
+        "services.files.read_chunks"
+      ],
+      "exceptions": [
+        "InvalidMimeTypeError",
+        "ValueError"
+      ],
+      "sqlalchemy_model_usage": [
+        "db.add",
+        "db.commit",
+        "db.refresh"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "stream_content",
+      "qualified_name": "services.files.stream_content",
+      "file": "services/files.py",
+      "line": 34,
+      "end_line": 36,
+      "is_async": true,
+      "parameters": [
+        "stored"
+      ],
+      "return_type": "AsyncIterator[bytes]",
+      "decorators": [],
+      "calls": [
+        "len",
+        "range"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "test_mime_validation",
+      "qualified_name": "tests.test_api.test_mime_validation",
+      "file": "tests/test_api.py",
+      "line": 8,
+      "end_line": 10,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "client.post"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "test_upload_and_download",
+      "qualified_name": "tests.test_api.test_upload_and_download",
+      "file": "tests/test_api.py",
+      "line": 4,
+      "end_line": 7,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "client.get",
+        "client.post",
+        "response.json"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "classes": [
+    {
+      "name": "Base",
+      "qualified_name": "database.Base",
+      "file": "database.py",
+      "line": 5,
+      "end_line": 6,
+      "fields": [],
+      "bases": [
+        "DeclarativeBase"
+      ],
+      "inheritance": [
+        "DeclarativeBase"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "DeclarativeBase"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "StoredFile",
+      "qualified_name": "models.StoredFile",
+      "file": "models.py",
+      "line": 4,
+      "end_line": 11,
+      "fields": [
+        "__tablename__",
+        "id",
+        "filename",
+        "content_type",
+        "label",
+        "size",
+        "content"
+      ],
+      "bases": [
+        "Base"
+      ],
+      "inheritance": [
+        "Base"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "mapped_column"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "FileMetadata",
+      "qualified_name": "schemas.FileMetadata",
+      "file": "schemas.py",
+      "line": 2,
+      "end_line": 8,
+      "fields": [
+        "model_config",
+        "id",
+        "filename",
+        "content_type",
+        "label",
+        "size"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "FileTooLargeError",
+      "qualified_name": "services.files.FileTooLargeError",
+      "file": "services/files.py",
+      "line": 11,
+      "end_line": 12,
+      "fields": [],
+      "bases": [
+        "Exception"
+      ],
+      "inheritance": [
+        "Exception"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "InvalidMimeTypeError",
+      "qualified_name": "services.files.InvalidMimeTypeError",
+      "file": "services/files.py",
+      "line": 9,
+      "end_line": 10,
+      "fields": [],
+      "bases": [
+        "Exception"
+      ],
+      "inheritance": [
+        "Exception"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "symbol_table": [
+    {
+      "name": "Base",
+      "qualified_name": "database.Base",
+      "kind": "class",
+      "file": "database.py",
+      "line": 5,
+      "end_line": 6,
+      "parent": null
+    },
+    {
+      "name": "get_db",
+      "qualified_name": "database.get_db",
+      "kind": "function",
+      "file": "database.py",
+      "line": 7,
+      "end_line": 12,
+      "parent": null
+    },
+    {
+      "name": "StoredFile",
+      "qualified_name": "models.StoredFile",
+      "kind": "class",
+      "file": "models.py",
+      "line": 4,
+      "end_line": 11,
+      "parent": null
+    },
+    {
+      "name": "delete",
+      "qualified_name": "routers.files.delete",
+      "kind": "function",
+      "file": "routers/files.py",
+      "line": 26,
+      "end_line": 30,
+      "parent": null
+    },
+    {
+      "name": "download",
+      "qualified_name": "routers.files.download",
+      "kind": "function",
+      "file": "routers/files.py",
+      "line": 20,
+      "end_line": 24,
+      "parent": null
+    },
+    {
+      "name": "upload",
+      "qualified_name": "routers.files.upload",
+      "kind": "function",
+      "file": "routers/files.py",
+      "line": 10,
+      "end_line": 18,
+      "parent": null
+    },
+    {
+      "name": "FileMetadata",
+      "qualified_name": "schemas.FileMetadata",
+      "kind": "class",
+      "file": "schemas.py",
+      "line": 2,
+      "end_line": 8,
+      "parent": null
+    },
+    {
+      "name": "FileTooLargeError",
+      "qualified_name": "services.files.FileTooLargeError",
+      "kind": "class",
+      "file": "services/files.py",
+      "line": 11,
+      "end_line": 12,
+      "parent": null
+    },
+    {
+      "name": "InvalidMimeTypeError",
+      "qualified_name": "services.files.InvalidMimeTypeError",
+      "kind": "class",
+      "file": "services/files.py",
+      "line": 9,
+      "end_line": 10,
+      "parent": null
+    },
+    {
+      "name": "read_chunks",
+      "qualified_name": "services.files.read_chunks",
+      "kind": "function",
+      "file": "services/files.py",
+      "line": 14,
+      "end_line": 22,
+      "parent": null
+    },
+    {
+      "name": "store_file",
+      "qualified_name": "services.files.store_file",
+      "kind": "function",
+      "file": "services/files.py",
+      "line": 24,
+      "end_line": 32,
+      "parent": null
+    },
+    {
+      "name": "stream_content",
+      "qualified_name": "services.files.stream_content",
+      "kind": "function",
+      "file": "services/files.py",
+      "line": 34,
+      "end_line": 36,
+      "parent": null
+    },
+    {
+      "name": "test_mime_validation",
+      "qualified_name": "tests.test_api.test_mime_validation",
+      "kind": "function",
+      "file": "tests/test_api.py",
+      "line": 8,
+      "end_line": 10,
+      "parent": null
+    },
+    {
+      "name": "test_upload_and_download",
+      "qualified_name": "tests.test_api.test_upload_and_download",
+      "kind": "function",
+      "file": "tests/test_api.py",
+      "line": 4,
+      "end_line": 7,
+      "parent": null
+    }
+  ],
+  "call_graph": [
+    {
+      "caller": "database",
+      "callee": "sqlalchemy.create_engine",
+      "file": "database.py",
+      "line": 3
+    },
+    {
+      "caller": "database",
+      "callee": "sqlalchemy.orm.sessionmaker",
+      "file": "database.py",
+      "line": 4
+    },
+    {
+      "caller": "database.get_db",
+      "callee": "SessionLocal",
+      "file": "database.py",
+      "line": 8
+    },
+    {
+      "caller": "database.get_db",
+      "callee": "db.close",
+      "file": "database.py",
+      "line": 12
+    },
+    {
+      "caller": "main",
+      "callee": "database.Base.metadata.create_all",
+      "file": "main.py",
+      "line": 4
+    },
+    {
+      "caller": "main",
+      "callee": "fastapi.FastAPI",
+      "file": "main.py",
+      "line": 5
+    },
+    {
+      "caller": "main",
+      "callee": "app.include_router",
+      "file": "main.py",
+      "line": 6
+    },
+    {
+      "caller": "routers.files",
+      "callee": "fastapi.APIRouter",
+      "file": "routers/files.py",
+      "line": 8
+    },
+    {
+      "caller": "routers.files.delete",
+      "callee": "db.get",
+      "file": "routers/files.py",
+      "line": 27
+    },
+    {
+      "caller": "routers.files.delete",
+      "callee": "fastapi.HTTPException",
+      "file": "routers/files.py",
+      "line": 29
+    },
+    {
+      "caller": "routers.files.delete",
+      "callee": "db.commit",
+      "file": "routers/files.py",
+      "line": 30
+    },
+    {
+      "caller": "routers.files.delete",
+      "callee": "db.delete",
+      "file": "routers/files.py",
+      "line": 30
+    },
+    {
+      "caller": "routers.files.download",
+      "callee": "db.get",
+      "file": "routers/files.py",
+      "line": 21
+    },
+    {
+      "caller": "routers.files.download",
+      "callee": "fastapi.HTTPException",
+      "file": "routers/files.py",
+      "line": 23
+    },
+    {
+      "caller": "routers.files.download",
+      "callee": "fastapi.responses.StreamingResponse",
+      "file": "routers/files.py",
+      "line": 24
+    },
+    {
+      "caller": "routers.files.download",
+      "callee": "services.files.stream_content",
+      "file": "routers/files.py",
+      "line": 24
+    },
+    {
+      "caller": "routers.files.upload",
+      "callee": "services.files.store_file",
+      "file": "routers/files.py",
+      "line": 12
+    },
+    {
+      "caller": "routers.files.upload",
+      "callee": "fastapi.HTTPException",
+      "file": "routers/files.py",
+      "line": 14
+    },
+    {
+      "caller": "routers.files.upload",
+      "callee": "str",
+      "file": "routers/files.py",
+      "line": 14
+    },
+    {
+      "caller": "routers.files.upload",
+      "callee": "fastapi.HTTPException",
+      "file": "routers/files.py",
+      "line": 16
+    },
+    {
+      "caller": "routers.files.upload",
+      "callee": "str",
+      "file": "routers/files.py",
+      "line": 16
+    },
+    {
+      "caller": "routers.files.upload",
+      "callee": "fastapi.HTTPException",
+      "file": "routers/files.py",
+      "line": 18
+    },
+    {
+      "caller": "routers.files.upload",
+      "callee": "str",
+      "file": "routers/files.py",
+      "line": 18
+    },
+    {
+      "caller": "services.files.read_chunks",
+      "callee": "upload.read",
+      "file": "services/files.py",
+      "line": 17
+    },
+    {
+      "caller": "services.files.read_chunks",
+      "callee": "len",
+      "file": "services/files.py",
+      "line": 18
+    },
+    {
+      "caller": "services.files.read_chunks",
+      "callee": "services.files.FileTooLargeError",
+      "file": "services/files.py",
+      "line": 20
+    },
+    {
+      "caller": "services.files.read_chunks",
+      "callee": "chunks.append",
+      "file": "services/files.py",
+      "line": 21
+    },
+    {
+      "caller": "services.files.read_chunks",
+      "callee": "b''.join",
+      "file": "services/files.py",
+      "line": 22
+    },
+    {
+      "caller": "services.files.store_file",
+      "callee": "services.files.InvalidMimeTypeError",
+      "file": "services/files.py",
+      "line": 26
+    },
+    {
+      "caller": "services.files.store_file",
+      "callee": "services.files.read_chunks",
+      "file": "services/files.py",
+      "line": 27
+    },
+    {
+      "caller": "services.files.store_file",
+      "callee": "ValueError",
+      "file": "services/files.py",
+      "line": 29
+    },
+    {
+      "caller": "services.files.store_file",
+      "callee": "len",
+      "file": "services/files.py",
+      "line": 30
+    },
+    {
+      "caller": "services.files.store_file",
+      "callee": "models.StoredFile",
+      "file": "services/files.py",
+      "line": 30
+    },
+    {
+      "caller": "services.files.store_file",
+      "callee": "db.add",
+      "file": "services/files.py",
+      "line": 31
+    },
+    {
+      "caller": "services.files.store_file",
+      "callee": "db.commit",
+      "file": "services/files.py",
+      "line": 31
+    },
+    {
+      "caller": "services.files.store_file",
+      "callee": "db.refresh",
+      "file": "services/files.py",
+      "line": 31
+    },
+    {
+      "caller": "services.files.stream_content",
+      "callee": "len",
+      "file": "services/files.py",
+      "line": 35
+    },
+    {
+      "caller": "services.files.stream_content",
+      "callee": "range",
+      "file": "services/files.py",
+      "line": 35
+    },
+    {
+      "caller": "tests.test_api",
+      "callee": "fastapi.testclient.TestClient",
+      "file": "tests/test_api.py",
+      "line": 3
+    },
+    {
+      "caller": "tests.test_api.test_mime_validation",
+      "callee": "client.post",
+      "file": "tests/test_api.py",
+      "line": 9
+    },
+    {
+      "caller": "tests.test_api.test_upload_and_download",
+      "callee": "client.post",
+      "file": "tests/test_api.py",
+      "line": 5
+    },
+    {
+      "caller": "tests.test_api.test_upload_and_download",
+      "callee": "client.get",
+      "file": "tests/test_api.py",
+      "line": 7
+    },
+    {
+      "caller": "tests.test_api.test_upload_and_download",
+      "callee": "response.json",
+      "file": "tests/test_api.py",
+      "line": 7
+    }
+  ],
+  "sqlalchemy_session_factories": [
+    {
+      "name": "SessionLocal",
+      "file": "database.py",
+      "factory": "sessionmaker",
+      "bind": "engine"
+    }
+  ],
+  "security_findings": [],
+  "components": [
+    {
+      "name": "database",
+      "responsibility": "Python module",
+      "files": [
+        "database.py"
+      ],
+      "dependencies": [
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "main",
+      "responsibility": "Application entrypoint",
+      "files": [
+        "main.py"
+      ],
+      "dependencies": [
+        "database",
+        "fastapi",
+        "routers.files"
+      ]
+    },
+    {
+      "name": "models",
+      "responsibility": "Python module",
+      "files": [
+        "models.py"
+      ],
+      "dependencies": [
+        "database",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "routers.files",
+      "responsibility": "Python module",
+      "files": [
+        "routers/files.py"
+      ],
+      "dependencies": [
+        "database",
+        "fastapi",
+        "fastapi.responses",
+        "models",
+        "schemas",
+        "services.files",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "schemas",
+      "responsibility": "Python module",
+      "files": [
+        "schemas.py"
+      ],
+      "dependencies": [
+        "pydantic"
+      ]
+    },
+    {
+      "name": "services.files",
+      "responsibility": "Python module",
+      "files": [
+        "services/files.py"
+      ],
+      "dependencies": [
+        "collections.abc",
+        "fastapi",
+        "models",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "tests.test_api",
+      "responsibility": "Python module",
+      "files": [
+        "tests/test_api.py"
+      ],
+      "dependencies": [
+        "fastapi.testclient",
+        "main"
+      ]
+    }
+  ],
+  "entrypoints": [
+    {
+      "path": "main.py",
+      "symbol": null,
+      "purpose": "Application entrypoint"
+    },
+    {
+      "path": "routers/files.py",
+      "symbol": "upload",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "routers/files.py",
+      "symbol": "delete",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "routers/files.py",
+      "symbol": "download",
+      "purpose": "API endpoint"
+    }
+  ],
+  "api_endpoints": [
+    {
+      "method": "POST",
+      "route": "/api/files/",
+      "handler": "upload",
+      "file": "routers/files.py",
+      "request_type": null,
+      "response_type": "FileMetadata",
+      "request_model": null,
+      "response_model": "FileMetadata",
+      "dependencies": [
+        "get_db"
+      ],
+      "success_status_codes": [
+        201
+      ],
+      "error_status_codes": [
+        413,
+        415,
+        422
+      ],
+      "exception_status_mappings": [
+        {
+          "exception": "HTTPException",
+          "status_code": 413
+        },
+        {
+          "exception": "HTTPException",
+          "status_code": 415
+        },
+        {
+          "exception": "HTTPException",
+          "status_code": 422
+        }
+      ],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "DELETE",
+      "route": "/api/files/{file_id}",
+      "handler": "delete",
+      "file": "routers/files.py",
+      "request_type": null,
+      "response_type": null,
+      "request_model": null,
+      "response_model": null,
+      "dependencies": [
+        "get_db"
+      ],
+      "success_status_codes": [
+        204
+      ],
+      "error_status_codes": [
+        404
+      ],
+      "exception_status_mappings": [
+        {
+          "exception": "HTTPException",
+          "status_code": 404
+        }
+      ],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "GET",
+      "route": "/api/files/{file_id}",
+      "handler": "download",
+      "file": "routers/files.py",
+      "request_type": null,
+      "response_type": null,
+      "request_model": null,
+      "response_model": null,
+      "dependencies": [
+        "get_db"
+      ],
+      "success_status_codes": [
+        200
+      ],
+      "error_status_codes": [
+        404
+      ],
+      "exception_status_mappings": [
+        {
+          "exception": "HTTPException",
+          "status_code": 404
+        }
+      ],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    }
+  ],
+  "data_models": [
+    {
+      "name": "Base",
+      "file": "database.py",
+      "fields": [],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "DeclarativeBase"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "StoredFile",
+      "file": "models.py",
+      "fields": [
+        "__tablename__",
+        "id",
+        "filename",
+        "content_type",
+        "label",
+        "size",
+        "content"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "foreign_keys": [],
+          "nullable": false,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "filename",
+          "type": "String(255)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "content_type",
+          "type": "String(100)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "label",
+          "type": "String(80)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "size",
+          "type": "int",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "content",
+          "type": "LargeBinary",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        }
+      ],
+      "primary_keys": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "mapped_column"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "FileMetadata",
+      "file": "schemas.py",
+      "fields": [
+        "model_config",
+        "id",
+        "filename",
+        "content_type",
+        "label",
+        "size"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "InvalidMimeTypeError",
+      "file": "services/files.py",
+      "fields": [],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "FileTooLargeError",
+      "file": "services/files.py",
+      "fields": [],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "pydantic_schemas": [
+    {
+      "name": "FileMetadata",
+      "file": "schemas.py",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "filename",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "content_type",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "label",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "size",
+          "type": "int",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": 1,
+          "le": 1048576,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    }
+  ],
+  "business_rules": [
+    {
+      "description": "Condition: stored is None",
+      "files": [
+        "routers/files.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: stored is None",
+      "files": [
+        "routers/files.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: upload.content_type not in ALLOWED_TYPES",
+      "files": [
+        "services/files.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: not content",
+      "files": [
+        "services/files.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: size > MAX_SIZE",
+      "files": [
+        "services/files.py"
+      ],
+      "symbols": []
+    }
+  ],
+  "execution_flows": [
+    {
+      "name": "POST /api/files/",
+      "entrypoint": "upload",
+      "steps": [
+        "Invoke upload",
+        "Call services.files.store_file",
+        "Call fastapi.HTTPException",
+        "Call str",
+        "Call fastapi.HTTPException",
+        "Call str",
+        "Call fastapi.HTTPException",
+        "Call str"
+      ],
+      "components": [],
+      "files": [
+        "routers/files.py"
+      ]
+    },
+    {
+      "name": "DELETE /api/files/{file_id}",
+      "entrypoint": "delete",
+      "steps": [
+        "Invoke delete",
+        "Call db.get",
+        "Call fastapi.HTTPException",
+        "Call db.delete",
+        "Call db.commit"
+      ],
+      "components": [],
+      "files": [
+        "routers/files.py"
+      ]
+    },
+    {
+      "name": "GET /api/files/{file_id}",
+      "entrypoint": "download",
+      "steps": [
+        "Invoke download",
+        "Call db.get",
+        "Call fastapi.HTTPException",
+        "Call fastapi.responses.StreamingResponse",
+        "Call services.files.stream_content"
+      ],
+      "components": [],
+      "files": [
+        "routers/files.py"
+      ]
+    }
+  ],
+  "external_dependencies": [
+    "collections",
+    "database",
+    "fastapi",
+    "main",
+    "models",
+    "pydantic",
+    "routers",
+    "schemas",
+    "services",
+    "sqlalchemy"
+  ],
+  "test_targets": [
+    {
+      "symbol": "get_db",
+      "file": "database.py",
+      "behavior": "Execute get_db",
+      "dependencies": [
+        "SessionLocal",
+        "close"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "upload",
+      "file": "routers/files.py",
+      "behavior": "Execute upload",
+      "dependencies": [
+        "HTTPException",
+        "store_file",
+        "str"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "download",
+      "file": "routers/files.py",
+      "behavior": "Execute download",
+      "dependencies": [
+        "HTTPException",
+        "StreamingResponse",
+        "get",
+        "stream_content"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "stored is None",
+        "not (stored is None)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "delete",
+      "file": "routers/files.py",
+      "behavior": "Execute delete",
+      "dependencies": [
+        "HTTPException",
+        "commit",
+        "delete",
+        "get"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "stored is None",
+        "not (stored is None)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "read_chunks",
+      "file": "services/files.py",
+      "behavior": "Execute read_chunks",
+      "dependencies": [
+        "FileTooLargeError",
+        "append",
+        "join",
+        "len",
+        "read"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "size > MAX_SIZE",
+        "not (size > MAX_SIZE)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "store_file",
+      "file": "services/files.py",
+      "behavior": "Execute store_file",
+      "dependencies": [
+        "InvalidMimeTypeError",
+        "StoredFile",
+        "ValueError",
+        "add",
+        "commit",
+        "len",
+        "read_chunks",
+        "refresh"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "upload.content_type not in ALLOWED_TYPES",
+        "not (upload.content_type not in ALLOWED_TYPES)",
+        "not content",
+        "not (not content)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "stream_content",
+      "file": "services/files.py",
+      "behavior": "Execute stream_content",
+      "dependencies": [
+        "len",
+        "range"
+      ],
+      "edge_cases": [
+        "missing key access may raise KeyError: stored.content[offset:offset + 64 * 1024]"
+      ],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "test_upload_and_download",
+      "file": "tests/test_api.py",
+      "behavior": "Execute test_upload_and_download",
+      "dependencies": [
+        "get",
+        "json",
+        "post"
+      ],
+      "edge_cases": [
+        "missing key access may raise KeyError: response.json()['id']"
+      ],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "test_mime_validation",
+      "file": "tests/test_api.py",
+      "behavior": "Execute test_mime_validation",
+      "dependencies": [
+        "post"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    }
+  ],
+  "ambiguities": [],
+  "analyzed_files": [
+    {
+      "path": "database.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "Base",
+        "get_db"
+      ]
+    },
+    {
+      "path": "main.py",
+      "purpose": "Python module",
+      "key_symbols": []
+    },
+    {
+      "path": "models.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "StoredFile"
+      ]
+    },
+    {
+      "path": "routers/files.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "upload",
+        "download",
+        "delete"
+      ]
+    },
+    {
+      "path": "schemas.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "FileMetadata"
+      ]
+    },
+    {
+      "path": "services/files.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "InvalidMimeTypeError",
+        "FileTooLargeError",
+        "read_chunks",
+        "store_file",
+        "stream_content"
+      ]
+    },
+    {
+      "path": "tests/test_api.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "test_upload_and_download",
+        "test_mime_validation"
+      ]
+    }
+  ]
+}

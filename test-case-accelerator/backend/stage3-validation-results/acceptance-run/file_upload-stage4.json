@@ -1,0 +1,2757 @@
+{
+  "generated_test_cases": [
+    {
+      "id": "TC-001",
+      "title": "Verify get_db returns a database session",
+      "description": "Ensure that calling get_db() provides a valid session object from the database context",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "1. Import the database module",
+        "2. Call get_db() and capture the result",
+        "3. Verify the result is an instance of a SQLAlchemy session"
+      ],
+      "expected_results": [
+        "1. Import succeeds",
+        "2. get_db() returns a session",
+        "3. The returned object is of type Session"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "database.py",
+          "main.py",
+          "models.py"
+        ],
+        "symbols": [
+          "upload",
+          "delete",
+          "download",
+          "get_db"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC001",
+      "title": "Upload file successfully",
+      "description": "Validate that uploading a valid file returns 201 and correct metadata.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Send POST request to /api/files/ with a well\u2011formed file payload.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 201.",
+        "Response body contains FileMetadata with correct filename, content_type, size, and label."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not content"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: size > MAX_SIZE"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "upload",
+          "delete",
+          "download",
+          "store_file",
+          "test_upload_and_download"
+        ],
+        "file": "routers/files.py",
+        "symbol": "upload",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "TC002",
+      "title": "Upload file too large",
+      "description": "Ensure server returns 413 when file exceeds allowed size.",
+      "category": "negative",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Send POST request to /api/files/ with a file larger than the maximum allowed size.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 413.",
+        "Error message indicates payload too large."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: size > MAX_SIZE"
+          },
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "upload",
+          "delete",
+          "download",
+          "store_file",
+          "test_upload_and_download"
+        ],
+        "file": "routers/files.py",
+        "symbol": "upload",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "TC003",
+      "title": "Delete non\u2011existent file",
+      "description": "Attempt to delete a file that does not exist, expecting 404.",
+      "category": "exception/integration",
+      "priority": "medium",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Send DELETE request to /api/files/9999 assuming file_id 9999 does not exist.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 404.",
+        "Error payload identifies missing file."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not content"
+          },
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "delete",
+          "download",
+          "upload",
+          "test_upload_and_download",
+          "store_file"
+        ],
+        "file": "routers/files.py",
+        "symbol": "delete",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "TC004",
+      "title": "Download existing file",
+      "description": "Retrieve a stored file and verify successful download with correct content.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Ensure a file with known file_id exists (upload if necessary).",
+        "Send GET request to /api/files/{file_id}.",
+        "Validate response content."
+      ],
+      "expected_results": [
+        "Response status code is 200.",
+        "Response body contains the exact file bytes and correct content_type."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          },
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "download",
+          "delete",
+          "upload",
+          "test_upload_and_download",
+          "store_file"
+        ],
+        "file": "routers/files.py",
+        "symbol": "download",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "TC005",
+      "title": "Download file with invalid ID format",
+      "description": "Check that providing a malformed file_id results in a 422 error.",
+      "category": "boundary",
+      "priority": "low",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Send GET request to /api/files/invalid-id-string.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 422.",
+        "Error indicates invalid path parameter."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "download",
+          "delete",
+          "upload",
+          "test_upload_and_download"
+        ],
+        "file": "routers/files.py",
+        "symbol": "download",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "TC006",
+      "title": "Download endpoint when stored is None - negative",
+      "description": "Verify that GET /api/files/{file_id} returns 404 when the file record does not exist and stored is None.",
+      "category": "negative",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Send a GET request to /api/files/999 where no record exists.",
+        "Observe the HTTP response."
+      ],
+      "expected_results": [
+        "Response status code is 404 Not Found."
+      ],
+      "requirement_ids": [
+        "download|negative|stored-is-none"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "download",
+          "delete",
+          "upload",
+          "test_upload_and_download"
+        ],
+        "file": "routers/files.py",
+        "symbol": "download",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "TC008",
+      "title": "Download endpoint when stored is not None - negative",
+      "description": "Check that GET /api/files/{file_id} returns 404 when the requested file does not exist despite stored condition.",
+      "category": "negative",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Send a GET request to /api/files/999 where no record exists.",
+        "Observe the HTTP response."
+      ],
+      "expected_results": [
+        "Response status code is 404 Not Found."
+      ],
+      "requirement_ids": [
+        "download|negative|not-stored-is-none"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "download",
+          "delete",
+          "upload",
+          "test_upload_and_download"
+        ],
+        "file": "routers/files.py",
+        "symbol": "download",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "TC-DELETE-POS-STORED-NONE-001",
+      "title": "Delete endpoint with non\u2011existent file returns 204",
+      "description": "Verify that deleting a file that is not stored (does not exist in the database) results in a 204 No Content response.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "No file with id 9999 exists in the database"
+      ],
+      "steps": [
+        "Send DELETE request to /api/files/9999",
+        "Receive response"
+      ],
+      "expected_results": [
+        "Response status code is 204 No Content"
+      ],
+      "requirement_ids": [
+        "delete|positive|stored-is-none"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not content"
+          },
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "database.py"
+        ],
+        "symbols": [
+          "delete",
+          "download",
+          "upload",
+          "store_file"
+        ],
+        "file": "routers/files.py",
+        "symbol": "delete",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata",
+        "coverage_requirements": [
+          "delete|positive|stored-is-none",
+          "delete|positive|not-stored-is-none",
+          "download|positive|stored-is-none",
+          "download|positive|not-stored-is-none"
+        ]
+      }
+    },
+    {
+      "id": "TC-DELETE-POS-NOT-STORED-NONE-002",
+      "title": "Delete endpoint with existing file returns 204",
+      "description": "Verify that deleting an existing stored file results in a 204 No Content response and the file is removed from the database.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "File with id 42 exists in the database"
+      ],
+      "steps": [
+        "Send DELETE request to /api/files/42",
+        "Receive response"
+      ],
+      "expected_results": [
+        "Response status code is 204 No Content",
+        "File with id 42 no longer exists in the database"
+      ],
+      "requirement_ids": [
+        "delete|positive|not-stored-is-none"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "database.py"
+        ],
+        "symbols": [
+          "delete",
+          "download",
+          "upload",
+          "store_file"
+        ],
+        "file": "routers/files.py",
+        "symbol": "delete",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "TC-DOWNLOAD-POS-STORED-NONE-003",
+      "title": "Download endpoint for non\u2011existent file returns 404",
+      "description": "Verify that attempting to download a file that is not stored (does not exist) results in a 404 Not Found response.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "No file with id 8888 exists in the database"
+      ],
+      "steps": [
+        "Send GET request to /api/files/8888",
+        "Receive response"
+      ],
+      "expected_results": [
+        "Response status code is 404 Not Found"
+      ],
+      "requirement_ids": [
+        "download|positive|stored-is-none"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "download",
+          "delete",
+          "upload",
+          "test_upload_and_download"
+        ],
+        "file": "routers/files.py",
+        "symbol": "download",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "TC-DOWNLOAD-POS-NOT-STORED-NONE-004",
+      "title": "Download endpoint for existing file returns 200",
+      "description": "Verify that downloading an existing stored file returns a 200 OK response with the correct file content.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "File with id 55 exists in the database and has content 'Hello World'"
+      ],
+      "steps": [
+        "Send GET request to /api/files/55",
+        "Receive response"
+      ],
+      "expected_results": [
+        "Response status code is 200 OK",
+        "Response body contains the file content 'Hello World'"
+      ],
+      "requirement_ids": [
+        "download|positive|not-stored-is-none"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "download",
+          "delete",
+          "upload",
+          "test_upload_and_download"
+        ],
+        "file": "routers/files.py",
+        "symbol": "download",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "B3-TC001",
+      "title": "Store file with allowed MIME type and within size limit",
+      "description": "Valid upload where content_type is permitted and file size is below MAX_SIZE.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Prepare an upload object with content_type set to an allowed type and size less than MAX_SIZE.",
+        "Call store_file with the prepared upload."
+      ],
+      "expected_results": [
+        "File is stored successfully without raising an error.",
+        "File is persisted and accessible."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: size > MAX_SIZE"
+          },
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "upload",
+          "delete",
+          "download",
+          "store_file",
+          "read_chunks",
+          "stream_content"
+        ],
+        "file": "services/files.py",
+        "symbol": "store_file",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "B3-TC002",
+      "title": "Reject file with disallowed MIME type",
+      "description": "Upload fails because content_type is not in ALLOWED_TYPES.",
+      "category": "negative",
+      "priority": "critical",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Prepare an upload object with content_type set to a type not listed in ALLOWED_TYPES.",
+        "Call store_file with the prepared upload."
+      ],
+      "expected_results": [
+        "InvalidMimeTypeError is raised.",
+        "No file is stored."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not content"
+          },
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "upload",
+          "delete",
+          "download",
+          "store_file",
+          "stream_content",
+          "read_chunks"
+        ],
+        "file": "services/files.py",
+        "symbol": "store_file",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "B3-TC003",
+      "title": "Reject file exceeding maximum size",
+      "description": "Upload fails because file size is greater than MAX_SIZE.",
+      "category": "boundary",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Prepare an upload object with size exactly MAX_SIZE + 1 byte.",
+        "Call store_file with the prepared upload."
+      ],
+      "expected_results": [
+        "FileTooLargeError is raised.",
+        "File is not stored."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: size > MAX_SIZE"
+          },
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "upload",
+          "delete",
+          "download",
+          "read_chunks",
+          "store_file",
+          "stream_content"
+        ],
+        "file": "services/files.py",
+        "symbol": "store_file",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "B3-TC004",
+      "title": "Handle missing content key during streaming",
+      "description": "Streaming function raises KeyError when stored.content lacks expected offset slice.",
+      "category": "exception/integration",
+      "priority": "medium",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Create a stored object with content missing the required slice at a given offset.",
+        "Invoke stream_content on the stored object."
+      ],
+      "expected_results": [
+        "KeyError is raised indicating missing key access.",
+        "Error is logged and streaming aborts gracefully."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [],
+        "business_rules": [
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          },
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          },
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "stream_content",
+          "store_file",
+          "test_upload_and_download",
+          "download"
+        ],
+        "file": "services/files.py",
+        "symbol": "stream_content"
+      }
+    },
+    {
+      "id": "B3-TC005",
+      "title": "Prevent path traversal injection in file name",
+      "description": "Security test ensuring file name cannot be used for directory traversal.",
+      "category": "security",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Prepare an upload with file name containing '../' sequences.",
+        "Call store_file with the malicious upload."
+      ],
+      "expected_results": [
+        "Upload is rejected or sanitized; no files are written outside the intended directory.",
+        "Appropriate security exception is raised."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          },
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "upload",
+          "delete",
+          "download",
+          "store_file",
+          "read_chunks",
+          "stream_content"
+        ],
+        "file": "services/files.py",
+        "symbol": "store_file",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "B4-TC001",
+      "title": "Validate MIME type acceptance - positive",
+      "description": "Ensure the API correctly accepts supported MIME types during file upload.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Send a POST request to the upload endpoint with a file having MIME type 'application/pdf'.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "The response status code is 201 Created and the file is stored successfully."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          },
+          {
+            "files": [
+              "routers/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "upload",
+          "delete",
+          "download",
+          "test_upload_and_download",
+          "test_mime_validation",
+          "store_file"
+        ],
+        "file": "routers/files.py",
+        "symbol": "upload",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "B4-TC002",
+      "title": "Validate MIME type rejection - negative",
+      "description": "Check that the API rejects unsupported MIME types.",
+      "category": "negative",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Send a POST request to the upload endpoint with a file having MIME type 'text/plain'.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "The response status code is 400 Bad Request with an error indicating unsupported MIME type."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "upload",
+          "delete",
+          "download",
+          "test_upload_and_download",
+          "test_mime_validation",
+          "store_file"
+        ],
+        "file": "routers/files.py",
+        "symbol": "upload",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "B4-TC003",
+      "title": "Missing 'id' key handling - exception/integration",
+      "description": "Verify that accessing a missing 'id' key in the JSON response raises a KeyError.",
+      "category": "exception/integration",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Perform a file upload request.",
+        "Parse the JSON response and attempt to access response.json()['id']."
+      ],
+      "expected_results": [
+        "A KeyError is raised indicating the 'id' key is missing."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "delete",
+          "download",
+          "upload",
+          "test_upload_and_download",
+          "stream_content"
+        ],
+        "file": "routers/files.py",
+        "symbol": "upload",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "B4-TC005",
+      "title": "Upload with missing required fields - boundary",
+      "description": "Test the API's handling of a request missing required payload fields.",
+      "category": "boundary",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Send a POST request to the upload endpoint without the 'file' field.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "The response status code is 400 Bad Request with a message about missing required fields."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/files/{file_id}",
+            "handler": "delete",
+            "file": "routers/files.py"
+          },
+          {
+            "method": "GET",
+            "route": "/api/files/{file_id}",
+            "handler": "download",
+            "file": "routers/files.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          },
+          {
+            "name": "DELETE /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke delete",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete"
+          },
+          {
+            "name": "GET /api/files/{file_id}",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke download",
+              "Call db.get",
+              "Call fastapi.HTTPException",
+              "Call fastapi.responses.StreamingResponse",
+              "Call services.files.stream_content"
+            ],
+            "components": [],
+            "entrypoint": "download"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "upload",
+          "delete",
+          "download",
+          "test_upload_and_download",
+          "test_mime_validation",
+          "store_file"
+        ],
+        "file": "routers/files.py",
+        "symbol": "upload",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    },
+    {
+      "id": "B4-TC006",
+      "title": "Upload endpoint security - security",
+      "description": "Ensure the upload endpoint validates authentication tokens.",
+      "category": "security",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Send a POST request to the upload endpoint without an Authorization header.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "The response status code is 401 Unauthorized."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/files/",
+            "handler": "upload",
+            "file": "routers/files.py",
+            "response_type": "FileMetadata"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/files.py"
+            ],
+            "symbols": [],
+            "description": "Condition: upload.content_type not in ALLOWED_TYPES"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/files/",
+            "files": [
+              "routers/files.py"
+            ],
+            "steps": [
+              "Invoke upload",
+              "Call services.files.store_file",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "upload"
+          }
+        ],
+        "source_files": [
+          "routers/files.py",
+          "services/files.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "upload",
+          "test_upload_and_download",
+          "test_mime_validation",
+          "store_file"
+        ],
+        "file": "routers/files.py",
+        "symbol": "upload",
+        "route": "/api/files/",
+        "method": "POST",
+        "response_model": "FileMetadata"
+      }
+    }
+  ],
+  "coverage_summary": {
+    "requirement_coverage": 100.0,
+    "category_coverage": 100.0,
+    "function_coverage": 100.0,
+    "branch_coverage": 83.33,
+    "target_coverage": 87.88,
+    "completeness": 95.24
+  },
+  "total_generated": 33,
+  "total_after_deduplication": 22,
+  "generation_status": "partial_coverage_incomplete",
+  "generation_reason": "all_providers_unavailable",
+  "uncovered_requirements": [
+    {
+      "symbol": "stream_content",
+      "requirement": "missing key access may raise KeyError: stored.content[offset:offset + 64 * 1024]",
+      "category": "positive",
+      "requirement_id": "stream_content|positive|missing-key-access-may-raise-keyerror-stored-content-offset-offset-64-1024"
+    },
+    {
+      "symbol": "stream_content",
+      "requirement": "missing key access may raise KeyError: stored.content[offset:offset + 64 * 1024]",
+      "category": "negative",
+      "requirement_id": "stream_content|negative|missing-key-access-may-raise-keyerror-stored-content-offset-offset-64-1024"
+    },
+    {
+      "symbol": "test_upload_and_download",
+      "requirement": "missing key access may raise KeyError: response.json()['id']",
+      "category": "positive",
+      "requirement_id": "test_upload_and_download|positive|missing-key-access-may-raise-keyerror-response-json-id"
+    },
+    {
+      "symbol": "test_upload_and_download",
+      "requirement": "missing key access may raise KeyError: response.json()['id']",
+      "category": "negative",
+      "requirement_id": "test_upload_and_download|negative|missing-key-access-may-raise-keyerror-response-json-id"
+    }
+  ]
+}

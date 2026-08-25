@@ -1,0 +1,50 @@
+rules:
+  - id: validation.python.sql-injection
+    languages: [python]
+    severity: ERROR
+    message: User-controlled SQL query passed to execute
+    metadata:
+      cwe: CWE-89
+      owasp: A03:2021
+      category: security
+    pattern: $DB.execute($QUERY)
+
+  - id: validation.python.hardcoded-secret
+    languages: [python]
+    severity: ERROR
+    message: Hardcoded API secret
+    metadata:
+      cwe: CWE-798
+      owasp: A07:2021
+      category: security
+    pattern: $KEY = "sk-validation-hardcoded-secret"
+
+  - id: validation.python.dangerous-subprocess
+    languages: [python]
+    severity: ERROR
+    message: Subprocess invocation uses shell=True
+    metadata:
+      cwe: CWE-78
+      owasp: A03:2021
+      category: security
+    pattern: subprocess.run(..., shell=True, ...)
+
+  - id: validation.python.eval
+    languages: [python]
+    severity: ERROR
+    message: Dynamic expression evaluation
+    metadata:
+      cwe: CWE-95
+      owasp: A03:2021
+      category: security
+    pattern: eval(...)
+
+  - id: validation.python.weak-cryptography
+    languages: [python]
+    severity: WARNING
+    message: MD5 is unsuitable for security-sensitive hashing
+    metadata:
+      cwe: CWE-327
+      owasp: A02:2021
+      category: security
+    pattern: hashlib.md5(...)

@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+app/uploads/
+temp/
+scratch/test_workspace/
+generated_tests/
+test_manifest.json
+node_modules/
+.DS_Store

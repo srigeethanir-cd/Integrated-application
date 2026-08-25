@@ -1,0 +1,2118 @@
+{
+  "generated_test_cases": [
+    {
+      "id": "TC_GETDB_001",
+      "title": "Retrieve database session",
+      "description": "Verify that calling get_db returns a valid SQLAlchemy session.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Call get_db"
+      ],
+      "expected_results": [
+        "Returns a SQLAlchemy Session instance"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "database.py",
+          "services/library.py"
+        ],
+        "symbols": [
+          "authors",
+          "books",
+          "list_books",
+          "get_db",
+          "add_book"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC_GETDB_002",
+      "title": "Session is committed after use",
+      "description": "Ensure that session commit behavior is correct after transaction.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Open session via get_db",
+        "Perform a write operation",
+        "Commit transaction"
+      ],
+      "expected_results": [
+        "Changes persisted in database"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "database.py",
+          "services/library.py"
+        ],
+        "symbols": [
+          "authors",
+          "books",
+          "list_books",
+          "get_db",
+          "add_book",
+          "create_author"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC_GETDB_003",
+      "title": "Session closed after exit",
+      "description": "Test that session is properly closed after context exit.",
+      "category": "boundary",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Open session via get_db",
+        "Exit context manager"
+      ],
+      "expected_results": [
+        "Session closed, no further operations allowed"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "database.py",
+          "services/library.py"
+        ],
+        "symbols": [
+          "authors",
+          "books",
+          "list_books",
+          "get_db",
+          "add_book"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC_GETDB_004",
+      "title": "Concurrent access",
+      "description": "Validate that multiple concurrent calls to get_db provide independent sessions.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Create 5 concurrent threads, each calling get_db"
+      ],
+      "expected_results": [
+        "Each thread receives a distinct session object"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "database.py",
+          "services/library.py"
+        ],
+        "symbols": [
+          "authors",
+          "books",
+          "list_books",
+          "get_db",
+          "create_author"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC_GETDB_005",
+      "title": "Invalid DB configuration",
+      "description": "Test behavior when database URL is missing or invalid.",
+      "category": "negative",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Set DB URL to empty string",
+        "Call get_db"
+      ],
+      "expected_results": [
+        "Raises configuration error, no session returned"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "database.py",
+          "tests/test_api.py",
+          "services/library.py"
+        ],
+        "symbols": [
+          "authors",
+          "books",
+          "list_books",
+          "get_db",
+          "add_book",
+          "test_author_and_missing_author_book"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC_GETDB_006",
+      "title": "Unhandled exception during query",
+      "description": "Ensure exceptions in queries are propagated correctly.",
+      "category": "exception/integration",
+      "priority": "critical",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Open session via get_db",
+        "Execute malformed query"
+      ],
+      "expected_results": [
+        "Raises SQLAlchemyError, session rolled back"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "database.py",
+          "services/library.py"
+        ],
+        "symbols": [
+          "authors",
+          "books",
+          "list_books",
+          "get_db",
+          "add_book"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC_GETDB_007",
+      "title": "SQL injection prevention",
+      "description": "Verify that get_db is not vulnerable to SQL injection via parameters.",
+      "category": "security",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Open session via get_db",
+        "Execute parameterized query with malicious input"
+      ],
+      "expected_results": [
+        "Query executed safely, no injection"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "database.py",
+          "services/library.py"
+        ],
+        "symbols": [
+          "authors",
+          "books",
+          "list_books",
+          "get_db",
+          "add_book"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC001",
+      "title": "Create Author Success",
+      "description": "POST /api/library/authors with valid AuthorCreate payload should create a new author and return 201.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Send a POST request to /api/library/authors with JSON body {\"name\": \"John Doe\"}.",
+        "Verify the response status code is 201."
+      ],
+      "expected_results": [
+        "Author is created in the database.",
+        "Response status code 201 returned."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          },
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: publisher is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "authors",
+          "books",
+          "list_books",
+          "create_author",
+          "test_author_and_missing_author_book"
+        ],
+        "file": "routers/library.py",
+        "symbol": "authors",
+        "route": "/api/library/authors",
+        "method": "POST",
+        "request_model": "AuthorCreate"
+      }
+    },
+    {
+      "id": "TC004",
+      "title": "Create Book Security Injection",
+      "description": "POST /api/library/authors/{author_id}/books with an ISBN containing SQL injection payload should not execute malicious SQL.",
+      "category": "security",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Send a POST request to /api/library/authors/1/books with payload {\"title\": \"Test\", \"isbn\": \"12345'; DROP TABLE books; --\", \"publisher_name\": \"Pub\"}.",
+        "Verify the response status code is 201.",
+        "Check that the books table still exists and no data was corrupted."
+      ],
+      "expected_results": [
+        "Book is created with the raw ISBN string.",
+        "Response status code 201 returned.",
+        "Database integrity is maintained."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          },
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: publisher is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "books",
+          "authors",
+          "list_books",
+          "add_book",
+          "test_author_and_missing_author_book"
+        ],
+        "file": "routers/library.py",
+        "symbol": "authors",
+        "route": "/api/library/authors",
+        "method": "POST",
+        "request_model": "AuthorCreate"
+      }
+    },
+    {
+      "id": "TC005",
+      "title": "List Books Exception Handling",
+      "description": "Simulate a database connectivity failure when calling GET /api/library/books and verify proper exception handling.",
+      "category": "exception/integration",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Mock the get_db dependency to raise a database connection exception.",
+        "Send a GET request to /api/library/books.",
+        "Verify the API returns an appropriate error response (e.g., 500)."
+      ],
+      "expected_results": [
+        "API does not crash.",
+        "Returns a 500 status code indicating internal server error."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          },
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: publisher is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          },
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "database.py"
+        ],
+        "symbols": [
+          "list_books",
+          "books",
+          "authors",
+          "get_db",
+          "add_book"
+        ],
+        "file": "routers/library.py",
+        "symbol": "books",
+        "route": "/api/library/authors/{author_id}/books",
+        "method": "POST",
+        "request_model": "BookCreate",
+        "response_model": "BookOut"
+      }
+    },
+    {
+      "id": "B3-TC001",
+      "title": "Add book with valid author and publisher",
+      "description": "Verify that add_book successfully adds a book when both author and publisher are provided.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Create an author entity.",
+        "Create a publisher entity.",
+        "Call add_book with the created author and publisher."
+      ],
+      "expected_results": [
+        "Author is created without errors.",
+        "Publisher is created without errors.",
+        "add_book returns success and the book appears in joined_books."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          },
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: publisher is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "books",
+          "list_books",
+          "add_book",
+          "create_author",
+          "joined_books"
+        ],
+        "file": "services/library.py",
+        "symbol": "add_book"
+      }
+    },
+    {
+      "id": "TC002",
+      "title": "Add book with missing author",
+      "description": "Verify that add_book handles a None author according to business rule.",
+      "category": "negative",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Create a publisher entity.",
+        "Call add_book with author set to None and the created publisher."
+      ],
+      "expected_results": [
+        "add_book raises a validation error or returns failure indicating author is required."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          },
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: publisher is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "books",
+          "add_book",
+          "create_author",
+          "test_author_and_missing_author_book"
+        ],
+        "file": "services/library.py",
+        "symbol": "add_book"
+      }
+    },
+    {
+      "id": "TC003",
+      "title": "Add book with missing publisher",
+      "description": "Validate behavior when publisher is None while author is provided.",
+      "category": "negative",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Create an author entity.",
+        "Call add_book with publisher set to None and the created author."
+      ],
+      "expected_results": [
+        "add_book raises a validation error or returns failure indicating publisher is required."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          },
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: publisher is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "books",
+          "add_book",
+          "create_author",
+          "test_author_and_missing_author_book"
+        ],
+        "file": "services/library.py",
+        "symbol": "add_book"
+      }
+    },
+    {
+      "id": "B3-TC004",
+      "title": "Add book boundary with empty strings for author and publisher names",
+      "description": "Test boundary condition where author and publisher objects exist but their name fields are empty.",
+      "category": "boundary",
+      "priority": "medium",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Create an author with empty name string.",
+        "Create a publisher with empty name string.",
+        "Call add_book with these entities."
+      ],
+      "expected_results": [
+        "add_book either treats empty names as invalid and rejects the request or successfully adds the book depending on validation rules."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          },
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: publisher is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "books",
+          "add_book",
+          "create_author",
+          "authors"
+        ],
+        "file": "services/library.py",
+        "symbol": "add_book"
+      }
+    },
+    {
+      "id": "B3-TC005",
+      "title": "Security test for add_book injection",
+      "description": "Ensure that add_book sanitizes input to prevent injection attacks.",
+      "category": "security",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Create an author with malicious payload in a field.",
+        "Create a publisher with normal data.",
+        "Invoke add_book with the malicious author."
+      ],
+      "expected_results": [
+        "add_book rejects the input or safely handles it without executing unintended commands."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          },
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: publisher is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "books",
+          "add_book",
+          "create_author",
+          "authors"
+        ],
+        "file": "services/library.py",
+        "symbol": "add_book"
+      }
+    },
+    {
+      "id": "TC006",
+      "title": "Exception handling when database connection fails",
+      "description": "Verify that add_book propagates a proper exception when the underlying storage layer is unavailable.",
+      "category": "exception/integration",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Simulate database outage.",
+        "Call add_book with valid author and publisher."
+      ],
+      "expected_results": [
+        "add_book raises a specific integration exception and does not crash the application."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          },
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: publisher is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "books",
+          "add_book",
+          "create_author"
+        ],
+        "file": "services/library.py",
+        "symbol": "add_book"
+      }
+    },
+    {
+      "id": "TC007",
+      "title": "Create author with valid data",
+      "description": "Positive test for create_author ensuring a new author is persisted.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Call create_author with a non-empty name."
+      ],
+      "expected_results": [
+        "Author is created and returned with a unique identifier."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "books",
+          "create_author",
+          "add_book",
+          "authors"
+        ],
+        "file": "services/library.py",
+        "symbol": "create_author"
+      }
+    },
+    {
+      "id": "TC008",
+      "title": "Create author with None name",
+      "description": "Negative test verifying create_author rejects a None name.",
+      "category": "negative",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Call create_author with name set to None."
+      ],
+      "expected_results": [
+        "create_author raises a validation error indicating name is required."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          },
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: publisher is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "books",
+          "add_book",
+          "create_author",
+          "authors"
+        ],
+        "file": "services/library.py",
+        "symbol": "create_author"
+      }
+    },
+    {
+      "id": "TC009",
+      "title": "Joined books reflects added book",
+      "description": "Positive test that joined_books includes the newly added book after a successful add_book call.",
+      "category": "positive",
+      "priority": "low",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Create author and publisher.",
+        "Call add_book with these entities.",
+        "Retrieve joined_books."
+      ],
+      "expected_results": [
+        "joined_books contains an entry for the newly added book linking to the author and publisher."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          },
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: publisher is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "books",
+          "list_books",
+          "add_book",
+          "create_author",
+          "joined_books"
+        ],
+        "file": "services/library.py",
+        "symbol": "add_book",
+        "route": "/api/library/authors/{author_id}/books",
+        "method": "POST",
+        "request_model": "BookCreate",
+        "response_model": "BookOut"
+      }
+    },
+    {
+      "id": "B4-TC001",
+      "title": "Verify author field is correctly set on book creation",
+      "description": "Create a book with a valid author and verify the author attribute is stored correctly.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "1. Send POST /books with JSON body {\"title\": \"Test Book\", \"author\": \"John Doe\"}.",
+        "2. Receive response with status 201 and JSON containing the book details."
+      ],
+      "expected_results": [
+        "1. Status code 201 is returned.",
+        "2. The response body contains an \"author\" field with value \"John Doe\"."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "tests/test_api.py",
+          "models.py"
+        ],
+        "symbols": [
+          "books",
+          "authors",
+          "list_books",
+          "test_author_and_missing_author_book"
+        ],
+        "file": "routers/library.py",
+        "symbol": "books",
+        "route": "/api/library/authors/{author_id}/books",
+        "method": "POST",
+        "request_model": "BookCreate",
+        "response_model": "BookOut"
+      }
+    },
+    {
+      "id": "B4-TC003",
+      "title": "Boundary test: extremely long author name",
+      "description": "Create a book with an author name at the maximum allowed length to ensure the system accepts it without truncation or errors.",
+      "category": "boundary",
+      "priority": "low",
+      "severity": "trivial",
+      "preconditions": [],
+      "steps": [
+        "1. Generate an author name string of 255 characters.",
+        "2. Send POST /books with JSON body {\"title\": \"Test Book\", \"author\": \"<255-char-name>\"}.",
+        "3. Receive response with status 201."
+      ],
+      "expected_results": [
+        "1. Status code 201 is returned.",
+        "2. The response body contains the full 255-character author name."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/library/authors/{author_id}/books",
+            "handler": "books",
+            "file": "routers/library.py",
+            "request_type": "BookCreate",
+            "response_type": "BookOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/library/authors",
+            "handler": "authors",
+            "file": "routers/library.py",
+            "request_type": "AuthorCreate"
+          },
+          {
+            "method": "GET",
+            "route": "/api/library/books",
+            "handler": "list_books",
+            "file": "routers/library.py",
+            "response_type": "list[BookOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/library.py"
+            ],
+            "symbols": [],
+            "description": "Condition: author is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/library/authors/{author_id}/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke books",
+              "Call services.library.add_book",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "books"
+          },
+          {
+            "name": "POST /api/library/authors",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke authors",
+              "Call services.library.create_author"
+            ],
+            "components": [],
+            "entrypoint": "authors"
+          },
+          {
+            "name": "GET /api/library/books",
+            "files": [
+              "routers/library.py"
+            ],
+            "steps": [
+              "Invoke list_books",
+              "Call services.library.joined_books"
+            ],
+            "components": [],
+            "entrypoint": "list_books"
+          }
+        ],
+        "source_files": [
+          "routers/library.py",
+          "services/library.py",
+          "tests/test_api.py",
+          "models.py"
+        ],
+        "symbols": [
+          "books",
+          "authors",
+          "list_books",
+          "test_author_and_missing_author_book"
+        ],
+        "file": "routers/library.py",
+        "symbol": "books",
+        "route": "/api/library/authors/{author_id}/books",
+        "method": "POST",
+        "request_model": "BookCreate",
+        "response_model": "BookOut"
+      }
+    }
+  ],
+  "coverage_summary": {
+    "requirement_coverage": 0.0,
+    "category_coverage": 100.0,
+    "function_coverage": 100.0,
+    "branch_coverage": 50.0,
+    "target_coverage": 75.0,
+    "completeness": 100.0
+  },
+  "total_generated": 32,
+  "total_after_deduplication": 21,
+  "generation_status": "partial_coverage_incomplete",
+  "uncovered_requirements": [
+    {
+      "symbol": "add_book",
+      "requirement": "author is None",
+      "category": "positive",
+      "requirement_id": "add_book|positive|author-is-none"
+    },
+    {
+      "symbol": "add_book",
+      "requirement": "not (author is None)",
+      "category": "positive",
+      "requirement_id": "add_book|positive|not-author-is-none"
+    },
+    {
+      "symbol": "add_book",
+      "requirement": "publisher is None",
+      "category": "positive",
+      "requirement_id": "add_book|positive|publisher-is-none"
+    },
+    {
+      "symbol": "add_book",
+      "requirement": "not (publisher is None)",
+      "category": "positive",
+      "requirement_id": "add_book|positive|not-publisher-is-none"
+    }
+  ]
+}

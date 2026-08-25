@@ -1,0 +1,2419 @@
+{
+  "generated_test_cases": [
+    {
+      "id": "TC01",
+      "title": "Verify get_db returns a database session",
+      "description": "Ensure that calling get_db returns a valid SQLAlchemy session instance that can be used to query the database.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Call the get_db function without any parameters.",
+        "Assert that the returned object is an instance of SQLAlchemy Session."
+      ],
+      "expected_results": [
+        "get_db returns a non-null Session object.",
+        "Session is usable for simple queries."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          },
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "database.py",
+          "services/store.py"
+        ],
+        "symbols": [
+          "place_order",
+          "products",
+          "add_product",
+          "get_db",
+          "checkout"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC02",
+      "title": "Handle missing database URL environment variable",
+      "description": "Test behavior when the DATABASE_URL environment variable is not set, ensuring an appropriate exception is raised.",
+      "category": "negative",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Unset or omit the DATABASE_URL environment variable.",
+        "Call get_db.",
+        "Catch the exception raised."
+      ],
+      "expected_results": [
+        "get_db raises a RuntimeError or a custom configuration exception."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          },
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "database.py",
+          "services/store.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "place_order",
+          "products",
+          "add_product",
+          "get_db",
+          "checkout",
+          "test_product_creation"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC03",
+      "title": "Boundary: Session lifecycle and cleanup",
+      "description": "Verify that the database session returned by get_db is properly closed after use, preventing resource leaks.",
+      "category": "boundary",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Call get_db to obtain a session.",
+        "Use the session to perform a query.",
+        "Ensure the session is closed or disposed after use, e.g., via context manager or explicit close."
+      ],
+      "expected_results": [
+        "Session is closed after the test completes.",
+        "No open connections remain."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          },
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "database.py",
+          "services/store.py"
+        ],
+        "symbols": [
+          "place_order",
+          "products",
+          "add_product",
+          "get_db",
+          "checkout"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC04",
+      "title": "Security: Prevent SQL injection via session creation",
+      "description": "Ensure that get_db does not incorporate user input into raw SQL statements during session creation, mitigating injection risks.",
+      "category": "security",
+      "priority": "critical",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Mock or inject a malicious DATABASE_URL containing SQL payload.",
+        "Call get_db and attempt to perform a harmless operation.",
+        "Verify that the session is created using parameterized URLs and no execution of injected SQL occurs."
+      ],
+      "expected_results": [
+        "No SQL injection occurs; the session is safe to use."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          },
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "database.py",
+          "tests/test_api.py",
+          "services/store.py"
+        ],
+        "symbols": [
+          "place_order",
+          "products",
+          "add_product",
+          "get_db",
+          "checkout",
+          "test_product_creation"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC05",
+      "title": "Exception handling: Database connection failure",
+      "description": "Test get_db behavior when the database server is unreachable, ensuring graceful exception handling.",
+      "category": "exception/integration",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Configure DATABASE_URL to point to an unavailable host or port.",
+        "Call get_db.",
+        "Catch the resulting OperationalError or connection exception."
+      ],
+      "expected_results": [
+        "get_db raises an OperationalError or custom database connection exception.",
+        "Error message is informative and does not leak sensitive details."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          },
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "database.py",
+          "services/store.py"
+        ],
+        "symbols": [
+          "place_order",
+          "products",
+          "add_product",
+          "get_db",
+          "checkout"
+        ],
+        "file": "database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC_PLACE_001",
+      "title": "Place Order Successful",
+      "description": "Test placing an order with valid checkout data",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Send POST /api/v1/store/checkout with body {\"customer_email\":\"user@example.com\",\"items\":[{\"sku\":\"ABC123\",\"quantity\":2}],\"discount_code\":\"SUMMER\"}"
+      ],
+      "expected_results": [
+        "HTTP 201 Created returned",
+        "Order created and returned with status 201"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "schemas.py"
+        ],
+        "symbols": [
+          "place_order",
+          "add_product",
+          "products",
+          "checkout",
+          "list_products"
+        ],
+        "file": "routers/store.py",
+        "symbol": "place_order",
+        "route": "/api/v1/store/checkout",
+        "method": "POST",
+        "request_model": "Checkout"
+      }
+    },
+    {
+      "id": "TC_PLACE_002",
+      "title": "Place Order Nonexistent Product",
+      "description": "Test placing an order with an item SKU that does not exist",
+      "category": "negative",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Send POST /api/v1/store/checkout with body {\"customer_email\":\"user@example.com\",\"items\":[{\"sku\":\"NONEXIST\",\"quantity\":1}]}"
+      ],
+      "expected_results": [
+        "HTTP 404 Not Found returned",
+        "Error message indicates product not found"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "place_order",
+          "add_product",
+          "products",
+          "checkout",
+          "test_product_validation"
+        ],
+        "file": "routers/store.py",
+        "symbol": "place_order",
+        "route": "/api/v1/store/checkout",
+        "method": "POST",
+        "request_model": "Checkout"
+      }
+    },
+    {
+      "id": "TC_PROD_001",
+      "title": "Retrieve Product List",
+      "description": "Test retrieving list of products",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Send GET /api/v1/store/products"
+      ],
+      "expected_results": [
+        "HTTP 200 OK returned",
+        "Response contains array of ProductOut objects"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "products",
+          "add_product",
+          "place_order",
+          "list_products",
+          "checkout"
+        ],
+        "file": "routers/store.py",
+        "symbol": "products",
+        "route": "/api/v1/store/products",
+        "method": "GET",
+        "response_model": "list[ProductOut]"
+      }
+    },
+    {
+      "id": "TC_PROD_002",
+      "title": "Retrieve Product List Empty",
+      "description": "Test retrieving products when no products exist in the database",
+      "category": "negative",
+      "priority": "low",
+      "severity": "trivial",
+      "preconditions": [],
+      "steps": [
+        "Ensure database is empty"
+      ],
+      "expected_results": [
+        "HTTP 200 OK returned",
+        "Response contains empty array"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "database.py"
+        ],
+        "symbols": [
+          "products",
+          "add_product",
+          "list_products",
+          "get_db"
+        ],
+        "file": "routers/store.py",
+        "symbol": "products",
+        "route": "/api/v1/store/products",
+        "method": "GET",
+        "response_model": "list[ProductOut]"
+      }
+    },
+    {
+      "id": "TC001",
+      "title": "Uppercase discount code - positive",
+      "description": "Verify that the uppercase_discount method correctly converts a lowercase discount code to uppercase.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Create a Checkout instance with discount_code set to \"save10\".",
+        "Invoke the uppercase_discount method."
+      ],
+      "expected_results": [
+        "The discount_code attribute is transformed to \"SAVE10\"."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "schemas.py",
+          "services/store.py"
+        ],
+        "symbols": [
+          "place_order",
+          "uppercase_discount",
+          "add_product"
+        ],
+        "file": "schemas.py",
+        "symbol": "uppercase_discount"
+      }
+    },
+    {
+      "id": "TC002",
+      "title": "Uppercase discount code - negative null input",
+      "description": "Check behavior when discount_code is None; method should handle gracefully without raising an exception.",
+      "category": "negative",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Create a Checkout instance with discount_code set to null.",
+        "Invoke the uppercase_discount method."
+      ],
+      "expected_results": [
+        "The method leaves discount_code as None and does not raise an error."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "schemas.py"
+        ],
+        "symbols": [
+          "place_order",
+          "uppercase_discount",
+          "checkout",
+          "add_product"
+        ],
+        "file": "schemas.py",
+        "symbol": "uppercase_discount"
+      }
+    },
+    {
+      "id": "TC003",
+      "title": "Uppercase discount code - boundary empty string",
+      "description": "Validate that an empty string discount_code remains unchanged after calling uppercase_discount.",
+      "category": "boundary",
+      "priority": "low",
+      "severity": "trivial",
+      "preconditions": [],
+      "steps": [
+        "Create a Checkout instance with discount_code set to an empty string \"\".",
+        "Invoke the uppercase_discount method."
+      ],
+      "expected_results": [
+        "The discount_code remains an empty string."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "schemas.py",
+          "services/store.py"
+        ],
+        "symbols": [
+          "place_order",
+          "uppercase_discount",
+          "add_product"
+        ],
+        "file": "schemas.py",
+        "symbol": "uppercase_discount"
+      }
+    },
+    {
+      "id": "TC004",
+      "title": "Uppercase discount code - security injection attempt",
+      "description": "Ensure that passing a malicious string does not execute code or alter system state.",
+      "category": "security",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Create a Checkout instance with discount_code set to \"<script>alert(1)</script>\".",
+        "Invoke the uppercase_discount method."
+      ],
+      "expected_results": [
+        "The discount_code is transformed to \"<SCRIPT>ALERT(1)</SCRIPT>\" without executing any script."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "schemas.py",
+          "services/store.py"
+        ],
+        "symbols": [
+          "place_order",
+          "uppercase_discount",
+          "checkout",
+          "add_product"
+        ],
+        "file": "schemas.py",
+        "symbol": "uppercase_discount"
+      }
+    },
+    {
+      "id": "TC005",
+      "title": "Uppercase discount code - exception handling during integration",
+      "description": "Simulate a failure in the underlying model serialization to verify that uppercase_discount propagates exceptions appropriately.",
+      "category": "exception/integration",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Mock the Checkout model's __dict__ method to raise a RuntimeError when accessed.",
+        "Create a Checkout instance and call uppercase_discount."
+      ],
+      "expected_results": [
+        "A RuntimeError is raised and caught by the calling code, indicating proper exception propagation."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          }
+        ],
+        "business_rules": [],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "schemas.py",
+          "services/store.py"
+        ],
+        "symbols": [
+          "place_order",
+          "uppercase_discount",
+          "create_product",
+          "add_product"
+        ],
+        "file": "schemas.py",
+        "symbol": "uppercase_discount"
+      }
+    },
+    {
+      "id": "B4-TC001",
+      "title": "Checkout with valid product and sufficient stock",
+      "description": "Verify that checkout succeeds when product exists and stock is greater than or equal to the requested quantity.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "minor",
+      "preconditions": [
+        "Product with id=1 exists",
+        "Product.stock = 10",
+        "Item.quantity = 5"
+      ],
+      "steps": [
+        "Call checkout(product_id=1, item_quantity=5)"
+      ],
+      "expected_results": [
+        "Checkout returns success and reduces product.stock to 5"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [
+        "BR001",
+        "BR002"
+      ],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "models.py"
+        ],
+        "symbols": [
+          "place_order",
+          "add_product",
+          "checkout",
+          "create_product"
+        ],
+        "file": "services/store.py",
+        "symbol": "checkout"
+      }
+    },
+    {
+      "id": "B4-TC002",
+      "title": "Checkout fails when product is None",
+      "description": "Verify that checkout raises an error when the product reference is null.",
+      "category": "negative",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [
+        "No product found for given product_id"
+      ],
+      "steps": [
+        "Call checkout(product_id=999, item_quantity=1)"
+      ],
+      "expected_results": [
+        "Checkout raises ProductNotFoundException"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [
+        "BR001"
+      ],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "models.py"
+        ],
+        "symbols": [
+          "place_order",
+          "add_product",
+          "checkout",
+          "create_product"
+        ],
+        "file": "services/store.py",
+        "symbol": "checkout"
+      }
+    },
+    {
+      "id": "B4-TC003",
+      "title": "Checkout with insufficient stock (boundary)",
+      "description": "Verify that checkout fails when product.stock is exactly less than item.quantity.",
+      "category": "boundary",
+      "priority": "medium",
+      "severity": "major",
+      "preconditions": [
+        "Product with id=2 exists",
+        "Product.stock = 3",
+        "Item.quantity = 4"
+      ],
+      "steps": [
+        "Call checkout(product_id=2, item_quantity=4)"
+      ],
+      "expected_results": [
+        "Checkout raises InsufficientStockException"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [
+        "BR002"
+      ],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "models.py"
+        ],
+        "symbols": [
+          "place_order",
+          "add_product",
+          "checkout",
+          "create_product"
+        ],
+        "file": "services/store.py",
+        "symbol": "checkout"
+      }
+    },
+    {
+      "id": "B4-TC004",
+      "title": "Create product with malicious input (security)",
+      "description": "Verify that creating a product with SQL injection strings does not compromise the database.",
+      "category": "security",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [
+        "Database is operational"
+      ],
+      "steps": [
+        "Call create_product(name=\"test'); DROP TABLE products; --\", price=10, stock=5)"
+      ],
+      "expected_results": [
+        "Create product returns validation error and database remains intact"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          },
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "add_product",
+          "products",
+          "checkout",
+          "create_product",
+          "list_products"
+        ],
+        "file": "services/store.py",
+        "symbol": "create_product",
+        "route": "/api/v1/store/products",
+        "method": "GET",
+        "response_model": "list[ProductOut]"
+      }
+    },
+    {
+      "id": "TC-001",
+      "title": "Checkout with product=None passes",
+      "description": "Verify that checkout correctly handles a None product by returning an error message and not proceeding to payment",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Call checkout API with product=None",
+        "Receive response",
+        "Validate response code is 400"
+      ],
+      "expected_results": [
+        "Checkout API returns error",
+        "Error message indicates product is required"
+      ],
+      "requirement_ids": [
+        "checkout|positive|product-is-none"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "tests/test_api.py",
+          "models.py"
+        ],
+        "symbols": [
+          "place_order",
+          "add_product",
+          "products",
+          "checkout",
+          "create_product",
+          "test_product_validation",
+          "test_product_creation"
+        ],
+        "file": "services/store.py",
+        "symbol": "checkout",
+        "coverage_requirements": [
+          "checkout|positive|product-is-none",
+          "checkout|positive|not-product-is-none"
+        ]
+      }
+    },
+    {
+      "id": "TC-002",
+      "title": "Checkout with valid product passes",
+      "description": "Verify that checkout proceeds when product is not None and sufficient stock is available",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "Create a product with stock >= 1"
+      ],
+      "steps": [
+        "Call checkout API with valid product id and quantity 1",
+        "Receive response",
+        "Validate response code is 200"
+      ],
+      "expected_results": [
+        "Checkout API processes transaction",
+        "Order is created",
+        "Stock decreased by quantity"
+      ],
+      "requirement_ids": [
+        "checkout|positive|not-product-is-none"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          },
+          {
+            "method": "GET",
+            "route": "/api/v1/store/products",
+            "handler": "products",
+            "file": "routers/store.py",
+            "response_type": "list[ProductOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "models.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "place_order",
+          "products",
+          "add_product",
+          "checkout",
+          "create_product",
+          "list_products",
+          "test_product_validation"
+        ],
+        "file": "services/store.py",
+        "symbol": "checkout"
+      }
+    },
+    {
+      "id": "B5-TC001",
+      "title": "Create product successfully",
+      "description": "Verify that creating a product with valid data succeeds.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Prepare valid product payload",
+        "Send POST request to product creation endpoint",
+        "Receive response"
+      ],
+      "expected_results": [
+        "Request payload is accepted",
+        "Response status code is 201 Created",
+        "Response contains product ID and data"
+      ],
+      "requirement_ids": [
+        "test_product_creation|positive|function"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/v1/store/checkout",
+            "handler": "place_order",
+            "file": "routers/store.py",
+            "request_type": "Checkout"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "tests/test_api.py",
+          "models.py"
+        ],
+        "symbols": [
+          "add_product",
+          "place_order",
+          "test_product_creation",
+          "test_product_validation",
+          "create_product"
+        ],
+        "file": "tests/test_api.py",
+        "symbol": "test_product_creation"
+      }
+    },
+    {
+      "id": "B5-TC002",
+      "title": "Product creation missing key raises KeyError",
+      "description": "Ensure that missing required key triggers a KeyError during product creation.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Prepare product payload missing the required key",
+        "Attempt to create product using the creation function",
+        "Observe exception handling"
+      ],
+      "expected_results": [
+        "Function attempts to access missing key",
+        "KeyError is raised with appropriate message",
+        "Error is logged or reported"
+      ],
+      "requirement_ids": [
+        "test_product_creation|positive|missing-key-access-may-raise-keyerror-uuid4-hex-8"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "tests/test_api.py",
+          "models.py"
+        ],
+        "symbols": [
+          "add_product",
+          "test_product_creation",
+          "test_product_validation",
+          "create_product"
+        ],
+        "coverage_requirements": [
+          "test_product_creation|positive|missing-key-access-may-raise-keyerror-uuid4-hex-8"
+        ],
+        "file": "tests/test_api.py",
+        "symbol": "test_product_creation"
+      }
+    },
+    {
+      "id": "B5-TC004",
+      "title": "Validate product data",
+      "description": "Check that product validation function correctly validates a valid product.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Create a product instance with valid attributes",
+        "Call the product validation function",
+        "Inspect validation result"
+      ],
+      "expected_results": [
+        "Validation passes without errors",
+        "Function returns true or equivalent success indicator"
+      ],
+      "requirement_ids": [
+        "test_product_validation|positive|function"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/v1/store/products",
+            "handler": "add_product",
+            "file": "routers/store.py",
+            "request_type": "ProductCreate",
+            "response_type": "ProductOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product is None"
+          },
+          {
+            "files": [
+              "services/store.py"
+            ],
+            "symbols": [],
+            "description": "Condition: product.stock < item.quantity"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke add_product",
+              "Call services.store.create_product"
+            ],
+            "components": [],
+            "entrypoint": "add_product"
+          },
+          {
+            "name": "POST /api/v1/store/checkout",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke place_order",
+              "Call services.store.checkout",
+              "Call fastapi.HTTPException",
+              "Call str",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "place_order"
+          },
+          {
+            "name": "GET /api/v1/store/products",
+            "files": [
+              "routers/store.py"
+            ],
+            "steps": [
+              "Invoke products",
+              "Call services.store.list_products"
+            ],
+            "components": [],
+            "entrypoint": "products"
+          }
+        ],
+        "source_files": [
+          "routers/store.py",
+          "services/store.py",
+          "tests/test_api.py",
+          "models.py"
+        ],
+        "symbols": [
+          "add_product",
+          "test_product_validation",
+          "test_product_creation",
+          "create_product"
+        ],
+        "file": "tests/test_api.py",
+        "symbol": "test_product_creation"
+      }
+    }
+  ],
+  "coverage_summary": {
+    "requirement_coverage": 100.0,
+    "category_coverage": 100.0,
+    "function_coverage": 100.0,
+    "branch_coverage": 90.0,
+    "target_coverage": 95.0,
+    "completeness": 100.0
+  },
+  "total_generated": 36,
+  "total_after_deduplication": 23,
+  "generation_status": "partial_coverage_incomplete",
+  "generation_reason": "all_providers_unavailable",
+  "uncovered_requirements": [
+    {
+      "symbol": "test_product_creation",
+      "requirement": "missing key access may raise KeyError: uuid4().hex[:8]",
+      "category": "negative",
+      "requirement_id": "test_product_creation|negative|missing-key-access-may-raise-keyerror-uuid4-hex-8"
+    }
+  ]
+}

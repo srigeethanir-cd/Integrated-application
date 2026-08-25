@@ -1,0 +1,52 @@
+{
+  "framework": "React",
+  "total_files": 3,
+  "compiled": true,
+  "tests_passed": 9,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "coverage": {
+    "statements": 98.5,
+    "branches": 93.2,
+    "functions": 100.0,
+    "lines": 98.5
+  },
+  "quality_score": 90.0,
+  "coverage_percentage": 92.5,
+  "duplicate_score": 100.0,
+  "maintainability_score": 94.0,
+  "confidence_score": 90.0,
+  "validation_passed": true,
+  "behavior_breakdown": {
+    "behavior_coverage": 92.5,
+    "interaction_coverage": 95.0,
+    "state_transition_coverage": 90.0,
+    "conditional_rendering_coverage": 88.5,
+    "accessibility_coverage": 94.0,
+    "hook_coverage": 92.0,
+    "event_coverage": 96.0,
+    "risk_coverage": 95.0
+  },
+  "quality_gaps": {
+    "duplicate_scenarios": 0,
+    "redundant_assertions": 0,
+    "missing_negative_tests": 0,
+    "missing_boundary_tests": 0,
+    "missing_accessibility_tests": 0,
+    "missing_async_tests": 0,
+    "missing_cleanup": 3,
+    "missing_mocks": 0
+  },
+  "recommendations": [
+    "Add afterEach cleanup hooks to prevent test state leaks."
+  ],
+  "errors": [],
+  "warnings": [
+    "Quality warning in EmailInput.test.generated.tsx: Missing afterEach or cleanup teardown hook.",
+    "Quality warning in EmailInput.test.generated.tsx: Unused imports found: React, fireEvent, waitFor",
+    "Quality warning in LoginButton.test.generated.tsx: Missing afterEach or cleanup teardown hook.",
+    "Quality warning in LoginButton.test.generated.tsx: Unused imports found: React, waitFor, userEvent",
+    "Quality warning in PasswordInput.test.generated.tsx: Missing afterEach or cleanup teardown hook.",
+    "Quality warning in PasswordInput.test.generated.tsx: Unused imports found: React, fireEvent, waitFor"
+  ]
+}

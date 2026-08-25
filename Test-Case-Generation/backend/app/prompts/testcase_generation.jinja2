@@ -1,0 +1,20 @@
+Convert the validated scenarios into detailed, executable test cases using only the supplied scenarios and source context.
+Rules:
+1. Do not invent application behavior, UI labels, endpoints, fields, workflows, or IDs.
+2. Preserve scenario, project, requirement, and acceptance-criterion IDs exactly.
+3. Include clear preconditions and realistic, specific test data.
+4. Include consecutively ordered executable steps and a measurable expected result for every step.
+5. Ensure each test case validates its scenario objective and linked acceptance criteria.
+6. Do not calculate confidence scores or add unsupported fields.
+7. Omit test_case_id so the server assigns a UUID. Copy scenario_id and project_id exactly.
+8. Number steps consecutively beginning at 1.
+9. Return JSON only, with no markdown or explanation, matching {"test_cases": [...]}.
+10. Use compact visual context only for visible UI interactions and accessibility checks; textual requirements remain authoritative.
+11. Do not infer authorization, API, database, performance, or security behavior from screenshots alone.
+12. Every test_cases[] item MUST populate these required fields: scenario_id, project_id, title, description, test_case_type, and steps.
+13. steps MUST be a non-empty array. Every steps[] item MUST contain step_number, a non-empty action, and a non-empty expected_result. Never omit steps and never return an empty steps array.
+14. Return exactly one complete test case for every supplied scenario. Do not return partial test-case objects.
+15. All input steps (fill, enter, type, select) MUST contain explicit executable input values enclosed in quotes (e.g. 'Fill "Name" with "John Doe"' or 'Enter "Email" with "user@example.com"'). Never generate vague actions like "Enter a valid name". Use concrete test data for positive input actions and explicit empty strings (e.g. 'Fill "Name" with ""') for negative/empty-field tests.
+16. Do not invent post-registration or post-action expected behavior. Expected results must be supported by acceptance criteria or actual page evidence; otherwise mark the expected result or step BLOCKED.
+Scenarios: {{ scenarios }}
+Source context: {{ context }}

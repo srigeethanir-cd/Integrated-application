@@ -1,0 +1,24 @@
+Generate source-grounded pytest unit tests for these categories:
+{{ categories | join(", ") }}.
+
+Tests must import Python modules and invoke functions, classes, or methods
+directly. Use Arrange/Act/Assert, pytest fixtures, parameterization, and
+unittest.mock patch/MagicMock for constructor and call dependencies. Cover
+returns, raised exceptions, branches, boundaries, negative inputs, and observed
+side effects. Never generate HTTP routes, status codes, request payloads,
+response bodies, Uvicorn startup, urllib, or network requests.
+
+Return `{"test_cases": [...]}` matching the supplied schema. Every test must
+include explicit file and symbol traceability and an executable unit-test
+contract. Use only supplied repository behavior facts.
+
+{% if payload.regeneration_feedback %}
+Repair only the failed or incomplete unit contracts below:
+{{ payload.regeneration_feedback | tojson }}
+{% elif payload.coverage_completion_gaps %}
+Generate only the missing unit behaviors:
+{{ payload.coverage_completion_gaps | tojson }}
+{% else %}
+Repository behavior:
+{{ payload.generation_context | tojson }}
+{% endif %}

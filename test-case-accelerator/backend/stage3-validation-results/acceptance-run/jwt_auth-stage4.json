@@ -1,0 +1,2752 @@
+{
+  "generated_test_cases": [
+    {
+      "id": "TC001",
+      "title": "Get current user profile successfully",
+      "description": "Verify that an authenticated user can retrieve their own profile using the /api/auth/me endpoint.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Authenticate as a regular user and obtain a valid access token.",
+        "Send a GET request to /api/auth/me with the Authorization header set to the access token."
+      ],
+      "expected_results": [
+        "Response status code is 200.",
+        "Response body conforms to the UserOut model and contains the correct username and role."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/admin",
+            "handler": "admin",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/auth/me",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke me"
+            ],
+            "components": [],
+            "entrypoint": "me"
+          },
+          {
+            "name": "GET /api/auth/admin",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke admin"
+            ],
+            "components": [],
+            "entrypoint": "admin"
+          },
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "me",
+          "admin",
+          "create_user",
+          "require_admin",
+          "refresh",
+          "get_current_user",
+          "test_register_login_and_current_user",
+          "authenticate"
+        ],
+        "file": "routers/auth.py",
+        "symbol": "me",
+        "route": "/api/auth/me",
+        "method": "GET",
+        "response_model": "UserOut"
+      }
+    },
+    {
+      "id": "TC002",
+      "title": "Refresh token with valid refresh token",
+      "description": "Ensure that a valid refresh token returns a new access token and refresh token pair.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Authenticate and obtain a TokenPair from /api/auth/login.",
+        "Extract the refresh_token from the TokenPair.",
+        "Send a POST request to /api/auth/refresh with a JSON body containing the refresh_token."
+      ],
+      "expected_results": [
+        "Response status code is 200.",
+        "Response body conforms to the TokenPair model and contains new access_token and refresh_token."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/login",
+            "handler": "login",
+            "file": "routers/auth.py",
+            "response_type": "TokenPair"
+          },
+          {
+            "method": "POST",
+            "route": "/api/auth/refresh",
+            "handler": "refresh",
+            "file": "routers/auth.py",
+            "request_type": "RefreshRequest",
+            "response_type": "TokenPair"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/admin",
+            "handler": "admin",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          },
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          },
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "login",
+          "refresh",
+          "admin",
+          "me",
+          "require_admin",
+          "test_register_login_and_current_user",
+          "rotate_refresh"
+        ],
+        "file": "routers/auth.py",
+        "symbol": "refresh",
+        "route": "/api/auth/login",
+        "method": "POST",
+        "response_model": "TokenPair"
+      }
+    },
+    {
+      "id": "TC003",
+      "title": "Access admin endpoint without admin role",
+      "description": "Attempt to access the admin endpoint using a user whose role is not 'admin' and verify denial.",
+      "category": "negative",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Authenticate as a user with role 'user' and obtain a valid access token.",
+        "Send a GET request to /api/auth/admin with the Authorization header set to the access token."
+      ],
+      "expected_results": [
+        "Response status code is 401 or 403 (depending on implementation).",
+        "Response body indicates insufficient privileges."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/admin",
+            "handler": "admin",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/auth/login",
+            "handler": "login",
+            "file": "routers/auth.py",
+            "response_type": "TokenPair"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /api/auth/admin",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke admin"
+            ],
+            "components": [],
+            "entrypoint": "admin"
+          },
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "GET /api/auth/me",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke me"
+            ],
+            "components": [],
+            "entrypoint": "me"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "create_user",
+          "admin",
+          "login",
+          "require_admin",
+          "me",
+          "refresh",
+          "get_current_user",
+          "authenticate"
+        ],
+        "file": "routers/auth.py",
+        "symbol": "admin",
+        "route": "/api/auth/admin",
+        "method": "GET",
+        "response_model": "UserOut"
+      }
+    },
+    {
+      "id": "TC004",
+      "title": "Register new user successfully",
+      "description": "Create a new user with valid registration data and verify successful creation.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Prepare a RegisterRequest payload with unique username, strong password, and role 'user'.",
+        "Send a POST request to /api/auth/register with the payload."
+      ],
+      "expected_results": [
+        "Response status code is 201.",
+        "Response body conforms to the UserOut model and contains the newly created user's details."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/admin",
+            "handler": "admin",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          },
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py"
+        ],
+        "symbols": [
+          "create_user",
+          "me",
+          "admin",
+          "require_admin",
+          "refresh",
+          "register",
+          "authenticate"
+        ],
+        "file": "routers/auth.py",
+        "symbol": "create_user",
+        "route": "/api/auth/register",
+        "method": "POST",
+        "request_model": "RegisterRequest",
+        "response_model": "UserOut"
+      }
+    },
+    {
+      "id": "TC005",
+      "title": "Register user with duplicate username",
+      "description": "Attempt to register a user using a username that already exists and verify conflict handling.",
+      "category": "exception/integration",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Ensure a user with username 'existing_user' already exists in the database.",
+        "Prepare a RegisterRequest payload with username 'existing_user', a valid password, and role 'user'.",
+        "Send a POST request to /api/auth/register with the payload."
+      ],
+      "expected_results": [
+        "Response status code is 409.",
+        "Response body indicates a conflict due to duplicate username."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/auth/login",
+            "handler": "login",
+            "file": "routers/auth.py",
+            "response_type": "TokenPair"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          },
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "create_user",
+          "login",
+          "me",
+          "require_admin",
+          "refresh",
+          "register",
+          "authenticate",
+          "test_register_login_and_current_user"
+        ],
+        "file": "routers/auth.py",
+        "symbol": "create_user",
+        "route": "/api/auth/register",
+        "method": "POST",
+        "request_model": "RegisterRequest",
+        "response_model": "UserOut"
+      }
+    },
+    {
+      "id": "TC1",
+      "title": "Strong password meets criteria",
+      "description": "Verify that a password containing at least one uppercase letter and one digit passes the strong_password check.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Create RegisterRequest with username 'user1', password 'Pass123', role 'user'"
+      ],
+      "expected_results": [
+        "strong_password method returns True"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py"
+        ],
+        "symbols": [
+          "create_user",
+          "me",
+          "strong_password",
+          "register",
+          "authenticate",
+          "require_admin"
+        ],
+        "file": "schemas.py",
+        "symbol": "strong_password"
+      }
+    },
+    {
+      "id": "TC2",
+      "title": "Strong password fails missing uppercase",
+      "description": "Verify that a password without uppercase letters fails the strong_password check.",
+      "category": "negative",
+      "priority": "high",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Create RegisterRequest with username 'user2', password 'pass123', role 'user'"
+      ],
+      "expected_results": [
+        "strong_password method returns False"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py"
+        ],
+        "symbols": [
+          "create_user",
+          "me",
+          "strong_password",
+          "verify_password",
+          "register",
+          "authenticate"
+        ],
+        "file": "schemas.py",
+        "symbol": "strong_password"
+      }
+    },
+    {
+      "id": "TC3",
+      "title": "Strong password fails missing digit",
+      "description": "Verify that a password without digits fails the strong_password check.",
+      "category": "negative",
+      "priority": "high",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Create RegisterRequest with username 'user3', password 'Password', role 'user'"
+      ],
+      "expected_results": [
+        "strong_password method returns False"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py"
+        ],
+        "symbols": [
+          "create_user",
+          "me",
+          "strong_password",
+          "verify_password",
+          "register",
+          "authenticate"
+        ],
+        "file": "schemas.py",
+        "symbol": "strong_password"
+      }
+    },
+    {
+      "id": "TC4",
+      "title": "Boundary test: password with only one uppercase and one digit",
+      "description": "Test the edge case where the password contains exactly one uppercase letter and one digit.",
+      "category": "boundary",
+      "priority": "medium",
+      "severity": "trivial",
+      "preconditions": [],
+      "steps": [
+        "Create RegisterRequest with username 'user4', password 'A1bcde', role 'user'"
+      ],
+      "expected_results": [
+        "strong_password method returns True"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          },
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py",
+          "models.py"
+        ],
+        "symbols": [
+          "create_user",
+          "me",
+          "strong_password",
+          "register",
+          "authenticate",
+          "require_admin"
+        ],
+        "file": "schemas.py",
+        "symbol": "strong_password"
+      }
+    },
+    {
+      "id": "TC5",
+      "title": "Register API successful creation",
+      "description": "Ensure that a POST to /api/auth/register with valid data creates a new user and returns 201.",
+      "category": "positive",
+      "priority": "critical",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Send POST /api/auth/register with JSON body {\"username\":\"newuser\",\"password\":\"Strong1\",\"role\":\"user\"}"
+      ],
+      "expected_results": [
+        "Response status 201 Created",
+        "Response body includes access_token, refresh_token, token_type"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/auth/refresh",
+            "handler": "refresh",
+            "file": "routers/auth.py",
+            "request_type": "RefreshRequest",
+            "response_type": "TokenPair"
+          },
+          {
+            "method": "POST",
+            "route": "/api/auth/login",
+            "handler": "login",
+            "file": "routers/auth.py",
+            "response_type": "TokenPair"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          },
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          },
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "create_user",
+          "refresh",
+          "login",
+          "strong_password",
+          "test_register_login_and_current_user",
+          "register",
+          "get_current_user"
+        ],
+        "file": "routers/auth.py",
+        "symbol": "create_user",
+        "route": "/api/auth/register",
+        "method": "POST",
+        "request_model": "RegisterRequest",
+        "response_model": "UserOut"
+      }
+    },
+    {
+      "id": "TC_SP1",
+      "title": "Password with no uppercase and no digits",
+      "description": "Verify that a password containing only lowercase letters passes the strong_password check when neither uppercase nor digit conditions are met.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "RegisterRequest schema loaded"
+      ],
+      "steps": [
+        "Create RegisterRequest with password='lowercase'"
+      ],
+      "expected_results": [
+        "strong_password method returns True"
+      ],
+      "requirement_ids": [
+        "strong_password|positive|not-any-c-isupper-for-c-in-value-or-not-any-c-isdigit-for-c-in-value"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py"
+        ],
+        "symbols": [
+          "create_user",
+          "strong_password",
+          "verify_password",
+          "authenticate"
+        ],
+        "file": "schemas.py",
+        "symbol": "strong_password"
+      }
+    },
+    {
+      "id": "TC_SN1",
+      "title": "Password with uppercase but no digits",
+      "description": "Verify that a password containing uppercase letters but no digits fails the strong_password check according to the negative requirement.",
+      "category": "negative",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "RegisterRequest schema loaded"
+      ],
+      "steps": [
+        "Create RegisterRequest with password='Password'"
+      ],
+      "expected_results": [
+        "strong_password method returns False"
+      ],
+      "requirement_ids": [
+        "strong_password|negative|not-any-c-isupper-for-c-in-value-or-not-any-c-isdigit-for-c-in-value"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py"
+        ],
+        "symbols": [
+          "create_user",
+          "strong_password",
+          "verify_password",
+          "authenticate"
+        ],
+        "file": "schemas.py",
+        "symbol": "strong_password"
+      }
+    },
+    {
+      "id": "TC_SP2",
+      "title": "Password with both uppercase and digits",
+      "description": "Verify that a password containing both uppercase letters and digits satisfies the positive requirement of not-not-any condition.",
+      "category": "positive",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "RegisterRequest schema loaded"
+      ],
+      "steps": [
+        "Create RegisterRequest with password='Passw0rd'"
+      ],
+      "expected_results": [
+        "strong_password method returns True"
+      ],
+      "requirement_ids": [
+        "strong_password|positive|not-not-any-c-isupper-for-c-in-value-or-not-any-c-isdigit-for-c-in-value"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "schemas.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not any((c.isupper() for c in value)) or not any((c.isdigit() for c in value))"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not hmac.compare_digest(signature_text, expected)"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py"
+        ],
+        "symbols": [
+          "create_user",
+          "strong_password",
+          "authenticate",
+          "verify_password"
+        ],
+        "file": "schemas.py",
+        "symbol": "strong_password",
+        "coverage_requirements": [
+          "strong_password|positive|not-any-c-isupper-for-c-in-value-or-not-any-c-isdigit-for-c-in-value",
+          "strong_password|positive|not-not-any-c-isupper-for-c-in-value-or-not-any-c-isdigit-for-c-in-value"
+        ]
+      }
+    },
+    {
+      "id": "TC_SN2",
+      "title": "Password with lowercase only but no digits",
+      "description": "Verify that a password containing only lowercase letters fails the not-not-any condition because it lacks digits.",
+      "category": "negative",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "RegisterRequest schema loaded"
+      ],
+      "steps": [
+        "Create RegisterRequest with password='lowercase'"
+      ],
+      "expected_results": [
+        "strong_password method returns False"
+      ],
+      "requirement_ids": [
+        "strong_password|negative|not-not-any-c-isupper-for-c-in-value-or-not-any-c-isdigit-for-c-in-value"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "schemas.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not any((c.isupper() for c in value)) or not any((c.isdigit() for c in value))"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not hmac.compare_digest(signature_text, expected)"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py"
+        ],
+        "symbols": [
+          "create_user",
+          "strong_password",
+          "authenticate",
+          "verify_password"
+        ],
+        "file": "schemas.py",
+        "symbol": "strong_password",
+        "coverage_requirements": [
+          "strong_password|negative|not-any-c-isupper-for-c-in-value-or-not-any-c-isdigit-for-c-in-value",
+          "strong_password|negative|not-not-any-c-isupper-for-c-in-value-or-not-any-c-isdigit-for-c-in-value"
+        ]
+      }
+    },
+    {
+      "id": "B5-TC001",
+      "title": "Authenticate with valid credentials",
+      "description": "Verify that a user can authenticate successfully when providing correct username and password.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Create a user record with known username and password hash.",
+        "Call authenticate with the correct username and password.",
+        "Observe the authentication response."
+      ],
+      "expected_results": [
+        "User record is retrieved from the database.",
+        "verify_password returns true.",
+        "Authentication succeeds and returns a JWT token."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          },
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          },
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "database.py"
+        ],
+        "symbols": [
+          "create_user",
+          "me",
+          "authenticate",
+          "hash_password",
+          "decode_token",
+          "register",
+          "verify_password"
+        ],
+        "file": "services/auth.py",
+        "symbol": "authenticate"
+      }
+    },
+    {
+      "id": "B5-TC002",
+      "title": "Authenticate with non\u2011existent username",
+      "description": "Ensure authentication fails when the supplied username does not exist in the database.",
+      "category": "negative",
+      "priority": "high",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Call authenticate with a username that is not stored in the database.",
+        "Provide any password value."
+      ],
+      "expected_results": [
+        "db.scalar returns None.",
+        "Branch \"user is None or not verify_password(...)\" evaluates to true.",
+        "Authentication raises InvalidCredentialsError."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/auth/login",
+            "handler": "login",
+            "file": "routers/auth.py",
+            "response_type": "TokenPair"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          },
+          {
+            "files": [
+              "schemas.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not any((c.isupper() for c in value)) or not any((c.isdigit() for c in value))"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          },
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py",
+          "database.py",
+          "models.py"
+        ],
+        "symbols": [
+          "create_user",
+          "login",
+          "me",
+          "authenticate",
+          "decode_token",
+          "hash_password",
+          "register",
+          "strong_password"
+        ],
+        "file": "services/auth.py",
+        "symbol": "authenticate"
+      }
+    },
+    {
+      "id": "B5-TC003",
+      "title": "Decode token with missing 'exp' claim",
+      "description": "Check that decode_token raises an exception when the payload lacks the required 'exp' field.",
+      "category": "exception/integration",
+      "priority": "medium",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Create a token payload containing only the 'kind' field.",
+        "Sign the payload and call decode_token with the generated token."
+      ],
+      "expected_results": [
+        "Accessing payload['exp'] raises KeyError.",
+        "decode_token propagates the exception, resulting in token validation failure."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: payload['kind'] != expected_kind or payload['exp'] < time.time()"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          },
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "create_user",
+          "decode_token",
+          "encode_token",
+          "get_current_user",
+          "rotate_refresh"
+        ],
+        "file": "services/auth.py",
+        "symbol": "decode_token"
+      }
+    },
+    {
+      "id": "B5-TC004",
+      "title": "Encode token with boundary expiration time",
+      "description": "Validate that encode_token correctly sets the expiration claim exactly at the allowed limit.",
+      "category": "boundary",
+      "priority": "low",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Generate a token payload with 'exp' set to the current Unix time plus the maximum allowed TTL.",
+        "Call encode_token to produce the signed JWT."
+      ],
+      "expected_results": [
+        "Token is signed without errors.",
+        "decode_token later validates the token as not expired."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: payload['kind'] != expected_kind or payload['exp'] < time.time()"
+          },
+          {
+            "files": [
+              "schemas.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not any((c.isupper() for c in value)) or not any((c.isdigit() for c in value))"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          },
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "me",
+          "decode_token",
+          "encode_token",
+          "authenticate",
+          "get_current_user"
+        ],
+        "file": "services/auth.py",
+        "symbol": "decode_token"
+      }
+    },
+    {
+      "id": "B5-TC005",
+      "title": "Signature verification failure via timing attack mitigation",
+      "description": "Confirm that hmac.compare_digest is used to compare signatures, preventing simple string comparison vulnerabilities.",
+      "category": "security",
+      "priority": "critical",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Create a token with a deliberately altered signature.",
+        "Call decode_token with the tampered token."
+      ],
+      "expected_results": [
+        "hmac.compare_digest returns false.",
+        "Branch \"not hmac.compare_digest(...)\" evaluates to true.",
+        "decode_token raises InvalidTokenError."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not hmac.compare_digest(signature_text, expected)"
+          },
+          {
+            "files": [
+              "schemas.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not any((c.isupper() for c in value)) or not any((c.isdigit() for c in value))"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          },
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "schemas.py"
+        ],
+        "symbols": [
+          "create_user",
+          "decode_token",
+          "encode_token",
+          "authenticate",
+          "get_current_user",
+          "rotate_refresh"
+        ],
+        "file": "services/auth.py",
+        "symbol": "decode_token"
+      }
+    },
+    {
+      "id": "B6-TC001",
+      "title": "Register new user with valid payload",
+      "description": "Ensure successful registration when a unique username and valid password are provided.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Send POST request to /api/auth/register with payload { username: 'newuser', password: 'StrongPass123!' }",
+        "Verify response status code is 201",
+        "Check that the response contains a user identifier"
+      ],
+      "expected_results": [
+        "Response status code 201 Created",
+        "User record exists in database with matching username",
+        "Returned payload includes a valid user ID"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [
+        "BR001"
+      ],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/auth/login",
+            "handler": "login",
+            "file": "routers/auth.py",
+            "response_type": "TokenPair"
+          },
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "routers/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user.role != 'admin'"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          },
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "create_user",
+          "login",
+          "me",
+          "register",
+          "verify_password",
+          "rotate_refresh",
+          "authenticate",
+          "test_register_login_and_current_user"
+        ],
+        "file": "services/auth.py",
+        "symbol": "register",
+        "route": "/api/auth/register",
+        "method": "POST",
+        "request_model": "RegisterRequest",
+        "response_model": "UserOut"
+      }
+    },
+    {
+      "id": "B6-TC003",
+      "title": "Rotate refresh token with missing jti",
+      "description": "Trigger rotate_refresh branch where payload lacks 'jti' key, causing a KeyError.",
+      "category": "exception/integration",
+      "priority": "medium",
+      "severity": "critical",
+      "preconditions": [],
+      "steps": [
+        "Prepare refresh token payload without 'jti' field",
+        "Call rotate_refresh function with this payload"
+      ],
+      "expected_results": [
+        "Function raises KeyError",
+        "Error is handled and returns appropriate error response"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [
+        "BR003"
+      ],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/api/auth/refresh",
+            "handler": "refresh",
+            "file": "routers/auth.py",
+            "request_type": "RefreshRequest",
+            "response_type": "TokenPair"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: payload['kind'] != expected_kind or payload['exp'] < time.time()"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          },
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py"
+        ],
+        "symbols": [
+          "refresh",
+          "rotate_refresh",
+          "register",
+          "verify_password",
+          "get_current_user",
+          "decode_token"
+        ],
+        "file": "services/auth.py",
+        "symbol": "rotate_refresh",
+        "route": "/api/auth/refresh",
+        "method": "POST",
+        "request_model": "RefreshRequest",
+        "response_model": "TokenPair"
+      }
+    },
+    {
+      "id": "B6-TC004",
+      "title": "Verify password with malformed hash format",
+      "description": "Test verify_password when stored hash does not contain ':' separator, leading to IndexError.",
+      "category": "exception/integration",
+      "priority": "low",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Store a password hash missing ':' delimiter",
+        "Call verify_password with correct password and malformed hash"
+      ],
+      "expected_results": [
+        "Function raises IndexError",
+        "Error is caught and returns InvalidCredentialsError"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [
+        "BR004"
+      ],
+      "traceability": {
+        "api_routes": [],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: user is None or not verify_password(password, user.password_hash)"
+          },
+          {
+            "files": [
+              "schemas.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not any((c.isupper() for c in value)) or not any((c.isdigit() for c in value))"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: stored is None or stored.revoked"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/login",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke login",
+              "Call services.auth.issue_pair",
+              "Call services.auth.authenticate",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "login"
+          },
+          {
+            "name": "POST /api/auth/refresh",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke refresh",
+              "Call services.auth.rotate_refresh",
+              "Call schemas.TokenPair",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "refresh"
+          },
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "services/auth.py",
+          "schemas.py",
+          "routers/auth.py"
+        ],
+        "symbols": [
+          "verify_password",
+          "register",
+          "rotate_refresh",
+          "authenticate"
+        ],
+        "file": "services/auth.py",
+        "symbol": "verify_password"
+      }
+    },
+    {
+      "id": "B6-TC005",
+      "title": "Validate token expiration boundary",
+      "description": "Check that a token expiring at the current timestamp is treated as expired.",
+      "category": "boundary",
+      "priority": "medium",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Create token payload with 'exp' field set to current Unix time",
+        "Pass token to authentication validation logic"
+      ],
+      "expected_results": [
+        "Token is rejected as expired",
+        "InvalidTokenError is raised"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [
+        "BR005"
+      ],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/api/auth/me",
+            "handler": "me",
+            "file": "routers/auth.py",
+            "response_type": "UserOut"
+          },
+          {
+            "method": "POST",
+            "route": "/api/auth/register",
+            "handler": "create_user",
+            "file": "routers/auth.py",
+            "request_type": "RegisterRequest",
+            "response_type": "UserOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: payload['kind'] != expected_kind or payload['exp'] < time.time()"
+          },
+          {
+            "files": [
+              "services/auth.py"
+            ],
+            "symbols": [],
+            "description": "Condition: db.scalar(select(User).where(User.username == payload.username))"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /api/auth/register",
+            "files": [
+              "routers/auth.py"
+            ],
+            "steps": [
+              "Invoke create_user",
+              "Call services.auth.register",
+              "Call fastapi.HTTPException",
+              "Call str"
+            ],
+            "components": [],
+            "entrypoint": "create_user"
+          }
+        ],
+        "source_files": [
+          "routers/auth.py",
+          "services/auth.py",
+          "tests/test_api.py"
+        ],
+        "symbols": [
+          "me",
+          "create_user",
+          "rotate_refresh",
+          "issue_pair",
+          "register",
+          "decode_token",
+          "get_current_user"
+        ],
+        "file": "routers/auth.py",
+        "symbol": "create_user"
+      }
+    }
+  ],
+  "coverage_summary": {
+    "requirement_coverage": 100.0,
+    "category_coverage": 100.0,
+    "function_coverage": 89.47,
+    "branch_coverage": 30.43,
+    "target_coverage": 47.69,
+    "completeness": 69.05
+  },
+  "total_generated": 24,
+  "total_after_deduplication": 23,
+  "generation_status": "partial_coverage_incomplete",
+  "generation_reason": "all_providers_unavailable",
+  "uncovered_requirements": [
+    {
+      "symbol": "get_db",
+      "requirement": "function",
+      "category": "positive",
+      "requirement_id": "get_db|positive|function"
+    },
+    {
+      "symbol": "get_current_user",
+      "requirement": "user is None",
+      "category": "positive",
+      "requirement_id": "get_current_user|positive|user-is-none"
+    },
+    {
+      "symbol": "get_current_user",
+      "requirement": "user is None",
+      "category": "negative",
+      "requirement_id": "get_current_user|negative|user-is-none"
+    },
+    {
+      "symbol": "get_current_user",
+      "requirement": "not (user is None)",
+      "category": "positive",
+      "requirement_id": "get_current_user|positive|not-user-is-none"
+    },
+    {
+      "symbol": "get_current_user",
+      "requirement": "missing key access may raise KeyError: payload['sub']",
+      "category": "positive",
+      "requirement_id": "get_current_user|positive|missing-key-access-may-raise-keyerror-payload-sub"
+    },
+    {
+      "symbol": "get_current_user",
+      "requirement": "missing key access may raise KeyError: payload['sub']",
+      "category": "negative",
+      "requirement_id": "get_current_user|negative|missing-key-access-may-raise-keyerror-payload-sub"
+    },
+    {
+      "symbol": "require_admin",
+      "requirement": "not (user.role != 'admin')",
+      "category": "positive",
+      "requirement_id": "require_admin|positive|not-user-role-admin"
+    },
+    {
+      "symbol": "verify_password",
+      "requirement": "missing key access may raise KeyError: hash_password(password, bytes.fromhex(salt_hex)).split(':', 1)[1]",
+      "category": "positive",
+      "requirement_id": "verify_password|positive|missing-key-access-may-raise-keyerror-hash-password-password-bytes-fromhex-salt-hex-split-1-1"
+    },
+    {
+      "symbol": "verify_password",
+      "requirement": "missing key access may raise KeyError: hash_password(password, bytes.fromhex(salt_hex)).split(':', 1)[1]",
+      "category": "negative",
+      "requirement_id": "verify_password|negative|missing-key-access-may-raise-keyerror-hash-password-password-bytes-fromhex-salt-hex-split-1-1"
+    },
+    {
+      "symbol": "decode_token",
+      "requirement": "not hmac.compare_digest(signature_text, expected)",
+      "category": "positive",
+      "requirement_id": "decode_token|positive|not-hmac-compare-digest-signature-text-expected"
+    },
+    {
+      "symbol": "decode_token",
+      "requirement": "not hmac.compare_digest(signature_text, expected)",
+      "category": "negative",
+      "requirement_id": "decode_token|negative|not-hmac-compare-digest-signature-text-expected"
+    },
+    {
+      "symbol": "decode_token",
+      "requirement": "not (not hmac.compare_digest(signature_text, expected))",
+      "category": "positive",
+      "requirement_id": "decode_token|positive|not-not-hmac-compare-digest-signature-text-expected"
+    },
+    {
+      "symbol": "decode_token",
+      "requirement": "not (not hmac.compare_digest(signature_text, expected))",
+      "category": "negative",
+      "requirement_id": "decode_token|negative|not-not-hmac-compare-digest-signature-text-expected"
+    },
+    {
+      "symbol": "decode_token",
+      "requirement": "payload['kind'] != expected_kind or payload['exp'] < time.time()",
+      "category": "positive",
+      "requirement_id": "decode_token|positive|payload-kind-expected-kind-or-payload-exp-time-time"
+    },
+    {
+      "symbol": "decode_token",
+      "requirement": "not (payload['kind'] != expected_kind or payload['exp'] < time.time())",
+      "category": "positive",
+      "requirement_id": "decode_token|positive|not-payload-kind-expected-kind-or-payload-exp-time-time"
+    },
+    {
+      "symbol": "decode_token",
+      "requirement": "missing key access may raise KeyError: payload['kind']",
+      "category": "positive",
+      "requirement_id": "decode_token|positive|missing-key-access-may-raise-keyerror-payload-kind"
+    },
+    {
+      "symbol": "decode_token",
+      "requirement": "missing key access may raise KeyError: payload['kind']",
+      "category": "negative",
+      "requirement_id": "decode_token|negative|missing-key-access-may-raise-keyerror-payload-kind"
+    },
+    {
+      "symbol": "decode_token",
+      "requirement": "missing key access may raise KeyError: payload['exp']",
+      "category": "positive",
+      "requirement_id": "decode_token|positive|missing-key-access-may-raise-keyerror-payload-exp"
+    },
+    {
+      "symbol": "decode_token",
+      "requirement": "missing key access may raise KeyError: payload['exp']",
+      "category": "negative",
+      "requirement_id": "decode_token|negative|missing-key-access-may-raise-keyerror-payload-exp"
+    },
+    {
+      "symbol": "register",
+      "requirement": "db.scalar(select(User).where(User.username == payload.username))",
+      "category": "positive",
+      "requirement_id": "register|positive|db-scalar-select-user-where-user-username-payload-username"
+    },
+    {
+      "symbol": "register",
+      "requirement": "db.scalar(select(User).where(User.username == payload.username))",
+      "category": "negative",
+      "requirement_id": "register|negative|db-scalar-select-user-where-user-username-payload-username"
+    },
+    {
+      "symbol": "register",
+      "requirement": "not (db.scalar(select(User).where(User.username == payload.username)))",
+      "category": "positive",
+      "requirement_id": "register|positive|not-db-scalar-select-user-where-user-username-payload-username"
+    },
+    {
+      "symbol": "register",
+      "requirement": "not (db.scalar(select(User).where(User.username == payload.username)))",
+      "category": "negative",
+      "requirement_id": "register|negative|not-db-scalar-select-user-where-user-username-payload-username"
+    },
+    {
+      "symbol": "rotate_refresh",
+      "requirement": "stored is None or stored.revoked",
+      "category": "positive",
+      "requirement_id": "rotate_refresh|positive|stored-is-none-or-stored-revoked"
+    },
+    {
+      "symbol": "rotate_refresh",
+      "requirement": "stored is None or stored.revoked",
+      "category": "negative",
+      "requirement_id": "rotate_refresh|negative|stored-is-none-or-stored-revoked"
+    },
+    {
+      "symbol": "rotate_refresh",
+      "requirement": "not (stored is None or stored.revoked)",
+      "category": "positive",
+      "requirement_id": "rotate_refresh|positive|not-stored-is-none-or-stored-revoked"
+    },
+    {
+      "symbol": "rotate_refresh",
+      "requirement": "not (stored is None or stored.revoked)",
+      "category": "negative",
+      "requirement_id": "rotate_refresh|negative|not-stored-is-none-or-stored-revoked"
+    },
+    {
+      "symbol": "rotate_refresh",
+      "requirement": "missing key access may raise KeyError: payload['jti']",
+      "category": "positive",
+      "requirement_id": "rotate_refresh|positive|missing-key-access-may-raise-keyerror-payload-jti"
+    },
+    {
+      "symbol": "rotate_refresh",
+      "requirement": "missing key access may raise KeyError: payload['jti']",
+      "category": "negative",
+      "requirement_id": "rotate_refresh|negative|missing-key-access-may-raise-keyerror-payload-jti"
+    },
+    {
+      "symbol": "test_register_login_and_current_user",
+      "requirement": "missing key access may raise KeyError: tokens['access_token']",
+      "category": "positive",
+      "requirement_id": "test_register_login_and_current_user|positive|missing-key-access-may-raise-keyerror-tokens-access-token"
+    },
+    {
+      "symbol": "test_register_login_and_current_user",
+      "requirement": "missing key access may raise KeyError: tokens['access_token']",
+      "category": "negative",
+      "requirement_id": "test_register_login_and_current_user|negative|missing-key-access-may-raise-keyerror-tokens-access-token"
+    },
+    {
+      "symbol": "test_register_login_and_current_user",
+      "requirement": "missing key access may raise KeyError: tokens['refresh_token']",
+      "category": "positive",
+      "requirement_id": "test_register_login_and_current_user|positive|missing-key-access-may-raise-keyerror-tokens-refresh-token"
+    },
+    {
+      "symbol": "test_register_login_and_current_user",
+      "requirement": "missing key access may raise KeyError: tokens['refresh_token']",
+      "category": "negative",
+      "requirement_id": "test_register_login_and_current_user|negative|missing-key-access-may-raise-keyerror-tokens-refresh-token"
+    },
+    {
+      "symbol": "test_authorization_required",
+      "requirement": "function",
+      "category": "positive",
+      "requirement_id": "test_authorization_required|positive|function"
+    }
+  ]
+}

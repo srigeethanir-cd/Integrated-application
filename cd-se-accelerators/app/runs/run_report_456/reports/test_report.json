@@ -1,0 +1,79 @@
+{
+  "pipeline_run_id": "run_report_456",
+  "project_id": null,
+  "framework": "React",
+  "generated_at": "2026-08-18T12:53:43Z",
+  "quality_score": {
+    "overall_score": 93,
+    "max_score": 100,
+    "execution_score": 90.0,
+    "coverage_score": 86.5,
+    "coverage_status": "available",
+    "generation_score": 100.0,
+    "traceability_score": 100.0,
+    "breakdown": {
+      "test_execution": "90.0% (weight: 40%)",
+      "coverage": "86.5% (weight: 25%)",
+      "generation_completeness": "100.0% (weight: 15%)",
+      "traceability_completeness": "100.0% (weight: 20%)",
+      "coverage_status": "included"
+    }
+  },
+  "execution_summary": {
+    "total_tests": 10,
+    "passed": 9,
+    "failed": 1,
+    "skipped": 0,
+    "pass_rate": 90.0,
+    "execution_time_ms": 2500.0,
+    "execution_time_seconds": 2.5
+  },
+  "coverage": {
+    "statements": 88.0,
+    "branches": 82.0,
+    "functions": 90.0,
+    "lines": 86.0,
+    "coverage_status": null
+  },
+  "test_files": [
+    {
+      "file_name": "LoginForm.test.jsx",
+      "file_path": "tests/react/LoginForm.test.jsx",
+      "framework": "React",
+      "component": "LoginForm",
+      "total_tests": 10,
+      "passed": 9,
+      "failed": 1,
+      "skipped": 0,
+      "test_case_ids": [
+        "TC-LOGIN-001",
+        "TC-LOGIN-002"
+      ]
+    }
+  ],
+  "passed_tests": [
+    {
+      "test_case_id": "TC-LOGIN-001",
+      "test_name": "Verify handleSubmit submits form",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'Logs in user'."
+    }
+  ],
+  "failures": [
+    {
+      "test_case_id": "TC-LOGIN-002",
+      "test_name": "Verify error banner renders on failure",
+      "component": "LoginForm",
+      "file_name": "LoginForm.test.jsx",
+      "expected": "Invalid credentials",
+      "actual": "null",
+      "error_message": "Expected element with text 'Invalid credentials' not found in document.",
+      "stack_trace": null,
+      "line_number": "42",
+      "suggested_reason": "The expected UI element or text was not rendered in the component output."
+    }
+  ],
+  "markdown_report": "# Test Execution & Quality Report\n\n**Pipeline Run ID:** `run_report_456`  \n**Generated At:** `2026-08-18 12:53:43 UTC`  \n**Framework:** React  \n**Overall Quality Score:** **93/100**\n\n---\n\n## TEST EXECUTION SUMMARY\n\n- **Total Tests:** 10\n- **Passed:** 9\n- **Failed:** 1\n- **Skipped:** 0\n- **Pass Rate:** 90.0%\n- **Execution Time:** 2.5s\n- **Overall Quality:** 93/100\n\n### Quality Score Breakdown:\n- **Test Execution:** 90.0% (weight: 40%)\n- **Coverage:** 86.5% (weight: 25%)\n- **Test Generation Completeness:** 100.0% (weight: 15%)\n- **Traceability Completeness:** 100.0% (weight: 20%)\n\n---\n\n## COVERAGE\n\n- **Statements:** 88.0%\n- **Branches:** 82.0%\n- **Functions:** 90.0%\n- **Lines:** 86.0%\n\n---\n\n## TEST FILE SUMMARY\n\n- \u2715 **LoginForm.test.jsx** \u2014 9/10 passed (1 failed)\n\n---\n\n## WHY TESTS PASSED\n\n\u2713 **[TC-LOGIN-001]** Verify handleSubmit submits form\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'Logs in user'.\n\n---\n\n## FAILURE REPORT\n\n### \u2715 [TC-LOGIN-002] Verify error banner renders on failure\n- **Component:** `LoginForm`\n- **Test File:** `LoginForm.test.jsx` (Line 42)\n- **Expected:** Invalid credentials\n- **Actual:** null\n- **Suggested Reason:** The expected UI element or text was not rendered in the component output.\n\n```\nExpected element with text 'Invalid credentials' not found in document.\n```\n"
+}

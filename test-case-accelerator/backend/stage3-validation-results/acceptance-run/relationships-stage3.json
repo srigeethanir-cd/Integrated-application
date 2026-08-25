@@ -1,0 +1,1869 @@
+{
+  "project_summary": "Python project with 7 modules, 8 callables, 7 classes, and 3 API endpoints.",
+  "architecture": "FastAPI application with deterministic Python static analysis.",
+  "modules": [
+    {
+      "name": "database",
+      "file": "database.py",
+      "imports": [
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "main",
+      "file": "main.py",
+      "imports": [
+        "database",
+        "fastapi",
+        "routers.library"
+      ]
+    },
+    {
+      "name": "models",
+      "file": "models.py",
+      "imports": [
+        "database",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "routers.library",
+      "file": "routers/library.py",
+      "imports": [
+        "database",
+        "fastapi",
+        "schemas",
+        "services.library",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "schemas",
+      "file": "schemas.py",
+      "imports": [
+        "pydantic"
+      ]
+    },
+    {
+      "name": "services.library",
+      "file": "services/library.py",
+      "imports": [
+        "models",
+        "schemas",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "tests.test_api",
+      "file": "tests/test_api.py",
+      "imports": [
+        "fastapi.testclient",
+        "main"
+      ]
+    }
+  ],
+  "imports": [
+    {
+      "module": "sqlalchemy",
+      "file": "database.py",
+      "names": [
+        "create_engine"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "database.py",
+      "names": [
+        "DeclarativeBase",
+        "sessionmaker"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "main.py",
+      "names": [
+        "Base",
+        "engine"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi",
+      "file": "main.py",
+      "names": [
+        "FastAPI"
+      ],
+      "level": 0
+    },
+    {
+      "module": "routers.library",
+      "file": "main.py",
+      "names": [
+        "router"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "models.py",
+      "names": [
+        "Base"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy",
+      "file": "models.py",
+      "names": [
+        "ForeignKey",
+        "String",
+        "UniqueConstraint"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "models.py",
+      "names": [
+        "Mapped",
+        "mapped_column",
+        "relationship"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "routers/library.py",
+      "names": [
+        "get_db"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi",
+      "file": "routers/library.py",
+      "names": [
+        "APIRouter",
+        "Depends",
+        "HTTPException"
+      ],
+      "level": 0
+    },
+    {
+      "module": "schemas",
+      "file": "routers/library.py",
+      "names": [
+        "AuthorCreate",
+        "BookCreate",
+        "BookOut"
+      ],
+      "level": 0
+    },
+    {
+      "module": "services.library",
+      "file": "routers/library.py",
+      "names": [
+        "add_book",
+        "create_author",
+        "joined_books"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "routers/library.py",
+      "names": [
+        "Session"
+      ],
+      "level": 0
+    },
+    {
+      "module": "pydantic",
+      "file": "schemas.py",
+      "names": [
+        "BaseModel",
+        "ConfigDict",
+        "Field"
+      ],
+      "level": 0
+    },
+    {
+      "module": "models",
+      "file": "services/library.py",
+      "names": [
+        "Author",
+        "Book",
+        "Publisher"
+      ],
+      "level": 0
+    },
+    {
+      "module": "schemas",
+      "file": "services/library.py",
+      "names": [
+        "AuthorCreate",
+        "BookCreate"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy",
+      "file": "services/library.py",
+      "names": [
+        "select"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "services/library.py",
+      "names": [
+        "Session",
+        "joinedload"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi.testclient",
+      "file": "tests/test_api.py",
+      "names": [
+        "TestClient"
+      ],
+      "level": 0
+    },
+    {
+      "module": "main",
+      "file": "tests/test_api.py",
+      "names": [
+        "app"
+      ],
+      "level": 0
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_db",
+      "qualified_name": "database.get_db",
+      "file": "database.py",
+      "line": 7,
+      "end_line": 12,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "SessionLocal",
+        "db.close"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "SessionLocal()",
+        "db.close",
+        "yield db"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "authors",
+      "qualified_name": "routers.library.authors",
+      "file": "routers/library.py",
+      "line": 8,
+      "end_line": 9,
+      "is_async": false,
+      "parameters": [
+        "payload",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.post('/authors', status_code=201)"
+      ],
+      "calls": [
+        "services.library.create_author"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "books",
+      "qualified_name": "routers.library.books",
+      "file": "routers/library.py",
+      "line": 11,
+      "end_line": 15,
+      "is_async": false,
+      "parameters": [
+        "author_id",
+        "payload",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.post('/authors/{author_id}/books', response_model=BookOut, status_code=201)"
+      ],
+      "calls": [
+        "fastapi.HTTPException",
+        "services.library.add_book",
+        "str"
+      ],
+      "exceptions": [
+        "HTTPException"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "list_books",
+      "qualified_name": "routers.library.list_books",
+      "file": "routers/library.py",
+      "line": 17,
+      "end_line": 18,
+      "is_async": false,
+      "parameters": [
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.get('/books', response_model=list[BookOut])"
+      ],
+      "calls": [
+        "services.library.joined_books"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "add_book",
+      "qualified_name": "services.library.add_book",
+      "file": "services/library.py",
+      "line": 7,
+      "end_line": 15,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "author_id",
+        "payload"
+      ],
+      "return_type": "Book",
+      "decorators": [],
+      "calls": [
+        "LookupError",
+        "db.add",
+        "db.commit",
+        "db.get",
+        "db.refresh",
+        "db.scalar",
+        "models.Book",
+        "models.Publisher",
+        "sqlalchemy.select",
+        "sqlalchemy.select().where"
+      ],
+      "exceptions": [
+        "LookupError"
+      ],
+      "sqlalchemy_model_usage": [
+        "Author",
+        "db.add",
+        "db.commit",
+        "db.get",
+        "db.refresh",
+        "db.scalar"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "create_author",
+      "qualified_name": "services.library.create_author",
+      "file": "services/library.py",
+      "line": 5,
+      "end_line": 6,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "payload"
+      ],
+      "return_type": "Author",
+      "decorators": [],
+      "calls": [
+        "db.add",
+        "db.commit",
+        "db.refresh",
+        "models.Author"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.add",
+        "db.commit",
+        "db.refresh"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "joined_books",
+      "qualified_name": "services.library.joined_books",
+      "file": "services/library.py",
+      "line": 16,
+      "end_line": 18,
+      "is_async": false,
+      "parameters": [
+        "db"
+      ],
+      "return_type": "list[Book]",
+      "decorators": [],
+      "calls": [
+        "db.scalars",
+        "list",
+        "sqlalchemy.orm.joinedload",
+        "sqlalchemy.select",
+        "sqlalchemy.select().options"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.scalars"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "test_author_and_missing_author_book",
+      "qualified_name": "tests.test_api.test_author_and_missing_author_book",
+      "file": "tests/test_api.py",
+      "line": 4,
+      "end_line": 7,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "client.post"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "classes": [
+    {
+      "name": "Base",
+      "qualified_name": "database.Base",
+      "file": "database.py",
+      "line": 5,
+      "end_line": 6,
+      "fields": [],
+      "bases": [
+        "DeclarativeBase"
+      ],
+      "inheritance": [
+        "DeclarativeBase"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "DeclarativeBase"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "Author",
+      "qualified_name": "models.Author",
+      "file": "models.py",
+      "line": 5,
+      "end_line": 9,
+      "fields": [
+        "__tablename__",
+        "id",
+        "name",
+        "books"
+      ],
+      "bases": [
+        "Base"
+      ],
+      "inheritance": [
+        "Base"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "mapped_column",
+        "relationship"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "Book",
+      "qualified_name": "models.Book",
+      "file": "models.py",
+      "line": 17,
+      "end_line": 26,
+      "fields": [
+        "__tablename__",
+        "__table_args__",
+        "id",
+        "title",
+        "isbn",
+        "author_id",
+        "publisher_id",
+        "author",
+        "publisher"
+      ],
+      "bases": [
+        "Base"
+      ],
+      "inheritance": [
+        "Base"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "ForeignKey",
+        "UniqueConstraint",
+        "mapped_column",
+        "relationship"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "Publisher",
+      "qualified_name": "models.Publisher",
+      "file": "models.py",
+      "line": 11,
+      "end_line": 15,
+      "fields": [
+        "__tablename__",
+        "id",
+        "name",
+        "books"
+      ],
+      "bases": [
+        "Base"
+      ],
+      "inheritance": [
+        "Base"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "mapped_column",
+        "relationship"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "AuthorCreate",
+      "qualified_name": "schemas.AuthorCreate",
+      "file": "schemas.py",
+      "line": 2,
+      "end_line": 3,
+      "fields": [
+        "name"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "BookCreate",
+      "qualified_name": "schemas.BookCreate",
+      "file": "schemas.py",
+      "line": 4,
+      "end_line": 7,
+      "fields": [
+        "title",
+        "isbn",
+        "publisher_name"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "BookOut",
+      "qualified_name": "schemas.BookOut",
+      "file": "schemas.py",
+      "line": 8,
+      "end_line": 12,
+      "fields": [
+        "model_config",
+        "id",
+        "title",
+        "isbn"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "symbol_table": [
+    {
+      "name": "Base",
+      "qualified_name": "database.Base",
+      "kind": "class",
+      "file": "database.py",
+      "line": 5,
+      "end_line": 6,
+      "parent": null
+    },
+    {
+      "name": "get_db",
+      "qualified_name": "database.get_db",
+      "kind": "function",
+      "file": "database.py",
+      "line": 7,
+      "end_line": 12,
+      "parent": null
+    },
+    {
+      "name": "Author",
+      "qualified_name": "models.Author",
+      "kind": "class",
+      "file": "models.py",
+      "line": 5,
+      "end_line": 9,
+      "parent": null
+    },
+    {
+      "name": "Book",
+      "qualified_name": "models.Book",
+      "kind": "class",
+      "file": "models.py",
+      "line": 17,
+      "end_line": 26,
+      "parent": null
+    },
+    {
+      "name": "Publisher",
+      "qualified_name": "models.Publisher",
+      "kind": "class",
+      "file": "models.py",
+      "line": 11,
+      "end_line": 15,
+      "parent": null
+    },
+    {
+      "name": "authors",
+      "qualified_name": "routers.library.authors",
+      "kind": "function",
+      "file": "routers/library.py",
+      "line": 8,
+      "end_line": 9,
+      "parent": null
+    },
+    {
+      "name": "books",
+      "qualified_name": "routers.library.books",
+      "kind": "function",
+      "file": "routers/library.py",
+      "line": 11,
+      "end_line": 15,
+      "parent": null
+    },
+    {
+      "name": "list_books",
+      "qualified_name": "routers.library.list_books",
+      "kind": "function",
+      "file": "routers/library.py",
+      "line": 17,
+      "end_line": 18,
+      "parent": null
+    },
+    {
+      "name": "AuthorCreate",
+      "qualified_name": "schemas.AuthorCreate",
+      "kind": "class",
+      "file": "schemas.py",
+      "line": 2,
+      "end_line": 3,
+      "parent": null
+    },
+    {
+      "name": "BookCreate",
+      "qualified_name": "schemas.BookCreate",
+      "kind": "class",
+      "file": "schemas.py",
+      "line": 4,
+      "end_line": 7,
+      "parent": null
+    },
+    {
+      "name": "BookOut",
+      "qualified_name": "schemas.BookOut",
+      "kind": "class",
+      "file": "schemas.py",
+      "line": 8,
+      "end_line": 12,
+      "parent": null
+    },
+    {
+      "name": "add_book",
+      "qualified_name": "services.library.add_book",
+      "kind": "function",
+      "file": "services/library.py",
+      "line": 7,
+      "end_line": 15,
+      "parent": null
+    },
+    {
+      "name": "create_author",
+      "qualified_name": "services.library.create_author",
+      "kind": "function",
+      "file": "services/library.py",
+      "line": 5,
+      "end_line": 6,
+      "parent": null
+    },
+    {
+      "name": "joined_books",
+      "qualified_name": "services.library.joined_books",
+      "kind": "function",
+      "file": "services/library.py",
+      "line": 16,
+      "end_line": 18,
+      "parent": null
+    },
+    {
+      "name": "test_author_and_missing_author_book",
+      "qualified_name": "tests.test_api.test_author_and_missing_author_book",
+      "kind": "function",
+      "file": "tests/test_api.py",
+      "line": 4,
+      "end_line": 7,
+      "parent": null
+    }
+  ],
+  "call_graph": [
+    {
+      "caller": "database",
+      "callee": "sqlalchemy.create_engine",
+      "file": "database.py",
+      "line": 3
+    },
+    {
+      "caller": "database",
+      "callee": "sqlalchemy.orm.sessionmaker",
+      "file": "database.py",
+      "line": 4
+    },
+    {
+      "caller": "database.get_db",
+      "callee": "SessionLocal",
+      "file": "database.py",
+      "line": 8
+    },
+    {
+      "caller": "database.get_db",
+      "callee": "db.close",
+      "file": "database.py",
+      "line": 12
+    },
+    {
+      "caller": "main",
+      "callee": "database.Base.metadata.create_all",
+      "file": "main.py",
+      "line": 4
+    },
+    {
+      "caller": "main",
+      "callee": "fastapi.FastAPI",
+      "file": "main.py",
+      "line": 5
+    },
+    {
+      "caller": "main",
+      "callee": "app.include_router",
+      "file": "main.py",
+      "line": 6
+    },
+    {
+      "caller": "routers.library",
+      "callee": "fastapi.APIRouter",
+      "file": "routers/library.py",
+      "line": 6
+    },
+    {
+      "caller": "routers.library.authors",
+      "callee": "services.library.create_author",
+      "file": "routers/library.py",
+      "line": 9
+    },
+    {
+      "caller": "routers.library.books",
+      "callee": "services.library.add_book",
+      "file": "routers/library.py",
+      "line": 13
+    },
+    {
+      "caller": "routers.library.books",
+      "callee": "fastapi.HTTPException",
+      "file": "routers/library.py",
+      "line": 15
+    },
+    {
+      "caller": "routers.library.books",
+      "callee": "str",
+      "file": "routers/library.py",
+      "line": 15
+    },
+    {
+      "caller": "routers.library.list_books",
+      "callee": "services.library.joined_books",
+      "file": "routers/library.py",
+      "line": 18
+    },
+    {
+      "caller": "services.library.add_book",
+      "callee": "db.get",
+      "file": "services/library.py",
+      "line": 8
+    },
+    {
+      "caller": "services.library.add_book",
+      "callee": "LookupError",
+      "file": "services/library.py",
+      "line": 10
+    },
+    {
+      "caller": "services.library.add_book",
+      "callee": "db.scalar",
+      "file": "services/library.py",
+      "line": 11
+    },
+    {
+      "caller": "services.library.add_book",
+      "callee": "sqlalchemy.select",
+      "file": "services/library.py",
+      "line": 11
+    },
+    {
+      "caller": "services.library.add_book",
+      "callee": "sqlalchemy.select().where",
+      "file": "services/library.py",
+      "line": 11
+    },
+    {
+      "caller": "services.library.add_book",
+      "callee": "models.Publisher",
+      "file": "services/library.py",
+      "line": 13
+    },
+    {
+      "caller": "services.library.add_book",
+      "callee": "models.Book",
+      "file": "services/library.py",
+      "line": 14
+    },
+    {
+      "caller": "services.library.add_book",
+      "callee": "db.add",
+      "file": "services/library.py",
+      "line": 15
+    },
+    {
+      "caller": "services.library.add_book",
+      "callee": "db.commit",
+      "file": "services/library.py",
+      "line": 15
+    },
+    {
+      "caller": "services.library.add_book",
+      "callee": "db.refresh",
+      "file": "services/library.py",
+      "line": 15
+    },
+    {
+      "caller": "services.library.create_author",
+      "callee": "db.add",
+      "file": "services/library.py",
+      "line": 6
+    },
+    {
+      "caller": "services.library.create_author",
+      "callee": "db.commit",
+      "file": "services/library.py",
+      "line": 6
+    },
+    {
+      "caller": "services.library.create_author",
+      "callee": "db.refresh",
+      "file": "services/library.py",
+      "line": 6
+    },
+    {
+      "caller": "services.library.create_author",
+      "callee": "models.Author",
+      "file": "services/library.py",
+      "line": 6
+    },
+    {
+      "caller": "services.library.joined_books",
+      "callee": "sqlalchemy.orm.joinedload",
+      "file": "services/library.py",
+      "line": 17
+    },
+    {
+      "caller": "services.library.joined_books",
+      "callee": "sqlalchemy.orm.joinedload",
+      "file": "services/library.py",
+      "line": 17
+    },
+    {
+      "caller": "services.library.joined_books",
+      "callee": "sqlalchemy.select",
+      "file": "services/library.py",
+      "line": 17
+    },
+    {
+      "caller": "services.library.joined_books",
+      "callee": "sqlalchemy.select().options",
+      "file": "services/library.py",
+      "line": 17
+    },
+    {
+      "caller": "services.library.joined_books",
+      "callee": "db.scalars",
+      "file": "services/library.py",
+      "line": 18
+    },
+    {
+      "caller": "services.library.joined_books",
+      "callee": "list",
+      "file": "services/library.py",
+      "line": 18
+    },
+    {
+      "caller": "tests.test_api",
+      "callee": "fastapi.testclient.TestClient",
+      "file": "tests/test_api.py",
+      "line": 3
+    },
+    {
+      "caller": "tests.test_api.test_author_and_missing_author_book",
+      "callee": "client.post",
+      "file": "tests/test_api.py",
+      "line": 5
+    },
+    {
+      "caller": "tests.test_api.test_author_and_missing_author_book",
+      "callee": "client.post",
+      "file": "tests/test_api.py",
+      "line": 6
+    }
+  ],
+  "sqlalchemy_session_factories": [
+    {
+      "name": "SessionLocal",
+      "file": "database.py",
+      "factory": "sessionmaker",
+      "bind": "engine"
+    }
+  ],
+  "security_findings": [],
+  "components": [
+    {
+      "name": "database",
+      "responsibility": "Python module",
+      "files": [
+        "database.py"
+      ],
+      "dependencies": [
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "main",
+      "responsibility": "Application entrypoint",
+      "files": [
+        "main.py"
+      ],
+      "dependencies": [
+        "database",
+        "fastapi",
+        "routers.library"
+      ]
+    },
+    {
+      "name": "models",
+      "responsibility": "Python module",
+      "files": [
+        "models.py"
+      ],
+      "dependencies": [
+        "database",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "routers.library",
+      "responsibility": "Python module",
+      "files": [
+        "routers/library.py"
+      ],
+      "dependencies": [
+        "database",
+        "fastapi",
+        "schemas",
+        "services.library",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "schemas",
+      "responsibility": "Python module",
+      "files": [
+        "schemas.py"
+      ],
+      "dependencies": [
+        "pydantic"
+      ]
+    },
+    {
+      "name": "services.library",
+      "responsibility": "Python module",
+      "files": [
+        "services/library.py"
+      ],
+      "dependencies": [
+        "models",
+        "schemas",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "tests.test_api",
+      "responsibility": "Python module",
+      "files": [
+        "tests/test_api.py"
+      ],
+      "dependencies": [
+        "fastapi.testclient",
+        "main"
+      ]
+    }
+  ],
+  "entrypoints": [
+    {
+      "path": "main.py",
+      "symbol": null,
+      "purpose": "Application entrypoint"
+    },
+    {
+      "path": "routers/library.py",
+      "symbol": "authors",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "routers/library.py",
+      "symbol": "books",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "routers/library.py",
+      "symbol": "list_books",
+      "purpose": "API endpoint"
+    }
+  ],
+  "api_endpoints": [
+    {
+      "method": "POST",
+      "route": "/api/library/authors",
+      "handler": "authors",
+      "file": "routers/library.py",
+      "request_type": "AuthorCreate",
+      "response_type": null,
+      "request_model": "AuthorCreate",
+      "response_model": null,
+      "dependencies": [
+        "get_db"
+      ],
+      "success_status_codes": [
+        201
+      ],
+      "error_status_codes": [],
+      "exception_status_mappings": [],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "POST",
+      "route": "/api/library/authors/{author_id}/books",
+      "handler": "books",
+      "file": "routers/library.py",
+      "request_type": "BookCreate",
+      "response_type": "BookOut",
+      "request_model": "BookCreate",
+      "response_model": "BookOut",
+      "dependencies": [
+        "get_db"
+      ],
+      "success_status_codes": [
+        201
+      ],
+      "error_status_codes": [
+        404
+      ],
+      "exception_status_mappings": [
+        {
+          "exception": "HTTPException",
+          "status_code": 404
+        }
+      ],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "GET",
+      "route": "/api/library/books",
+      "handler": "list_books",
+      "file": "routers/library.py",
+      "request_type": null,
+      "response_type": "list[BookOut]",
+      "request_model": null,
+      "response_model": "list[BookOut]",
+      "dependencies": [
+        "get_db"
+      ],
+      "success_status_codes": [
+        200
+      ],
+      "error_status_codes": [],
+      "exception_status_mappings": [],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    }
+  ],
+  "data_models": [
+    {
+      "name": "Base",
+      "file": "database.py",
+      "fields": [],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "DeclarativeBase"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "Author",
+      "file": "models.py",
+      "fields": [
+        "__tablename__",
+        "id",
+        "name",
+        "books"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "foreign_keys": [],
+          "nullable": false,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "name",
+          "type": "String(100)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": true,
+          "unique": false
+        }
+      ],
+      "primary_keys": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "relationships": [
+        "books = relationship(back_populates='author', cascade='all, delete-orphan')"
+      ],
+      "constraints": [],
+      "indexes": [
+        "name"
+      ],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "mapped_column",
+        "relationship"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "Publisher",
+      "file": "models.py",
+      "fields": [
+        "__tablename__",
+        "id",
+        "name",
+        "books"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "foreign_keys": [],
+          "nullable": false,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "name",
+          "type": "String(100)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": true
+        }
+      ],
+      "primary_keys": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "relationships": [
+        "books = relationship(back_populates='publisher')"
+      ],
+      "constraints": [
+        "name"
+      ],
+      "indexes": [],
+      "unique_constraints": [
+        "name"
+      ],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "mapped_column",
+        "relationship"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "Book",
+      "file": "models.py",
+      "fields": [
+        "__tablename__",
+        "__table_args__",
+        "id",
+        "title",
+        "isbn",
+        "author_id",
+        "publisher_id",
+        "author",
+        "publisher"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "foreign_keys": [],
+          "nullable": false,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "title",
+          "type": "String(200)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "isbn",
+          "type": "String(20)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": true,
+          "unique": false
+        },
+        {
+          "name": "author_id",
+          "type": "int",
+          "primary_key": false,
+          "foreign_keys": [
+            "authors.id"
+          ],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "publisher_id",
+          "type": "int",
+          "primary_key": false,
+          "foreign_keys": [
+            "publishers.id"
+          ],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        }
+      ],
+      "primary_keys": [
+        "id"
+      ],
+      "foreign_keys": [
+        "author_id -> authors.id",
+        "publisher_id -> publishers.id"
+      ],
+      "relationships": [
+        "author = relationship(back_populates='books')",
+        "publisher = relationship(back_populates='books')"
+      ],
+      "constraints": [
+        "author_id -> authors.id",
+        "publisher_id -> publishers.id",
+        "UniqueConstraint('publisher_id', 'isbn')"
+      ],
+      "indexes": [
+        "isbn"
+      ],
+      "unique_constraints": [
+        "UniqueConstraint('publisher_id', 'isbn')"
+      ],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "ForeignKey",
+        "UniqueConstraint",
+        "mapped_column",
+        "relationship"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "AuthorCreate",
+      "file": "schemas.py",
+      "fields": [
+        "name"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "BookCreate",
+      "file": "schemas.py",
+      "fields": [
+        "title",
+        "isbn",
+        "publisher_name"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "BookOut",
+      "file": "schemas.py",
+      "fields": [
+        "model_config",
+        "id",
+        "title",
+        "isbn"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "pydantic_schemas": [
+    {
+      "name": "AuthorCreate",
+      "file": "schemas.py",
+      "fields": [
+        {
+          "name": "name",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": 2,
+          "max_length": 100,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    },
+    {
+      "name": "BookCreate",
+      "file": "schemas.py",
+      "fields": [
+        {
+          "name": "title",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": 1,
+          "max_length": 200,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "isbn",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": "^[0-9-]{10,20}$",
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "publisher_name",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": 2,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    },
+    {
+      "name": "BookOut",
+      "file": "schemas.py",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "isbn",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    }
+  ],
+  "business_rules": [
+    {
+      "description": "Condition: author is None",
+      "files": [
+        "services/library.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: publisher is None",
+      "files": [
+        "services/library.py"
+      ],
+      "symbols": []
+    }
+  ],
+  "execution_flows": [
+    {
+      "name": "POST /api/library/authors",
+      "entrypoint": "authors",
+      "steps": [
+        "Invoke authors",
+        "Call services.library.create_author"
+      ],
+      "components": [],
+      "files": [
+        "routers/library.py"
+      ]
+    },
+    {
+      "name": "POST /api/library/authors/{author_id}/books",
+      "entrypoint": "books",
+      "steps": [
+        "Invoke books",
+        "Call services.library.add_book",
+        "Call fastapi.HTTPException",
+        "Call str"
+      ],
+      "components": [],
+      "files": [
+        "routers/library.py"
+      ]
+    },
+    {
+      "name": "GET /api/library/books",
+      "entrypoint": "list_books",
+      "steps": [
+        "Invoke list_books",
+        "Call services.library.joined_books"
+      ],
+      "components": [],
+      "files": [
+        "routers/library.py"
+      ]
+    }
+  ],
+  "external_dependencies": [
+    "database",
+    "fastapi",
+    "main",
+    "models",
+    "pydantic",
+    "routers",
+    "schemas",
+    "services",
+    "sqlalchemy"
+  ],
+  "test_targets": [
+    {
+      "symbol": "get_db",
+      "file": "database.py",
+      "behavior": "Execute get_db",
+      "dependencies": [
+        "SessionLocal",
+        "close"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "authors",
+      "file": "routers/library.py",
+      "behavior": "Execute authors",
+      "dependencies": [
+        "create_author"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "books",
+      "file": "routers/library.py",
+      "behavior": "Execute books",
+      "dependencies": [
+        "HTTPException",
+        "add_book",
+        "str"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "list_books",
+      "file": "routers/library.py",
+      "behavior": "Execute list_books",
+      "dependencies": [
+        "joined_books"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "create_author",
+      "file": "services/library.py",
+      "behavior": "Execute create_author",
+      "dependencies": [
+        "Author",
+        "add",
+        "commit",
+        "refresh"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "add_book",
+      "file": "services/library.py",
+      "behavior": "Execute add_book",
+      "dependencies": [
+        "Book",
+        "LookupError",
+        "Publisher",
+        "add",
+        "commit",
+        "get",
+        "refresh",
+        "scalar",
+        "select",
+        "where"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "author is None",
+        "not (author is None)",
+        "publisher is None",
+        "not (publisher is None)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "joined_books",
+      "file": "services/library.py",
+      "behavior": "Execute joined_books",
+      "dependencies": [
+        "joinedload",
+        "list",
+        "options",
+        "scalars",
+        "select"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "test_author_and_missing_author_book",
+      "file": "tests/test_api.py",
+      "behavior": "Execute test_author_and_missing_author_book",
+      "dependencies": [
+        "post"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    }
+  ],
+  "ambiguities": [],
+  "analyzed_files": [
+    {
+      "path": "database.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "Base",
+        "get_db"
+      ]
+    },
+    {
+      "path": "main.py",
+      "purpose": "Python module",
+      "key_symbols": []
+    },
+    {
+      "path": "models.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "Author",
+        "Publisher",
+        "Book"
+      ]
+    },
+    {
+      "path": "routers/library.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "authors",
+        "books",
+        "list_books"
+      ]
+    },
+    {
+      "path": "schemas.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "AuthorCreate",
+        "BookCreate",
+        "BookOut"
+      ]
+    },
+    {
+      "path": "services/library.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "create_author",
+        "add_book",
+        "joined_books"
+      ]
+    },
+    {
+      "path": "tests/test_api.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "test_author_and_missing_author_book"
+      ]
+    }
+  ]
+}

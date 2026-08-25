@@ -1,0 +1,689 @@
+export type WorkflowStatus =
+  | 'pending'
+  | 'preparing_context'
+  | 'generating_scenarios'
+  | 'validating_scenarios'
+  | 'scenario_manual_review'
+  | 'generating_test_cases'
+  | 'validating_test_cases'
+  | 'testcase_manual_review'
+  | 'completed'
+  | 'failed'
+  | 'cancelled';
+
+export interface TechStack {
+  frontend: string;
+  backend: string;
+  database: string;
+  testing: string;
+  other: string;
+}
+
+export interface ManualInputPayload {
+  user_stories: string[];
+  acceptance_criteria: string[];
+  functional_requirements: string[];
+  non_functional_requirements: string[];
+  epics: string[];
+  features: string[];
+  business_rules: string[];
+  dependencies: string[];
+  constraints: string[];
+  image_ids: string[];
+  tech_stack: TechStack;
+}
+
+export interface WorkflowStartRequest {
+  source_type: 'manual';
+  input_payload?: ManualInputPayload;
+  document_session_id?: string;
+  mock_mode?: boolean;
+  confidence_threshold?: number;
+}
+
+export interface ParsedDocumentStory {
+  id?: string;
+  text: string;
+  acceptance_criteria: string[];
+}
+
+export interface DocumentSession {
+  session_id: string;
+  filename: string;
+  content: string;
+  stories: ParsedDocumentStory[];
+  expires_in_seconds: number;
+}
+
+export interface WorkflowStartResponse {
+  workflow_id: string;
+  project_id: string;
+  status: WorkflowStatus;
+  message?: string;
+  confidence_threshold?: number;
+}
+
+export interface ValidationIssue {
+  issue_code?: string;
+  severity?: string;
+  description: string;
+  affected_entity_id?: string | null;
+  recommendation?: string | null;
+}
+
+export interface ValidationResult {
+  confidence_score?: number;
+  score_breakdown?: Record<string, number>;
+  entity_scores?: Record<string, number>;
+  status?: string;
+  issues?: ValidationIssue[];
+  failed_entity_ids?: string[];
+  regeneration_instructions?: string[];
+}
+
+export interface Scenario {
+  scenario_id: string;
+  title: string;
+  description: string;
+  scenario_type?: string;
+  priority?: string;
+  preconditions?: string[];
+  test_data_requirements?: string[];
+  expected_business_outcome?: string;
+  requirement_ids?: string[];
+  feature_ids?: string[];
+  user_story_ids?: string[];
+  acceptance_criteria_ids?: string[];
+  confidence_score?: number;
+  validation_status?: string;
+  source_references?: string[];
+}
+
+export interface TestStep {
+  step_number: number;
+  action: string;
+  expected_result: string;
+}
+
+export interface TestCase {
+  test_case_id: string;
+  scenario_id: string;
+  title: string;
+  description: string;
+  test_case_type?: string;
+  priority?: string;
+  preconditions?: string[];
+  test_data?: Record<string, unknown>;
+  steps?: TestStep[];
+  postconditions?: string[];
+  requirement_ids?: string[];
+  acceptance_criteria_ids?: string[];
+  automation_candidate?: boolean;
+  confidence_score?: number;
+  validation_status?: string;
+  source_references?: string[];
+}
+
+export interface StructuredContext {
+  epics?: unknown[];
+  features?: unknown[];
+  user_stories?: unknown[];
+  acceptance_criteria?: unknown[];
+  requirements?: unknown[];
+  traceability_map?: unknown;
+  [key: string]: unknown;
+}
+
+export interface WorkflowEvent {
+  status: WorkflowStatus;
+  current_stage: string;
+  progress_percentage?: number;
+  message?: string;
+  confidence_score?: number;
+  scenario_attempt_count?: number;
+  testcase_attempt_count?: number;
+  errors?: string[];
+  confidence_threshold?: number;
+}
+
+export interface WorkflowResult {
+  workflow_id: string;
+  project_id?: string;
+  status: WorkflowStatus;
+  current_stage?: string;
+  structured_context?: StructuredContext | null;
+  scenarios: Scenario[];
+  scenario_validation?: ValidationResult | null;
+  test_cases: TestCase[];
+  testcase_validation?: ValidationResult | null;
+  manual_intervention_reason?: string;
+  confidence_threshold?: number;
+}
+
+export interface ResumeRequest {
+  stage: 'scenario_manual_review' | 'testcase_manual_review';
+  feedback: string;
+  corrected_data: Record<string, unknown>;
+}
+
+export interface ResultFilters {
+  search: string;
+  priority: string;
+  testType: string;
+  validationStatus: string;
+  requirement: string;
+  minConfidence: number;
+}
+
+export interface GeneratedScript {
+  script_id: string;
+  test_case_id: string;
+  scenario_id: string;
+  name: string;
+  application_url: string;
+  source: string;
+  download_path: string;
+  requirement_ids: string[];
+  user_story_ids: string[];
+  application_map_version?: string;
+  requirement_version?: string;
+  lifecycle_status: 'Valid' | 'Needs Review' | 'Obsolete' | 'Regeneration Required';
+  page_url?: string;
+  page_elements: Array<Record<string, unknown>>;
+  executable_steps: Array<Record<string, unknown>>;
+}
+
+export interface DiscoveredElement {
+  role?: string;
+  name?: string;
+  aria_label?: string;
+  label?: string;
+  test_id?: string;
+  tag: string;
+  input_type?: string;
+  placeholder?: string;
+  visible_text?: string;
+  href?: string;
+  page_url?: string;
+  page_title?: string;
+  parent_page?: string;
+  navigation_path?: string[];
+  dom_snapshot?: string;
+  application_state?: Record<string, unknown>;
+  discovery_timestamp?: string;
+  element_id?: string;
+  css_selector?: string;
+  locator_validated?: boolean;
+}
+
+export interface ScriptGeneration {
+  generation_id: string;
+  application_url: string;
+  reachable: boolean;
+  page_title?: string;
+  discovered_elements: DiscoveredElement[];
+  application_map: {
+    page_count?: number;
+    element_count?: number;
+    discovery_engine?: string;
+    pages?: Array<Record<string, unknown>>;
+    relationships?: Array<Record<string, unknown>>;
+  };
+  application_map_version?: string;
+  requirement_version?: string;
+  crawl_status: 'script_generation_completed';
+  crawl_report: CrawlReport;
+  scripts: GeneratedScript[];
+}
+
+export interface CrawlReport {
+  status: 'crawl_completed' | 'crawl_incomplete' | 'crawl_blocked';
+  failure_reason?: string;
+  blocked_url?: string;
+  last_successfully_loaded_page?: string;
+  actual_application_reached: boolean;
+  pages_discovered: number;
+  pages_completed: number;
+  pages_skipped: Array<{ url: string; reason: string }>;
+  remaining_crawl_queue: string[];
+  unprocessed_navigation_states: Array<Record<string, unknown>>;
+  challenge_evidence?: Array<Record<string, unknown>>;
+  recommended_corrective_action?: string;
+  events?: string[];
+  progress?: {
+    pages_discovered: number;
+    pages_completed: number;
+    pages_remaining: number;
+    current_crawl_depth: number;
+    elapsed_seconds: number;
+    estimated_completion_seconds?: number | null;
+  };
+}
+
+export interface CrawlAnalysis {
+  crawl_id: string;
+  application_url: string;
+  crawl_status: 'crawl_completed' | 'crawl_incomplete' | 'crawl_blocked';
+  page_title?: string;
+  pages_crawled: number;
+  elements_found: number;
+  crawl_report: CrawlReport;
+  application_map: ScriptGeneration['application_map'];
+  discovered_elements: ScriptGeneration['discovered_elements'];
+}
+
+export interface WorkflowCrawlJob {
+  job_id: string;
+  status: 'queued' | 'running' | 'stopping' | 'completed' | 'failed';
+  stop_requested: boolean;
+  progress: CrawlReport['progress'];
+  crawl: CrawlAnalysis | null;
+  generation: ScriptGeneration | null;
+  error: string | null;
+}
+
+export interface ExecutionJob {
+  job_id: string;
+  status: 'queued' | 'running' | 'completed' | 'failed';
+  report: ExecutionReport | null;
+  error: string | null;
+}
+
+export interface TraceabilityComparisonReport {
+  comparison_id: string;
+  execution_id: string;
+  generation_id: string;
+  summary: { total_artifacts: number; covered: number; partial?: number; missing: number; coverage_percentage: number; thresholds?: { missing_below: number; covered_above: number } };
+  scenario_coverage: Array<{
+    id: string;
+    title: string;
+    status: 'covered' | 'partial' | 'missing';
+    coverage_percentage: number;
+    matched_scripts: string[];
+    missing_terms: string[];
+  }>;
+  test_case_coverage: Array<{
+    id: string;
+    title: string;
+    status: 'covered' | 'partial' | 'missing';
+    coverage_percentage: number;
+    matched_scripts: string[];
+    missing_terms: string[];
+  }>;
+  gaps: Array<{
+    artifact_id: string;
+    artifact_title: string;
+    status?: 'covered' | 'partial' | 'missing';
+    gap_type: string;
+    coverage_percentage?: number;
+    details: string;
+  }>;
+  inconsistencies: Array<{ script_id: string; type: string; details: string }>;
+}
+
+export interface FailureAnalysis {
+  test_case_id: string;
+  issue_title?: string;
+  confidence_score: number;
+  affected_feature?: string;
+  mapped_user_stories: Array<{ id: string; title: string }>;
+  mapped_acceptance_criteria: Array<{ id: string; title: string }>;
+  test_scenario: Record<string, unknown>;
+  test_case_title?: string;
+  failed_step?: number;
+  failed_action?: string;
+  failure_stage?: string;
+  expected_result?: string;
+  actual_result?: string;
+  failure_reason: string;
+  /**
+   * Precise categories emitted by the backend (v2+).
+   * Legacy short labels kept for backwards compat with stored reports.
+   */
+  failure_category:
+    | 'Locator Failure'
+    | 'Navigation Failure'
+    | 'Application Feature Missing'
+    | 'Page Load Timeout'
+    | 'Assertion Failure'
+    | 'Environment Issue'
+    | 'Page Failure'
+    | 'Application Failure'
+    | 'Generated Script Defect'
+    | 'Invalid Test Step'
+    | 'Test Data Failure'
+    | 'API Failure'
+    | 'Authentication Failure'
+    | 'Application State Failure'
+    | 'Blocked Page'
+    | 'Dynamic Content Timeout'
+    // legacy
+    | 'Script Generation'
+    | 'Locator'
+    | 'Navigation'
+    | 'Application';
+  page_url?: string;
+  expected_page_url?: string;
+  page_title?: string;
+  http_response_status?: number;
+  execution_timestamp: string;
+  ui_element?: string;
+  exact_locator?: string;
+  locator_details: Record<string, unknown>;
+  alternate_locators_attempted: Array<Record<string, unknown>>;
+  locator_diagnosis?: string;
+  input_details: Record<string, unknown>;
+  navigation_details: Record<string, unknown>;
+  assertion_details: Record<string, unknown>;
+  api_details: Record<string, unknown>;
+  application_state_details: Record<string, unknown>;
+  captured_dom_text?: string;
+  reproduction_steps: string[];
+  severity: 'Critical' | 'High' | 'Medium' | 'Low';
+  priority: 'Critical' | 'High' | 'Medium' | 'Low';
+  developer_issue_recommended: boolean;
+  mapping_explanation?: string;
+  screenshot?: string;
+  /** Path to saved DOM snapshot HTML (on failure) */
+  dom_snapshot?: string;
+  /** Path to saved Playwright trace .zip (on failure) */
+  trace_path?: string;
+  console_logs: string[];
+  network_errors: string[];
+  stack_trace?: string;
+  seacrawl_attempted: boolean;
+  seacrawl_succeeded: boolean;
+  intelligence?: FailureIntelligence;
+}
+
+export interface RequirementMapping {
+  epic: Array<{ id: string; title: string }>;
+  feature: Array<{ id: string; title: string }>;
+  user_story: Array<{ id: string; title: string }>;
+  acceptance_criteria: Array<{ id: string; title: string }>;
+  scenario: Array<{ id: string; title: string }>;
+  test_case: Array<{ id: string; title: string }>;
+  requirement_ids: string[];
+}
+
+export interface DeveloperImplementationPlan {
+  ticket_title: string;
+  feature_affected: string;
+  user_story_reference: string[];
+  test_scenario_reference: string;
+  test_case_reference: string;
+  problem_summary: string;
+  missing_functionality: string;
+  root_cause_analysis: string;
+  expected_behavior: string;
+  actual_behavior: string;
+  ui_changes_required: string[];
+  backend_api_changes_required: string[];
+  database_changes: string[];
+  validation_rules: string[];
+  acceptance_criteria_to_satisfy: string[];
+  suggested_implementation_steps: string[];
+  priority: 'Critical' | 'High' | 'Medium' | 'Low';
+  estimated_development_effort: string;
+  jira_description: string;
+}
+
+export interface FailureIntelligence {
+  classification:
+    | 'APPLICATION_DEFECT'
+    | 'MISSING_FEATURE'
+    | 'REQUIREMENT_MISMATCH'
+    | 'AUTOMATION_DEFECT'
+    | 'ENVIRONMENT_FAILURE'
+    | 'TEST_DATA_FAILURE'
+    | 'INCONCLUSIVE';
+  root_cause_category:
+    | 'Missing application functionality'
+    | 'Incorrect business logic'
+    | 'UI implementation issue'
+    | 'Locator or automation issue'
+    | 'Requirement mismatch'
+    | 'Navigation problem'
+    | 'Validation issue'
+    | 'API/Backend failure'
+    | 'Environment or configuration issue';
+  confidence: number;
+  confidence_gate: {
+    threshold?: number;
+    passed?: boolean;
+    checks?: Record<string, boolean>;
+  };
+  is_application_issue: boolean;
+  deviation_step: Record<string, unknown>;
+  requirement_mapping: RequirementMapping;
+  root_cause_analysis: string;
+  expected_behavior: string;
+  actual_behavior: string;
+  evidence: {
+    screenshot?: string;
+    dom_snapshot?: string;
+    playwright_trace?: string;
+    failed_locator?: string;
+    page_url?: string;
+    console_findings: string[];
+    network_findings: string[];
+    evidence_summary: string[];
+  };
+  developer_implementation_plan?: DeveloperImplementationPlan;
+  automation_recommendation?: {
+    script_changes: string[];
+    locator_strategy: string[];
+    wait_strategy: string[];
+    assertion_strategy: string[];
+    navigation_strategy: string[];
+  };
+  acceptance_criteria_checklist: Array<{ id: string; criterion: string; satisfied: boolean; verification: string }>;
+  recommended_fix: string[];
+  retest_strategy: {
+    reuse_generation_id: boolean;
+    original_script_id: string;
+    steps: string[];
+    verification_scope: string[];
+    acceptance_criteria_checklist: Array<Record<string, unknown>>;
+  };
+}
+
+export interface DeveloperExecutionReport {
+  issue_title: string;
+  affected_feature_user_story: {
+    feature: string;
+    user_stories: string[];
+  };
+  problem_description: string;
+  expected_vs_actual_application_behavior: {
+    expected: string;
+    actual: string;
+  };
+  missing_functionality: string;
+  developer_implementation_requirements: {
+    ui: string[];
+    backend_api: string[];
+    validation: string[];
+    database: string[];
+  };
+  acceptance_criteria: Array<{ id: string; title: string }>;
+  priority: 'Critical' | 'High' | 'Medium' | 'Low';
+  severity?: 'Critical' | 'High' | 'Medium' | 'Low';
+  classification?: FailureIntelligence['classification'];
+  confidence?: number;
+  developer_issue_created?: boolean;
+  technical_failure_details?: FailureAnalysis;
+  root_cause_analysis?: string;
+  reproduction_steps?: string[];
+  recommended_script_correction?: string[];
+  recommended_application_fix?: string[];
+  mapping_explanation?: string;
+}
+
+export interface QaDiagnosticReport {
+  script_id: string;
+  status: 'passed' | 'failed' | 'skipped';
+  classification?: FailureIntelligence['classification'];
+  confidence?: number;
+  confidence_gate: FailureIntelligence['confidence_gate'];
+  locator?: string;
+  stack_trace?: string;
+  screenshots: string[];
+  dom_snapshot?: string;
+  network_errors: string[];
+  console_logs: string[];
+  playwright_trace?: string;
+  automation_recommendations: Record<string, string[]>;
+}
+
+export interface PlaywrightAuthentication {
+  auth_mode?: 'no_auth' | 'credentials' | 'existing_session';
+  identifier?: string;
+  email?: string;
+  username?: string;
+  password?: string;
+  session_state?: unknown;
+}
+
+export interface ExecutionReport {
+  execution_id: string;
+  generation_id: string;
+  execution_status: 'execution_started' | 'execution_completed';
+  mode: 'automated' | 'manual';
+  total_scripts: number;
+  passed_scripts: number;
+  failed_scripts: number;
+  skipped_scripts: number;
+  blocked_scripts?: number;
+  rejected_scripts: number;
+  execution_time_seconds: number;
+  success_percentage: number;
+  results: Array<{
+    script_id: string;
+    script_name: string;
+    test_case_id: string;
+    scenario_id: string;
+    status: 'passed' | 'failed' | 'skipped' | 'blocked';
+    duration_seconds: number;
+    error_message?: string;
+    failure?: FailureAnalysis;
+    traceability: Record<string, unknown>;
+  }>;
+  rejected_results: Array<{
+    test_case_id: string;
+    test_case_name: string;
+    status: 'rejected/unsupported';
+    reason: string;
+    duration_seconds: number;
+    screenshot?: string;
+    logs: string[];
+  }>;
+  overall_summary: {
+    total_tests: number;
+    executed_tests: number;
+    passed: number;
+    failed: number;
+    skipped: number;
+    blocked?: number;
+    rejected: number;
+    pass_rate: number;
+    application_failures?: number;
+    automation_failures?: number;
+    verified_fixes?: number;
+    inconclusive?: number;
+    pages_discovered?: number;
+    page_failures?: number;
+    locator_failures?: number;
+    environment_failures?: number;
+  };
+  requirement_coverage: {
+    total_mapped_requirements: number;
+    executed_requirement_references: string[];
+    failed_requirement_references: string[];
+    covered_percentage: number;
+  };
+  failed_requirement_mapping: Array<Record<string, unknown>>;
+  developer_ready_tickets: DeveloperImplementationPlan[];
+  developer_execution_reports: DeveloperExecutionReport[];
+  qa_diagnostic_reports: QaDiagnosticReport[];
+  traceability_chains: Array<Record<string, unknown>>;
+  requirement_version?: string;
+  script_lifecycle: Array<{
+    script_id: string;
+    status: 'Valid' | 'Needs Review' | 'Obsolete' | 'Regeneration Required';
+    requirement_version?: string;
+    application_map_version?: string;
+  }>;
+  retest_verification: Array<{ script_id: string; previous_status: string; current_status: string; verified: boolean; message: string }>;
+}
+
+export type HumanExecutionState =
+  | 'waiting_for_human'
+  | 'recording'
+  | 'generating_scripts'
+  | 'validating_scripts'
+  | 'executing_scripts'
+  | 'completed'
+  | 'failed'
+  | 'cancelled';
+
+export interface HumanExecutionSession {
+  session_id: string;
+  workflow_id: string;
+  scenario_id: string;
+  test_case_id: string;
+  application_url: string;
+  state: HumanExecutionState;
+  browser_status: string;
+  recorded_action_count: number;
+  generation_id?: string;
+  execution_id?: string;
+  comparison?: TraceabilityComparisonReport;
+  error?: string;
+  generated_scripts: Array<{
+    script_id: string;
+    workflow_id: string;
+    scenario_id: string;
+    test_case_id: string;
+    name: string;
+    application_url: string;
+    source: string;
+    action_count: number;
+  }>;
+  actions: Array<{
+    sequence: number;
+    kind: 'click' | 'fill' | 'select' | 'check' | 'uncheck' | 'navigation';
+    accessible_name?: string;
+    label?: string;
+    test_id?: string;
+  }>;
+}
+
+export interface CrawlGenerationResponse {
+  crawl_id: string;
+  url: string;
+  page_title: string | null;
+  pages_crawled: number;
+  elements_found: number;
+  crawl_status: 'crawl_completed' | 'crawl_incomplete' | 'crawl_blocked' | 'script_generation_completed';
+  crawl_report: CrawlReport;
+  scripts: GeneratedScript[];
+  discovered_elements: DiscoveredElement[];
+  application_map: Record<string, unknown>;
+}
+
+export interface CrawlJob {
+  job_id: string;
+  status: 'queued' | 'running' | 'stopping' | 'completed' | 'failed';
+  stop_requested: boolean;
+  progress: {
+    pages_discovered?: number;
+    pages_completed?: number;
+    pages_remaining?: number;
+    current_crawl_depth?: number;
+    elapsed_seconds?: number;
+    estimated_completion_seconds?: number | null;
+  };
+  result: CrawlGenerationResponse | null;
+  error: string | null;
+}
