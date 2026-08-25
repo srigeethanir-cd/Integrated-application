@@ -5,7 +5,18 @@ import DynamicStageContent from './components/DynamicStageContent';
 import FrameworkDetectionCard from './components/FrameworkDetectionCard';
 import ViewContainer from './components/ViewContainer';
 import NewProjectModal from './components/NewProjectModal';
-import { Plus, Server, Zap } from 'lucide-react';
+import {
+  Plus,
+  Server,
+  Zap,
+  LayoutDashboard,
+  FolderGit2,
+  ClipboardList,
+  FileText,
+  BarChart3,
+  Sun,
+  Moon
+} from 'lucide-react';
 import {
   checkBackendHealth,
   uploadProjectZip,
@@ -469,31 +480,36 @@ export default function App() {
   };
 
 
+  const navTabs = [
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'projects', label: 'Projects', icon: FolderGit2 },
+    {
+      id: 'test-cases',
+      label: 'Test Cases',
+      icon: ClipboardList,
+      badge: testCasesLoading
+        ? 'loading'
+        : (pipelineStatus === 'completed' || currentStageIndex >= 6)
+        ? (testCasePlan?.total_test_cases ?? testCasePlan?.test_cases?.length ?? 0)
+        : null,
+    },
+    { id: 'test-files', label: 'Test Files', icon: FileText },
+    { id: 'reports', label: 'Reports', icon: BarChart3 },
+  ];
+
   return (
-    <div className="h-screen max-h-screen overflow-hidden flex bg-[#F4F7FE] dark:bg-[#11142D] text-[#1B2559] dark:text-slate-100 transition-colors duration-200">
-      {/* Left Sidebar Component */}
-      <Sidebar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
-        onNewRun={handleNewRun}
-        testCaseCount={
-          (pipelineStatus === 'completed' || currentStageIndex >= 6)
-            ? (testCasePlan?.total_test_cases ?? testCasePlan?.test_cases?.length ?? 0)
-            : 0
-        }
-        testCasesLoading={testCasesLoading}
-      />
+    <div className={`h-screen max-h-screen overflow-hidden flex bg-[#F4F7FE] dark:bg-[#11142D] text-[#1B2559] dark:text-slate-100 transition-colors duration-200 ${darkMode ? 'dark' : ''}`}>
+      {/* Universal StoryForge AI Sidebar */}
+      <Sidebar />
 
       {/* Main Content Area */}
       <main className="flex-1 h-screen overflow-hidden flex flex-col p-3 sm:p-4 max-w-7xl mx-auto w-full">
-        {/* Top Welcome Header */}
-        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5 shrink-0">
+        {/* Top Header */}
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-2 shrink-0">
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-lg sm:text-xl font-bold text-[#1B2559] dark:text-white tracking-tight leading-tight">
-                Welcome back, Admin! 👋
+                Unit Test Cases
               </h1>
               {/* Backend Live Indicator Badge */}
               <span
@@ -508,18 +524,42 @@ export default function App() {
               </span>
             </div>
             <p className="text-[#707EAE] dark:text-[#A3AED0] text-[11px] font-medium mt-0.5">
-              Let's generate robust UI test cases with confidence.
+              Automated QA & Unit Test Generation Engine
             </p>
           </div>
 
-          {/* Top Right Action Button */}
-          <button
-            onClick={handleNewRun}
-            className="bg-[#FF5523] hover:bg-[#E0481B] active:bg-[#C93B14] text-white font-medium px-3.5 py-1.5 rounded-xl text-xs flex items-center gap-1.5 shadow-md shadow-[#FF5523]/25 transition-all transform hover:-translate-y-0.5 cursor-pointer shrink-0"
-          >
-            <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-            <span>New Test Project</span>
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Light / Dark Mode Switcher */}
+            <div className="bg-white dark:bg-[#1B1E3A] p-1 rounded-xl flex items-center border border-[#E0E5F2] dark:border-slate-800 shadow-xs">
+              <button
+                onClick={() => setDarkMode(false)}
+                title="Light mode"
+                className={`p-1.5 rounded-lg text-xs transition-all cursor-pointer ${
+                  !darkMode ? 'bg-[#F4F7FE] text-[#FFB800] shadow-xs' : 'text-[#A3AED0] hover:text-[#1B2559]'
+                }`}
+              >
+                <Sun className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={() => setDarkMode(true)}
+                title="Dark mode"
+                className={`p-1.5 rounded-lg text-xs transition-all cursor-pointer ${
+                  darkMode ? 'bg-[#11142D] text-[#7357FF] shadow-xs' : 'text-[#A3AED0] hover:text-[#1B2559]'
+                }`}
+              >
+                <Moon className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            {/* Top Right Action Button */}
+            <button
+              onClick={handleNewRun}
+              className="bg-[#FF5523] hover:bg-[#E0481B] active:bg-[#C93B14] text-white font-medium px-3.5 py-1.5 rounded-xl text-xs flex items-center gap-1.5 shadow-md shadow-[#FF5523]/25 transition-all transform hover:-translate-y-0.5 cursor-pointer shrink-0"
+            >
+              <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span>New Test Project</span>
+            </button>
+          </div>
 
           {/* New Project Modal */}
           <NewProjectModal
@@ -528,6 +568,35 @@ export default function App() {
             onProceed={handleProjectCreated}
           />
         </header>
+
+        {/* Top Module Navigation Tabs Bar */}
+        <div className="flex items-center gap-1.5 mb-2 p-1 bg-white/80 dark:bg-[#1B1E3A]/80 backdrop-blur-sm border border-[#E0E5F2] dark:border-[#2B3674] rounded-2xl shrink-0 shadow-xs">
+          {navTabs.map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  isActive
+                    ? 'bg-gradient-to-r from-[#FF602B] via-[#7551FF] to-[#4318FF] text-white shadow-md shadow-indigo-900/30'
+                    : 'text-[#707EAE] dark:text-[#A3AED0] hover:text-[#1B2559] dark:hover:text-white hover:bg-white dark:hover:bg-[#11142D]/50'
+                }`}
+              >
+                <Icon className="w-3.5 h-3.5" />
+                <span>{tab.label}</span>
+                {tab.badge === 'loading' ? (
+                  <span className="w-3 h-3 rounded-full border-2 border-white border-t-transparent animate-spin inline-block shrink-0" />
+                ) : tab.badge ? (
+                  <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-full leading-tight ${isActive ? 'bg-white/20 text-white' : 'bg-[#FF5523] text-white'}`}>
+                    {tab.badge > 999 ? '999+' : tab.badge}
+                  </span>
+                ) : null}
+              </button>
+            );
+          })}
+        </div>
 
         {/* Live Stage Log Banner */}
         {activeLogMessage && (
