@@ -30,10 +30,10 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
 
-  // Automatically redirect from port 3000 to the Nginx gateway port 8080
+  // Automatically redirect from port 3000 to the Nginx gateway port 80
   React.useEffect(() => {
     if (typeof window !== 'undefined' && window.location.port === '3000') {
-      const newUrl = window.location.protocol + '//' + window.location.hostname + ':8080' + window.location.pathname + window.location.search + window.location.hash;
+      const newUrl = window.location.protocol + '//' + window.location.hostname + window.location.pathname + window.location.search + window.location.hash;
       window.location.replace(newUrl);
     }
   }, []);

@@ -192,7 +192,7 @@ services:
       dockerfile: Dockerfile
     container_name: main-nginx
     ports:
-      - "8080:80"
+      - "80:80"
     depends_on:
       - frontend
       - backend
