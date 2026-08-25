@@ -5,24 +5,32 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 import {
-  ArrowLeft,
   Code2,
   FileCheck2,
   FolderKanban,
-  Menu,
-  PanelLeftClose,
-  PanelLeftOpen,
+  LayoutGrid,
   Plus,
   Search,
+  Settings as SettingsIcon,
   Sparkles,
-  X
+  Terminal,
+  CheckSquare
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { NewProjectModal } from '@/components/projects/NewProjectModal';
 import { ScrollToBottomButton } from './ScrollToBottomButton';
 import styles from './PremiumShell.module.css';
 
-const navigation = [
+const universalMenuItems = [
+  { label: 'User Story', icon: LayoutGrid, path: '/dashboard' },
+  { label: 'UI Code', icon: Code2, path: '/ui-code' },
+  { label: 'API Code', icon: Terminal, path: '/api-code' },
+  { label: 'Unit Test Cases', icon: FileCheck2, path: '/unit-test-cases/' },
+  { label: 'Application Testing', icon: CheckSquare, path: '/application-testing/' },
+  { label: 'Backend Unit-Testcase Generator', icon: Sparkles, path: '/backend-unit-testcase-generator/' },
+];
+
+const moduleTabs = [
   { href: '/dashboard', label: 'Dashboard', icon: FolderKanban, exact: true },
   { href: '/test-case-generation', label: 'New Generator', icon: Plus, exact: true },
   { href: '/test-case-generation/results', label: 'Generated Tests', icon: FileCheck2, exact: false },
@@ -33,8 +41,6 @@ const navigation = [
 export function FeatureShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [collapsed, setCollapsed] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [showNewProjectModal, setShowNewProjectModal] = useState(false);
   const [globalQuery, setGlobalQuery] = useState('');
 
@@ -61,125 +67,193 @@ export function FeatureShell({ children }: { children: ReactNode }) {
     }
   };
 
+  const activeAccelerator = 'Application Testing';
+
   return (
-    <div className={styles.experience}>
+    <div className={styles.experience} style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--background)' }}>
       <div className={styles.ambient} aria-hidden="true">
         <div className={styles.grid} />
         <motion.div className={styles.orb} style={reducedMotion ? undefined : { x, y }} />
         <div className={styles.ring} />
       </div>
 
-      <button type="button" className={styles.mobileMenuButton} onClick={() => setMobileOpen(true)} aria-label="Open navigation" aria-expanded={mobileOpen}>
-        <Menu className="h-5 w-5" />
-      </button>
-
-      {mobileOpen && <button type="button" className={styles.sidebarBackdrop} onClick={() => setMobileOpen(false)} aria-label="Close navigation" />}
-
-      {/* STORYFORGE AI INSPIRED DARK SLATE SIDEBAR */}
-      <aside className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ''} ${mobileOpen ? styles.sidebarOpen : ''}`} aria-label="Primary navigation">
-        <div className={styles.sidebarBrand}>
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-orange-500 via-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30 shrink-0">
-            <Sparkles className="h-5 w-5" />
-          </span>
-          <div className={styles.brandCopy}>
-            <div className="flex items-center gap-1.5">
-              <span className="font-extrabold tracking-tight text-white text-base">TestCase Engine</span>
-              <span className="rounded-md bg-purple-500/20 px-1.5 py-0.5 text-[10px] font-bold text-purple-300">AI</span>
+      {/* UNIVERSAL STORYFORGE AI SIDEBAR */}
+      <aside
+        style={{
+          width: '260px',
+          height: '100vh',
+          backgroundColor: '#1B1B3A',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          zIndex: 40,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '24px 16px',
+          boxSizing: 'border-box',
+          borderRight: '1px solid rgba(45, 55, 72, 0.5)',
+          userSelect: 'none',
+          flexShrink: 0
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+          {/* StoryForge AI Header */}
+          <a href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '0 8px', textDecoration: 'none' }}>
+            <div style={{
+              width: '34px',
+              height: '34px',
+              borderRadius: '12px',
+              background: 'linear-gradient(to right, #FF602B, #4318FF)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 4px 14px rgba(67, 24, 255, 0.4)'
+            }}>
+              <Sparkles size={18} color="#ffffff" style={{ fill: '#ffffff' }} />
             </div>
-            <span className="text-[11px] text-slate-400 font-medium">Test Script Generator</span>
-          </div>
-          <button type="button" className={styles.mobileClose} onClick={() => setMobileOpen(false)} aria-label="Close navigation">
-            <X className="h-5 w-5" />
-          </button>
+            <span style={{
+              fontSize: '18px',
+              fontWeight: 800,
+              color: '#ffffff',
+              letterSpacing: '-0.025em',
+              fontFamily: 'Inter, sans-serif'
+            }}>
+              StoryForge AI
+            </span>
+          </a>
+
+          {/* Universal Sidebar Menu Items */}
+          <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: 0 }}>
+            {universalMenuItems.map((item) => {
+              const isActive = activeAccelerator === item.label;
+              return (
+                <a
+                  key={item.label}
+                  href={item.path}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '12px 16px',
+                    borderRadius: '16px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    textDecoration: 'none',
+                    transition: 'all 0.2s',
+                    background: isActive ? 'linear-gradient(to right, #FF602B, #7551FF, #4318FF)' : 'transparent',
+                    color: isActive ? '#ffffff' : '#A0AEC0',
+                    boxShadow: isActive ? '0 6px 20px rgba(67, 24, 255, 0.35)' : 'none'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <item.icon size={16} color={isActive ? '#ffffff' : '#A0AEC0'} />
+                    <span>{item.label}</span>
+                  </div>
+                  {isActive && (
+                    <span style={{
+                      width: '4px',
+                      height: '16px',
+                      backgroundColor: '#ffffff',
+                      borderRadius: '9999px',
+                      flexShrink: 0
+                    }} />
+                  )}
+                </a>
+              );
+            })}
+          </nav>
         </div>
 
-        <div className={styles.sidebarDivider} />
-        <p className={styles.sidebarLabel}>Test Automation Workspace</p>
-
-        <nav className={styles.sidebarNav}>
-          {navigation.map(({ href, label, icon: Icon, exact }) => {
-            const active = exact ? pathname === href : pathname.startsWith(href);
-            return (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setMobileOpen(false)}
-                title={collapsed ? label : undefined}
-                aria-current={active ? 'page' : undefined}
-                className={`${styles.sidebarLink} ${active ? styles.sidebarActive : ''}`}
-              >
-                <Icon className="h-5 w-5 shrink-0" />
-                <span>{label}</span>
-              </Link>
-            );
-          })}
+        {/* Bottom Settings & User Avatar ('N') */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
           <a
-            href="/dashboard"
-            className={styles.sidebarLink}
-            style={{ marginTop: 'auto', color: '#ff6a3d' }}
+            href="/settings"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '12px 16px',
+              borderRadius: '16px',
+              fontSize: '12px',
+              fontWeight: 700,
+              color: '#A0AEC0',
+              textDecoration: 'none',
+              transition: 'all 0.2s'
+            }}
           >
-            <ArrowLeft className="h-5 w-5 shrink-0" />
-            <span>&larr; Return to StoryForge AI</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <SettingsIcon size={16} color="#A0AEC0" />
+              <span>Settings</span>
+            </div>
           </a>
-        </nav>
 
-        <div className={styles.sidebarFooter}>
-          <button
-            type="button"
-            className={styles.collapseButton}
-            onClick={() => setCollapsed((value) => !value)}
-            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            title={collapsed ? 'Expand sidebar' : undefined}
-          >
-            {collapsed ? <PanelLeftOpen className="h-5 w-5" /> : <PanelLeftClose className="h-5 w-5" />}
-            <span>{collapsed ? 'Expand' : 'Collapse'}</span>
-          </button>
+          <div style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            backgroundColor: '#1A1A2E',
+            border: '1px solid rgba(75, 85, 99, 0.6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#ffffff',
+            fontWeight: 800,
+            fontSize: '12px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+          }}>
+            N
+          </div>
         </div>
       </aside>
 
       {/* TOP NAVIGATION BAR & CONTENT WRAPPER */}
-      <div className={`flex flex-col min-h-screen transition-all duration-300 ${collapsed ? 'lg:pl-20' : 'lg:pl-[280px]'}`}>
-        {/* Top Navbar */}
-        <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-border/60 bg-background/80 px-6 backdrop-blur-md transition-colors">
-          <form onSubmit={handleGlobalSearch} className="relative w-full max-w-md hidden sm:block">
-            <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <input
-              type="text"
-              value={globalQuery}
-              onChange={(e) => setGlobalQuery(e.target.value)}
-              placeholder="Search projects, user stories, Playwright scripts..."
-              className="h-10 w-full rounded-full border border-border/70 bg-card/60 pl-10 pr-12 text-xs text-foreground placeholder:text-muted-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition"
-            />
-            <span className="absolute right-3.5 top-1/2 -translate-y-1/2 rounded border border-border/80 bg-muted px-1.5 py-0.5 text-[10px] font-mono text-muted-foreground">⌘K</span>
-          </form>
+      <div style={{ marginLeft: '260px', flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+        {/* Top Header */}
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/60 bg-background/90 px-6 backdrop-blur-md transition-colors gap-4">
+          {/* Top Module Navigation Tabs */}
+          <nav className="flex items-center gap-1.5 p-1 bg-muted/60 dark:bg-muted/30 border border-border/60 rounded-2xl">
+            {moduleTabs.map(({ href, label, icon: Icon, exact }) => {
+              const active = exact ? pathname === href : pathname.startsWith(href);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    active
+                      ? 'bg-[#FF5523] hover:bg-[#E0481B] text-white shadow-md shadow-[#FF5523]/30'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-background/60'
+                  }`}
+                >
+                  <Icon className="h-3.5 w-3.5" />
+                  <span>{label}</span>
+                </Link>
+              );
+            })}
+          </nav>
 
           <div className="flex items-center gap-3 ml-auto">
+            {/* Search Input */}
+            <form onSubmit={handleGlobalSearch} className="relative w-64 hidden xl:block">
+              <Search className="absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                value={globalQuery}
+                onChange={(e) => setGlobalQuery(e.target.value)}
+                placeholder="Search projects..."
+                className="h-9 w-full rounded-full border border-border/70 bg-card/60 pl-9 pr-4 text-xs text-foreground placeholder:text-muted-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition"
+              />
+            </form>
+
             {/* Quick Create Action */}
             <button
               onClick={() => setShowNewProjectModal(true)}
-              className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-orange-500 to-purple-600 px-4 py-2 text-xs font-bold text-white shadow-md shadow-orange-500/15 hover:opacity-95 transition"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FF5523] hover:bg-[#E0481B] px-3.5 py-1.5 text-xs font-bold text-white shadow-md shadow-[#FF5523]/25 transition cursor-pointer"
             >
               <Plus className="h-3.5 w-3.5" /> New Project
             </button>
 
-
-
             <ThemeToggle />
-
-            {/* Profile Avatar Section */}
-            <div className="flex items-center gap-2.5 pl-2 border-l border-border/60">
-              <div className="h-9 w-9 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 p-0.5 shadow-sm">
-                <img
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120"
-                  alt="Sarah Jenkins"
-                  className="h-full w-full rounded-full object-cover"
-                />
-              </div>
-              <div className="hidden lg:flex flex-col text-left">
-                <span className="text-xs font-bold text-foreground leading-tight">Sarah Jenkins</span>
-                <span className="text-[10px] font-medium text-muted-foreground">Lead QA Automation Engineer</span>
-              </div>
-            </div>
           </div>
         </header>
 
