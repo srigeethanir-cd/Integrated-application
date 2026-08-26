@@ -25,6 +25,7 @@ import styles from './PremiumShell.module.css';
 
 const universalMenuItems = [
   { label: 'User Story', icon: LayoutGrid, path: '/dashboard' },
+  { label: 'UI Code', icon: Code2, path: '/ui-code' },
   { label: 'API Code', icon: Terminal, path: '/api-code' },
   { label: 'Unit Test Cases', icon: FileCheck2, path: '/unit-test-cases/' },
   { label: 'Application Testing', icon: CheckSquare, path: '/application-testing/' },

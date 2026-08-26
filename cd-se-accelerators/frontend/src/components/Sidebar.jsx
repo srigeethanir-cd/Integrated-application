@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   LayoutGrid, 
+  Code2,
   Terminal, 
   FileCheck2, 
   CheckSquare, 
@@ -41,6 +42,11 @@ export default function Sidebar() {
       label: 'User Story', 
       icon: LayoutGrid, 
       path: '/dashboard',
+    },
+    { 
+      label: 'UI Code', 
+      icon: Code2, 
+      path: '/ui-code',
     },
     { 
       label: 'API Code', 

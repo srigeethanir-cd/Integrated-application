@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   LayoutGrid, 
+  Code2,
   Terminal, 
   FileCheck2, 
   CheckSquare, 
@@ -40,6 +41,7 @@ export const Sidebar: React.FC = () => {
   };
 
   // Active accelerator determination
+  const isUiCode = pathname.startsWith('/ui-code');
   const isApiCode = pathname.startsWith('/api-code');
   const isUnitTests = pathname.startsWith('/unit-test-cases');
   const isTesting = pathname.startsWith('/application-testing');
@@ -47,7 +49,8 @@ export const Sidebar: React.FC = () => {
   const isSettings = pathname.startsWith('/settings');
 
   let activeAccelerator = 'User Story';
-  if (isApiCode) activeAccelerator = 'API Code';
+  if (isUiCode) activeAccelerator = 'UI Code';
+  else if (isApiCode) activeAccelerator = 'API Code';
   else if (isUnitTests) activeAccelerator = 'Unit Test Cases';
   else if (isTesting) activeAccelerator = 'Application Testing';
   else if (isBackendGen) activeAccelerator = 'Backend Unit-Testcase Generator';
@@ -58,6 +61,11 @@ export const Sidebar: React.FC = () => {
       label: 'User Story', 
       icon: LayoutGrid, 
       path: '/dashboard',
+    },
+    { 
+      label: 'UI Code', 
+      icon: Code2, 
+      path: '/ui-code',
     },
     { 
       label: 'API Code', 
