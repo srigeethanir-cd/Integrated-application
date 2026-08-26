@@ -26,12 +26,23 @@ export function AppShell() {
   const state = useAppState()
   const navigate = useNavigate()
   const [dark, setDark] = useState(() => localStorage.getItem('theme') === 'dark')
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
+    try { return localStorage.getItem('sidebar_collapsed') === 'true' } catch { return false }
+  })
 
   useEffect(() => { void state.refreshProjects().catch(() => undefined) }, [])
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light'
     localStorage.setItem('theme', dark ? 'dark' : 'light')
   }, [dark])
+
+  const toggleSidebar = () => {
+    setSidebarCollapsed((prev) => {
+      const next = !prev
+      try { localStorage.setItem('sidebar_collapsed', String(next)) } catch {}
+      return next
+    })
+  }
 
   const activeProject = state.projects.find((project) => project.id === state.activeProjectId)
   const projectStatus = activeProject?.status === 'FAILED' ? 'Failed' : activeProject?.status === 'PROCESSING' ? 'Running' : 'Ready'
@@ -40,10 +51,10 @@ export function AppShell() {
   return (
     <div className="app-shell" style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--canvas, #F7F9FC)' }}>
       {/* StoryForge AI Universal Sidebar */}
-      <UniversalSidebar />
+      <UniversalSidebar collapsed={sidebarCollapsed} onToggleCollapse={toggleSidebar} />
 
       {/* Main Content Area with Fixed Navigation & Scrollable Body */}
-      <div className="app-body" style={{ marginLeft: '260px', flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', height: '100vh', overflowY: 'auto' }}>
+      <div className="app-body" style={{ marginLeft: sidebarCollapsed ? '78px' : '260px', flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', height: '100vh', overflowY: 'auto', transition: 'margin-left 0.2s ease' }}>
         {/* Sticky Top Header with Module Navigation Tabs */}
         <header
           className="topbar"

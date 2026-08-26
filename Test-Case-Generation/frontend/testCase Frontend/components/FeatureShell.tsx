@@ -14,7 +14,9 @@ import {
   Settings as SettingsIcon,
   Sparkles,
   Terminal,
-  CheckSquare
+  CheckSquare,
+  PanelLeftClose,
+  PanelLeftOpen
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { NewProjectModal } from '@/components/projects/NewProjectModal';
@@ -23,7 +25,6 @@ import styles from './PremiumShell.module.css';
 
 const universalMenuItems = [
   { label: 'User Story', icon: LayoutGrid, path: '/dashboard' },
-  { label: 'UI Code', icon: Code2, path: '/ui-code' },
   { label: 'API Code', icon: Terminal, path: '/api-code' },
   { label: 'Unit Test Cases', icon: FileCheck2, path: '/unit-test-cases/' },
   { label: 'Application Testing', icon: CheckSquare, path: '/application-testing/' },
@@ -43,6 +44,24 @@ export function FeatureShell({ children }: { children: ReactNode }) {
   const router = useRouter();
   const [showNewProjectModal, setShowNewProjectModal] = useState(false);
   const [globalQuery, setGlobalQuery] = useState('');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('sidebar_collapsed');
+      if (saved !== null) setSidebarCollapsed(saved === 'true');
+    } catch {}
+  }, []);
+
+  const toggleSidebar = () => {
+    setSidebarCollapsed((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('sidebar_collapsed', String(next));
+      } catch {}
+      return next;
+    });
+  };
 
   const reducedMotion = useReducedMotion();
   const pointerX = useMotionValue(0);
@@ -80,7 +99,7 @@ export function FeatureShell({ children }: { children: ReactNode }) {
       {/* UNIVERSAL STORYFORGE AI SIDEBAR */}
       <aside
         style={{
-          width: '260px',
+          width: sidebarCollapsed ? '78px' : '260px',
           height: '100vh',
           backgroundColor: '#1B1B3A',
           position: 'fixed',
@@ -90,38 +109,87 @@ export function FeatureShell({ children }: { children: ReactNode }) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '24px 16px',
+          padding: '24px 12px',
           boxSizing: 'border-box',
           borderRight: '1px solid rgba(45, 55, 72, 0.5)',
           userSelect: 'none',
-          flexShrink: 0
+          flexShrink: 0,
+          transition: 'width 0.2s ease'
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-          {/* StoryForge AI Header */}
-          <a href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '0 8px', textDecoration: 'none' }}>
-            <div style={{
-              width: '34px',
-              height: '34px',
-              borderRadius: '12px',
-              background: 'linear-gradient(to right, #FF602B, #4318FF)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 4px 14px rgba(67, 24, 255, 0.4)'
-            }}>
-              <Sparkles size={18} color="#ffffff" style={{ fill: '#ffffff' }} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+          {/* StoryForge AI Header with Collapse Toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: sidebarCollapsed ? 'center' : 'space-between', padding: '0 4px' }}>
+            <a href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }} title="StoryForge AI">
+              <div style={{
+                width: '34px',
+                height: '34px',
+                borderRadius: '12px',
+                background: 'linear-gradient(to right, #FF602B, #4318FF)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 14px rgba(67, 24, 255, 0.4)',
+                flexShrink: 0
+              }}>
+                <Sparkles size={18} color="#ffffff" style={{ fill: '#ffffff' }} />
+              </div>
+              {!sidebarCollapsed && (
+                <span style={{
+                  fontSize: '18px',
+                  fontWeight: 800,
+                  color: '#ffffff',
+                  letterSpacing: '-0.025em',
+                  fontFamily: 'Inter, sans-serif',
+                  whiteSpace: 'nowrap'
+                }}>
+                  StoryForge AI
+                </span>
+              )}
+            </a>
+
+            {!sidebarCollapsed && (
+              <button
+                onClick={toggleSidebar}
+                title="Collapse sidebar"
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  color: '#A0AEC0',
+                  padding: '6px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <PanelLeftClose size={16} />
+              </button>
+            )}
+          </div>
+
+          {sidebarCollapsed && (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <button
+                onClick={toggleSidebar}
+                title="Expand sidebar"
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  color: '#A0AEC0',
+                  padding: '6px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <PanelLeftOpen size={16} />
+              </button>
             </div>
-            <span style={{
-              fontSize: '18px',
-              fontWeight: 800,
-              color: '#ffffff',
-              letterSpacing: '-0.025em',
-              fontFamily: 'Inter, sans-serif'
-            }}>
-              StoryForge AI
-            </span>
-          </a>
+          )}
 
           {/* Universal Sidebar Menu Items */}
           <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: 0 }}>
@@ -131,11 +199,12 @@ export function FeatureShell({ children }: { children: ReactNode }) {
                 <a
                   key={item.label}
                   href={item.path}
+                  title={sidebarCollapsed ? item.label : undefined}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '12px 16px',
+                    justifyContent: sidebarCollapsed ? 'center' : 'space-between',
+                    padding: sidebarCollapsed ? '12px' : '12px 16px',
                     borderRadius: '16px',
                     fontSize: '12px',
                     fontWeight: 700,
@@ -146,11 +215,11 @@ export function FeatureShell({ children }: { children: ReactNode }) {
                     boxShadow: isActive ? '0 6px 20px rgba(67, 24, 255, 0.35)' : 'none'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <item.icon size={16} color={isActive ? '#ffffff' : '#A0AEC0'} />
-                    <span>{item.label}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: sidebarCollapsed ? 'center' : 'flex-start' }}>
+                    <item.icon size={16} color={isActive ? '#ffffff' : '#A0AEC0'} style={{ flexShrink: 0 }} />
+                    {!sidebarCollapsed && <span>{item.label}</span>}
                   </div>
-                  {isActive && (
+                  {isActive && !sidebarCollapsed && (
                     <span style={{
                       width: '4px',
                       height: '16px',
@@ -166,14 +235,15 @@ export function FeatureShell({ children }: { children: ReactNode }) {
         </div>
 
         {/* Bottom Settings & User Avatar ('N') */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.1)', alignItems: sidebarCollapsed ? 'center' : 'stretch' }}>
           <a
             href="/settings"
+            title={sidebarCollapsed ? 'Settings' : undefined}
             style={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '12px 16px',
+              justifyContent: sidebarCollapsed ? 'center' : 'space-between',
+              padding: sidebarCollapsed ? '12px' : '12px 16px',
               borderRadius: '16px',
               fontSize: '12px',
               fontWeight: 700,
@@ -182,9 +252,9 @@ export function FeatureShell({ children }: { children: ReactNode }) {
               transition: 'all 0.2s'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <SettingsIcon size={16} color="#A0AEC0" />
-              <span>Settings</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: sidebarCollapsed ? 'center' : 'flex-start' }}>
+              <SettingsIcon size={16} color="#A0AEC0" style={{ flexShrink: 0 }} />
+              {!sidebarCollapsed && <span>Settings</span>}
             </div>
           </a>
 
@@ -208,7 +278,7 @@ export function FeatureShell({ children }: { children: ReactNode }) {
       </aside>
 
       {/* TOP NAVIGATION BAR & CONTENT WRAPPER */}
-      <div style={{ marginLeft: '260px', flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+      <div style={{ marginLeft: sidebarCollapsed ? '78px' : '260px', flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', transition: 'margin-left 0.2s ease' }}>
         {/* Top Header */}
         <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/60 bg-background/90 px-6 backdrop-blur-md transition-colors gap-4">
           {/* Top Module Navigation Tabs */}
