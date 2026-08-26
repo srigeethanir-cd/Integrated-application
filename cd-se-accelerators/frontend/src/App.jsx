@@ -498,44 +498,42 @@ export default function App() {
   ];
 
   return (
-    <div className={`h-screen max-h-screen overflow-hidden flex bg-[#F4F7FE] dark:bg-[#11142D] text-[#1B2559] dark:text-slate-100 transition-colors duration-200 ${darkMode ? 'dark' : ''}`}>
+    <div className={`h-screen max-h-screen overflow-hidden flex bg-[#F7F9FC] dark:bg-[#11142D] text-[#111827] dark:text-slate-100 transition-colors duration-200 ${darkMode ? 'dark' : ''}`}>
       {/* Universal StoryForge AI Sidebar */}
       <Sidebar />
 
       {/* Main Content Area */}
-      <main className="flex-1 h-screen overflow-hidden flex flex-col p-3 sm:p-4 max-w-7xl mx-auto w-full">
-        {/* Top Header */}
-        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-2 shrink-0">
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-lg sm:text-xl font-bold text-[#1B2559] dark:text-white tracking-tight leading-tight">
-                Unit Test Cases
-              </h1>
-              {/* Backend Live Indicator Badge */}
-              <span
-                className={`text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 border ${
-                  backendOnline
-                    ? 'bg-[#E6F9F0] text-[#05CD99] border-[#05CD99]/30 dark:bg-[#05CD99]/10 dark:text-[#05CD99]'
-                    : 'bg-[#FFB800]/10 text-[#FFB800] border-[#FFB800]/30'
-                }`}
-              >
-                <Server className="w-3 h-3" />
-                <span>{backendOnline ? 'FastAPI Backend Live (v0.1.0)' : 'Local Demo Engine'}</span>
-              </span>
-            </div>
-            <p className="text-[#707EAE] dark:text-[#A3AED0] text-[11px] font-medium mt-0.5">
-              Automated QA & Unit Test Generation Engine
-            </p>
+      <div className="flex-1 h-screen overflow-y-auto flex flex-col min-w-0">
+        {/* Top Header Bar Standard */}
+        <header className="sticky top-0 z-20 flex items-center justify-between px-8 py-4 bg-white dark:bg-[#1B1E3A] border-b border-[#E5E7EB] dark:border-[#2D3748] shrink-0 shadow-xs">
+          <div className="flex-1 max-w-md relative">
+            <input
+              type="text"
+              placeholder="Search projects, test cases..."
+              className="w-full pl-10 pr-4 py-2 text-xs bg-[#F7F9FC] dark:bg-[#11142D] border border-[#E5E7EB] dark:border-[#2D3748] rounded-full focus:outline-none focus:ring-2 focus:ring-[#7551FF] text-[#111827] dark:text-white placeholder-[#A0AEC0]"
+            />
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
+            {/* Backend Live Indicator Badge */}
+            <span
+              className={`text-[10px] font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5 border ${
+                backendOnline
+                  ? 'bg-[#E6F9F0] text-[#05CD99] border-[#05CD99]/30 dark:bg-[#05CD99]/10 dark:text-[#05CD99]'
+                  : 'bg-[#FFB800]/10 text-[#FFB800] border-[#FFB800]/30'
+              }`}
+            >
+              <Server className="w-3 h-3" />
+              <span>{backendOnline ? 'FastAPI Backend Live' : 'Demo Engine'}</span>
+            </span>
+
             {/* Light / Dark Mode Switcher */}
-            <div className="bg-white dark:bg-[#1B1E3A] p-1 rounded-xl flex items-center border border-[#E0E5F2] dark:border-slate-800 shadow-xs">
+            <div className="bg-[#F7F9FC] dark:bg-[#11142D] p-1 rounded-xl flex items-center border border-[#E0E5F2] dark:border-slate-800 shadow-xs">
               <button
                 onClick={() => setDarkMode(false)}
                 title="Light mode"
                 className={`p-1.5 rounded-lg text-xs transition-all cursor-pointer ${
-                  !darkMode ? 'bg-[#F4F7FE] text-[#FFB800] shadow-xs' : 'text-[#A3AED0] hover:text-[#1B2559]'
+                  !darkMode ? 'bg-white text-[#FFB800] shadow-xs' : 'text-[#A3AED0] hover:text-[#1B2559]'
                 }`}
               >
                 <Sun className="w-3.5 h-3.5" />
@@ -544,21 +542,25 @@ export default function App() {
                 onClick={() => setDarkMode(true)}
                 title="Dark mode"
                 className={`p-1.5 rounded-lg text-xs transition-all cursor-pointer ${
-                  darkMode ? 'bg-[#11142D] text-[#7357FF] shadow-xs' : 'text-[#A3AED0] hover:text-[#1B2559]'
+                  darkMode ? 'bg-[#1B1E3A] text-[#7357FF] shadow-xs' : 'text-[#A3AED0] hover:text-[#1B2559]'
                 }`}
               >
                 <Moon className="w-3.5 h-3.5" />
               </button>
             </div>
 
-            {/* Top Right Action Button */}
-            <button
-              onClick={handleNewRun}
-              className="bg-[#FF5523] hover:bg-[#E0481B] active:bg-[#C93B14] text-white font-medium px-3.5 py-1.5 rounded-xl text-xs flex items-center gap-1.5 shadow-md shadow-[#FF5523]/25 transition-all transform hover:-translate-y-0.5 cursor-pointer shrink-0"
-            >
-              <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-              <span>New Test Project</span>
-            </button>
+            {/* Profile Section Standard */}
+            <div className="flex items-center gap-3 pl-3 border-l border-[#E5E7EB] dark:border-[#2D3748]">
+              <img
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120"
+                alt="Sarah Jenkins"
+                className="w-9 h-9 rounded-full object-cover border border-[#E5E7EB] dark:border-[#2D3748] shadow-sm"
+              />
+              <div className="flex flex-col text-left hidden sm:flex">
+                <span className="text-xs font-bold text-[#111827] dark:text-white leading-tight">Sarah Jenkins</span>
+                <span className="text-[11px] text-[#A0AEC0]">Product Owner</span>
+              </div>
+            </div>
           </div>
 
           {/* New Project Modal */}
@@ -569,34 +571,56 @@ export default function App() {
           />
         </header>
 
-        {/* Top Module Navigation Tabs Bar */}
-        <div className="flex items-center gap-1.5 mb-2 p-1 bg-white/80 dark:bg-[#1B1E3A]/80 backdrop-blur-sm border border-[#E0E5F2] dark:border-[#2B3674] rounded-2xl shrink-0 shadow-xs">
-          {navTabs.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                  isActive
-                    ? 'bg-[#FF5523] hover:bg-[#E0481B] text-white shadow-md shadow-[#FF5523]/30'
-                    : 'text-[#707EAE] dark:text-[#A3AED0] hover:text-[#1B2559] dark:hover:text-white hover:bg-white dark:hover:bg-[#11142D]/50'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span>{tab.label}</span>
-                {tab.badge === 'loading' ? (
-                  <span className="w-3 h-3 rounded-full border-2 border-white border-t-transparent animate-spin inline-block shrink-0" />
-                ) : tab.badge ? (
-                  <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-full leading-tight ${isActive ? 'bg-white text-[#FF5523]' : 'bg-[#FF5523] text-white'}`}>
-                    {tab.badge > 999 ? '999+' : tab.badge}
-                  </span>
-                ) : null}
-              </button>
-            );
-          })}
-        </div>
+        {/* Main Workspace Body */}
+        <main className="flex-1 px-8 py-6 space-y-6 max-w-7xl w-full mx-auto flex flex-col min-h-0">
+          {/* Welcome Banner & Action Button */}
+          <div className="flex items-start justify-between flex-wrap gap-4 shrink-0">
+            <div>
+              <h1 className="text-2xl font-bold text-[#111827] dark:text-white tracking-tight">
+                Good morning, Sarah
+              </h1>
+              <p className="text-xs text-[#6B7280] dark:text-[#A0AEC0] mt-1">
+                Welcome back to your workspace. Let&apos;s run and review unit test generation today.
+              </p>
+            </div>
+
+            <button
+              onClick={handleNewRun}
+              className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-extrabold rounded-full shadow-[0_4px_16px_rgba(255,96,43,0.35)] hover:opacity-95 transition-opacity cursor-pointer shrink-0"
+            >
+              <Plus className="w-4 h-4 stroke-[2.5]" />
+              <span>New Test Project</span>
+            </button>
+          </div>
+
+          {/* Sticky Top Module Navigation Tabs Bar */}
+          <div className="sticky top-0 z-10 bg-[#F7F9FC]/95 dark:bg-[#11142D]/95 backdrop-blur-md py-1 flex items-center gap-2 overflow-x-auto shrink-0 border-b border-[#E5E7EB]/60 dark:border-[#2D3748]/60">
+            {navTabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                    isActive
+                      ? 'bg-[#FF602B] text-white shadow-sm'
+                      : 'bg-white dark:bg-[#1B1E3A] text-[#6B7280] dark:text-[#A0AEC0] hover:bg-[#F3F4F6] dark:hover:bg-[#1B1E3A]/70 hover:text-[#111827] dark:hover:text-white'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  <span>{tab.label}</span>
+                  {tab.badge === 'loading' ? (
+                    <span className="w-3 h-3 rounded-full border-2 border-white border-t-transparent animate-spin inline-block shrink-0" />
+                  ) : tab.badge ? (
+                    <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-full leading-tight ${isActive ? 'bg-white text-[#FF602B]' : 'bg-[#FF602B] text-white'}`}>
+                      {tab.badge > 999 ? '999+' : tab.badge}
+                    </span>
+                  ) : null}
+                </button>
+              );
+            })}
+          </div>
 
         {/* Live Stage Log Banner */}
         {activeLogMessage && (
@@ -676,7 +700,8 @@ export default function App() {
             />
           </div>
         )}
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

@@ -260,17 +260,30 @@ export function FeatureShell({ children }: { children: ReactNode }) {
             {/* Quick Create Action */}
             <button
               onClick={() => setShowNewProjectModal(true)}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FF5523] hover:bg-[#E0481B] px-3.5 py-1.5 text-xs font-bold text-white shadow-md shadow-[#FF5523]/25 transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#FF602B] to-[#4318FF] px-4 py-2 text-xs font-bold text-white shadow-md shadow-[#FF602B]/25 hover:opacity-95 transition cursor-pointer"
             >
               <Plus className="h-3.5 w-3.5" /> New Project
             </button>
 
             <ThemeToggle />
+
+            {/* Profile Section Standard */}
+            <div className="flex items-center gap-2.5 pl-2 border-l border-border/60">
+              <img
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120"
+                alt="Sarah Jenkins"
+                className="h-8 w-8 rounded-full object-cover border border-border/70 shadow-xs"
+              />
+              <div className="hidden lg:flex flex-col text-left">
+                <span className="text-xs font-bold text-foreground leading-tight">Sarah Jenkins</span>
+                <span className="text-[10px] font-medium text-muted-foreground">Product Owner</span>
+              </div>
+            </div>
           </div>
         </header>
 
         {/* Route Content Container */}
-        <main className="flex-1 p-4 md:p-8">
+        <main className="flex-1 px-8 py-6 max-w-7xl w-full mx-auto">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={pathname}

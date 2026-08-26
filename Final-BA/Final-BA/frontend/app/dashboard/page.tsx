@@ -346,7 +346,7 @@ function DashboardContent() {
     <div className="flex-1 flex flex-col min-h-screen bg-[#F7F9FC] text-[#111827] font-sans antialiased overflow-y-auto">
       
       {/* ── Top Header Bar ─────────────────────────────────────────────────── */}
-      <header className="flex items-center justify-between px-8 py-4 bg-white border-b border-[#E5E7EB] shrink-0">
+      <header className="sticky top-0 z-30 flex items-center justify-between px-8 py-4 bg-white/95 backdrop-blur-md border-b border-[#E5E7EB] shrink-0 shadow-xs">
         <div className="flex-1 max-w-md relative">
           <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A0AEC0]" />
           <input
@@ -400,14 +400,14 @@ function DashboardContent() {
             {!isCreatingNewProject ? (
               <button 
                 onClick={() => setIsCreatingNewProject(true)}
-                className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-extrabold rounded-full shadow-[0_4px_16px_rgba(255,96,43,0.35)] hover:opacity-95 transition-opacity"
+                className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-extrabold rounded-full shadow-[0_4px_16px_rgba(255,96,43,0.35)] hover:opacity-95 transition-opacity cursor-pointer"
               >
                 New Project
               </button>
             ) : (
               <button 
                 onClick={() => setIsCreatingNewProject(false)}
-                className="flex items-center gap-2 px-6 py-2.5 bg-[#F3F4F6] text-[#111827] text-xs font-bold rounded-full hover:bg-[#E5E7EB]"
+                className="flex items-center gap-2 px-6 py-2.5 bg-[#F3F4F6] text-[#111827] text-xs font-bold rounded-full hover:bg-[#E5E7EB] cursor-pointer"
               >
                 <ArrowLeft className="w-4 h-4" /> Cancel
               </button>
@@ -415,9 +415,9 @@ function DashboardContent() {
           </div>
         )}
 
-        {/* ── In-Page Workflow Tab Navigation (Logical Order) ──────────────── */}
+        {/* ── Sticky In-Page Workflow Tab Navigation ─────────────────────────── */}
         {!isCreatingNewProject && (
-          <div className="flex items-center gap-2 overflow-x-auto pb-1">
+          <div className="sticky top-[65px] z-20 bg-[#F7F9FC]/95 backdrop-blur-md py-2 border-b border-[#E5E7EB]/60 flex items-center gap-2 overflow-x-auto">
             {navTabs.map(tab => {
               const isActive = activeTab === tab || 
                 (tab === 'Outline Review' && (activeTab === 'Epics' || activeTab === 'Outline / Epics')) ||
@@ -431,7 +431,7 @@ function DashboardContent() {
                     setActiveTab(tab);
                     setIsCreatingNewProject(false);
                   }}
-                  className={`px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-200 whitespace-nowrap ${
+                  className={`px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-200 whitespace-nowrap cursor-pointer ${
                     isActive
                       ? 'bg-[#FF602B] text-white shadow-sm'
                       : 'bg-white text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#111827]'
