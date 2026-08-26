@@ -1,10 +1,20 @@
-// Backend URL — always use localhost so the browser origin matches CORS allowlist.
-// The backend is bound to 0.0.0.0:8000 so it accepts both localhost and 127.0.0.1.
-const BACKEND_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+// Backend API Client — routes through Nginx proxy via relative paths by default
+const getBaseUrl = (): string => {
+  // If explicitly configured with an external API URL, use it
+  if (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL !== 'http://localhost:8000') {
+    return process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, '');
+  }
+  // In the browser, use relative path so requests go through Nginx at current origin
+  if (typeof window !== 'undefined') {
+    return '';
+  }
+  return '';
+};
 
 function buildUrl(path: string): string {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  return `${BACKEND_URL}${normalizedPath}`;
+  const baseUrl = getBaseUrl();
+  return `${baseUrl}${normalizedPath}`;
 }
 
 function getHeaders(isMultipart = false): HeadersInit {
@@ -40,14 +50,18 @@ async function performFetch(url: string, options: RequestInit): Promise<Response
   try {
     return await fetch(targetUrl, options);
   } catch (err) {
-    // Fallback: try 127.0.0.1 if localhost failed (and vice-versa)
+    // If running in browser and relative path failed, rethrow
+    if (typeof window !== 'undefined') {
+      throw err;
+    }
+    // Server-side fallback: try localhost:8000 vs 127.0.0.1:8000
     const fallbackUrl = targetUrl.includes('localhost')
       ? targetUrl.replace('localhost', '127.0.0.1')
       : targetUrl.replace('127.0.0.1', 'localhost');
     try {
       return await fetch(fallbackUrl, options);
     } catch {
-      throw err; // re-throw original error if fallback also fails
+      throw err;
     }
   }
 }

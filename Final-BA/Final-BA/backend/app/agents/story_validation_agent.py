@@ -58,24 +58,20 @@ class StoryValidationAgent(BaseAgent[ValidateUserStoriesRequest, ValidationResul
         ai_issues: list[ValidationIssue] = []
         
         if payload.generated_user_stories:
-            sem = asyncio.Semaphore(2)  # Max 2 concurrent LLM calls to prevent Cerebras RPM limits
+            sem = asyncio.Semaphore(5)  # High concurrency for fast parallel validation
             
             async def bounded_validate(story, index):
                 async with sem:
                     start_time = time.time()
                     logger.info("Validation starting for story index=%d id=%s title='%s'", index, story.id, story.title[:50])
-                    # Create a localized payload with just ONE story for focused validation
                     single_payload = payload.model_copy(update={"generated_user_stories": [story]})
                     prompt = self._prompt_manager.get_story_validation_prompt(
                         **_validation_prompt_payload(single_payload)
                     )
                     
-                    max_retries = 3
+                    max_retries = 2
                     for attempt in range(1, max_retries + 1):
                         try:
-                            # Add request pacing delay to stay under RPM
-                            await asyncio.sleep(1.5)
-                            
                             result = await self._run_ai_validation(prompt.user_prompt, prompt.system_prompt)
                             duration = time.time() - start_time
                             logger.info("Validation completed for story index=%d id=%s duration=%.2fs", index, story.id, duration)
@@ -84,7 +80,7 @@ class StoryValidationAgent(BaseAgent[ValidateUserStoriesRequest, ValidationResul
                             error_str = str(e).lower()
                             if "429" in error_str or "too many requests" in error_str or "rate limit" in error_str:
                                 if attempt < max_retries:
-                                    backoff = 2 ** attempt
+                                    backoff = 1.0 * attempt
                                     logger.warning("Rate limit (429) hit for story index=%d id=%s. Retrying in %.1fs (Attempt %d/%d)", index, story.id, backoff, attempt, max_retries)
                                     await asyncio.sleep(backoff)
                                     continue
@@ -93,7 +89,6 @@ class StoryValidationAgent(BaseAgent[ValidateUserStoriesRequest, ValidationResul
                             logger.error("Validation FAILED for story index=%d id=%s duration=%.2fs error=%s", index, story.id, duration, str(e), exc_info=True)
                             return e
                     
-                    # If it exits the loop, all retries failed
                     duration = time.time() - start_time
                     logger.error("Validation FAILED (Max retries reached) for story index=%d id=%s duration=%.2fs", index, story.id, duration)
                     return Exception("Validation failed after max retries due to rate limiting.")
@@ -132,9 +127,9 @@ class StoryValidationAgent(BaseAgent[ValidateUserStoriesRequest, ValidationResul
                     system_prompt=system_prompt,
                     response_schema=AIValidationOutput,
                     prompt_version="v1",
-                    timeout=30.0,  # Explicit timeout passed to provider
+                    timeout=20.0,
                 ),
-                timeout=45.0 # Hard timeout wrapper
+                timeout=25.0
             )
             call_duration = time.time() - call_start
             logger.info("AI LLM validation call SUCCESS duration=%.2fs", call_duration)

@@ -46,6 +46,10 @@ class TokenBudgetManager:
             ("groq", "llama-3.3-70b-versatile"): 9600, # 12000 TPM minus 20%
             ("groq", "meta-llama/llama-4-scout-17b-16e-instruct"): 24000, # 30000 TPM minus 20%
             ("groq", "qwen/qwen3-32b"): 4800, # 6000 TPM minus 20%
+            ("groq", "openai/gpt-oss-120b"): 16000,
+            ("groq", "openai/gpt-oss-20b"): 9600,
+            ("groq", "qwen/qwen3.6-27b"): 9600,
+            ("groq", "groq/compound"): 16000,
         }
         
         # OpenRouter/Cerebras or unknown models fallback

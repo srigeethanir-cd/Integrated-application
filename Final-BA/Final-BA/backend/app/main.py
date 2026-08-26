@@ -57,17 +57,38 @@ app = FastAPI(
     ],
 )
 
+cors_origins_env = os.getenv("CORS_ORIGINS", "")
 cors_origins = [
     origin.strip()
-    for origin in os.getenv(
-        "CORS_ORIGINS",
-        "http://localhost:3000,http://127.0.0.1:3000",
-    ).split(",")
+    for origin in (cors_origins_env.split(",") if cors_origins_env else [])
     if origin.strip()
 ]
+
+# Ensure common local origins are always allowed
+default_origins = [
+    "http://localhost",
+    "http://localhost:80",
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:8000",
+    "http://localhost:8001",
+    "http://localhost:8006",
+    "http://127.0.0.1",
+    "http://127.0.0.1:80",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:3001",
+    "http://127.0.0.1:8000",
+    "http://127.0.0.1:8001",
+    "http://127.0.0.1:8006",
+]
+for origin in default_origins:
+    if origin not in cors_origins:
+        cors_origins.append(origin)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
+    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

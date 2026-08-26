@@ -118,46 +118,45 @@ export default function StoryBoardPage({ projectId: propProjectId, onNavigate }:
   }
 
   return (
-    <div className="flex-1 overflow-y-auto bg-muted/10 text-foreground relative h-full">
+    <div className="w-full space-y-5 font-sans antialiased">
       {/* Header */}
-      <div className="p-6 pb-4 border-b border-border bg-background">
-        <div className="text-[11px] text-muted-foreground flex gap-2 items-center mb-1 uppercase tracking-wider font-bold">
-          <span>Project Workspace</span> <span>/</span> <span className="text-foreground">Story Board</span>
+      <div className="bg-white rounded-2xl border border-gray-200/80 p-5 shadow-xs w-full">
+        <div className="text-[10px] text-gray-400 flex gap-2 items-center mb-1 uppercase tracking-wider font-bold">
+          <span>Project Workspace</span> <span>/</span> <span className="text-gray-900 font-bold">Story Board</span>
         </div>
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Story Board</h1>
-            <p className="text-[13px] text-muted-foreground mt-1">
+            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Story Board</h1>
+            <p className="text-xs text-gray-500 mt-0.5">
               {stories.length} user stories generated from your document.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <Button
-              size="sm"
+            <button
               onClick={() =>
                 setStories((prev) => prev.map((s) => ({ ...s, status: 'approved' as EntityStatus })))
               }
-              className="bg-green-500 hover:bg-green-600 text-white font-semibold h-[32px]"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-[34px] px-3.5 rounded-xl shadow-xs flex items-center gap-1.5 cursor-pointer transition-colors"
             >
-              <CheckCircle2 className="w-4 h-4 mr-2" /> Approve All
-            </Button>
+              <CheckCircle2 className="w-3.5 h-3.5" /> Approve All
+            </button>
 
-            <div className="relative w-[240px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
+            <div className="relative w-[220px]">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search stories..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 h-[32px] bg-background border border-input rounded-lg text-[13px] focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full pl-8 pr-3 h-[34px] bg-gray-50/80 border border-gray-200 rounded-xl text-xs text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-[#FF602B]"
               />
             </div>
 
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as any)}
-              className="bg-background border border-input text-[13px] rounded-lg px-3 h-[32px] focus:outline-none focus:ring-1 focus:ring-primary"
+              className="bg-gray-50/80 border border-gray-200 text-xs text-gray-700 font-medium rounded-xl px-3 h-[34px] focus:outline-none focus:ring-1 focus:ring-[#FF602B]"
             >
               <option value="all">All Statuses</option>
               <option value="ready_for_review">Ready for Review</option>
@@ -166,16 +165,16 @@ export default function StoryBoardPage({ projectId: propProjectId, onNavigate }:
               <option value="rejected">Rejected</option>
             </select>
 
-            <div className="flex bg-muted/50 rounded-lg p-1 border border-border">
+            <div className="flex bg-gray-100 rounded-xl p-1 border border-gray-200">
               <button
                 onClick={() => setViewMode('grid')}
-                className={cn('p-1.5 rounded transition-colors', viewMode === 'grid' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground')}
+                className={cn('p-1 rounded-lg transition-colors cursor-pointer', viewMode === 'grid' ? 'bg-white shadow-xs text-gray-900' : 'text-gray-400 hover:text-gray-700')}
               >
                 <LayoutGrid className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={cn('p-1.5 rounded transition-colors', viewMode === 'list' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground')}
+                className={cn('p-1 rounded-lg transition-colors cursor-pointer', viewMode === 'list' ? 'bg-white shadow-xs text-gray-900' : 'text-gray-400 hover:text-gray-700')}
               >
                 <List className="w-4 h-4" />
               </button>
@@ -185,11 +184,11 @@ export default function StoryBoardPage({ projectId: propProjectId, onNavigate }:
       </div>
 
       {/* Story grid / list */}
-      <div className="p-6 pb-24">
+      <div className="w-full">
         <div className={cn(
           viewMode === 'grid'
-            ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'
-            : 'flex flex-col gap-4 max-w-5xl mx-auto'
+            ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'
+            : 'flex flex-col gap-3.5 w-full'
         )}>
           {filteredStories.map((story) => (
             <StoryCard
@@ -202,41 +201,40 @@ export default function StoryBoardPage({ projectId: propProjectId, onNavigate }:
             />
           ))}
           {filteredStories.length === 0 && (
-            <div className="col-span-full py-12 text-center text-muted-foreground">
+            <div className="col-span-full py-12 text-center text-xs text-gray-400 bg-white rounded-2xl border border-gray-200/80">
               No stories match your filters.
             </div>
           )}
         </div>
       </div>
 
-      {/* Sticky bottom bar */}
-      <div className="sticky bottom-0 left-0 right-0 p-6 bg-card/80 backdrop-blur-md border-t border-border flex items-center justify-between z-10">
+      {/* Bottom bar */}
+      <div className="w-full p-4 bg-white rounded-2xl border border-gray-200/80 shadow-xs flex items-center justify-between">
         <div className="flex items-center gap-3">
           {stories.some(s => s.status === 'needs_ba_review' || s.status === 'ready_for_review') ? (
-            <div className="flex items-center gap-2 text-amber-500 text-sm font-medium">
-              <AlertTriangle className="w-5 h-5" />
+            <div className="flex items-center gap-2 text-amber-600 text-xs font-semibold">
+              <AlertTriangle className="w-4 h-4" />
               <span>Review all {stories.length} stories before proceeding.</span>
             </div>
           ) : !stories.some(s => s.status === 'approved') ? (
-            <div className="flex items-center gap-2 text-amber-500 text-sm font-medium">
-              <AlertTriangle className="w-5 h-5" />
+            <div className="flex items-center gap-2 text-amber-600 text-xs font-semibold">
+              <AlertTriangle className="w-4 h-4" />
               <span>Approve at least one story to continue.</span>
             </div>
           ) : (
-            <div className="flex items-center gap-2 text-green-500 text-sm font-medium">
-              <CheckCircle2 className="w-5 h-5" />
+            <div className="flex items-center gap-2 text-emerald-600 text-xs font-semibold">
+              <CheckCircle2 className="w-4 h-4" />
               <span>Stories reviewed! Ready for validation.</span>
             </div>
           )}
         </div>
-        <Button
+        <button
           disabled={stories.some(s => s.status === 'needs_ba_review' || s.status === 'ready_for_review') || !stories.some(s => s.status === 'approved')}
           onClick={() => onNavigate ? onNavigate('Validation Gate') : router.push(`/projects/${projectId}/validation`)}
-          size="lg"
-          className="bg-primary hover:bg-primary/90 text-primary-foreground text-base shadow-md disabled:opacity-50"
+          className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-bold rounded-xl shadow-xs hover:opacity-95 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
         >
-          Proceed to Validation <ArrowRight className="w-4 h-4 ml-2" />
-        </Button>
+          Proceed to Validation <ArrowRight className="w-3.5 h-3.5 ml-1" />
+        </button>
       </div>
     </div>
   );
@@ -402,7 +400,7 @@ function StoryCard({
                   {story.status === 'approved' && <CheckCircle2 className="w-4 h-4 text-green-500" />}
                   {story.status === 'rejected' && <XCircle className="w-4 h-4 text-red-500" />}
                 </span>
-                <span className="text-xs font-medium text-muted-foreground bg-accent px-2 py-0.5 rounded line-clamp-1">
+                <span className="text-xs font-bold text-white bg-[#FF602B] px-2.5 py-0.5 rounded-md line-clamp-1">
                   {story.epicName}
                 </span>
                 {story.priority && (

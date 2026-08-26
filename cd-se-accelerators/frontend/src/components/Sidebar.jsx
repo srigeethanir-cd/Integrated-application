@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { 
   LayoutGrid, 
-  Code2,
-  Terminal, 
-  FileCheck2, 
-  CheckSquare, 
+  Folder,
+  FileText, 
+  BookOpen, 
+  Layers, 
   Settings as SettingsIcon, 
   Sparkles,
   PanelLeftClose,
@@ -45,22 +45,22 @@ export default function Sidebar() {
     },
     { 
       label: 'UI Code', 
-      icon: Code2, 
+      icon: Folder, 
       path: '/ui-code',
     },
     { 
       label: 'API Code', 
-      icon: Terminal, 
+      icon: FileText, 
       path: '/api-code',
     },
     { 
       label: 'Unit Test Cases', 
-      icon: FileCheck2, 
+      icon: BookOpen, 
       path: '/unit-test-cases/',
     },
     { 
       label: 'Application Testing', 
-      icon: CheckSquare, 
+      icon: Layers, 
       path: '/application-testing/',
     },
     { 
@@ -112,26 +112,30 @@ export default function Sidebar() {
           </div>
         )}
 
-        {/* Universal Sidebar Menu Items */}
+        {/* Sidebar Menu Items */}
         <nav className="space-y-2">
           {menuItems.map((item) => {
             const isActive = activeAccelerator === item.label;
-            const className = `flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-4 py-3'} rounded-2xl text-xs font-bold transition-all duration-200 group relative ${
-              isActive
-                ? 'bg-gradient-to-r from-[#FF602B] via-[#7551FF] to-[#4318FF] text-white shadow-lg shadow-indigo-900/40'
-                : 'text-[#A0AEC0] hover:text-white hover:bg-white/10'
-            }`;
 
             return (
-              <a key={item.label} href={item.path} className={className} title={collapsed ? item.label : undefined}>
+              <a
+                key={item.label}
+                href={item.path}
+                className={`flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-3.5 py-3'} rounded-xl text-xs transition-all duration-200 group relative ${
+                  isActive
+                    ? 'bg-gradient-to-r from-[#FF5722] via-[#7B3FE4] to-[#5924E1] text-white shadow-md'
+                    : 'text-[#8F9BBA] hover:text-white hover:bg-white/10'
+                }`}
+                title={collapsed ? item.label : undefined}
+              >
                 <div className={`flex items-center ${collapsed ? 'justify-center w-full' : 'gap-3'}`}>
-                  <item.icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-[#A0AEC0] group-hover:text-white'}`} />
-                  {!collapsed && <span>{item.label}</span>}
+                  <item.icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-white' : 'text-[#8F9BBA] group-hover:text-white'}`} />
+                  {!collapsed && <span className="font-semibold text-sm">{item.label}</span>}
                 </div>
 
                 {/* Active Indicator Bar | */}
                 {isActive && !collapsed && (
-                  <span className="w-1 h-4 bg-white rounded-full shrink-0 shadow-sm" />
+                  <span className="w-1.5 h-4 bg-white rounded-full shrink-0 shadow-xs" />
                 )}
               </a>
             );

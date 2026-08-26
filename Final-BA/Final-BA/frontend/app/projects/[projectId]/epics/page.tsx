@@ -270,7 +270,7 @@ export default function EpicReviewPage({ projectId: propProjectId, onNavigate }:
 
         {/* Traceability Matrix */}
         {isTraceabilityOpen && (
-          <div className="bg-card border border-border rounded-xl p-6 mb-6 shadow-sm max-w-5xl">
+          <div className="bg-card border border-border rounded-xl p-6 mb-6 shadow-sm w-full">
             <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-primary" /> Epic, Feature & One-Line Story Traceability
             </h3>
@@ -322,7 +322,7 @@ export default function EpicReviewPage({ projectId: propProjectId, onNavigate }:
         )}
 
         {/* Epic cards */}
-        <div className="max-w-5xl space-y-3">
+        <div className="w-full space-y-3">
           {epics.map((epic) => {
             const isRegenerating = regeneratingIds.has(epic.id);
             const isEditing = editingId === epic.id;

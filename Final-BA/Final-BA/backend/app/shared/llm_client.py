@@ -134,11 +134,16 @@ class LLMService:
             "llama-3.3-70b-versatile",
             "meta-llama/llama-4-scout-17b-16e-instruct",
             "qwen/qwen3-32b",
+            "qwen/qwen3.6-27b",
+            "openai/gpt-oss-120b",
+            "openai/gpt-oss-20b",
+            "groq/compound",
+            "groq/compound-mini",
         }
-        if normalized in groq_models:
+        if normalized in groq_models or normalized.startswith("openai/gpt-oss") or normalized.startswith("qwen/") or normalized.startswith("groq/"):
             return "groq"
 
-        if normalized in {"llama3.1-8b", "gemma2-9b-it", "gpt-oss-120b", "zai-glm-4.7"}:
+        if normalized in {"llama3.1-8b", "gemma2-9b-it", "zai-glm-4.7"}:
             return "cerebras"
 
         if ":free" in normalized or normalized.startswith("openrouter/"):
@@ -298,6 +303,18 @@ class LLMService:
                 safe_key = "*** (too short)"
             logger.debug("Loaded %s_API_KEY. Length: %d, Key snippet: %s", provider.upper(), key_len, safe_key)
 
+        effective_system_prompt = system_prompt
+        effective_prompt = prompt
+        if response_schema:
+            schema_json = json.dumps(response_schema.model_json_schema(), indent=2)
+            schema_instruction = (
+                f"\n\nCRITICAL: Respond ONLY with a valid JSON object strictly matching the following JSON Schema. Do NOT include markdown code blocks, backticks, or any introductory text.\nJSON Schema:\n{schema_json}"
+            )
+            if effective_system_prompt:
+                effective_system_prompt += schema_instruction
+            else:
+                effective_system_prompt = "You are an expert AI that outputs valid JSON conforming to schemas." + schema_instruction
+
         @retry(
             retry=retry_if_exception(_is_retryable_exception),
             stop=stop_after_attempt(int(os.getenv("MODEL_MAX_RETRIES", "3"))),
@@ -319,8 +336,8 @@ class LLMService:
                 client = anthropic.AsyncAnthropic(api_key=api_key, timeout=timeout)
                 response = await client.messages.create(
                     model=model_name,
-                    messages=[{"role": "user", "content": prompt}],
-                    system=system_prompt or "",
+                    messages=[{"role": "user", "content": effective_prompt}],
+                    system=effective_system_prompt or "",
                     temperature=temperature,
                     max_tokens=max_tokens,
                     top_p=top_p,
@@ -333,9 +350,13 @@ class LLMService:
             elif provider == "openai":
                 client = openai.AsyncOpenAI(api_key=api_key, timeout=timeout)
                 messages = []
-                if system_prompt:
-                    messages.append({"role": "system", "content": system_prompt})
-                messages.append({"role": "user", "content": prompt})
+                if effective_system_prompt:
+                    messages.append({"role": "system", "content": effective_system_prompt})
+                messages.append({"role": "user", "content": effective_prompt})
+
+                extra_args = {}
+                if response_schema or (isinstance(response_format, dict) and response_format.get("type") == "json_object"):
+                    extra_args["response_format"] = {"type": "json_object"}
 
                 response = await client.chat.completions.create(
                     model=model_name,
@@ -343,6 +364,7 @@ class LLMService:
                     temperature=temperature,
                     max_tokens=max_tokens,
                     top_p=top_p,
+                    **extra_args,
                 )
                 content = response.choices[0].message.content or ""
                 tokens = response.usage.total_tokens if response.usage else 0
@@ -353,9 +375,9 @@ class LLMService:
                 base_url = "https://generativelanguage.googleapis.com/v1beta/openai/"
                 client = openai.AsyncOpenAI(api_key=api_key, base_url=base_url, timeout=timeout)
                 messages = []
-                if system_prompt:
-                    messages.append({"role": "system", "content": system_prompt})
-                messages.append({"role": "user", "content": prompt})
+                if effective_system_prompt:
+                    messages.append({"role": "system", "content": effective_system_prompt})
+                messages.append({"role": "user", "content": effective_prompt})
 
                 response = await client.chat.completions.create(
                     model=model_name,
@@ -378,9 +400,9 @@ class LLMService:
                     timeout=timeout,
                 )
                 messages = []
-                if system_prompt:
-                    messages.append({"role": "system", "content": system_prompt})
-                messages.append({"role": "user", "content": prompt})
+                if effective_system_prompt:
+                    messages.append({"role": "system", "content": effective_system_prompt})
+                messages.append({"role": "user", "content": effective_prompt})
 
                 response = await client.chat.completions.create(
                     model=model_name,
@@ -397,9 +419,9 @@ class LLMService:
                 ollama_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1")
                 client = openai.AsyncOpenAI(api_key="ollama", base_url=ollama_url, timeout=timeout)
                 messages = []
-                if system_prompt:
-                    messages.append({"role": "system", "content": system_prompt})
-                messages.append({"role": "user", "content": prompt})
+                if effective_system_prompt:
+                    messages.append({"role": "system", "content": effective_system_prompt})
+                messages.append({"role": "user", "content": effective_prompt})
 
                 response = await client.chat.completions.create(
                     model=model_name,
@@ -415,14 +437,18 @@ class LLMService:
             elif provider == "groq":
                 groq_url = "https://api.groq.com/openai/v1"
                 resolved_model = model_name
-                if any(x in model_name.lower() for x in ["gpt-", "claude-", "gemini-"]):
-                    resolved_model = os.getenv("MODEL_NAME") or "llama-3.3-70b-versatile"
+                if any(x in model_name.lower() for x in ["gpt-4", "gpt-3.5", "claude-", "gemini-"]):
+                    resolved_model = os.getenv("MODEL_NAME") or "openai/gpt-oss-120b"
                 
                 client = openai.AsyncOpenAI(api_key=api_key, base_url=groq_url, timeout=timeout)
                 messages = []
-                if system_prompt:
-                    messages.append({"role": "system", "content": system_prompt})
-                messages.append({"role": "user", "content": prompt})
+                if effective_system_prompt:
+                    messages.append({"role": "system", "content": effective_system_prompt})
+                messages.append({"role": "user", "content": effective_prompt})
+
+                extra_args = {}
+                if response_schema or (isinstance(response_format, dict) and response_format.get("type") == "json_object"):
+                    extra_args["response_format"] = {"type": "json_object"}
 
                 response = await client.chat.completions.create(
                     model=resolved_model,
@@ -430,6 +456,7 @@ class LLMService:
                     temperature=temperature,
                     max_tokens=max_tokens,
                     top_p=top_p,
+                    **extra_args,
                 )
                 content = response.choices[0].message.content or ""
                 tokens = response.usage.total_tokens if response.usage else 0

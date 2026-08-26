@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { 
   LayoutGrid, 
-  Code2,
-  Terminal, 
-  FileCheck2, 
-  CheckSquare, 
+  Folder,
+  FileText, 
+  BookOpen, 
+  Layers, 
   Settings as SettingsIcon, 
   Sparkles,
   PanelLeftClose,
@@ -41,22 +41,22 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
     },
     { 
       label: 'UI Code', 
-      icon: Code2, 
+      icon: Folder, 
       path: '/ui-code',
     },
     { 
       label: 'API Code', 
-      icon: Terminal, 
+      icon: FileText, 
       path: '/api-code',
     },
     { 
       label: 'Unit Test Cases', 
-      icon: FileCheck2, 
+      icon: BookOpen, 
       path: '/unit-test-cases/',
     },
     { 
       label: 'Application Testing', 
-      icon: CheckSquare, 
+      icon: Layers, 
       path: '/application-testing/',
     },
     { 
@@ -174,24 +174,24 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: isCollapsed ? 'center' : 'space-between',
-                  padding: isCollapsed ? '12px' : '12px 16px',
-                  borderRadius: '16px',
-                  fontSize: '12px',
-                  fontWeight: 700,
+                  padding: isCollapsed ? '12px' : '12px 14px',
+                  borderRadius: '12px',
+                  fontSize: '13px',
+                  fontWeight: 600,
                   textDecoration: 'none',
                   transition: 'all 0.2s',
-                  background: isActive ? 'linear-gradient(to right, #FF602B, #7551FF, #4318FF)' : 'transparent',
-                  color: isActive ? '#ffffff' : '#A0AEC0',
-                  boxShadow: isActive ? '0 6px 20px rgba(67, 24, 255, 0.35)' : 'none'
+                  background: isActive ? 'linear-gradient(to right, #FF5722, #7B3FE4, #5924E1)' : 'transparent',
+                  color: isActive ? '#ffffff' : '#8F9BBA',
+                  boxShadow: isActive ? '0 4px 14px rgba(91, 50, 245, 0.35)' : 'none'
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: isCollapsed ? 'center' : 'flex-start' }}>
-                  <item.icon size={16} color={isActive ? '#ffffff' : '#A0AEC0'} style={{ flexShrink: 0 }} />
+                  <item.icon size={18} color={isActive ? '#ffffff' : '#8F9BBA'} style={{ flexShrink: 0 }} />
                   {!isCollapsed && <span>{item.label}</span>}
                 </div>
                 {isActive && !isCollapsed && (
                   <span style={{
-                    width: '4px',
+                    width: '5px',
                     height: '16px',
                     backgroundColor: '#ffffff',
                     borderRadius: '9999px',

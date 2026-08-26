@@ -5,6 +5,10 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 import {
+  Folder,
+  FileText,
+  BookOpen,
+  Layers,
   Code2,
   FileCheck2,
   FolderKanban,
@@ -25,10 +29,10 @@ import styles from './PremiumShell.module.css';
 
 const universalMenuItems = [
   { label: 'User Story', icon: LayoutGrid, path: '/dashboard' },
-  { label: 'UI Code', icon: Code2, path: '/ui-code' },
-  { label: 'API Code', icon: Terminal, path: '/api-code' },
-  { label: 'Unit Test Cases', icon: FileCheck2, path: '/unit-test-cases/' },
-  { label: 'Application Testing', icon: CheckSquare, path: '/application-testing/' },
+  { label: 'UI Code', icon: Folder, path: '/ui-code' },
+  { label: 'API Code', icon: FileText, path: '/api-code' },
+  { label: 'Unit Test Cases', icon: BookOpen, path: '/unit-test-cases/' },
+  { label: 'Application Testing', icon: Layers, path: '/application-testing/' },
   { label: 'Backend Unit-Testcase Generator', icon: Sparkles, path: '/backend-unit-testcase-generator/' },
 ];
 
@@ -205,24 +209,24 @@ export function FeatureShell({ children }: { children: ReactNode }) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: sidebarCollapsed ? 'center' : 'space-between',
-                    padding: sidebarCollapsed ? '12px' : '12px 16px',
-                    borderRadius: '16px',
-                    fontSize: '12px',
-                    fontWeight: 700,
+                    padding: sidebarCollapsed ? '12px' : '12px 14px',
+                    borderRadius: '12px',
+                    fontSize: '13px',
+                    fontWeight: 600,
                     textDecoration: 'none',
                     transition: 'all 0.2s',
-                    background: isActive ? 'linear-gradient(to right, #FF602B, #7551FF, #4318FF)' : 'transparent',
-                    color: isActive ? '#ffffff' : '#A0AEC0',
-                    boxShadow: isActive ? '0 6px 20px rgba(67, 24, 255, 0.35)' : 'none'
+                    background: isActive ? 'linear-gradient(to right, #FF5722, #7B3FE4, #5924E1)' : 'transparent',
+                    color: isActive ? '#ffffff' : '#8F9BBA',
+                    boxShadow: isActive ? '0 4px 14px rgba(91, 50, 245, 0.35)' : 'none'
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: sidebarCollapsed ? 'center' : 'flex-start' }}>
-                    <item.icon size={16} color={isActive ? '#ffffff' : '#A0AEC0'} style={{ flexShrink: 0 }} />
+                    <item.icon size={18} color={isActive ? '#ffffff' : '#8F9BBA'} style={{ flexShrink: 0 }} />
                     {!sidebarCollapsed && <span>{item.label}</span>}
                   </div>
                   {isActive && !sidebarCollapsed && (
                     <span style={{
-                      width: '4px',
+                      width: '5px',
                       height: '16px',
                       backgroundColor: '#ffffff',
                       borderRadius: '9999px',

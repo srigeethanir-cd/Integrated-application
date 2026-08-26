@@ -104,21 +104,23 @@ class ProviderModelLimits:
 class ModelRoutingSettings:
     """B4.2: Agent -> ordered fallback chain of (provider, model)."""
     segmentation_chain: tuple[tuple[str, str], ...] = (
-        ("groq", "llama-3.1-8b-instant"),
-        ("groq", "qwen/qwen3-32b"),
+        ("groq", "openai/gpt-oss-120b"),
+        ("groq", "qwen/qwen3.6-27b"),
+        ("groq", "openai/gpt-oss-20b"),
     )
     epic_chain: tuple[tuple[str, str], ...] = (
-        ("groq", "meta-llama/llama-4-scout-17b-16e-instruct"),
-        ("groq", "llama-3.3-70b-versatile"),
+        ("groq", "openai/gpt-oss-120b"),
+        ("groq", "qwen/qwen3.6-27b"),
         ("openrouter", "meta-llama/llama-3.3-70b-instruct:free"),
     )
     user_story_chain: tuple[tuple[str, str], ...] = (
-        ("groq", "meta-llama/llama-4-scout-17b-16e-instruct"),
-        ("groq", "llama-3.3-70b-versatile"),
+        ("groq", "openai/gpt-oss-120b"),
+        ("groq", "qwen/qwen3.6-27b"),
         ("openrouter", "meta-llama/llama-3.3-70b-instruct:free"),
     )
     validation_chain: tuple[tuple[str, str], ...] = (
-        ("groq", "llama-3.3-70b-versatile"),
+        ("groq", "openai/gpt-oss-120b"),
+        ("groq", "qwen/qwen3.6-27b"),
         ("openrouter", "meta-llama/llama-3.3-70b-instruct:free"),
     )
 

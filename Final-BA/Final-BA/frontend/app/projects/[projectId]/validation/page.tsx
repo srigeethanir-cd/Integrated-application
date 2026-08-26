@@ -149,33 +149,27 @@ export default function FinalValidationPage({ projectId: propProjectId, onNaviga
   const thresholdPercent = Math.round(data.threshold * 100);
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen bg-[#f8f9fc] font-sans antialiased overflow-y-auto">
-      
-
-
-      {/* Main Container */}
-      <main className="flex-1 p-6 md:p-8 max-w-5xl w-full mx-auto space-y-6">
-        
-        {/* Title + Pass Badge */}
-        <div className="flex items-start justify-between">
-          <div>
-            <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Validation Gate Analysis</h1>
-            <p className="text-sm text-gray-500 mt-1">
-              AI quality &amp; INVEST compliance evaluation of generated backlog items.
-            </p>
-          </div>
-          <div
-            className={cn(
-              'flex items-center gap-2.5 px-5 py-3 rounded-2xl border font-bold text-sm shadow-sm shrink-0',
-              data.passed
-                ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
-                : 'bg-red-50 border-red-200 text-red-700'
-            )}
-          >
-            {data.passed ? <CheckCircle2 className="w-5 h-5 text-emerald-600" /> : <XCircle className="w-5 h-5 text-red-600" />}
-            <span>{data.passed ? 'Validation Passed' : 'Validation Action Required'}</span>
-          </div>
+    <div className="w-full space-y-5 font-sans antialiased">
+      {/* Title + Pass Badge */}
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Validation Gate Analysis</h1>
+          <p className="text-xs text-gray-500 mt-0.5">
+            AI quality &amp; INVEST compliance evaluation of generated backlog items.
+          </p>
         </div>
+        <div
+          className={cn(
+            'flex items-center gap-2 px-4 py-2 rounded-xl border font-bold text-xs shadow-xs shrink-0',
+            data.passed
+              ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
+              : 'bg-red-50 border-red-200 text-red-700'
+          )}
+        >
+          {data.passed ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <XCircle className="w-4 h-4 text-red-600" />}
+          <span>{data.passed ? 'Validation Passed' : 'Validation Action Required'}</span>
+        </div>
+      </div>
 
         {/* Score overview cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -371,14 +365,13 @@ export default function FinalValidationPage({ projectId: propProjectId, onNaviga
             </button>
             <button
               onClick={() => onNavigate ? onNavigate('Document') : router.push(`/projects/${projectId}/document`)}
-              className="flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-[#ff6b4a] to-[#ff5733] text-white text-xs font-extrabold rounded-xl shadow-[0_4px_18px_rgba(255,87,51,0.38)] hover:opacity-95 transition-all hover:scale-[1.02]"
+              className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-bold rounded-xl shadow-xs hover:opacity-95 transition-opacity cursor-pointer"
             >
-              Continue to Document Preview <ArrowRight className="w-4 h-4" />
+              Continue to Document Preview <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
 
-      </main>
     </div>
   );
 }

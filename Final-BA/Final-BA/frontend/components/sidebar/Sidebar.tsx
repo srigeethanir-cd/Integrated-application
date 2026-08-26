@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   LayoutGrid, 
-  Code2,
-  Terminal, 
-  FileCheck2, 
-  CheckSquare, 
+  Folder,
+  FileText, 
+  BookOpen, 
+  Layers, 
   Settings as SettingsIcon, 
   Sparkles,
   PanelLeftClose,
@@ -64,22 +64,22 @@ export const Sidebar: React.FC = () => {
     },
     { 
       label: 'UI Code', 
-      icon: Code2, 
+      icon: Folder, 
       path: '/ui-code',
     },
     { 
       label: 'API Code', 
-      icon: Terminal, 
+      icon: FileText, 
       path: '/api-code',
     },
     { 
       label: 'Unit Test Cases', 
-      icon: FileCheck2, 
+      icon: BookOpen, 
       path: '/unit-test-cases/',
     },
     { 
       label: 'Application Testing', 
-      icon: CheckSquare, 
+      icon: Layers, 
       path: '/application-testing/',
     },
     { 
@@ -141,21 +141,21 @@ export const Sidebar: React.FC = () => {
             const content = (
               <>
                 <div className={`flex items-center ${collapsed ? 'justify-center w-full' : 'gap-3'}`}>
-                  <item.icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-[#A0AEC0] group-hover:text-white'}`} />
-                  {!collapsed && <span>{item.label}</span>}
+                  <item.icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-white' : 'text-[#8F9BBA] group-hover:text-white'}`} />
+                  {!collapsed && <span className="font-semibold text-sm">{item.label}</span>}
                 </div>
 
                 {/* Active Indicator Bar | */}
                 {isActive && !collapsed && (
-                  <span className="w-1 h-4 bg-white rounded-full shrink-0 shadow-sm" />
+                  <span className="w-1.5 h-4 bg-white rounded-full shrink-0 shadow-xs" />
                 )}
               </>
             );
 
-            const className = `flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-4 py-3'} rounded-2xl text-xs font-bold transition-all duration-200 group relative ${
+            const className = `flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-3.5 py-3'} rounded-xl text-xs transition-all duration-200 group relative ${
               isActive
-                ? 'bg-gradient-to-r from-[#FF602B] via-[#7551FF] to-[#4318FF] text-white shadow-lg shadow-indigo-900/40'
-                : 'text-[#A0AEC0] hover:text-white hover:bg-white/10'
+                ? 'bg-gradient-to-r from-[#FF5722] via-[#7B3FE4] to-[#5924E1] text-white shadow-md'
+                : 'text-[#8F9BBA] hover:text-white hover:bg-white/10'
             }`;
 
             if (isNginxRoute) {
@@ -175,29 +175,41 @@ export const Sidebar: React.FC = () => {
         </nav>
       </div>
 
-      {/* Bottom Settings & User Avatar ('N') */}
-      <div className={`space-y-4 pt-4 border-t border-white/10 flex flex-col ${collapsed ? 'items-center' : ''}`}>
+      {/* Bottom Forge Stories Promo & Settings */}
+      <div className={`space-y-3 pt-3 border-t border-white/10 flex flex-col ${collapsed ? 'items-center' : ''}`}>
+        {!collapsed && (
+          <div className="mx-1 p-3.5 rounded-2xl bg-gradient-to-br from-[#2D225A] to-[#1E1B4B] border border-white/10 text-white relative overflow-hidden shadow-md">
+            <div className="relative z-10 space-y-1">
+              <h4 className="text-xs font-extrabold text-white tracking-tight">Forge Stories</h4>
+              <p className="text-[10px] text-[#A0AEC0] leading-tight">Generate AI-powered stories faster</p>
+              <Link 
+                href="/dashboard"
+                className="mt-2 inline-block px-3 py-1 bg-white text-gray-900 font-bold text-[10px] rounded-lg shadow-sm hover:bg-gray-100 transition-colors"
+              >
+                Try Now
+              </Link>
+            </div>
+            <div className="absolute -right-2 -bottom-2 w-12 h-12 bg-gradient-to-br from-[#7551FF]/40 to-[#FF602B]/30 rounded-xl pointer-events-none" />
+          </div>
+        )}
+
         <Link
           href="/settings"
           title={collapsed ? 'Settings' : undefined}
-          className={`flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-4 py-3'} rounded-2xl text-xs font-bold transition-all duration-200 w-full group ${
+          className={`flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-4 py-2.5'} rounded-xl text-xs font-semibold transition-all duration-200 w-full group ${
             activeAccelerator === 'Settings'
-              ? 'bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white shadow-lg shadow-indigo-900/40'
-              : 'text-[#A0AEC0] hover:text-white hover:bg-white/10'
+              ? 'bg-gradient-to-r from-[#FF5722] to-[#5924E1] text-white shadow-md'
+              : 'text-[#8F9BBA] hover:text-white hover:bg-white/10'
           }`}
         >
           <div className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'}`}>
-            <SettingsIcon className="w-4 h-4 shrink-0 text-[#A0AEC0] group-hover:text-white" />
+            <SettingsIcon className="w-5 h-5 shrink-0 text-[#8F9BBA] group-hover:text-white" />
             {!collapsed && <span>Settings</span>}
           </div>
           {activeAccelerator === 'Settings' && !collapsed && (
-            <span className="w-1 h-4 bg-white rounded-full shrink-0 shadow-sm" />
+            <span className="w-1.5 h-4 bg-white rounded-full shrink-0 shadow-xs" />
           )}
         </Link>
-
-        <div className="w-9 h-9 rounded-full bg-[#1A1A2E] border border-gray-700/60 flex items-center justify-center text-white font-extrabold text-xs shadow-md">
-          N
-        </div>
       </div>
 
     </aside>

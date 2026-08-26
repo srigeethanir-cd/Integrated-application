@@ -8,7 +8,7 @@ import {
   ArrowUpRight, FileText, Sparkles, ChevronDown, BookOpen, GitBranch, 
   ListChecks, ShieldCheck, History, Download, Upload, Database, Cloud, 
   CheckCircle2, AlertTriangle, ArrowLeft, Sliders, RotateCw, Loader2, Trash2,
-  BarChart3, Bot, Check, AlertOctagon, Send, Mic, XCircle, Globe
+  BarChart3, Bot, Check, AlertOctagon, Send, Mic, XCircle, Globe, LayoutGrid
 } from 'lucide-react';
 import { useWorkspaceStore } from '@/store/workspaceStore';
 import { api } from '@/services/api';
@@ -28,14 +28,77 @@ function DashboardContent() {
 
   const [selectedProjectId, setSelectedProjectId] = useState<string>('');
   const [activeTab, setActiveTab] = useState<string>('Dashboard');
+  const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  // Sync state from query params if present on initial load
+  // Restore state on initial load: URL query params > localStorage
   useEffect(() => {
-    const qTab = searchParams?.get('tab');
-    const qProj = searchParams?.get('project');
-    if (qProj) setSelectedProjectId(qProj);
-    if (qTab) setActiveTab(qTab);
+    let resolvedTab = searchParams?.get('tab');
+    let resolvedProj = searchParams?.get('project');
+    let resolvedNew = searchParams?.get('new');
+
+    if (!resolvedTab) {
+      try {
+        const storedTab = localStorage.getItem('ba_active_tab');
+        if (storedTab) resolvedTab = storedTab;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    if (!resolvedProj) {
+      try {
+        const storedProj = localStorage.getItem('ba_selected_project');
+        if (storedProj) resolvedProj = storedProj;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    let isNewMode = resolvedNew === '1' || resolvedNew === 'true';
+    if (resolvedNew === null || resolvedNew === undefined) {
+      try {
+        const storedNew = localStorage.getItem('ba_creating_new_project');
+        if (storedNew === 'true') isNewMode = true;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    if (resolvedProj) setSelectedProjectId(resolvedProj);
+    if (resolvedTab) setActiveTab(resolvedTab);
+    if (isNewMode) setIsCreatingNewProject(true);
+    setIsHydrated(true);
   }, [searchParams]);
+
+  // Persist state to localStorage and update browser URL on every state change
+  useEffect(() => {
+    if (!isHydrated) return;
+    try {
+      localStorage.setItem('ba_active_tab', activeTab);
+      localStorage.setItem('ba_selected_project', selectedProjectId || '');
+      localStorage.setItem('ba_creating_new_project', isCreatingNewProject ? 'true' : 'false');
+
+      const params = new URLSearchParams();
+      if (activeTab && activeTab !== 'Dashboard') {
+        params.set('tab', activeTab);
+      }
+      if (selectedProjectId) {
+        params.set('project', selectedProjectId);
+      }
+      if (isCreatingNewProject) {
+        params.set('new', '1');
+      }
+
+      const queryString = params.toString();
+      const targetUrl = queryString ? `/dashboard?${queryString}` : '/dashboard';
+      if (typeof window !== 'undefined' && window.location.pathname === '/dashboard') {
+        window.history.replaceState(null, '', targetUrl);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, [activeTab, selectedProjectId, isCreatingNewProject, isHydrated]);
 
   // Deleted Projects state (persisted locally so initial mock projects can also be deleted)
   const [deletedProjectIds, setDeletedProjectIds] = useState<string[]>([]);
@@ -101,9 +164,6 @@ function DashboardContent() {
     return () => { isMounted = false; };
   }, [workspaces, activeTab]); // re-evaluate when tabs change or workspaces update
 
-  // In-page New Project Mode State
-  const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
-  
   // New Project Form State
   const [projectName, setProjectName] = useState('');
   const [businessUnit, setBusinessUnit] = useState('Product');
@@ -346,7 +406,7 @@ function DashboardContent() {
     <div className="flex-1 flex flex-col min-h-screen bg-[#F7F9FC] text-[#111827] font-sans antialiased overflow-y-auto">
       
       {/* ── Top Header Bar ─────────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-30 flex items-center justify-between px-8 py-4 bg-white/95 backdrop-blur-md border-b border-[#E5E7EB] shrink-0 shadow-xs">
+      <header className="sticky top-0 z-30 flex items-center justify-between px-8 py-3.5 bg-white/95 backdrop-blur-md border-b border-[#E5E7EB] shrink-0 shadow-xs">
         <div className="flex-1 max-w-md relative">
           <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A0AEC0]" />
           <input
@@ -354,17 +414,17 @@ function DashboardContent() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search projects, stories..."
-            className="w-full pl-10 pr-4 py-2 text-xs bg-[#F7F9FC] border border-[#E5E7EB] rounded-full focus:outline-none focus:ring-2 focus:ring-[#7551FF] text-[#111827] placeholder-[#A0AEC0]"
+            className="w-full pl-10 pr-4 py-2 text-xs bg-[#F8F9FC] border border-[#E5E7EB] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7551FF] text-[#111827] placeholder-[#A0AEC0]"
           />
         </div>
 
         <div className="flex items-center gap-4">
-          <button className="p-2 text-[#6B7280] hover:text-[#111827] hover:bg-[#F3F4F6] rounded-full transition-colors relative">
+          <button className="p-2 text-[#6B7280] hover:text-[#111827] hover:bg-[#F3F4F6] rounded-xl transition-colors relative cursor-pointer">
             <Bell className="w-4.5 h-4.5" />
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF602B] rounded-full" />
           </button>
           
-          <div className="flex items-center gap-3 pl-2 border-l border-[#E5E7EB]">
+          <div className="flex items-center gap-3 pl-3 border-l border-[#E5E7EB]">
             <img
               src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120"
               alt="Sarah Jenkins"
@@ -378,363 +438,258 @@ function DashboardContent() {
         </div>
       </header>
 
-      {/* ── Main Workspace Area ────────────────────────────────────────────── */}
-      <main className="flex-1 px-8 py-6 space-y-6 max-w-7xl w-full mx-auto">
+      {/* ── Main Workspace Area (Full Width, No Outer Side Gap) ───────────── */}
+      <main className="flex-1 px-8 py-5 space-y-4 w-full">
         
-        {/* Welcome Banner & Action Button */}
-        {(isCreatingNewProject || activeTab === 'Dashboard' || activeTab === 'Projects') && (
+        {/* Welcome Banner & Action Button (Only on Dashboard tab when not in create mode) */}
+        {!isCreatingNewProject && activeTab === 'Dashboard' && (
           <div className="flex items-start justify-between">
             <div>
-              {(isCreatingNewProject || activeTab === 'Dashboard') && (
-                <>
-                  <h1 className="text-2xl font-bold text-[#111827] tracking-tight">
-                    {isCreatingNewProject ? 'Create New Project' : 'Good morning, Sarah'}
-                  </h1>
-                  <p className="text-xs text-[#6B7280] mt-1">
-                    {isCreatingNewProject ? 'Initialize a new requirement analysis workspace' : "Welcome back to your workspace. Let's forge some amazing stories today."}
-                  </p>
-                </>
-              )}
+              <h1 className="text-2xl font-bold text-[#111827] tracking-tight">Good morning, Sarah</h1>
+              <p className="text-xs text-[#6B7280] mt-1">
+                Welcome back to your workspace. Let's forge some amazing stories today.
+              </p>
             </div>
 
-            {!isCreatingNewProject ? (
-              <button 
-                onClick={() => setIsCreatingNewProject(true)}
-                className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-extrabold rounded-full shadow-[0_4px_16px_rgba(255,96,43,0.35)] hover:opacity-95 transition-opacity cursor-pointer"
-              >
-                New Project
-              </button>
-            ) : (
-              <button 
-                onClick={() => setIsCreatingNewProject(false)}
-                className="flex items-center gap-2 px-6 py-2.5 bg-[#F3F4F6] text-[#111827] text-xs font-bold rounded-full hover:bg-[#E5E7EB] cursor-pointer"
-              >
-                <ArrowLeft className="w-4 h-4" /> Cancel
-              </button>
-            )}
+            <button 
+              onClick={() => setIsCreatingNewProject(true)}
+              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-bold rounded-xl shadow-sm hover:opacity-95 transition-opacity cursor-pointer"
+            >
+              + New Project
+            </button>
           </div>
         )}
 
-        {/* ── Sticky In-Page Workflow Tab Navigation ─────────────────────────── */}
-        {!isCreatingNewProject && (
-          <div className="sticky top-[65px] z-20 bg-[#F7F9FC]/95 backdrop-blur-md py-2 border-b border-[#E5E7EB]/60 flex items-center gap-2 overflow-x-auto">
-            {navTabs.map(tab => {
-              const isActive = activeTab === tab || 
-                (tab === 'Outline Review' && (activeTab === 'Epics' || activeTab === 'Outline / Epics')) ||
-                (tab === 'Story Board' && activeTab === 'Stories') ||
-                (tab === 'Requirement Analysis' && activeTab === 'requirements');
-
-              return (
-                <button
-                  key={tab}
-                  onClick={() => {
-                    setActiveTab(tab);
-                    setIsCreatingNewProject(false);
-                  }}
-                  className={`px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-200 whitespace-nowrap cursor-pointer ${
-                    isActive
-                      ? 'bg-[#FF602B] text-white shadow-sm'
-                      : 'bg-white text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#111827]'
-                  }`}
-                >
-                  {tab}
-                </button>
+        {/* ── Sticky In-Page Workflow Tab Navigation (Always Visible) ───────── */}
+        <div className="sticky top-[57px] z-20 bg-[#F7F9FC]/95 backdrop-blur-md pt-2 pb-0 flex items-center gap-2 overflow-x-auto border-b border-[#E5E7EB]/80">
+          {navTabs.map(tab => {
+            const isActive = isCreatingNewProject 
+              ? tab === 'Projects'
+              : (
+                activeTab === tab || 
+                (tab === 'Projects' && (activeTab === 'Pipeline' || activeTab === 'processing')) ||
+                (tab === 'Document' && (activeTab === 'document' || activeTab === 'Export' || activeTab === 'export')) ||
+                (tab === 'Outline Review' && (activeTab === 'Epics' || activeTab === 'Outline / Epics' || activeTab === 'epics')) ||
+                (tab === 'Story Board' && (activeTab === 'Stories' || activeTab === 'stories')) ||
+                (tab === 'Requirement Analysis' && (activeTab === 'requirements' || activeTab === 'Requirement Analysis')) ||
+                (tab === 'Validation Gate' && (activeTab === 'validation' || activeTab === 'Validation Gate')) ||
+                (tab === 'Dashboard' && activeTab === 'Dashboard')
               );
-            })}
-          </div>
-        )}
+
+            return (
+              <button
+                key={tab}
+                onClick={() => {
+                  setActiveTab(tab);
+                  setIsCreatingNewProject(false);
+                }}
+                className={`px-5 py-2.5 text-xs font-bold rounded-t-lg rounded-b-none transition-all duration-150 whitespace-nowrap cursor-pointer ${
+                  isActive
+                    ? 'bg-[#FF602B] text-white shadow-none'
+                    : 'bg-[#EAEBED] text-[#505D6F] hover:bg-[#DFE1E6] hover:text-[#111827]'
+                }`}
+              >
+                {tab}
+              </button>
+            );
+          })}
+        </div>
 
         {/* ======================================================================
-            IN-PAGE CREATE NEW PROJECT FORM
+            IN-PAGE CREATE NEW PROJECT FORM (Matches Figma Screenshot Exactly)
            ====================================================================== */}
         {isCreatingNewProject && (
-          <form onSubmit={handleCreateProjectSubmit} className="space-y-8 max-w-4xl bg-white p-8 rounded-3xl border border-[#E5E7EB] shadow-sm">
+          <form onSubmit={handleCreateProjectSubmit} className="w-full bg-white p-7 md:p-8 rounded-2xl border border-[#E5E7EB] shadow-xs space-y-6">
             
             {/* SECTION 1: Project Details */}
-            <div className="space-y-4">
-              <h2 className="text-base font-bold text-[#111827] border-b border-[#E5E7EB] pb-3 flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#FF602B] text-white text-xs flex items-center justify-center font-bold">1</span>
-                Project Details
-              </h2>
+            <div className="space-y-3.5">
+              <div className="flex items-center gap-2.5">
+                <span className="w-5 h-5 rounded-full bg-[#FF602B] text-white text-[11px] flex items-center justify-center font-bold shrink-0">1</span>
+                <h2 className="text-sm font-bold text-gray-900">Project Details</h2>
+              </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#111827] block">Project Name *</label>
+              <div className="space-y-3 max-w-2xl">
+                <div>
+                  <label className="text-xs font-bold text-gray-900 block mb-1.5">Project Name *</label>
                   <input
                     type="text"
                     required
                     value={projectName}
                     onChange={(e) => setProjectName(e.target.value)}
-                    placeholder="e.g. Clarity Dental Portal V2"
-                    className="w-full px-3.5 py-2.5 text-xs bg-[#F7F9FC] border border-[#E5E7EB] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7551FF]"
+                    placeholder="Aegis Portal v2"
+                    className="w-full px-3.5 py-2 text-xs bg-[#F8F9FC] border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7551FF]"
                   />
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#111827] block">Business Unit *</label>
-                  <select
-                    value={businessUnit}
-                    onChange={(e) => setBusinessUnit(e.target.value)}
-                    className="w-full px-3.5 py-2.5 text-xs bg-[#F7F9FC] border border-[#E5E7EB] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7551FF]"
-                  >
-                    <option value="Product">Product</option>
-                    <option value="Retail">Retail</option>
-                    <option value="Medical">Medical</option>
-                    <option value="Operations">Operations</option>
-                    <option value="Platform">Platform</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#111827] block">Client Name</label>
-                  <input
-                    type="text"
-                    value={clientName}
-                    onChange={(e) => setClientName(e.target.value)}
-                    placeholder="e.g. FastLane Logistics"
-                    className="w-full px-3.5 py-2.5 text-xs bg-[#F7F9FC] border border-[#E5E7EB] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7551FF]"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#111827] block">Project Description</label>
-                  <input
-                    type="text"
+                <div>
+                  <label className="text-xs font-bold text-gray-900 block mb-1.5">Project Description</label>
+                  <textarea
+                    rows={3}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder="e.g. Ingestion of PRD specification document"
-                    className="w-full px-3.5 py-2.5 text-xs bg-[#F7F9FC] border border-[#E5E7EB] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7551FF]"
+                    placeholder="This project covers the expansion of the Aegis customer portal, focusing on modern secure transaction workflows, real-time balances, and enterprise auditing."
+                    className="w-full px-3.5 py-2 text-xs bg-[#F8F9FC] border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7551FF] resize-none leading-relaxed"
                   />
                 </div>
               </div>
             </div>
 
             {/* SECTION 2: Document Source Injection */}
-            <div className="space-y-4">
-              <h2 className="text-base font-bold text-[#111827] border-b border-[#E5E7EB] pb-3 flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#FF602B] text-white text-xs flex items-center justify-center font-bold">2</span>
-                Document Source
-              </h2>
+            <div className="space-y-3.5 pt-2">
+              <div className="flex items-center gap-2.5">
+                <span className="w-5 h-5 rounded-full bg-[#FF602B] text-white text-[11px] flex items-center justify-center font-bold shrink-0">2</span>
+                <h2 className="text-sm font-bold text-gray-900">Document Source</h2>
+              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pb-4">
+              {/* 6 Source Cards in a Single Row */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
                 
                 {/* 1. Local Upload */}
                 <div
                   onClick={() => setDocSource('upload')}
-                  className={`w-full p-4 rounded-2xl border cursor-pointer transition-all flex flex-col items-start gap-2 text-left relative ${
-                    docSource === 'upload' ? 'border-[#FF602B] ring-1 ring-[#FF602B] bg-white' : 'border-[#E5E7EB] bg-white opacity-60 hover:opacity-100'
+                  className={`p-3.5 rounded-xl border cursor-pointer transition-all flex flex-col justify-between h-[120px] relative text-left ${
+                    docSource === 'upload' ? 'border-[#FF602B] bg-white ring-1 ring-[#FF602B] shadow-xs' : 'border-gray-200 bg-white hover:border-gray-300'
                   }`}
                 >
                   <div className="flex items-center justify-between w-full">
-                    <Upload className={`w-5 h-5 ${docSource === 'upload' ? 'text-[#FF602B]' : 'text-blue-500'}`} />
-                    {docSource === 'upload' && <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-2 py-0.5 rounded uppercase">Connected</span>}
+                    <Upload className="w-5 h-5 text-[#FF602B]" />
+                    <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-1.5 py-0.5 rounded tracking-wider uppercase">Connected</span>
                   </div>
-                  <span className="text-sm font-bold text-[#111827] mt-1">Local Upload</span>
-                  <p className="text-[10px] text-[#6B7280] leading-snug">Upload PDF, DOC, DOCX, XLS or recordings.</p>
+                  <div>
+                    <span className="text-xs font-bold text-gray-900 block">Local Upload</span>
+                    <p className="text-[10px] text-gray-500 leading-tight mt-0.5">Upload PDF, DOC, DOCX, XLS or recordings.</p>
+                  </div>
                 </div>
 
                 {/* 2. Jira Cloud */}
                 <div
                   onClick={() => setDocSource('jira')}
-                  className={`w-full p-4 rounded-2xl border cursor-pointer transition-all flex flex-col items-start gap-2 text-left relative ${
-                    docSource === 'jira' ? 'border-[#FF602B] ring-1 ring-[#FF602B] bg-white' : 'border-[#E5E7EB] bg-white opacity-60 hover:opacity-100'
+                  className={`p-3.5 rounded-xl border cursor-pointer transition-all flex flex-col justify-between h-[120px] relative text-left ${
+                    docSource === 'jira' ? 'border-[#FF602B] bg-white ring-1 ring-[#FF602B] shadow-xs' : 'border-gray-200 bg-white hover:border-gray-300'
                   }`}
                 >
                   <div className="flex items-center justify-between w-full">
                     <XCircle className="w-5 h-5 text-blue-500" />
-                    {docSource === 'jira' && <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-2 py-0.5 rounded uppercase">Connected</span>}
+                    {docSource === 'jira' && <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-1.5 py-0.5 rounded tracking-wider uppercase">Connected</span>}
                   </div>
-                  <span className="text-sm font-bold text-[#111827] mt-1">Jira Cloud</span>
-                  <p className="text-[10px] text-[#6B7280] leading-snug">Import requirements directly from Jira Epics.</p>
+                  <div>
+                    <span className="text-xs font-bold text-gray-900 block">Jira Cloud</span>
+                    <p className="text-[10px] text-gray-500 leading-tight mt-0.5">Import requirements directly from Jira Epics.</p>
+                  </div>
                 </div>
 
                 {/* 3. Google Drive */}
                 <div
                   onClick={() => setDocSource('google')}
-                  className={`w-full p-4 rounded-2xl border cursor-pointer transition-all flex flex-col items-start gap-2 text-left relative ${
-                    docSource === 'google' ? 'border-[#FF602B] ring-1 ring-[#FF602B] bg-white' : 'border-[#E5E7EB] bg-white opacity-60 hover:opacity-100'
+                  className={`p-3.5 rounded-xl border cursor-pointer transition-all flex flex-col justify-between h-[120px] relative text-left ${
+                    docSource === 'google' ? 'border-[#FF602B] bg-white ring-1 ring-[#FF602B] shadow-xs' : 'border-gray-200 bg-white hover:border-gray-300'
                   }`}
                 >
                   <div className="flex items-center justify-between w-full">
                     <XCircle className="w-5 h-5 text-emerald-500" />
-                    {docSource === 'google' && <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-2 py-0.5 rounded uppercase">Connected</span>}
+                    {docSource === 'google' && <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-1.5 py-0.5 rounded tracking-wider uppercase">Connected</span>}
                   </div>
-                  <span className="text-sm font-bold text-[#111827] mt-1">Google Drive</span>
-                  <p className="text-[10px] text-[#6B7280] leading-snug">Import documents using Google drive connection.</p>
+                  <div>
+                    <span className="text-xs font-bold text-gray-900 block">Google Drive</span>
+                    <p className="text-[10px] text-gray-500 leading-tight mt-0.5">Import documents using Google drive connection.</p>
+                  </div>
                 </div>
 
                 {/* 4. SharePoint */}
                 <div
                   onClick={() => setDocSource('sharepoint')}
-                  className={`w-full p-4 rounded-2xl border cursor-pointer transition-all flex flex-col items-start gap-2 text-left relative ${
-                    docSource === 'sharepoint' ? 'border-[#FF602B] ring-1 ring-[#FF602B] bg-white' : 'border-[#E5E7EB] bg-white opacity-60 hover:opacity-100'
+                  className={`p-3.5 rounded-xl border cursor-pointer transition-all flex flex-col justify-between h-[120px] relative text-left ${
+                    docSource === 'sharepoint' ? 'border-[#FF602B] bg-white ring-1 ring-[#FF602B] shadow-xs' : 'border-gray-200 bg-white hover:border-gray-300'
                   }`}
                 >
                   <div className="flex items-center justify-between w-full">
                     <XCircle className="w-5 h-5 text-blue-600" />
-                    {docSource === 'sharepoint' && <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-2 py-0.5 rounded uppercase">Connected</span>}
+                    {docSource === 'sharepoint' && <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-1.5 py-0.5 rounded tracking-wider uppercase">Connected</span>}
                   </div>
-                  <span className="text-sm font-bold text-[#111827] mt-1">SharePoint</span>
-                  <p className="text-[10px] text-[#6B7280] leading-snug">Connect to your corporate SharePoint repo.</p>
+                  <div>
+                    <span className="text-xs font-bold text-gray-900 block">SharePoint</span>
+                    <p className="text-[10px] text-gray-500 leading-tight mt-0.5">Connect to your corporate SharePoint repo.</p>
+                  </div>
                 </div>
 
                 {/* 5. Voice Transcript */}
                 <div
                   onClick={() => setDocSource('voice')}
-                  className={`w-full p-4 rounded-2xl border cursor-pointer transition-all flex flex-col items-start gap-2 text-left relative ${
-                    docSource === 'voice' ? 'border-[#FF602B] ring-1 ring-[#FF602B] bg-white' : 'border-[#E5E7EB] bg-white opacity-60 hover:opacity-100'
+                  className={`p-3.5 rounded-xl border cursor-pointer transition-all flex flex-col justify-between h-[120px] relative text-left ${
+                    docSource === 'voice' ? 'border-[#FF602B] bg-white ring-1 ring-[#FF602B] shadow-xs' : 'border-gray-200 bg-white hover:border-gray-300'
                   }`}
                 >
                   <div className="flex items-center justify-between w-full">
                     <Mic className="w-5 h-5 text-purple-500" />
-                    {docSource === 'voice' && <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-2 py-0.5 rounded uppercase">Connected</span>}
+                    {docSource === 'voice' && <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-1.5 py-0.5 rounded tracking-wider uppercase">Connected</span>}
                   </div>
-                  <span className="text-sm font-bold text-[#111827] mt-1">Voice Transcript</span>
-                  <p className="text-[10px] text-[#6B7280] leading-snug">Extract stories from transcribed recordings.</p>
+                  <div>
+                    <span className="text-xs font-bold text-gray-900 block">Voice Transcript</span>
+                    <p className="text-[10px] text-gray-500 leading-tight mt-0.5">Extract stories from transcribed recordings.</p>
+                  </div>
                 </div>
 
                 {/* 6. Azure DevOps */}
                 <div
                   onClick={() => setDocSource('azure')}
-                  className={`w-full p-4 rounded-2xl border cursor-pointer transition-all flex flex-col items-start gap-2 text-left relative ${
-                    docSource === 'azure' ? 'border-[#FF602B] ring-1 ring-[#FF602B] bg-white' : 'border-[#E5E7EB] bg-white opacity-60 hover:opacity-100'
+                  className={`p-3.5 rounded-xl border cursor-pointer transition-all flex flex-col justify-between h-[120px] relative text-left ${
+                    docSource === 'azure' ? 'border-[#FF602B] bg-white ring-1 ring-[#FF602B] shadow-xs' : 'border-gray-200 bg-white hover:border-gray-300'
                   }`}
                 >
                   <div className="flex items-center justify-between w-full">
                     <Cloud className="w-5 h-5 text-blue-500" />
-                    {docSource === 'azure' && <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-2 py-0.5 rounded uppercase">Connected</span>}
+                    {docSource === 'azure' && <span className="text-[9px] font-bold text-[#FF602B] bg-[#FFF0EB] px-1.5 py-0.5 rounded tracking-wider uppercase">Connected</span>}
                   </div>
-                  <span className="text-sm font-bold text-[#111827] mt-1">Azure DevOps</span>
-                  <p className="text-[10px] text-[#6B7280] leading-snug">Connect to your Azure boards and repos.</p>
+                  <div>
+                    <span className="text-xs font-bold text-gray-900 block">Azure DevOps</span>
+                    <p className="text-[10px] text-gray-500 leading-tight mt-0.5">Connect to your Azure boards and repos.</p>
+                  </div>
                 </div>
               </div>
 
-              {/* Specific Source Inputs container */}
-              <div className="p-6 rounded-xl bg-[#F7F9FC] border border-[#E5E7EB] flex flex-col items-center justify-center min-h-[200px] relative">
-                
-                {docSource === 'upload' && (
-                  <div className="w-full max-w-lg text-center space-y-3">
-                    <Upload className="w-8 h-8 mx-auto text-[#FF602B]" />
-                    <div>
-                      <label htmlFor="file-upload" className="cursor-pointer font-bold text-[#111827] block">
-                        Upload PDF, DOC, DOCX, XLS, XLSX or Voice recordings.
-                      </label>
-                      <p className="text-xs text-[#6B7280] mt-1">Select a file from your file system. Max size limit 15MB.</p>
-                      <input
-                        id="file-upload"
-                        type="file"
-                        accept=".pdf,.docx,.txt"
-                        onChange={(e) => setUploadedFile(e.target.files?.[0] || null)}
-                        className="hidden"
-                      />
-                    </div>
-                    {uploadedFile && (
-                      <div className="mt-4 p-3 bg-white border border-[#E5E7EB] rounded-xl flex items-center gap-3 text-left w-full max-w-sm mx-auto shadow-sm">
-                        <FileText className="w-6 h-6 text-[#FF602B]" />
-                        <div>
-                          <p className="text-xs font-bold text-[#111827]">{uploadedFile.name}</p>
-                          <p className="text-[10px] text-[#6B7280]">{(uploadedFile.size / 1024).toFixed(0)} KB</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
+              {/* Upload Dropzone Box (Matches Reference Image) */}
+              <div 
+                onClick={() => document.getElementById('file-upload')?.click()}
+                className="p-7 rounded-2xl bg-[#F8FAFC] border-2 border-dashed border-gray-200 hover:border-[#FF602B]/40 transition-colors flex flex-col items-center justify-center text-center cursor-pointer w-full mt-3"
+              >
+                <Upload className="w-7 h-7 text-[#FF602B] mb-1.5" />
+                <label htmlFor="file-upload" className="cursor-pointer font-bold text-xs text-gray-800 block">
+                  Upload PDF, DOC, DOCX, XLS, XLSX or Voice recordings.
+                </label>
+                <p className="text-[11px] text-gray-400 mt-0.5">Select a file from your file system. Max size limit 15MB.</p>
+                <input
+                  id="file-upload"
+                  type="file"
+                  accept=".pdf,.docx,.txt,.xls,.xlsx"
+                  onChange={(e) => setUploadedFile(e.target.files?.[0] || null)}
+                  className="hidden"
+                />
 
-                {docSource === 'sharepoint' && (
-                  <div className="w-full max-w-lg text-center space-y-4">
-                    <Globe className="w-8 h-8 mx-auto text-[#FF602B]" />
-                    <div>
-                      <p className="font-bold text-[#111827] block">Link SharePoint Repository</p>
-                      <p className="text-xs text-[#6B7280] mt-1">Paste your corporate SharePoint document URL below.</p>
-                    </div>
-                    <input
-                      type="url"
-                      placeholder="e.g. https://company.sharepoint.com/sites/PRD"
-                      className="w-full max-w-md mx-auto block px-4 py-3 text-xs bg-white border border-[#E5E7EB] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF602B]"
-                    />
-                  </div>
-                )}
-
-                {docSource === 'jira' && (
-                  <div className="w-full max-w-lg text-center space-y-4">
-                    <Database className="w-8 h-8 mx-auto text-[#FF602B]" />
-                    <div>
-                      <p className="font-bold text-[#111827] block">Connect Jira Epic</p>
-                      <p className="text-xs text-[#6B7280] mt-1">Provide the specific Jira Key for the epic you want to import.</p>
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="e.g. PROJ-1234"
-                      className="w-full max-w-md mx-auto block px-4 py-3 text-xs bg-white border border-[#E5E7EB] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF602B]"
-                    />
-                  </div>
-                )}
-
-                {docSource === 'google' && (
-                  <div className="w-full max-w-lg text-center space-y-4">
-                    <Folder className="w-8 h-8 mx-auto text-[#FF602B]" />
-                    <div>
-                      <p className="font-bold text-[#111827] block">Link Google Drive Folder</p>
-                      <p className="text-xs text-[#6B7280] mt-1">Provide the specific Google Drive link to import documents.</p>
-                    </div>
-                    <input
-                      type="url"
-                      placeholder="e.g. https://drive.google.com/drive/folders/xyz"
-                      className="w-full max-w-md mx-auto block px-4 py-3 text-xs bg-white border border-[#E5E7EB] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF602B]"
-                    />
-                  </div>
-                )}
-
-                {docSource === 'azure' && (
-                  <div className="w-full max-w-lg text-center space-y-4">
-                    <Cloud className="w-8 h-8 mx-auto text-[#FF602B]" />
-                    <div>
-                      <p className="font-bold text-[#111827] block">Connect Azure DevOps</p>
-                      <p className="text-xs text-[#6B7280] mt-1">Provide the URL to your Azure Boards or Repository.</p>
-                    </div>
-                    <input
-                      type="url"
-                      placeholder="e.g. https://dev.azure.com/organization/project"
-                      className="w-full max-w-md mx-auto block px-4 py-3 text-xs bg-white border border-[#E5E7EB] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF602B]"
-                    />
-                  </div>
-                )}
-
-                {docSource === 'voice' && (
-                  <div className="w-full max-w-lg text-center space-y-4">
-                    <Mic className="w-8 h-8 mx-auto text-[#FF602B]" />
-                    <div>
-                      <p className="font-bold text-[#111827] block">Upload Voice Transcript</p>
-                      <p className="text-xs text-[#6B7280] mt-1">Upload an audio recording or transcription file.</p>
-                    </div>
-                    <div className="w-full max-w-md mx-auto relative block">
-                       <input
-                         type="file"
-                         accept="audio/*,.txt,.pdf"
-                         className="w-full px-4 py-2.5 text-xs bg-white border border-[#E5E7EB] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF602B] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-[#FFF0EB] file:text-[#FF602B] hover:file:bg-[#FFE6DE] cursor-pointer"
-                       />
+                {uploadedFile && (
+                  <div className="mt-3 p-2.5 bg-white border border-gray-200 rounded-xl flex items-center gap-3 text-left max-w-sm mx-auto shadow-xs">
+                    <FileText className="w-5 h-5 text-[#FF602B] shrink-0" />
+                    <div className="flex-1 truncate">
+                      <p className="text-xs font-bold text-gray-900 truncate">{uploadedFile.name}</p>
+                      <p className="text-[10px] text-gray-500">{(uploadedFile.size / 1024).toFixed(0)} KB</p>
                     </div>
                   </div>
                 )}
-
               </div>
             </div>
 
             {/* Submit Action CTA */}
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#E5E7EB]">
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-100">
               <button
                 type="button"
                 onClick={() => setIsCreatingNewProject(false)}
-                className="px-5 py-2.5 text-xs font-bold text-[#6B7280] bg-[#F3F4F6] rounded-xl hover:bg-[#E5E7EB]"
+                className="px-4 py-2 text-xs font-semibold text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={isUploading}
-                className="px-6 py-2.5 text-xs font-extrabold text-white bg-gradient-to-r from-[#FF602B] to-[#4318FF] rounded-xl shadow-md hover:opacity-95 flex items-center gap-2"
+                className="px-5 py-2.5 text-xs font-bold text-white bg-gradient-to-r from-[#FF602B] to-[#4318FF] rounded-xl shadow-sm hover:opacity-95 flex items-center gap-2 transition-opacity cursor-pointer"
               >
                 {isUploading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Create Workspace & Inject Document →'}
               </button>
@@ -750,129 +705,147 @@ function DashboardContent() {
           <>
             {/* Stat Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-5 rounded-2xl bg-[#E6F7F0] flex items-start justify-between border border-[#10B981]/20 shadow-sm">
-                <div className="space-y-2">
-                  <span className="text-xs font-semibold text-[#111827]">Documents Processed</span>
-                  <div className="text-3xl font-extrabold text-[#111827]">47</div>
-                  <div className="flex items-center gap-1 text-xs font-semibold text-[#10B981]">
+              <div className="p-5 rounded-2xl bg-[#EAF8F1] flex items-start justify-between border border-[#CBEEDB] shadow-xs">
+                <div className="space-y-1.5">
+                  <span className="text-xs font-semibold text-gray-700">Documents Processed</span>
+                  <div className="text-3xl font-extrabold text-gray-900 tracking-tight">47</div>
+                  <div className="flex items-center gap-1 text-xs font-semibold text-[#10B981] pt-0.5">
                     <ArrowUpRight className="w-3.5 h-3.5" />
                     <span>+12.3% vs last week</span>
                   </div>
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-[#D1FAE5] text-[#10B981] flex items-center justify-center shrink-0">
-                  <FileCheck className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-2xl bg-[#D2F3E2] text-[#10B981] flex items-center justify-center shrink-0">
+                  <FileText className="w-5 h-5" />
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#EFEEFD] flex items-start justify-between border border-[#7551FF]/20 shadow-sm">
-                <div className="space-y-2">
-                  <span className="text-xs font-semibold text-[#111827]">Stories Generated</span>
-                  <div className="text-3xl font-extrabold text-[#111827]">312</div>
-                  <div className="flex items-center gap-1 text-xs font-semibold text-[#4318FF]">
+              <div className="p-5 rounded-2xl bg-[#F4F1FD] flex items-start justify-between border border-[#E4DCFB] shadow-xs">
+                <div className="space-y-1.5">
+                  <span className="text-xs font-semibold text-gray-700">Stories Generated</span>
+                  <div className="text-3xl font-extrabold text-gray-900 tracking-tight">312</div>
+                  <div className="flex items-center gap-1 text-xs font-semibold text-[#5B32F5] pt-0.5">
                     <ArrowUpRight className="w-3.5 h-3.5" />
                     <span>+8.4% vs last week</span>
                   </div>
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-[#D8E2FD] text-[#4318FF] flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-[#E6DEFC] text-[#5B32F5] flex items-center justify-center shrink-0">
                   <Layers className="w-5 h-5" />
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#FFF0EB] flex items-start justify-between border border-[#FF602B]/20 shadow-sm">
-                <div className="space-y-2">
-                  <span className="text-xs font-semibold text-[#111827]">Avg Processing Time</span>
-                  <div className="text-3xl font-extrabold text-[#111827]">2.3 min</div>
-                  <div className="flex items-center gap-1 text-xs font-semibold text-[#FF602B]">
+              <div className="p-5 rounded-2xl bg-[#FFF4ED] flex items-start justify-between border border-[#FFE2D1] shadow-xs">
+                <div className="space-y-1.5">
+                  <span className="text-xs font-semibold text-gray-700">Avg Processing Time</span>
+                  <div className="text-3xl font-extrabold text-gray-900 tracking-tight">2.3 min</div>
+                  <div className="flex items-center gap-1 text-xs font-semibold text-[#FF602B] pt-0.5">
                     <ArrowUpRight className="w-3.5 h-3.5 rotate-90" />
                     <span>-15.1% vs last week</span>
                   </div>
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-[#FFE0D6] text-[#FF602B] flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-[#FFE4D4] text-[#FF602B] flex items-center justify-center shrink-0">
                   <Clock className="w-5 h-5" />
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#EDF5FF] flex items-start justify-between border border-[#3B82F6]/20 shadow-sm">
-                <div className="space-y-2">
-                  <span className="text-xs font-semibold text-[#111827]">Active Projects</span>
-                  <div className="text-3xl font-extrabold text-[#111827]">8</div>
-                  <div className="flex items-center gap-1 text-xs font-semibold text-[#3B82F6]">
+              <div className="p-5 rounded-2xl bg-[#EFF6FF] flex items-start justify-between border border-[#D6E8FE] shadow-xs">
+                <div className="space-y-1.5">
+                  <span className="text-xs font-semibold text-gray-700">Active Projects</span>
+                  <div className="text-3xl font-extrabold text-gray-900 tracking-tight">8</div>
+                  <div className="flex items-center gap-1 text-xs font-semibold text-blue-600 pt-0.5">
                     <ArrowUpRight className="w-3.5 h-3.5" />
                     <span>0% vs last week</span>
                   </div>
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-[#D3E4FF] text-[#3B82F6] flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-[#DCEBFE] text-blue-600 flex items-center justify-center shrink-0">
                   <Folder className="w-5 h-5" />
                 </div>
               </div>
             </div>
 
             {/* Recent Projects Table Container */}
-            <div className="bg-white rounded-3xl border border-[#E5E7EB] shadow-sm p-6 space-y-4">
+            <div className="bg-white rounded-2xl border border-gray-200/80 shadow-sm p-6 space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-base font-bold text-[#111827] tracking-tight">Recent Projects</h2>
-                  <p className="text-xs text-[#6B7280] mt-0.5">Review status and live progress of active scopes</p>
+                  <h2 className="text-base font-bold text-gray-900 tracking-tight">Recent Projects</h2>
+                  <p className="text-xs text-gray-500 mt-0.5">Review status and live progress of active scopes</p>
                 </div>
-                <button
-                  onClick={() => setActiveTab('Projects')}
-                  className="px-4 py-2 text-xs font-bold text-[#111827] bg-white border border-[#E5E7EB] hover:bg-[#F9FAFB] rounded-full transition-colors flex items-center gap-2"
-                >
-                  View All Projects
-                </button>
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1 text-gray-400">
+                    <button className="p-1.5 rounded-lg hover:text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer" title="Filter">
+                      <Filter className="w-4 h-4" />
+                    </button>
+                    <button className="p-1.5 rounded-lg hover:text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer" title="Grid View">
+                      <LayoutGrid className="w-4 h-4" />
+                    </button>
+                    <button className="p-1.5 rounded-lg text-gray-700 bg-gray-100 transition-colors cursor-pointer" title="List View">
+                      <ListChecks className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => setActiveTab('Projects')}
+                    className="px-3.5 py-1.5 text-xs font-semibold text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 rounded-xl transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
+                  >
+                    View All Projects
+                  </button>
+                </div>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-[#E5E7EB] text-[11px] font-bold text-[#A0AEC0] uppercase tracking-wider">
-                      <th className="py-3 px-4">Name</th>
-                      <th className="py-3 px-4">Client</th>
-                      <th className="py-3 px-4">Status</th>
-                      <th className="py-3 px-4">Stories</th>
-                      <th className="py-3 px-4">Progress</th>
-                      <th className="py-3 px-4 text-right">Updated</th>
-                      <th className="py-3 px-4 text-right">Action</th>
+                    <tr className="border-b border-gray-200/80 text-[11px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/60">
+                      <th className="py-3 px-4 font-semibold">Name</th>
+                      <th className="py-3 px-4 font-semibold">Client</th>
+                      <th className="py-3 px-4 font-semibold">Status</th>
+                      <th className="py-3 px-4 font-semibold">Stories</th>
+                      <th className="py-3 px-4 font-semibold">Progress</th>
+                      <th className="py-3 px-4 text-right font-semibold">Updated</th>
+                      <th className="py-3 px-4 text-right font-semibold">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#E5E7EB] text-xs">
+                  <tbody className="divide-y divide-gray-100 text-xs">
                     {filteredProjects.map((proj, idx) => (
                       <tr 
                         key={`tbl-${proj.id}-${idx}`}
                         onClick={() => handleOpenProjectInPage(proj.id, proj.status === 'Completed' ? 'Document' : undefined)}
-                        className="hover:bg-[#F7F9FC] transition-colors cursor-pointer group"
+                        className="hover:bg-gray-50/80 transition-colors cursor-pointer group"
                       >
-                        <td className="py-3.5 px-4 font-semibold text-[#111827] flex items-center gap-3">
+                        <td className="py-3.5 px-4 font-semibold text-gray-900 flex items-center gap-3">
                           <Folder className="w-4 h-4 text-[#FF602B] shrink-0" />
                           <span className="group-hover:text-[#7551FF] transition-colors">{proj.name}</span>
                         </td>
-                        <td className="py-3.5 px-4 text-[#6B7280] font-medium">{proj.client}</td>
+                        <td className="py-3.5 px-4 text-gray-600 font-medium">{proj.client}</td>
                         <td className="py-3.5 px-4">
-                          <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${proj.status === 'Completed' ? 'bg-[#E0E7FF] text-[#4318FF]' : 'bg-[#D1FAE5] text-[#10B981]'}`}>
-                            {proj.status === 'Completed' ? 'Completed' : 'Active'}
+                          <span className={`px-2.5 py-1 rounded-md text-[11px] font-semibold ${
+                            proj.status === 'Completed' 
+                              ? 'bg-[#EAF8F1] text-[#10B981]' 
+                              : proj.status === 'Blocked'
+                              ? 'bg-[#FEF2F2] text-[#EF4444]'
+                              : 'bg-[#FFF3EC] text-[#FF602B]'
+                          }`}>
+                            {proj.status === 'Completed' ? 'Completed' : 'In Progress'}
                           </span>
                         </td>
-                        <td className="py-3.5 px-4 text-[#6B7280] font-medium">
-                          <span className="text-muted-foreground flex gap-1 items-center font-medium">
-                            <Layers className="w-3.5 h-3.5 opacity-70" />
-                            {projectStats[proj.id]?.stories || 0} stories
+                        <td className="py-3.5 px-4 text-gray-600 font-medium">
+                          <span className="flex gap-1 items-center font-medium">
+                            {projectStats[proj.id]?.stories || proj.storiesCount || 0} Stories
                           </span>
                         </td>
                         <td className="py-3.5 px-4">
                           <div className="flex items-center gap-3 max-w-[140px]">
-                            <div className="flex-1 bg-[#F3F4F6] rounded-full h-1.5 overflow-hidden">
-                              <div className="bg-gradient-to-r from-[#FF602B] to-[#4318FF] h-full rounded-full" style={{ width: `${proj.progress}%` }} />
+                            <div className="flex-1 bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                              <div className="bg-[#FF602B] h-full rounded-full" style={{ width: `${proj.progress}%` }} />
                             </div>
-                            <span className="text-[11px] font-bold text-[#111827]">{proj.progress}%</span>
+                            <span className="text-[11px] font-semibold text-gray-700">{proj.progress}%</span>
                           </div>
                         </td>
-                        <td className="py-3.5 px-4 text-right text-[#A0AEC0] font-medium">{proj.updated}</td>
+                        <td className="py-3.5 px-4 text-right text-gray-400 font-medium">{proj.updated}</td>
                         <td className="py-3.5 px-4 text-right">
                           <button
                             type="button"
                             onClick={(e) => handleDeleteProject(proj.id, e)}
                             title="Delete project"
-                            className="p-1.5 rounded-lg text-[#A0AEC0] hover:text-red-600 hover:bg-red-50 transition-colors"
+                            className="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
