@@ -204,8 +204,43 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
         </nav>
       </div>
 
-      {/* Bottom Settings & User Avatar ('N') */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.1)', alignItems: isCollapsed ? 'center' : 'stretch' }}>
+      {/* Bottom Forge Stories Banner & Settings */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.1)', alignItems: isCollapsed ? 'center' : 'stretch' }}>
+        {!isCollapsed && (
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(255, 96, 43, 0.15) 0%, rgba(67, 24, 255, 0.15) 100%)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '16px',
+            padding: '14px',
+            color: '#ffffff',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
+          }}>
+            <div style={{ fontSize: '12px', fontWeight: 800, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Sparkles size={14} color="#FF602B" /> Forge Stories
+            </div>
+            <div style={{ fontSize: '10px', color: '#A0AEC0', marginTop: '4px', lineHeight: '1.4' }}>
+              Generate AI-powered stories faster
+            </div>
+            <a
+              href="/dashboard"
+              style={{
+                display: 'inline-block',
+                marginTop: '10px',
+                padding: '6px 14px',
+                background: 'linear-gradient(to right, #FF602B, #4318FF)',
+                color: '#ffffff',
+                fontSize: '10px',
+                fontWeight: 700,
+                borderRadius: '10px',
+                textDecoration: 'none',
+                textAlign: 'center'
+              }}
+            >
+              Try Now
+            </a>
+          </div>
+        )}
+
         <a
           href="/settings"
           title={isCollapsed ? 'Settings' : undefined}
@@ -227,23 +262,6 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
             {!isCollapsed && <span>Settings</span>}
           </div>
         </a>
-
-        <div style={{
-          width: '36px',
-          height: '36px',
-          borderRadius: '50%',
-          backgroundColor: '#1A1A2E',
-          border: '1px solid rgba(75, 85, 99, 0.6)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#ffffff',
-          fontWeight: 800,
-          fontSize: '12px',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
-        }}>
-          N
-        </div>
       </div>
     </aside>
   );

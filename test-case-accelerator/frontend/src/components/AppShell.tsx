@@ -1,18 +1,18 @@
 import { useEffect, useState, type ComponentType } from 'react'
-import { BarChart3, Bot, ChevronDown, FolderKanban, History, Home, Moon, PlayCircle, Settings, Sun } from 'lucide-react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { BarChart3, Bell, Bot, FolderKanban, History, Home, Moon, PlayCircle, Search, Settings, Sun } from 'lucide-react'
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useAppState } from '../state/app-state'
 import { UploadModal } from './UploadModal'
 import { UniversalSidebar } from './UniversalSidebar'
 
-type NavigationItem = {
+export type NavigationItem = {
   label: string
   to: string
   icon: ComponentType<{ size?: number }>
   projectRoute?: boolean
 }
 
-const navTabs: NavigationItem[] = [
+export const navTabs: NavigationItem[] = [
   { label: 'Dashboard', to: '/', icon: Home },
   { label: 'Projects', to: '/projects', icon: FolderKanban },
   { label: 'AI Workspace', to: '/processing', icon: Bot, projectRoute: true },
@@ -25,10 +25,12 @@ const navTabs: NavigationItem[] = [
 export function AppShell() {
   const state = useAppState()
   const navigate = useNavigate()
+  const location = useLocation()
   const [dark, setDark] = useState(() => localStorage.getItem('theme') === 'dark')
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
     try { return localStorage.getItem('sidebar_collapsed') === 'true' } catch { return false }
   })
+  const [globalSearch, setGlobalSearch] = useState('')
 
   useEffect(() => { void state.refreshProjects().catch(() => undefined) }, [])
   useEffect(() => {
@@ -44,9 +46,11 @@ export function AppShell() {
     })
   }
 
-  const activeProject = state.projects.find((project) => project.id === state.activeProjectId)
-  const projectStatus = activeProject?.status === 'FAILED' ? 'Failed' : activeProject?.status === 'PROCESSING' ? 'Running' : 'Ready'
-  const statusTone = projectStatus.toLowerCase()
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && globalSearch.trim()) {
+      navigate(`/projects?q=${encodeURIComponent(globalSearch.trim())}`)
+    }
+  }
 
   return (
     <div className="app-shell" style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--canvas, #F7F9FC)' }}>
@@ -55,11 +59,11 @@ export function AppShell() {
 
       {/* Main Content Area with Fixed Navigation & Scrollable Body */}
       <div className="app-body" style={{ marginLeft: sidebarCollapsed ? '78px' : '260px', flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', height: '100vh', overflowY: 'auto', transition: 'margin-left 0.2s ease' }}>
-        {/* Sticky Top Header with Module Navigation Tabs */}
+        {/* Sticky Top Header with Search Bar on Left, Bell & Profile on Right */}
         <header
           className="topbar"
           style={{
-            height: '64px',
+            height: '60px',
             position: 'sticky',
             top: 0,
             zIndex: 30,
@@ -74,71 +78,50 @@ export function AppShell() {
             flexShrink: 0
           }}
         >
-          {/* Top Module Navigation Tabs Bar */}
-          <nav
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '4px',
-              borderRadius: '8px',
-              backgroundColor: dark ? '#111827' : '#F7F9FC',
-              border: '1px solid var(--border, #E5E7EB)'
-            }}
-          >
-            {navTabs.map(({ label, to, icon: Icon, projectRoute }) => {
-              const target = projectRoute ? (state.activeProjectId ? `${to}/${state.activeProjectId}` : '/projects') : to
-              return (
-                <NavLink
-                  end={to === '/'}
-                  key={label}
-                  to={target}
-                  style={({ isActive }) => ({
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '7px',
-                    padding: '6px 14px',
-                    borderRadius: '6px',
-                    fontSize: '12px',
-                    fontWeight: 700,
-                    textDecoration: 'none',
-                    transition: 'all 0.15s ease',
-                    backgroundColor: isActive ? '#FF602B' : 'transparent',
-                    color: isActive ? '#ffffff' : dark ? '#A0AEC0' : '#6B7280',
-                    boxShadow: isActive ? '0 2px 8px rgba(255, 96, 43, 0.35)' : 'none',
-                    cursor: 'pointer'
-                  })}
-                >
-                  <Icon size={14} />
-                  <span>{label}</span>
-                </NavLink>
-              )
-            })}
-          </nav>
-
-          {/* Right Header: Project Selector & Profile Avatar Standard */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <button
-              className="project-select"
-              onClick={() => navigate('/projects')}
+          {/* Left Search Bar (Matches User Story Page Header) */}
+          <div style={{ flex: 1, maxWidth: '420px', position: 'relative' }}>
+            <Search size={16} color="#A0AEC0" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} />
+            <input
+              type="text"
+              placeholder="Search projects, test cases..."
+              value={globalSearch}
+              onChange={(e) => setGlobalSearch(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
               style={{
-                height: '36px',
-                borderRadius: '9999px',
+                width: '100%',
+                paddingLeft: '38px',
+                paddingRight: '16px',
+                paddingTop: '8px',
+                paddingBottom: '8px',
+                fontSize: '12px',
+                backgroundColor: dark ? '#111827' : '#F8F9FC',
+                border: '1px solid var(--border, #E5E7EB)',
+                borderRadius: '12px',
+                color: dark ? '#FFFFFF' : '#111827',
+                outline: 'none',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+
+          {/* Right Header: Notification Bell, Theme Toggle, Sarah Jenkins Profile */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <button
+              style={{
+                padding: '8px',
+                color: dark ? '#A0AEC0' : '#6B7280',
+                background: 'transparent',
+                border: 'none',
+                borderRadius: '12px',
+                cursor: 'pointer',
+                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
-                padding: '0 14px',
-                border: '1px solid var(--border, #E5E7EB)',
-                backgroundColor: dark ? '#1E293B' : '#F7F9FC',
-                color: dark ? '#E5EDF7' : '#111827',
-                fontSize: '12px',
-                fontWeight: 600,
-                cursor: 'pointer'
+                justifyContent: 'center'
               }}
             >
-              <span>{activeProject?.name ?? 'Select a project'}</span>
-              {activeProject && <i className={`project-status-dot ${statusTone}`} aria-hidden="true" />}
-              <ChevronDown size={14} />
+              <Bell size={16} />
+              <span style={{ position: 'absolute', top: '6px', right: '6px', width: '8px', height: '8px', backgroundColor: '#FF602B', borderRadius: '50%' }} />
             </button>
 
             <button
@@ -146,8 +129,8 @@ export function AppShell() {
               aria-label="Toggle color theme"
               onClick={() => setDark(!dark)}
               style={{
-                width: '36px',
-                height: '36px',
+                width: '34px',
+                height: '34px',
                 borderRadius: '50%',
                 border: '1px solid var(--border, #E5E7EB)',
                 backgroundColor: dark ? '#1E293B' : '#ffffff',
@@ -157,10 +140,10 @@ export function AppShell() {
                 cursor: 'pointer'
               }}
             >
-              {dark ? <Sun size={16} /> : <Moon size={16} />}
+              {dark ? <Sun size={15} /> : <Moon size={15} />}
             </button>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingLeft: '8px', borderLeft: '1px solid var(--border, #E5E7EB)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingLeft: '12px', borderLeft: '1px solid var(--border, #E5E7EB)' }}>
               <img
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120"
                 alt="Sarah Jenkins"
@@ -174,8 +157,55 @@ export function AppShell() {
           </div>
         </header>
 
+        {/* Sticky In-Page Navigation for sub-routes (when not on dashboard) */}
+        {location.pathname !== '/' && (
+          <div
+            style={{
+              position: 'sticky',
+              top: '60px',
+              zIndex: 20,
+              backgroundColor: dark ? 'rgba(23, 32, 51, 0.95)' : 'rgba(247, 249, 252, 0.95)',
+              backdropFilter: 'blur(8px)',
+              padding: '10px 32px 0 32px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              overflowX: 'auto',
+              borderBottom: '1px solid var(--border, #E5E7EB)'
+            }}
+          >
+            {navTabs.map(({ label, to, projectRoute }) => {
+              const target = projectRoute ? (state.activeProjectId ? `${to}/${state.activeProjectId}` : '/projects') : to
+              return (
+                <NavLink
+                  end={to === '/'}
+                  key={label}
+                  to={target}
+                  style={({ isActive }) => ({
+                    padding: '10px 20px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    borderTopLeftRadius: '8px',
+                    borderTopRightRadius: '8px',
+                    borderBottomLeftRadius: 0,
+                    borderBottomRightRadius: 0,
+                    textDecoration: 'none',
+                    transition: 'all 0.15s ease',
+                    backgroundColor: isActive ? '#FF602B' : dark ? '#1E293B' : '#EAEBED',
+                    color: isActive ? '#ffffff' : dark ? '#A0AEC0' : '#505D6F',
+                    whiteSpace: 'nowrap',
+                    cursor: 'pointer'
+                  })}
+                >
+                  {label}
+                </NavLink>
+              )
+            })}
+          </div>
+        )}
+
         {/* Main Content Area - Scrollable */}
-        <main id="main-content" style={{ flex: 1, minHeight: 0 }}>
+        <main id="main-content" style={{ flex: 1, minHeight: 0, width: '100%' }}>
           <Outlet />
         </main>
       </div>

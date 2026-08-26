@@ -25,6 +25,7 @@ import {
 import { useTestCaseWorkflowStore, TestProjectRecord } from '@/testCase Frontend/store/workflowStore';
 import { testCaseApi } from '@/testCase Frontend/services/testCaseApi';
 import { projectService, BackendProject } from '@/services/projectService';
+import { NewProjectModal } from '@/components/projects/NewProjectModal';
 
 const formatDate = (value: string, isMounted = true) => {
   if (!isMounted) {
@@ -56,6 +57,7 @@ function DashboardContent() {
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('table');
   const [mounted, setMounted] = useState(false);
   const [backendProjects, setBackendProjects] = useState<BackendProject[]>([]);
+  const [showNewProjectModal, setShowNewProjectModal] = useState(false);
 
   // ── Selection mode state ─────────────────────────────────────────────────
   const [selectMode, setSelectMode] = useState(false);
@@ -190,19 +192,60 @@ function DashboardContent() {
   const allVisibleSelected = filteredIds.length > 0 && filteredIds.every(id => selectedIds.has(id));
 
   return (
-    <div className="space-y-8 pb-12">
-      {/* GREETING */}
-      <div>
-        <h1 className="text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
-          Hello, Yogeshwar
-        </h1>
-        <p className="mt-1.5 text-sm text-muted-foreground">
-          Welcome back to your workspace. Let&apos;s forge high-quality test suites &amp; automation scripts today.
-        </p>
+    <div className="space-y-4 pb-12">
+      {/* GREETING & ACTION ROW */}
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 
+            style={{ fontSize: '24px', fontWeight: 700, letterSpacing: '-0.025em', lineHeight: '1.25', margin: 0 }}
+            className="text-2xl font-bold tracking-tight text-[#111827] dark:text-foreground"
+          >
+            Good morning, Sarah
+          </h1>
+          <p 
+            style={{ fontSize: '12px', color: '#6B7280', marginTop: '4px', margin: '4px 0 0 0' }}
+            className="text-xs text-[#6B7280] dark:text-muted-foreground mt-1"
+          >
+            Welcome back to your workspace. Let&apos;s forge high-quality test suites &amp; automation scripts today.
+          </p>
+        </div>
+        <button
+          onClick={() => setShowNewProjectModal(true)}
+          style={{ fontSize: '12px', fontWeight: 700, borderRadius: '12px' }}
+          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-bold rounded-xl shadow-sm hover:opacity-95 transition-opacity cursor-pointer shrink-0"
+        >
+          + New Project
+        </button>
+      </div>
+
+      {/* STICKY IN-PAGE WORKFLOW TAB NAVIGATION */}
+      <div className="sticky top-[57px] z-20 bg-background/95 backdrop-blur-md pt-2 pb-0 flex items-center gap-2 overflow-x-auto border-b border-border/80">
+        {[
+          { href: '/dashboard', label: 'Dashboard' },
+          { href: '/test-case-generation', label: 'New Generator' },
+          { href: '/test-case-generation/results', label: 'Generated Tests' },
+          { href: '/test-case-generation/automation', label: 'Playwright Studio' },
+          { href: '/test-case-generation/url-crawler', label: 'App Crawler' },
+        ].map(({ href, label }) => {
+          const active = href === '/dashboard';
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`px-5 py-2.5 text-xs font-bold rounded-t-lg rounded-b-none transition-all duration-150 whitespace-nowrap cursor-pointer ${
+                active
+                  ? 'bg-[#FF602B] text-white shadow-none'
+                  : 'bg-[#EAEBED] text-[#505D6F] dark:bg-muted/50 dark:text-muted-foreground hover:bg-[#DFE1E6] hover:text-[#111827] dark:hover:bg-muted dark:hover:text-foreground'
+              }`}
+            >
+              {label}
+            </Link>
+          );
+        })}
       </div>
 
       {/* 4 STAT SUMMARY CARDS */}
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {/* Card 1: Mint Green */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -752,6 +795,8 @@ function DashboardContent() {
           </div>
         )}
       </AnimatePresence>
+
+      <NewProjectModal isOpen={showNewProjectModal} onClose={() => setShowNewProjectModal(false)} />
     </div>
   );
 }

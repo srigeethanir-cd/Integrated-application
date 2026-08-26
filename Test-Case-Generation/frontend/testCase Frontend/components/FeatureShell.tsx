@@ -20,7 +20,8 @@ import {
   Terminal,
   CheckSquare,
   PanelLeftClose,
-  PanelLeftOpen
+  PanelLeftOpen,
+  Bell
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { NewProjectModal } from '@/components/projects/NewProjectModal';
@@ -239,8 +240,43 @@ export function FeatureShell({ children }: { children: ReactNode }) {
           </nav>
         </div>
 
-        {/* Bottom Settings & User Avatar ('N') */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.1)', alignItems: sidebarCollapsed ? 'center' : 'stretch' }}>
+        {/* Bottom Forge Stories Banner & Settings */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.1)', alignItems: sidebarCollapsed ? 'center' : 'stretch' }}>
+          {!sidebarCollapsed && (
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(255, 96, 43, 0.15) 0%, rgba(67, 24, 255, 0.15) 100%)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '16px',
+              padding: '14px',
+              color: '#ffffff',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
+            }}>
+              <div style={{ fontSize: '12px', fontWeight: 800, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Sparkles size={14} color="#FF602B" /> Forge Stories
+              </div>
+              <div style={{ fontSize: '10px', color: '#A0AEC0', marginTop: '4px', lineHeight: '1.4' }}>
+                Generate AI-powered stories faster
+              </div>
+              <a
+                href="/dashboard"
+                style={{
+                  display: 'inline-block',
+                  marginTop: '10px',
+                  padding: '6px 14px',
+                  background: 'linear-gradient(to right, #FF602B, #4318FF)',
+                  color: '#ffffff',
+                  fontSize: '10px',
+                  fontWeight: 700,
+                  borderRadius: '10px',
+                  textDecoration: 'none',
+                  textAlign: 'center'
+                }}
+              >
+                Try Now
+              </a>
+            </div>
+          )}
+
           <a
             href="/settings"
             title={sidebarCollapsed ? 'Settings' : undefined}
@@ -262,103 +298,77 @@ export function FeatureShell({ children }: { children: ReactNode }) {
               {!sidebarCollapsed && <span>Settings</span>}
             </div>
           </a>
-
-          <div style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '50%',
-            backgroundColor: '#1A1A2E',
-            border: '1px solid rgba(75, 85, 99, 0.6)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#ffffff',
-            fontWeight: 800,
-            fontSize: '12px',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
-          }}>
-            N
-          </div>
         </div>
       </aside>
 
       {/* TOP NAVIGATION BAR & CONTENT WRAPPER */}
       <div style={{ marginLeft: sidebarCollapsed ? '78px' : '260px', flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', transition: 'margin-left 0.2s ease' }}>
-        {/* Top Header */}
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/60 bg-background/90 px-6 backdrop-blur-md transition-colors gap-4">
-          {/* Top Module Navigation Tabs */}
-          <nav className="flex items-center gap-1.5 p-1 bg-muted/60 dark:bg-muted/30 border border-border/60 rounded-2xl">
-            {moduleTabs.map(({ href, label, icon: Icon, exact }) => {
-              const cleanCurrent = (pathname || '').replace(/^\/application-testing/, '').replace(/\/$/, '') || '/';
-              const cleanTarget = href.replace(/\/$/, '') || '/';
-              const active = exact ? cleanCurrent === cleanTarget : cleanCurrent.startsWith(cleanTarget);
+        {/* Top Header Bar (Matching User Story Header) */}
+        <header className="sticky top-0 z-30 flex items-center justify-between px-8 py-3.5 bg-white/95 dark:bg-card/95 backdrop-blur-md border-b border-border shrink-0 shadow-xs">
+          <form onSubmit={handleGlobalSearch} className="flex-1 max-w-md relative">
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <input
+              type="text"
+              value={globalQuery}
+              onChange={(e) => setGlobalQuery(e.target.value)}
+              placeholder="Search projects, test cases..."
+              className="w-full pl-10 pr-4 py-2 text-xs bg-muted/40 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7551FF] text-foreground placeholder:text-muted-foreground"
+            />
+          </form>
 
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  style={
-                    active
-                      ? {
-                          backgroundColor: '#FF5523',
-                          color: '#ffffff',
-                          boxShadow: '0 4px 14px rgba(255, 85, 35, 0.35)',
-                        }
-                      : undefined
-                  }
-                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    active
-                      ? 'bg-[#FF5523] hover:bg-[#E0481B] text-white shadow-md shadow-[#FF5523]/30'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-background/60'
-                  }`}
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                  <span>{label}</span>
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="flex items-center gap-3 ml-auto">
-            {/* Search Input */}
-            <form onSubmit={handleGlobalSearch} className="relative w-64 hidden xl:block">
-              <Search className="absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="text"
-                value={globalQuery}
-                onChange={(e) => setGlobalQuery(e.target.value)}
-                placeholder="Search projects..."
-                className="h-9 w-full rounded-full border border-border/70 bg-card/60 pl-9 pr-4 text-xs text-foreground placeholder:text-muted-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition"
-              />
-            </form>
-
-            {/* Quick Create Action */}
-            <button
-              onClick={() => setShowNewProjectModal(true)}
-              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#FF602B] to-[#4318FF] px-4 py-2 text-xs font-bold text-white shadow-md shadow-[#FF602B]/25 hover:opacity-95 transition cursor-pointer"
-            >
-              <Plus className="h-3.5 w-3.5" /> New Project
+          <div className="flex items-center gap-4">
+            <button className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-xl transition-colors relative cursor-pointer">
+              <Bell className="w-4 h-4" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF602B] rounded-full" />
             </button>
 
             <ThemeToggle />
 
-            {/* Profile Section Standard */}
-            <div className="flex items-center gap-2.5 pl-2 border-l border-border/60">
+            <div className="flex items-center gap-3 pl-3 border-l border-border">
               <img
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120"
                 alt="Sarah Jenkins"
-                className="h-8 w-8 rounded-full object-cover border border-border/70 shadow-xs"
+                className="w-9 h-9 rounded-full object-cover border border-border shadow-sm"
               />
-              <div className="hidden lg:flex flex-col text-left">
+              <div className="flex flex-col text-left">
                 <span className="text-xs font-bold text-foreground leading-tight">Sarah Jenkins</span>
-                <span className="text-[10px] font-medium text-muted-foreground">Product Owner</span>
+                <span className="text-[11px] text-muted-foreground">Product Owner</span>
               </div>
             </div>
           </div>
         </header>
 
-        {/* Route Content Container */}
-        <main className="flex-1 px-8 py-6 max-w-7xl w-full mx-auto">
+        {/* Sticky In-Page Workflow Tab Navigation (for sub-routes) */}
+        {(() => {
+          const cleanCurrent = (pathname || '').replace(/^\/application-testing/, '').replace(/\/$/, '') || '/';
+          if (cleanCurrent === '/' || cleanCurrent === '/dashboard') return null;
+
+          return (
+            <div className="sticky top-[57px] z-20 bg-background/95 backdrop-blur-md px-8 pt-3 pb-0 flex items-center gap-2 overflow-x-auto border-b border-border/80">
+              {moduleTabs.map(({ href, label, exact }) => {
+                const targetClean = href.replace(/\/$/, '') || '/';
+                const active = exact ? cleanCurrent === targetClean : cleanCurrent.startsWith(targetClean);
+
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={`px-5 py-2.5 text-xs font-bold rounded-t-lg rounded-b-none transition-all duration-150 whitespace-nowrap cursor-pointer ${
+                      active
+                        ? 'bg-[#FF602B] text-white shadow-none'
+                        : 'bg-[#EAEBED] text-[#505D6F] dark:bg-muted/50 dark:text-muted-foreground hover:bg-[#DFE1E6] hover:text-[#111827] dark:hover:bg-muted dark:hover:text-foreground'
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+            </div>
+          );
+        })()}
+
+        {/* Route Content Container (Full Width, No Outer Side Gap) */}
+        <main className="flex-1 px-8 py-5 w-full">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={pathname}

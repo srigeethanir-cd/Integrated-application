@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { ArrowRight, BarChart3, BrainCircuit, CheckCircle2, ChevronDown, ChevronUp, CircleAlert, Clipboard, Clock3, Code2, Download, Eye, FileArchive, FileText, FolderGit2, Gauge, GitBranch, History as HistoryIcon, Layers3, Lightbulb, RefreshCw, Search, ShieldCheck, Sparkles, Target, TestTube2, Trash2, TrendingUp, Upload, X } from 'lucide-react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { api, securityScanErrorMessage } from '../api/client'
 import type { RuntimeValidationReport, TestCase } from '../api/types'
 import { Badge, Button, Empty, ErrorNotice, Loading, MetricCard, PageHeader, Section } from '../components/ui'
@@ -10,6 +10,7 @@ import { ProjectOverview } from '../components/ProjectOverview'
 import { GenerateWorkspace } from '../components/GenerateWorkspace'
 import { SecurityReview } from '../components/SecurityReview'
 import { useAppState } from '../state/app-state'
+import { navTabs } from '../components/AppShell'
 
 const tone = (status?: string) => status === 'Verified' || status === 'READY' || status === 'complete' ? 'success' : status === 'Failed' || status === 'FAILED' || status === 'failed' ? 'danger' : status === 'Partial' || status === 'PROCESSING' ? 'warning' : 'info'
 
@@ -254,7 +255,7 @@ export function Dashboard() {
   }
 
   return (
-    <div style={{ maxWidth: '1280px', width: '100%', margin: '0 auto', padding: '24px 32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ width: '100%', padding: '20px 32px', display: 'flex', flexDirection: 'column', gap: '16px', boxSizing: 'border-box' }}>
       {/* Welcome Banner & Action Button */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
         <div>
@@ -272,21 +273,65 @@ export function Dashboard() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '8px',
-            padding: '10px 24px',
+            padding: '10px 20px',
             background: 'linear-gradient(to right, #FF602B, #4318FF)',
             color: '#ffffff',
             fontSize: '12px',
             fontWeight: 800,
-            borderRadius: '9999px',
+            borderRadius: '12px',
             border: 'none',
             boxShadow: '0 4px 16px rgba(255, 96, 43, 0.35)',
             cursor: 'pointer',
             transition: 'opacity 0.2s'
           }}
         >
-          <Sparkles size={15} />
-          New Project
+          <Sparkles size={14} />
+          + New Project
         </button>
+      </div>
+
+      {/* Sticky In-Page Workflow Tab Navigation */}
+      <div
+        style={{
+          position: 'sticky',
+          top: '60px',
+          zIndex: 20,
+          backgroundColor: 'var(--canvas, #F7F9FC)',
+          paddingTop: '6px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          overflowX: 'auto',
+          borderBottom: '1px solid var(--border, #E5E7EB)'
+        }}
+      >
+        {navTabs.map(({ label, to, projectRoute }) => {
+          const target = projectRoute ? (state.activeProjectId ? `${to}/${state.activeProjectId}` : '/projects') : to
+          return (
+            <NavLink
+              end={to === '/'}
+              key={label}
+              to={target}
+              style={({ isActive }) => ({
+                padding: '10px 20px',
+                fontSize: '12px',
+                fontWeight: 700,
+                borderTopLeftRadius: '8px',
+                borderTopRightRadius: '8px',
+                borderBottomLeftRadius: 0,
+                borderBottomRightRadius: 0,
+                textDecoration: 'none',
+                transition: 'all 0.15s ease',
+                backgroundColor: isActive ? '#FF602B' : '#EAEBED',
+                color: isActive ? '#ffffff' : '#505D6F',
+                whiteSpace: 'nowrap',
+                cursor: 'pointer'
+              })}
+            >
+              {label}
+            </NavLink>
+          )
+        })}
       </div>
 
       {/* 4 Metric Cards in User Story Grid Standard */}
