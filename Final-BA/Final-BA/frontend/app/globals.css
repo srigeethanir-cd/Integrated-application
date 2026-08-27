@@ -4,7 +4,7 @@
 
 :root {
   /* ==========================================================================
-     STORYFORGE AI DESIGN SYSTEM TOKENS (Approved Palette)
+     STORYFORGE AI DESIGN SYSTEM TOKENS (Default: Purple Light)
      ========================================================================== */
 
   /* Primary Brand Purples */
@@ -42,7 +42,7 @@
 
   --error-light: #F9E0E3;
 
-  /* Canvas Mapping */
+  /* Canvas Mapping (Default / Purple Light) */
   --background: var(--neutral-workspace);
   --foreground: var(--dark-950);
 
@@ -69,6 +69,215 @@
   --ring: var(--primary-500);
 
   --radius: 0.75rem;
+}
+
+/* ==========================================================================
+   10 THEME DEFINITIONS
+   ========================================================================== */
+
+/* 1. Purple Light (Default) */
+[data-theme="purple-light"] {
+  --background: #F7F9FC;
+  --foreground: #111827;
+  --card: #FFFFFF;
+  --card-foreground: #111827;
+  --border: #E5E7EB;
+  --input: #F3F4F6;
+  --muted: #F3F4F6;
+  --muted-foreground: #6B7280;
+  --primary: #7551FF;
+  --primary-foreground: #FFFFFF;
+  --primary-gradient: linear-gradient(135deg, #FF602B 0%, #4318FF 100%);
+  --accent-orange: #FF602B;
+  --sidebar-bg: #1B1B3A;
+  --sidebar-foreground: #A0AEC0;
+  --sidebar-active-bg: linear-gradient(135deg, #FF602B 0%, #4318FF 100%);
+  --ring: #7551FF;
+}
+
+/* 2. Purple Dark */
+[data-theme="purple-dark"],
+.dark[data-theme="purple-dark"] {
+  --background: #0F0C1B;
+  --foreground: #F5F3FF;
+  --card: #1A162B;
+  --card-foreground: #F5F3FF;
+  --border: #2E284A;
+  --input: #231E38;
+  --muted: #231E38;
+  --muted-foreground: #9CA3AF;
+  --primary: #8B5CF6;
+  --primary-foreground: #FFFFFF;
+  --primary-gradient: linear-gradient(135deg, #EC4899 0%, #7551FF 100%);
+  --accent-orange: #F43F5E;
+  --sidebar-bg: #0A0814;
+  --sidebar-foreground: #9CA3AF;
+  --sidebar-active-bg: linear-gradient(135deg, #EC4899 0%, #7551FF 100%);
+  --ring: #8B5CF6;
+}
+
+/* 3. Blue Light */
+[data-theme="blue-light"] {
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --border: #E2E8F0;
+  --input: #F1F5F9;
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B;
+  --primary: #2563EB;
+  --primary-foreground: #FFFFFF;
+  --primary-gradient: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+  --accent-orange: #0284C7;
+  --sidebar-bg: #0F172A;
+  --sidebar-foreground: #94A3B8;
+  --sidebar-active-bg: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+  --ring: #2563EB;
+}
+
+/* 4. Blue Dark */
+[data-theme="blue-dark"],
+.dark[data-theme="blue-dark"] {
+  --background: #0B0F19;
+  --foreground: #F8FAFC;
+  --card: #111827;
+  --card-foreground: #F8FAFC;
+  --border: #1E293B;
+  --input: #1F2937;
+  --muted: #1F2937;
+  --muted-foreground: #94A3B8;
+  --primary: #3B82F6;
+  --primary-foreground: #FFFFFF;
+  --primary-gradient: linear-gradient(135deg, #0284C7 0%, #2563EB 100%);
+  --accent-orange: #38BDF8;
+  --sidebar-bg: #080C14;
+  --sidebar-foreground: #94A3B8;
+  --sidebar-active-bg: linear-gradient(135deg, #0284C7 0%, #2563EB 100%);
+  --ring: #3B82F6;
+}
+
+/* 5. Green Light */
+[data-theme="green-light"] {
+  --background: #F7FBF9;
+  --foreground: #064E3B;
+  --card: #FFFFFF;
+  --card-foreground: #064E3B;
+  --border: #D1FAE5;
+  --input: #ECFDF5;
+  --muted: #ECFDF5;
+  --muted-foreground: #059669;
+  --primary: #059669;
+  --primary-foreground: #FFFFFF;
+  --primary-gradient: linear-gradient(135deg, #10B981 0%, #047857 100%);
+  --accent-orange: #059669;
+  --sidebar-bg: #064E3B;
+  --sidebar-foreground: #A7F3D0;
+  --sidebar-active-bg: linear-gradient(135deg, #34D399 0%, #059669 100%);
+  --ring: #059669;
+}
+
+/* 6. Green Dark */
+[data-theme="green-dark"],
+.dark[data-theme="green-dark"] {
+  --background: #061A14;
+  --foreground: #ECFDF5;
+  --card: #0B2920;
+  --card-foreground: #ECFDF5;
+  --border: #134E39;
+  --input: #0F372C;
+  --muted: #0F372C;
+  --muted-foreground: #6EE7B7;
+  --primary: #10B981;
+  --primary-foreground: #061A14;
+  --primary-gradient: linear-gradient(135deg, #059669 0%, #047857 100%);
+  --accent-orange: #34D399;
+  --sidebar-bg: #04140F;
+  --sidebar-foreground: #6EE7B7;
+  --sidebar-active-bg: linear-gradient(135deg, #10B981 0%, #047857 100%);
+  --ring: #10B981;
+}
+
+/* 7. Orange Light */
+[data-theme="orange-light"] {
+  --background: #FFFBF7;
+  --foreground: #431407;
+  --card: #FFFFFF;
+  --card-foreground: #431407;
+  --border: #FED7AA;
+  --input: #FFF7ED;
+  --muted: #FFF7ED;
+  --muted-foreground: #9A3412;
+  --primary: #EA580C;
+  --primary-foreground: #FFFFFF;
+  --primary-gradient: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%);
+  --accent-orange: #EA580C;
+  --sidebar-bg: #2A1208;
+  --sidebar-foreground: #FDBA74;
+  --sidebar-active-bg: linear-gradient(135deg, #F97316 0%, #C2410C 100%);
+  --ring: #EA580C;
+}
+
+/* 8. Orange Dark */
+[data-theme="orange-dark"],
+.dark[data-theme="orange-dark"] {
+  --background: #180D06;
+  --foreground: #FFF7ED;
+  --card: #27160D;
+  --card-foreground: #FFF7ED;
+  --border: #432111;
+  --input: #341C10;
+  --muted: #341C10;
+  --muted-foreground: #FDBA74;
+  --primary: #F97316;
+  --primary-foreground: #180D06;
+  --primary-gradient: linear-gradient(135deg, #D97706 0%, #EA580C 100%);
+  --accent-orange: #FB923C;
+  --sidebar-bg: #100804;
+  --sidebar-foreground: #FDBA74;
+  --sidebar-active-bg: linear-gradient(135deg, #F97316 0%, #9A3412 100%);
+  --ring: #F97316;
+}
+
+/* 9. Rose Light */
+[data-theme="rose-light"] {
+  --background: #FFF8F9;
+  --foreground: #4C0519;
+  --card: #FFFFFF;
+  --card-foreground: #4C0519;
+  --border: #FECDD3;
+  --input: #FFE4E6;
+  --muted: #FFE4E6;
+  --muted-foreground: #9F1239;
+  --primary: #E11D48;
+  --primary-foreground: #FFFFFF;
+  --primary-gradient: linear-gradient(135deg, #FB7185 0%, #E11D48 100%);
+  --accent-orange: #E11D48;
+  --sidebar-bg: #2C0B14;
+  --sidebar-foreground: #FDA4AF;
+  --sidebar-active-bg: linear-gradient(135deg, #F43F5E 0%, #BE123C 100%);
+  --ring: #E11D48;
+}
+
+/* 10. Rose Dark */
+[data-theme="rose-dark"],
+.dark[data-theme="rose-dark"] {
+  --background: #17060B;
+  --foreground: #FFF1F2;
+  --card: #280C14;
+  --card-foreground: #FFF1F2;
+  --border: #4C1220;
+  --input: #38101C;
+  --muted: #38101C;
+  --muted-foreground: #FDA4AF;
+  --primary: #F43F5E;
+  --primary-foreground: #17060B;
+  --primary-gradient: linear-gradient(135deg, #BE123C 0%, #E11D48 100%);
+  --accent-orange: #FB7185;
+  --sidebar-bg: #0F0307;
+  --sidebar-foreground: #FDA4AF;
+  --sidebar-active-bg: linear-gradient(135deg, #F43F5E 0%, #9F1239 100%);
+  --ring: #F43F5E;
 }
 
 .dark {
@@ -108,6 +317,7 @@
 html {
   background-color: var(--background);
   color: var(--foreground);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {

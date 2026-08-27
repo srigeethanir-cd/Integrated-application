@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Search, User, LogOut } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { usePersonalization } from '@/context/PersonalizationContext';
 import { AutosaveIndicator, AutosaveState } from './AutosaveIndicator';
 
 interface TopNavProps {
@@ -13,6 +14,7 @@ interface TopNavProps {
 
 export function TopNav({ autosaveState }: TopNavProps) {
   const router = useRouter();
+  const { logoUrl } = usePersonalization();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -38,7 +40,11 @@ export function TopNav({ autosaveState }: TopNavProps) {
       {/* Left: Logo */}
       <div className="flex items-center gap-2">
         <Link href="/dashboard" className="flex items-center">
-          <img src="/images_and_videos/logo.png" alt="BA Accelerator" className="h-6 object-contain" />
+          <img 
+            src={logoUrl || "/images_and_videos/logo.png"} 
+            alt="Application Logo" 
+            className="h-6 object-contain max-w-[160px]" 
+          />
         </Link>
       </div>
 

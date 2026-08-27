@@ -14,9 +14,11 @@ import {
   PanelLeftClose,
   PanelLeftOpen
 } from 'lucide-react';
+import { usePersonalization } from '@/context/PersonalizationContext';
 
 export const Sidebar: React.FC = () => {
   const pathname = usePathname();
+  const { logoUrl } = usePersonalization();
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
@@ -99,9 +101,15 @@ export const Sidebar: React.FC = () => {
         {/* StoryForge AI Header with Collapse Toggle */}
         <div className={`flex items-center ${collapsed ? 'justify-center' : 'justify-between'} px-1`}>
           <Link href="/dashboard" className="flex items-center gap-3 group" title="StoryForge AI">
-            <div className="w-8.5 h-8.5 rounded-2xl bg-gradient-to-r from-[#FF602B] to-[#4318FF] flex items-center justify-center shrink-0 shadow-lg shadow-purple-950/60 group-hover:scale-105 transition-transform">
-              <Sparkles className="w-4.5 h-4.5 text-white fill-white" />
-            </div>
+            {logoUrl ? (
+              <div className="w-8.5 h-8.5 rounded-xl bg-white/10 p-1 flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform overflow-hidden">
+                <img src={logoUrl} alt="Logo" className="w-full h-full object-contain" />
+              </div>
+            ) : (
+              <div className="w-8.5 h-8.5 rounded-2xl bg-gradient-to-r from-[#FF602B] to-[#4318FF] flex items-center justify-center shrink-0 shadow-lg shadow-purple-950/60 group-hover:scale-105 transition-transform">
+                <Sparkles className="w-4.5 h-4.5 text-white fill-white" />
+              </div>
+            )}
             {!collapsed && (
               <span className="text-lg font-extrabold text-white tracking-tight font-sans whitespace-nowrap">
                 StoryForge AI

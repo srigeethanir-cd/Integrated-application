@@ -133,3 +133,10 @@ class LLMExecutionLog(Base, UUIDMixin, TimestampMixin):
     error_message: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     
     execution: Mapped[Optional["WorkflowExecution"]] = relationship(back_populates="logs")
+
+class AppSetting(Base, TimestampMixin):
+    __tablename__ = "app_settings"
+
+    key: Mapped[str] = mapped_column(String(100), primary_key=True)
+    value: Mapped[Dict[str, Any]] = mapped_column(JSON, default=dict)
+

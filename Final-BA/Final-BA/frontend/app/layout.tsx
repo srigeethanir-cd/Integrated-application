@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Outfit, Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import { PersonalizationProvider } from '@/context/PersonalizationContext';
 import { ConnectionToast } from '@/components/common/ConnectionToast';
 import { Sidebar } from '@/components/sidebar/Sidebar';
 
@@ -43,24 +44,26 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`min-h-screen antialiased text-foreground bg-[#f8f9fc] ${outfit.className} ${outfit.variable} ${geistSans.variable} ${geistMono.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          {isAuthPage ? (
-            // Auth Layout (No Sidebar)
-            <div className="min-h-screen w-screen overflow-x-hidden bg-[#f8f9fc]">
-              {children}
-            </div>
-          ) : (
-            // App Layout (With Single Global Sidebar)
-            <div className="flex h-screen w-screen overflow-hidden bg-[#f8f9fc]">
-              <Sidebar />
-              <main className="flex-1 flex flex-col h-full overflow-y-auto relative bg-[#f8f9fc]">
+      <body className={`min-h-screen antialiased text-foreground bg-[var(--background,#f8f9fc)] ${outfit.className} ${outfit.variable} ${geistSans.variable} ${geistMono.variable}`}>
+        <PersonalizationProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+            {isAuthPage ? (
+              // Auth Layout (No Sidebar)
+              <div className="min-h-screen w-screen overflow-x-hidden bg-[var(--background,#f8f9fc)]">
                 {children}
-              </main>
-            </div>
-          )}
-          <ConnectionToast />
-        </ThemeProvider>
+              </div>
+            ) : (
+              // App Layout (With Single Global Sidebar)
+              <div className="flex h-screen w-screen overflow-hidden bg-[var(--background,#f8f9fc)]">
+                <Sidebar />
+                <main className="flex-1 flex flex-col h-full overflow-y-auto relative bg-[var(--background,#f8f9fc)]">
+                  {children}
+                </main>
+              </div>
+            )}
+            <ConnectionToast />
+          </ThemeProvider>
+        </PersonalizationProvider>
       </body>
     </html>
   );

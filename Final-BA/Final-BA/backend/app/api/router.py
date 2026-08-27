@@ -8,6 +8,7 @@ from fastapi import APIRouter, File, UploadFile
 from fastapi.responses import JSONResponse
 
 from app.api.rag_router import router as rag_router
+from app.api.settings_router import router as settings_router
 from app.api.story_router import router as user_story_router
 from app.api.workflow_router import router as workflow_router
 from app.services.import_service import DocumentImportService
@@ -23,6 +24,7 @@ upload_dir = Path(__file__).resolve().parents[2] / "uploads"
 api_router.include_router(user_story_router)
 api_router.include_router(workflow_router)
 api_router.include_router(rag_router)
+api_router.include_router(settings_router)
 api_router.include_router(export_router, prefix="/export")
 
 # Register MCP enterprise connector routes.
