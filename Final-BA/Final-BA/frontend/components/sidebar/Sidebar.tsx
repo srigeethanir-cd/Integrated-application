@@ -14,11 +14,11 @@ import {
   PanelLeftClose,
   PanelLeftOpen
 } from 'lucide-react';
-import { usePersonalization } from '@/context/PersonalizationContext';
+import { usePersonalization, getLogoBorderRadius } from '@/context/PersonalizationContext';
 
 export const Sidebar: React.FC = () => {
   const pathname = usePathname();
-  const { logoUrl } = usePersonalization();
+  const { logoUrl, logoShape, sidebarBg, highlightFrom, highlightVia } = usePersonalization();
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
@@ -59,42 +59,22 @@ export const Sidebar: React.FC = () => {
   else if (isSettings) activeAccelerator = 'Settings';
 
   const menuItems = [
-    { 
-      label: 'User Story', 
-      icon: LayoutGrid, 
-      path: '/dashboard',
-    },
-    { 
-      label: 'UI Code', 
-      icon: Folder, 
-      path: '/ui-code',
-    },
-    { 
-      label: 'API Code', 
-      icon: FileText, 
-      path: '/api-code',
-    },
-    { 
-      label: 'Unit Test Cases', 
-      icon: BookOpen, 
-      path: '/unit-test-cases/',
-    },
-    { 
-      label: 'Application Testing', 
-      icon: Layers, 
-      path: '/application-testing/',
-    },
-    { 
-      label: 'Backend Unit-Testcase Generator', 
-      icon: Sparkles, 
-      path: '/backend-unit-testcase-generator/',
-    },
+    { label: 'User Story', icon: LayoutGrid, path: '/dashboard' },
+    { label: 'UI Code', icon: Folder, path: '/ui-code' },
+    { label: 'API Code', icon: FileText, path: '/api-code' },
+    { label: 'Unit Test Cases', icon: BookOpen, path: '/unit-test-cases/' },
+    { label: 'Application Testing', icon: Layers, path: '/application-testing/' },
+    { label: 'Backend Unit-Testcase Generator', icon: Sparkles, path: '/backend-unit-testcase-generator/' },
   ];
+
+  // Computed gradient for active items
+  const activeGradient = `linear-gradient(to right, ${highlightFrom}, ${highlightVia})`;
+  const logoRadius = getLogoBorderRadius(logoShape);
 
   return (
     <aside 
       className={`${collapsed ? 'w-[78px]' : 'w-[260px]'} h-screen select-none shrink-0 z-30 flex flex-col justify-between py-6 px-3 relative border-r border-[#2D3748]/50 transition-all duration-200`} 
-      style={{ backgroundColor: '#1B1B3A' }}
+      style={{ backgroundColor: sidebarBg }}
     >
       <div className="space-y-7">
         
@@ -102,11 +82,17 @@ export const Sidebar: React.FC = () => {
         <div className={`flex items-center ${collapsed ? 'justify-center' : 'justify-between'} px-1`}>
           <Link href="/dashboard" className="flex items-center gap-3 group" title="StoryForge AI">
             {logoUrl ? (
-              <div className="w-8.5 h-8.5 rounded-xl bg-white/10 p-1 flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform overflow-hidden">
+              <div 
+                className="w-8.5 h-8.5 bg-white/10 p-1 flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-all overflow-hidden"
+                style={{ borderRadius: logoRadius }}
+              >
                 <img src={logoUrl} alt="Logo" className="w-full h-full object-contain" />
               </div>
             ) : (
-              <div className="w-8.5 h-8.5 rounded-2xl bg-gradient-to-r from-[#FF602B] to-[#4318FF] flex items-center justify-center shrink-0 shadow-lg shadow-purple-950/60 group-hover:scale-105 transition-transform">
+              <div
+                className="w-8.5 h-8.5 flex items-center justify-center shrink-0 shadow-lg group-hover:scale-105 transition-all"
+                style={{ background: activeGradient, borderRadius: logoRadius }}
+              >
                 <Sparkles className="w-4.5 h-4.5 text-white fill-white" />
               </div>
             )}
@@ -160,22 +146,31 @@ export const Sidebar: React.FC = () => {
               </>
             );
 
-            const className = `flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-3.5 py-3'} rounded-xl text-xs transition-all duration-200 group relative ${
-              isActive
-                ? 'bg-gradient-to-r from-[#FF5722] via-[#7B3FE4] to-[#5924E1] text-white shadow-md'
-                : 'text-[#8F9BBA] hover:text-white hover:bg-white/10'
-            }`;
+            const baseClasses = `flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-3.5 py-3'} rounded-xl text-xs transition-all duration-200 group relative`;
+            const inactiveClasses = 'text-[#8F9BBA] hover:text-white hover:bg-white/10';
 
             if (isNginxRoute) {
               return (
-                <a key={item.label} href={item.path} className={className} title={collapsed ? item.label : undefined}>
+                <a
+                  key={item.label}
+                  href={item.path}
+                  className={`${baseClasses} ${isActive ? 'text-white shadow-md' : inactiveClasses}`}
+                  style={isActive ? { background: activeGradient } : undefined}
+                  title={collapsed ? item.label : undefined}
+                >
                   {content}
                 </a>
               );
             }
 
             return (
-              <Link key={item.label} href={item.path} className={className} title={collapsed ? item.label : undefined}>
+              <Link
+                key={item.label}
+                href={item.path}
+                className={`${baseClasses} ${isActive ? 'text-white shadow-md' : inactiveClasses}`}
+                style={isActive ? { background: activeGradient } : undefined}
+                title={collapsed ? item.label : undefined}
+              >
                 {content}
               </Link>
             );
@@ -206,9 +201,10 @@ export const Sidebar: React.FC = () => {
           title={collapsed ? 'Settings' : undefined}
           className={`flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-4 py-2.5'} rounded-xl text-xs font-semibold transition-all duration-200 w-full group ${
             activeAccelerator === 'Settings'
-              ? 'bg-gradient-to-r from-[#FF5722] to-[#5924E1] text-white shadow-md'
+              ? 'text-white shadow-md'
               : 'text-[#8F9BBA] hover:text-white hover:bg-white/10'
           }`}
+          style={activeAccelerator === 'Settings' ? { background: activeGradient } : undefined}
         >
           <div className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'}`}>
             <SettingsIcon className="w-5 h-5 shrink-0 text-[#8F9BBA] group-hover:text-white" />

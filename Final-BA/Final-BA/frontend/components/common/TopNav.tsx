@@ -14,7 +14,7 @@ interface TopNavProps {
 
 export function TopNav({ autosaveState }: TopNavProps) {
   const router = useRouter();
-  const { logoUrl } = usePersonalization();
+  const { logoUrl, logoShape } = usePersonalization();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -35,6 +35,8 @@ export function TopNav({ autosaveState }: TopNavProps) {
     router.push('/');
   };
 
+  const logoRadius = logoShape === 'square' ? '0px' : logoShape === 'circle' ? '50%' : '8px';
+
   return (
     <header className="h-[56px] border-b border-border bg-background flex items-center justify-between px-4 shrink-0 z-10 sticky top-0">
       {/* Left: Logo */}
@@ -43,7 +45,8 @@ export function TopNav({ autosaveState }: TopNavProps) {
           <img 
             src={logoUrl || "/images_and_videos/logo.png"} 
             alt="Application Logo" 
-            className="h-6 object-contain max-w-[160px]" 
+            className="h-7 object-contain max-w-[160px] transition-all overflow-hidden" 
+            style={{ borderRadius: logoRadius }}
           />
         </Link>
       </div>

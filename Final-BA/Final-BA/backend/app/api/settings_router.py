@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import re
 from typing import Any, Dict, Optional
 
 from fastapi import APIRouter, File, Header, HTTPException, UploadFile, WebSocket, WebSocketDisconnect, status
@@ -15,45 +16,60 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(tags=["Settings & Personalization"])
 
-VALID_THEMES = {
-    "blue-light",
-    "blue-dark",
-    "green-light",
-    "green-dark",
-    "purple-light",
-    "purple-dark",
-    "orange-light",
-    "orange-dark",
-    "rose-light",
-    "rose-dark",
-}
+HEX_COLOR_RE = re.compile(r"^#[0-9a-fA-F]{6}$")
+VALID_LOGO_SHAPES = {"square", "rounded", "circle"}
 
 
-class ThemeUpdateRequest(BaseModel):
-    theme: str = Field(..., description="Theme identifier (e.g. purple-light, blue-dark, etc.)")
+class SidebarColorsRequest(BaseModel):
+    sidebar_bg: str = Field(..., description="Sidebar background hex color, e.g. #1B1B3A")
+    highlight_from: str = Field(..., description="Highlight gradient from-color hex, e.g. #FF5722")
+    highlight_via: str = Field(..., description="Highlight gradient via-color hex, e.g. #7B3FE4")
 
 
 class PersonalizationUpdateRequest(BaseModel):
     logo_url: Optional[str] = None
-    theme: Optional[str] = None
+    logo_shape: Optional[str] = None
+    sidebar_bg: Optional[str] = None
+    highlight_from: Optional[str] = None
+    highlight_via: Optional[str] = None
 
 
 def _check_admin_authorization(x_user_role: Optional[str]) -> None:
     """Verifies that the request comes from an authorized administrator."""
-    # If no header provided or role is admin / administrator, allow
-    # If explicitly passed a non-admin role (e.g. viewer, user, business_analyst), enforce restriction
     if x_user_role:
         normalized = x_user_role.strip().lower()
         if normalized not in {"admin", "administrator", "system_admin", "superuser"}:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
-                detail="Only administrators are authorized to modify global branding and theme settings.",
+                detail="Only administrators are authorized to modify personalization settings.",
             )
+
+
+def _validate_hex_color(value: str, field_name: str) -> str:
+    """Validate and normalize a hex color string."""
+    value = value.strip()
+    if not HEX_COLOR_RE.match(value):
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid hex color for '{field_name}': '{value}'. Expected format: #RRGGBB",
+        )
+    return value
+
+
+def _validate_logo_shape(value: str) -> str:
+    """Validate logo shape string."""
+    value = value.strip().lower()
+    if value not in VALID_LOGO_SHAPES:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid logo shape '{value}'. Must be one of: {', '.join(sorted(VALID_LOGO_SHAPES))}",
+        )
+    return value
 
 
 @router.get("/settings/personalization")
 async def get_personalization_settings() -> Dict[str, Any]:
-    """Retrieve the active application branding and theme settings."""
+    """Retrieve the active application branding and sidebar personalization settings."""
     settings = await personalization_service.get_personalization()
     return {
         "success": True,
@@ -121,29 +137,27 @@ async def remove_custom_logo(
     }
 
 
-@router.put("/settings/personalization/theme")
-async def update_theme(
-    request: ThemeUpdateRequest,
+@router.put("/settings/personalization/sidebar")
+async def update_sidebar_colors(
+    request: SidebarColorsRequest,
     x_user_role: Optional[str] = Header(default="administrator", alias="X-User-Role"),
 ) -> Dict[str, Any]:
-    """Update the application theme (one of the 10 available themes)."""
+    """Update sidebar background and highlight gradient colors."""
     _check_admin_authorization(x_user_role)
 
-    theme = request.theme.strip().lower()
-    if theme not in VALID_THEMES:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Invalid theme '{theme}'. Must be one of: {', '.join(sorted(VALID_THEMES))}",
-        )
+    sidebar_bg = _validate_hex_color(request.sidebar_bg, "sidebar_bg")
+    highlight_from = _validate_hex_color(request.highlight_from, "highlight_from")
+    highlight_via = _validate_hex_color(request.highlight_via, "highlight_via")
 
     updated = await personalization_service.update_personalization(
-        theme=theme,
+        sidebar_bg=sidebar_bg,
+        highlight_from=highlight_from,
+        highlight_via=highlight_via,
         updated_by="administrator",
     )
     return {
         "success": True,
-        "message": f"Theme updated to '{theme}' successfully",
-        "theme": theme,
+        "message": "Sidebar colors updated successfully",
         "data": updated,
     }
 
@@ -153,38 +167,53 @@ async def update_personalization_all(
     request: PersonalizationUpdateRequest,
     x_user_role: Optional[str] = Header(default="administrator", alias="X-User-Role"),
 ) -> Dict[str, Any]:
-    """Update both logo and theme configuration simultaneously."""
+    """Update personalization settings (logo, shape, and sidebar colors)."""
     _check_admin_authorization(x_user_role)
 
-    theme = request.theme.strip().lower() if request.theme else None
-    if theme and theme not in VALID_THEMES:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Invalid theme '{theme}'. Must be one of: {', '.join(sorted(VALID_THEMES))}",
-        )
+    logo_shape = _validate_logo_shape(request.logo_shape) if request.logo_shape else None
+    sidebar_bg = _validate_hex_color(request.sidebar_bg, "sidebar_bg") if request.sidebar_bg else None
+    highlight_from = _validate_hex_color(request.highlight_from, "highlight_from") if request.highlight_from else None
+    highlight_via = _validate_hex_color(request.highlight_via, "highlight_via") if request.highlight_via else None
 
     updated = await personalization_service.update_personalization(
         logo_url=request.logo_url,
-        theme=theme,
+        logo_shape=logo_shape,
+        sidebar_bg=sidebar_bg,
+        highlight_from=highlight_from,
+        highlight_via=highlight_via,
         updated_by="administrator",
     )
     return {
         "success": True,
+        "message": "Personalization settings saved successfully",
         "data": updated,
+    }
+
+
+@router.post("/settings/personalization/reset")
+async def reset_personalization_endpoint(
+    x_user_role: Optional[str] = Header(default="administrator", alias="X-User-Role"),
+) -> Dict[str, Any]:
+    """Reset all personalization settings to application defaults."""
+    _check_admin_authorization(x_user_role)
+
+    defaults = await personalization_service.reset_personalization(updated_by="administrator")
+    return {
+        "success": True,
+        "message": "Personalization settings reset to application defaults",
+        "data": defaults,
     }
 
 
 @router.websocket("/ws/settings")
 async def websocket_settings_endpoint(websocket: WebSocket) -> None:
-    """WebSocket endpoint to receive real-time branding and theme updates."""
+    """WebSocket endpoint to receive real-time branding and sidebar color updates."""
     await websocket_manager.connect(websocket)
     try:
-        # Send current state on connection
         current = await personalization_service.get_personalization()
         await websocket.send_json({"type": "INITIAL_PERSONALIZATION", "data": current})
 
         while True:
-            # Keep connection alive; accept any ping/message
             data = await websocket.receive_text()
             if data == "ping":
                 await websocket.send_text("pong")

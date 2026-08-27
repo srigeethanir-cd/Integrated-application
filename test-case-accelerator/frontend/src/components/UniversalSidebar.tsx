@@ -16,8 +16,106 @@ interface UniversalSidebarProps {
   onToggleCollapse?: () => void;
 }
 
+const DEFAULTS = {
+  sidebar_bg: '#1B1B3A',
+  highlight_from: '#FF5722',
+  highlight_via: '#7B3FE4',
+  logo_url: null as string | null,
+  logo_shape: 'rounded',
+};
+
+type SidebarColors = typeof DEFAULTS;
+
+function getLogoRadius(shape: string): string {
+  if (shape === 'square') return '0px';
+  if (shape === 'circle') return '50%';
+  return '8px';
+}
+
+function useSidebarPersonalization(): SidebarColors {
+  const [colors, setColors] = useState<SidebarColors>(() => {
+    if (typeof window === 'undefined') return DEFAULTS;
+    try {
+      return {
+        sidebar_bg: localStorage.getItem('app_sidebar_bg') || DEFAULTS.sidebar_bg,
+        highlight_from: localStorage.getItem('app_highlight_from') || DEFAULTS.highlight_from,
+        highlight_via: localStorage.getItem('app_highlight_via') || DEFAULTS.highlight_via,
+        logo_url: localStorage.getItem('app_custom_logo') || null,
+        logo_shape: localStorage.getItem('app_logo_shape') || DEFAULTS.logo_shape,
+      };
+    } catch {
+      return DEFAULTS;
+    }
+  });
+
+  useEffect(() => {
+    const applyData = (d: Record<string, string | null>) => {
+      const next: SidebarColors = {
+        sidebar_bg: d.sidebar_bg || DEFAULTS.sidebar_bg,
+        highlight_from: d.highlight_from || DEFAULTS.highlight_from,
+        highlight_via: d.highlight_via || DEFAULTS.highlight_via,
+        logo_url: d.logo_url || null,
+        logo_shape: d.logo_shape || DEFAULTS.logo_shape,
+      };
+      setColors(next);
+      try {
+        localStorage.setItem('app_sidebar_bg', next.sidebar_bg);
+        localStorage.setItem('app_highlight_from', next.highlight_from);
+        localStorage.setItem('app_highlight_via', next.highlight_via);
+        localStorage.setItem('app_logo_shape', next.logo_shape);
+        if (next.logo_url) localStorage.setItem('app_custom_logo', next.logo_url);
+        else localStorage.removeItem('app_custom_logo');
+      } catch {}
+    };
+
+    fetch('/api/settings/personalization', { credentials: 'omit' })
+      .then(res => res.ok ? res.json() : Promise.reject(res))
+      .then(json => applyData(json.data || json))
+      .catch(() => {});
+
+    let socket: WebSocket | null = null;
+    let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+    let cleaned = false;
+
+    const connect = () => {
+      try {
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const host = window.location.host;
+        socket = new WebSocket(`${protocol}//${host}/api/ws/settings`);
+
+        socket.onmessage = (event) => {
+          try {
+            const parsed = JSON.parse(event.data);
+            if (parsed.type === 'PERSONALIZATION_UPDATED' || parsed.type === 'INITIAL_PERSONALIZATION') {
+              applyData(parsed.data);
+            }
+          } catch {}
+        };
+
+        socket.onclose = () => {
+          if (!cleaned) reconnectTimer = setTimeout(connect, 4000);
+        };
+        socket.onerror = () => { socket?.close(); };
+      } catch {
+        if (!cleaned) reconnectTimer = setTimeout(connect, 4000);
+      }
+    };
+
+    connect();
+
+    return () => {
+      cleaned = true;
+      if (reconnectTimer) clearTimeout(reconnectTimer);
+      if (socket) socket.close();
+    };
+  }, []);
+
+  return colors;
+}
+
 export function UniversalSidebar({ collapsed = false, onToggleCollapse }: UniversalSidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(collapsed);
+  const colors = useSidebarPersonalization();
 
   useEffect(() => {
     setIsCollapsed(collapsed);
@@ -34,44 +132,23 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
   const activeAccelerator = 'Backend Unit-Testcase Generator';
 
   const menuItems = [
-    { 
-      label: 'User Story', 
-      icon: LayoutGrid, 
-      path: '/dashboard',
-    },
-    { 
-      label: 'UI Code', 
-      icon: Folder, 
-      path: '/ui-code',
-    },
-    { 
-      label: 'API Code', 
-      icon: FileText, 
-      path: '/api-code',
-    },
-    { 
-      label: 'Unit Test Cases', 
-      icon: BookOpen, 
-      path: '/unit-test-cases/',
-    },
-    { 
-      label: 'Application Testing', 
-      icon: Layers, 
-      path: '/application-testing/',
-    },
-    { 
-      label: 'Backend Unit-Testcase Generator', 
-      icon: Sparkles, 
-      path: '/backend-unit-testcase-generator/',
-    },
+    { label: 'User Story', icon: LayoutGrid, path: '/dashboard' },
+    { label: 'UI Code', icon: Folder, path: '/ui-code' },
+    { label: 'API Code', icon: FileText, path: '/api-code' },
+    { label: 'Unit Test Cases', icon: BookOpen, path: '/unit-test-cases/' },
+    { label: 'Application Testing', icon: Layers, path: '/application-testing/' },
+    { label: 'Backend Unit-Testcase Generator', icon: Sparkles, path: '/backend-unit-testcase-generator/' },
   ];
+
+  const activeGradient = `linear-gradient(to right, ${colors.highlight_from}, ${colors.highlight_via})`;
+  const logoRadius = getLogoRadius(colors.logo_shape);
 
   return (
     <aside 
       style={{
         width: isCollapsed ? '78px' : '260px',
         height: '100vh',
-        backgroundColor: '#1B1B3A',
+        backgroundColor: colors.sidebar_bg,
         position: 'fixed',
         top: 0,
         left: 0,
@@ -91,19 +168,38 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
         {/* StoryForge AI Header with Collapse Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: isCollapsed ? 'center' : 'space-between', padding: '0 4px' }}>
           <a href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }} title="StoryForge AI">
-            <div style={{
-              width: '34px',
-              height: '34px',
-              borderRadius: '12px',
-              background: 'linear-gradient(to right, #FF602B, #4318FF)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 4px 14px rgba(67, 24, 255, 0.4)',
-              flexShrink: 0
-            }}>
-              <Sparkles size={18} color="#ffffff" style={{ fill: '#ffffff' }} />
-            </div>
+            {colors.logo_url ? (
+              <div style={{
+                width: '34px',
+                height: '34px',
+                borderRadius: logoRadius,
+                background: 'rgba(255,255,255,0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '4px',
+                flexShrink: 0,
+                overflow: 'hidden',
+                transition: 'border-radius 0.2s ease',
+              }}>
+                <img src={colors.logo_url} alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              </div>
+            ) : (
+              <div style={{
+                width: '34px',
+                height: '34px',
+                borderRadius: logoRadius,
+                background: activeGradient,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 14px rgba(67, 24, 255, 0.4)',
+                flexShrink: 0,
+                transition: 'border-radius 0.2s ease',
+              }}>
+                <Sparkles size={18} color="#ffffff" style={{ fill: '#ffffff' }} />
+              </div>
+            )}
             {!isCollapsed && (
               <span style={{
                 fontSize: '18px',
@@ -180,7 +276,7 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
                   fontWeight: 600,
                   textDecoration: 'none',
                   transition: 'all 0.2s',
-                  background: isActive ? 'linear-gradient(to right, #FF5722, #7B3FE4, #5924E1)' : 'transparent',
+                  background: isActive ? activeGradient : 'transparent',
                   color: isActive ? '#ffffff' : '#8F9BBA',
                   boxShadow: isActive ? '0 4px 14px rgba(91, 50, 245, 0.35)' : 'none'
                 }}

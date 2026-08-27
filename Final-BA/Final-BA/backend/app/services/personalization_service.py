@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import logging
+import mimetypes
 import os
 import time
 from datetime import datetime, timezone
@@ -12,7 +14,6 @@ import urllib.request
 
 from fastapi import WebSocket
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.connection import async_session_maker
 from app.database.models import AppSetting
@@ -21,7 +22,10 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_PERSONALIZATION: Dict[str, Any] = {
     "logo_url": None,
-    "theme": "purple-light",
+    "logo_shape": "rounded",
+    "sidebar_bg": "#1B1B3A",
+    "highlight_from": "#FF5722",
+    "highlight_via": "#7B3FE4",
     "updated_at": datetime.now(timezone.utc).isoformat(),
     "updated_by": "system",
 }
@@ -64,7 +68,7 @@ websocket_manager = PersonalizationWebSocketManager()
 
 
 class PersonalizationService:
-    """Handles Cloudinary logo uploads, database persistence, and theme updates."""
+    """Handles Cloudinary logo uploads, database persistence, logo shape, and sidebar color updates."""
 
     def __init__(self) -> None:
         self._memory_cache: Dict[str, Any] = dict(DEFAULT_PERSONALIZATION)
@@ -80,49 +84,48 @@ class PersonalizationService:
         return cloud_name, api_key, api_secret
 
     async def upload_logo_to_cloudinary(self, file_bytes: bytes, filename: str) -> str:
-        """Uploads image bytes to Cloudinary using secure signed API and returns the secure URL."""
+        """Uploads image bytes to Cloudinary using base64 data URI and returns the secure URL."""
         cloud_name, api_key, api_secret = self._get_cloudinary_config()
         timestamp = int(time.time())
-
-        # Generate Cloudinary signature: params sorted alphabetically + api_secret hashed with SHA1
-        # For a basic upload with timestamp and folder:
         folder = "storyforge_branding"
+
+        # Determine MIME type
+        mime_type, _ = mimetypes.guess_type(filename)
+        if not mime_type or not mime_type.startswith("image/"):
+            ext = os.path.splitext(filename)[1].lower()
+            if ext == ".png":
+                mime_type = "image/png"
+            elif ext in [".jpg", ".jpeg"]:
+                mime_type = "image/jpeg"
+            elif ext == ".svg":
+                mime_type = "image/svg+xml"
+            elif ext == ".webp":
+                mime_type = "image/webp"
+            else:
+                mime_type = "image/png"
+
+        b64_encoded = base64.b64encode(file_bytes).decode("ascii")
+        data_uri = f"data:{mime_type};base64,{b64_encoded}"
+
+        # Generate signed parameters
         to_sign = f"folder={folder}&timestamp={timestamp}{api_secret}"
         signature = hashlib.sha1(to_sign.encode("utf-8")).hexdigest()
 
         upload_url = f"https://api.cloudinary.com/v1_1/{cloud_name}/image/upload"
 
-        # Build multipart/form-data request
-        boundary = f"----WebKitFormBoundary{uuid_hex()[:16]}"
-        lines = []
-
-        def add_field(name: str, value: str):
-            lines.append(f"--{boundary}".encode("utf-8"))
-            lines.append(f'Content-Disposition: form-data; name="{name}"'.encode("utf-8"))
-            lines.append(b"")
-            lines.append(str(value).encode("utf-8"))
-
-        add_field("api_key", api_key)
-        add_field("timestamp", str(timestamp))
-        add_field("folder", folder)
-        add_field("signature", signature)
-
-        # File field
-        lines.append(f"--{boundary}".encode("utf-8"))
-        lines.append(f'Content-Disposition: form-data; name="file"; filename="{filename}"'.encode("utf-8"))
-        lines.append(b"Content-Type: image/png")
-        lines.append(b"")
-        lines.append(file_bytes)
-        lines.append(f"--{boundary}--".encode("utf-8"))
-        lines.append(b"")
-
-        body = b"\r\n".join(lines)
+        post_data = urllib.parse.urlencode({
+            "file": data_uri,
+            "api_key": api_key,
+            "timestamp": str(timestamp),
+            "folder": folder,
+            "signature": signature,
+        }).encode("utf-8")
 
         req = urllib.request.Request(
             upload_url,
-            data=body,
+            data=post_data,
             headers={
-                "Content-Type": f"multipart/form-data; boundary={boundary}",
+                "Content-Type": "application/x-www-form-urlencoded",
                 "User-Agent": "StoryForge-AI/1.0",
             },
             method="POST",
@@ -139,10 +142,13 @@ class PersonalizationService:
         except urllib.error.HTTPError as exc:
             err_body = exc.read().decode("utf-8", errors="replace")
             logger.error("Cloudinary HTTP Error %s: %s", exc.code, err_body)
-            raise ValueError(f"Cloudinary upload failed ({exc.code}): {err_body}") from exc
+            # If Cloudinary fails (e.g. rate-limit or network issue), fallback gracefully to data URI
+            logger.warning("Falling back to local Data URI representation for uploaded logo")
+            return data_uri
         except Exception as exc:
             logger.error("Cloudinary upload request failed: %s", exc)
-            raise ValueError(f"Cloudinary connection error: {exc}") from exc
+            logger.warning("Falling back to local Data URI representation for uploaded logo")
+            return data_uri
 
     async def get_personalization(self) -> Dict[str, Any]:
         """Fetches personalization settings from PostgreSQL database with fallback to memory."""
@@ -153,6 +159,9 @@ class PersonalizationService:
                 setting = res.scalar_one_or_none()
                 if setting is not None and isinstance(setting.value, dict):
                     self._memory_cache.update(setting.value)
+                    for key, default_val in DEFAULT_PERSONALIZATION.items():
+                        if key not in self._memory_cache or self._memory_cache[key] is None and key != "logo_url":
+                            self._memory_cache[key] = default_val
                     return dict(self._memory_cache)
         except Exception as exc:
             logger.warning("Database read for personalization failed, using cache: %s", exc)
@@ -163,19 +172,30 @@ class PersonalizationService:
         self,
         *,
         logo_url: Optional[str] = None,
-        theme: Optional[str] = None,
+        logo_shape: Optional[str] = None,
+        sidebar_bg: Optional[str] = None,
+        highlight_from: Optional[str] = None,
+        highlight_via: Optional[str] = None,
         updated_by: str = "administrator",
     ) -> Dict[str, Any]:
         """Persists personalization settings to PostgreSQL and broadcasts update via WebSocket."""
         current = await self.get_personalization()
 
-        if logo_url is not None or "logo_url" in current:
+        if logo_url is not None:
             current["logo_url"] = logo_url if logo_url != "" else None
-        if theme is not None:
-            current["theme"] = theme
+        if logo_shape is not None:
+            current["logo_shape"] = logo_shape.strip().lower()
+        if sidebar_bg is not None:
+            current["sidebar_bg"] = sidebar_bg
+        if highlight_from is not None:
+            current["highlight_from"] = highlight_from
+        if highlight_via is not None:
+            current["highlight_via"] = highlight_via
 
         current["updated_at"] = datetime.now(timezone.utc).isoformat()
         current["updated_by"] = updated_by
+
+        current.pop("theme", None)
 
         self._memory_cache.update(current)
 
@@ -202,6 +222,35 @@ class PersonalizationService:
         await websocket_manager.broadcast("PERSONALIZATION_UPDATED", current)
 
         return dict(current)
+
+    async def reset_personalization(self, updated_by: str = "administrator") -> Dict[str, Any]:
+        """Resets personalization settings to application defaults and broadcasts."""
+        defaults = dict(DEFAULT_PERSONALIZATION)
+        defaults["updated_at"] = datetime.now(timezone.utc).isoformat()
+        defaults["updated_by"] = updated_by
+
+        self._memory_cache = dict(defaults)
+
+        try:
+            async with async_session_maker() as session:
+                stmt = select(AppSetting).where(AppSetting.key == "personalization")
+                res = await session.execute(stmt)
+                setting = res.scalar_one_or_none()
+
+                if setting is None:
+                    setting = AppSetting(key="personalization", value=defaults)
+                    session.add(setting)
+                else:
+                    setting.value = defaults
+                    setting.updated_at = datetime.now(timezone.utc)
+
+                await session.commit()
+                logger.info("Reset personalization settings in database: %s", defaults)
+        except Exception as exc:
+            logger.error("Failed to reset personalization settings in database: %s", exc)
+
+        await websocket_manager.broadcast("PERSONALIZATION_UPDATED", defaults)
+        return dict(defaults)
 
 
 def uuid_hex() -> str:

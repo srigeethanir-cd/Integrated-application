@@ -2,36 +2,63 @@
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 
+export type LogoShape = 'square' | 'rounded' | 'circle';
+
 export interface PersonalizationData {
   logo_url: string | null;
-  theme: string;
+  logo_shape: LogoShape;
+  sidebar_bg: string;
+  highlight_from: string;
+  highlight_via: string;
   updated_at?: string;
   updated_by?: string;
 }
 
 interface PersonalizationContextType {
   logoUrl: string | null;
-  theme: string;
+  logoShape: LogoShape;
+  sidebarBg: string;
+  highlightFrom: string;
+  highlightVia: string;
   isLoading: boolean;
   userRole: string;
   isAdmin: boolean;
   setUserRole: (role: string) => void;
-  setTheme: (theme: string) => Promise<boolean>;
+  savePersonalization: (settings: {
+    logoUrl?: string | null;
+    logoShape?: LogoShape;
+    sidebarBg?: string;
+    highlightFrom?: string;
+    highlightVia?: string;
+  }) => Promise<void>;
+  resetPersonalization: () => Promise<void>;
+  saveSidebarColors: (bg: string, from: string, via: string) => Promise<void>;
   uploadLogo: (file: File) => Promise<string>;
   removeLogo: () => Promise<void>;
   refreshSettings: () => Promise<void>;
 }
 
-const DEFAULT_THEME = 'purple-light';
+const DEFAULTS = {
+  logoUrl: null as string | null,
+  logoShape: 'rounded' as LogoShape,
+  sidebarBg: '#1B1B3A',
+  highlightFrom: '#FF5722',
+  highlightVia: '#7B3FE4',
+};
 
 const PersonalizationContext = createContext<PersonalizationContextType>({
-  logoUrl: null,
-  theme: DEFAULT_THEME,
+  logoUrl: DEFAULTS.logoUrl,
+  logoShape: DEFAULTS.logoShape,
+  sidebarBg: DEFAULTS.sidebarBg,
+  highlightFrom: DEFAULTS.highlightFrom,
+  highlightVia: DEFAULTS.highlightVia,
   isLoading: true,
   userRole: 'administrator',
   isAdmin: true,
   setUserRole: () => {},
-  setTheme: async () => false,
+  savePersonalization: async () => {},
+  resetPersonalization: async () => {},
+  saveSidebarColors: async () => {},
   uploadLogo: async () => '',
   removeLogo: async () => {},
   refreshSettings: async () => {},
@@ -39,49 +66,66 @@ const PersonalizationContext = createContext<PersonalizationContextType>({
 
 export const usePersonalization = () => useContext(PersonalizationContext);
 
+function readLS(key: string, fallback: string): string {
+  if (typeof window === 'undefined') return fallback;
+  try { return localStorage.getItem(key) || fallback; } catch { return fallback; }
+}
+function writeLS(key: string, value: string | null) {
+  try { if (value) localStorage.setItem(key, value); else localStorage.removeItem(key); } catch {}
+}
+
+export function getLogoBorderRadius(shape: LogoShape): string {
+  if (shape === 'square') return '0px';
+  if (shape === 'circle') return '50%';
+  return '8px';
+}
+
 export const PersonalizationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [logoUrl, setLogoUrl] = useState<string | null>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('app_custom_logo') || null;
-    }
-    return null;
-  });
-
-  const [theme, setInternalTheme] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('app_active_theme') || DEFAULT_THEME;
-    }
-    return DEFAULT_THEME;
-  });
-
-  const [userRole, setUserRoleState] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('app_user_role') || 'administrator';
-    }
-    return 'administrator';
-  });
-
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [logoUrl, setLogoUrl] = useState<string | null>(() => readLS('app_custom_logo', '') || null);
+  const [logoShape, setLogoShape] = useState<LogoShape>(() => (readLS('app_logo_shape', DEFAULTS.logoShape) as LogoShape) || DEFAULTS.logoShape);
+  const [sidebarBg, setSidebarBg] = useState(() => readLS('app_sidebar_bg', DEFAULTS.sidebarBg));
+  const [highlightFrom, setHighlightFrom] = useState(() => readLS('app_highlight_from', DEFAULTS.highlightFrom));
+  const [highlightVia, setHighlightVia] = useState(() => readLS('app_highlight_via', DEFAULTS.highlightVia));
+  const [userRole, setUserRoleState] = useState(() => readLS('app_user_role', 'administrator'));
+  const [isLoading, setIsLoading] = useState(true);
 
   const isAdmin = userRole === 'administrator' || userRole === 'admin';
 
   const setUserRole = (role: string) => {
     setUserRoleState(role);
-    try {
-      localStorage.setItem('app_user_role', role);
-    } catch {}
+    writeLS('app_user_role', role);
   };
 
-  const applyThemeToDom = useCallback((targetTheme: string) => {
-    if (typeof document === 'undefined') return;
-    const root = document.documentElement;
-    root.setAttribute('data-theme', targetTheme);
-    if (targetTheme.endsWith('-dark')) {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
+  const applyCssVariables = useCallback((bg: string, from: string, via: string, shape: LogoShape) => {
+    if (typeof document !== 'undefined' && document.documentElement) {
+      document.documentElement.style.setProperty('--sidebar-background', bg);
+      document.documentElement.style.setProperty('--sidebar-highlight-from', from);
+      document.documentElement.style.setProperty('--sidebar-highlight-via', via);
+      document.documentElement.style.setProperty('--logo-border-radius', getLogoBorderRadius(shape));
     }
   }, []);
+
+  const applyState = useCallback((data: PersonalizationData) => {
+    const logo = data.logo_url ?? null;
+    const shape = (data.logo_shape as LogoShape) || DEFAULTS.logoShape;
+    const bg = data.sidebar_bg || DEFAULTS.sidebarBg;
+    const from = data.highlight_from || DEFAULTS.highlightFrom;
+    const via = data.highlight_via || DEFAULTS.highlightVia;
+
+    setLogoUrl(logo);
+    setLogoShape(shape);
+    setSidebarBg(bg);
+    setHighlightFrom(from);
+    setHighlightVia(via);
+
+    applyCssVariables(bg, from, via, shape);
+
+    writeLS('app_custom_logo', logo);
+    writeLS('app_logo_shape', shape);
+    writeLS('app_sidebar_bg', bg);
+    writeLS('app_highlight_from', from);
+    writeLS('app_highlight_via', via);
+  }, [applyCssVariables]);
 
   const refreshSettings = useCallback(async () => {
     try {
@@ -90,31 +134,20 @@ export const PersonalizationProvider: React.FC<{ children: React.ReactNode }> = 
       if (response.ok) {
         const json = await response.json();
         const data: PersonalizationData = json.data || json;
-        const fetchedLogo = data.logo_url ?? null;
-        const fetchedTheme = data.theme || DEFAULT_THEME;
-
-        setLogoUrl(fetchedLogo);
-        setInternalTheme(fetchedTheme);
-        applyThemeToDom(fetchedTheme);
-
-        try {
-          if (fetchedLogo) localStorage.setItem('app_custom_logo', fetchedLogo);
-          else localStorage.removeItem('app_custom_logo');
-          localStorage.setItem('app_active_theme', fetchedTheme);
-        } catch {}
+        applyState(data);
       }
     } catch (err) {
       console.warn('Could not fetch personalization settings from server:', err);
     } finally {
       setIsLoading(false);
     }
-  }, [applyThemeToDom]);
+  }, [applyState]);
 
   // Initial load
   useEffect(() => {
-    applyThemeToDom(theme);
+    applyCssVariables(sidebarBg, highlightFrom, highlightVia, logoShape);
     refreshSettings();
-  }, [applyThemeToDom, refreshSettings, theme]);
+  }, [applyCssVariables, refreshSettings, sidebarBg, highlightFrom, highlightVia, logoShape]);
 
   // Real-time WebSocket synchronization
   useEffect(() => {
@@ -132,27 +165,11 @@ export const PersonalizationProvider: React.FC<{ children: React.ReactNode }> = 
 
         socket = new WebSocket(wsUrl);
 
-        socket.onopen = () => {
-          // Connection established
-        };
-
         socket.onmessage = (event) => {
           try {
             const parsed = JSON.parse(event.data);
             if (parsed.type === 'PERSONALIZATION_UPDATED' || parsed.type === 'INITIAL_PERSONALIZATION') {
-              const data: PersonalizationData = parsed.data;
-              const nextLogo = data.logo_url ?? null;
-              const nextTheme = data.theme || DEFAULT_THEME;
-
-              setLogoUrl(nextLogo);
-              setInternalTheme(nextTheme);
-              applyThemeToDom(nextTheme);
-
-              try {
-                if (nextLogo) localStorage.setItem('app_custom_logo', nextLogo);
-                else localStorage.removeItem('app_custom_logo');
-                localStorage.setItem('app_active_theme', nextTheme);
-              } catch {}
+              applyState(parsed.data as PersonalizationData);
             }
           } catch (e) {
             console.error('Error processing personalization WebSocket message:', e);
@@ -168,7 +185,7 @@ export const PersonalizationProvider: React.FC<{ children: React.ReactNode }> = 
         socket.onerror = () => {
           socket?.close();
         };
-      } catch (err) {
+      } catch {
         if (!isCleanedUp) {
           reconnectTimer = setTimeout(connectWebSocket, 4000);
         }
@@ -182,35 +199,79 @@ export const PersonalizationProvider: React.FC<{ children: React.ReactNode }> = 
       if (reconnectTimer) clearTimeout(reconnectTimer);
       if (socket) socket.close();
     };
-  }, [applyThemeToDom]);
+  }, [applyState]);
 
-  const setTheme = async (newTheme: string): Promise<boolean> => {
-    setInternalTheme(newTheme);
-    applyThemeToDom(newTheme);
-    try {
-      localStorage.setItem('app_active_theme', newTheme);
-    } catch {}
+  const savePersonalization = async (settings: {
+    logoUrl?: string | null;
+    logoShape?: LogoShape;
+    sidebarBg?: string;
+    highlightFrom?: string;
+    highlightVia?: string;
+  }): Promise<void> => {
+    const nextLogo = settings.logoUrl !== undefined ? settings.logoUrl : logoUrl;
+    const nextShape = settings.logoShape !== undefined ? settings.logoShape : logoShape;
+    const nextBg = settings.sidebarBg !== undefined ? settings.sidebarBg : sidebarBg;
+    const nextFrom = settings.highlightFrom !== undefined ? settings.highlightFrom : highlightFrom;
+    const nextVia = settings.highlightVia !== undefined ? settings.highlightVia : highlightVia;
 
-    try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-      const response = await fetch(`${apiUrl}/api/settings/personalization/theme`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-User-Role': userRole,
-        },
-        body: JSON.stringify({ theme: newTheme }),
-      });
+    // Optimistic UI update
+    setLogoUrl(nextLogo);
+    setLogoShape(nextShape);
+    setSidebarBg(nextBg);
+    setHighlightFrom(nextFrom);
+    setHighlightVia(nextVia);
+    applyCssVariables(nextBg, nextFrom, nextVia, nextShape);
 
-      if (!response.ok) {
-        const errJson = await response.json().catch(() => ({}));
-        throw new Error(errJson.detail || 'Failed to save theme to server');
-      }
-      return true;
-    } catch (err) {
-      console.error('Failed to update theme on server:', err);
-      throw err;
+    writeLS('app_custom_logo', nextLogo);
+    writeLS('app_logo_shape', nextShape);
+    writeLS('app_sidebar_bg', nextBg);
+    writeLS('app_highlight_from', nextFrom);
+    writeLS('app_highlight_via', nextVia);
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+    const response = await fetch(`${apiUrl}/api/settings/personalization`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-User-Role': userRole,
+      },
+      body: JSON.stringify({
+        logo_url: nextLogo,
+        logo_shape: nextShape,
+        sidebar_bg: nextBg,
+        highlight_from: nextFrom,
+        highlight_via: nextVia,
+      }),
+    });
+
+    if (!response.ok) {
+      const errJson = await response.json().catch(() => ({}));
+      throw new Error(errJson.detail || 'Failed to save personalization settings');
     }
+  };
+
+  const resetPersonalization = async (): Promise<void> => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+    const response = await fetch(`${apiUrl}/api/settings/personalization/reset`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-User-Role': userRole,
+      },
+    });
+
+    if (!response.ok) {
+      const errJson = await response.json().catch(() => ({}));
+      throw new Error(errJson.detail || 'Failed to reset personalization');
+    }
+
+    const json = await response.json();
+    const data: PersonalizationData = json.data || json;
+    applyState(data);
+  };
+
+  const saveSidebarColors = async (bg: string, from: string, via: string): Promise<void> => {
+    await savePersonalization({ sidebarBg: bg, highlightFrom: from, highlightVia: via });
   };
 
   const uploadLogo = async (file: File): Promise<string> => {
@@ -220,25 +281,20 @@ export const PersonalizationProvider: React.FC<{ children: React.ReactNode }> = 
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
     const response = await fetch(`${apiUrl}/api/settings/personalization/logo`, {
       method: 'POST',
-      headers: {
-        'X-User-Role': userRole,
-      },
+      headers: { 'X-User-Role': userRole },
       body: formData,
     });
 
     if (!response.ok) {
       const errJson = await response.json().catch(() => ({}));
-      throw new Error(errJson.detail || 'Failed to upload logo to Cloudinary');
+      throw new Error(errJson.detail || 'Failed to upload logo');
     }
 
     const data = await response.json();
     const newLogoUrl = data.logo_url || data.data?.logo_url;
 
     setLogoUrl(newLogoUrl);
-    try {
-      if (newLogoUrl) localStorage.setItem('app_custom_logo', newLogoUrl);
-    } catch {}
-
+    writeLS('app_custom_logo', newLogoUrl);
     return newLogoUrl;
   };
 
@@ -246,9 +302,7 @@ export const PersonalizationProvider: React.FC<{ children: React.ReactNode }> = 
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
     const response = await fetch(`${apiUrl}/api/settings/personalization/logo`, {
       method: 'DELETE',
-      headers: {
-        'X-User-Role': userRole,
-      },
+      headers: { 'X-User-Role': userRole },
     });
 
     if (!response.ok) {
@@ -257,21 +311,24 @@ export const PersonalizationProvider: React.FC<{ children: React.ReactNode }> = 
     }
 
     setLogoUrl(null);
-    try {
-      localStorage.removeItem('app_custom_logo');
-    } catch {}
+    writeLS('app_custom_logo', null);
   };
 
   return (
     <PersonalizationContext.Provider
       value={{
         logoUrl,
-        theme,
+        logoShape,
+        sidebarBg,
+        highlightFrom,
+        highlightVia,
         isLoading,
         userRole,
         isAdmin,
         setUserRole,
-        setTheme,
+        savePersonalization,
+        resetPersonalization,
+        saveSidebarColors,
         uploadLogo,
         removeLogo,
         refreshSettings,
