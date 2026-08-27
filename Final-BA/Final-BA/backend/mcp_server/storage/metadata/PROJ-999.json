@@ -1,0 +1,9 @@
+{
+  "issue_key": "PROJ-999",
+  "project": "PROJ",
+  "reporter": "John",
+  "assignee": "Jane",
+  "created": "<MagicMock name='JIRA().issue().fields.created' id='1726098150064'>",
+  "updated": "<MagicMock name='JIRA().issue().fields.updated' id='1726133286240'>",
+  "labels": []
+}

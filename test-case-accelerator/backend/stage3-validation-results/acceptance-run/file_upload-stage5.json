@@ -1,0 +1,2048 @@
+{
+  "results": [
+    {
+      "test_case_id": "TC-001",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 7,
+          "detail": "File exists: database.py"
+        },
+        {
+          "file": "database.py",
+          "symbol": "get_db",
+          "line": 7,
+          "detail": "Referenced symbol exists at line 7"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 7,
+              "detail": "File exists: database.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 7",
+          "evidence": [
+            {
+              "file": "database.py",
+              "symbol": "get_db",
+              "line": 7,
+              "detail": "Referenced symbol exists at line 7"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC001",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC002",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC003",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "delete",
+          "line": 25,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "delete",
+          "line": 26,
+          "detail": "Referenced symbol exists at line 26"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "delete",
+              "line": 25,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 26",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "delete",
+              "line": 26,
+              "detail": "Referenced symbol exists at line 26"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC004",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "Referenced symbol exists at line 20"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 20",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "Referenced symbol exists at line 20"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC005",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "Referenced symbol exists at line 20"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 20",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "Referenced symbol exists at line 20"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC006",
+      "status": "Failed",
+      "confidence": 0.93,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "Referenced symbol exists at line 20"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "duplicate",
+          "status": "Failed",
+          "detail": "Test case duplicates another case",
+          "evidence": []
+        },
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 20",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "Referenced symbol exists at line 20"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC008",
+      "status": "Failed",
+      "confidence": 0.93,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "Referenced symbol exists at line 20"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "duplicate",
+          "status": "Failed",
+          "detail": "Test case duplicates another case",
+          "evidence": []
+        },
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 20",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "Referenced symbol exists at line 20"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC-DELETE-POS-STORED-NONE-001",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "delete",
+          "line": 25,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "delete",
+          "line": 26,
+          "detail": "Referenced symbol exists at line 26"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "delete",
+              "line": 25,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 26",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "delete",
+              "line": 26,
+              "detail": "Referenced symbol exists at line 26"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC-DELETE-POS-NOT-STORED-NONE-002",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "delete",
+          "line": 25,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "delete",
+          "line": 26,
+          "detail": "Referenced symbol exists at line 26"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "delete",
+              "line": 25,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 26",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "delete",
+              "line": 26,
+              "detail": "Referenced symbol exists at line 26"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC-DOWNLOAD-POS-STORED-NONE-003",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "Referenced symbol exists at line 20"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 20",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "Referenced symbol exists at line 20"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC-DOWNLOAD-POS-NOT-STORED-NONE-004",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "download",
+          "line": 20,
+          "detail": "Referenced symbol exists at line 20"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 20",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "download",
+              "line": 20,
+              "detail": "Referenced symbol exists at line 20"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B3-TC001",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/files.py",
+          "symbol": "store_file",
+          "line": 24,
+          "detail": "File exists: services/files.py"
+        },
+        {
+          "file": "services/files.py",
+          "symbol": "store_file",
+          "line": 24,
+          "detail": "Referenced symbol exists at line 24"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "store_file",
+              "line": 24,
+              "detail": "File exists: services/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 24",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "store_file",
+              "line": 24,
+              "detail": "Referenced symbol exists at line 24"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B3-TC002",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/files.py",
+          "symbol": "store_file",
+          "line": 24,
+          "detail": "File exists: services/files.py"
+        },
+        {
+          "file": "services/files.py",
+          "symbol": "store_file",
+          "line": 24,
+          "detail": "Referenced symbol exists at line 24"
+        },
+        {
+          "file": "services/files.py",
+          "symbol": "store_file",
+          "line": 24,
+          "detail": "InvalidMimeTypeError is produced by an explicit raise"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "store_file",
+              "line": 24,
+              "detail": "File exists: services/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 24",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "store_file",
+              "line": 24,
+              "detail": "Referenced symbol exists at line 24"
+            }
+          ]
+        },
+        {
+          "check": "behavior_semantics",
+          "status": "Verified",
+          "detail": "Claimed behavior: InvalidMimeTypeError. Found a matching raise statement in store_file.",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "store_file",
+              "line": 24,
+              "detail": "InvalidMimeTypeError is produced by an explicit raise"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B3-TC003",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/files.py",
+          "symbol": "store_file",
+          "line": 24,
+          "detail": "File exists: services/files.py"
+        },
+        {
+          "file": "services/files.py",
+          "symbol": "store_file",
+          "line": 24,
+          "detail": "Referenced symbol exists at line 24"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "store_file",
+              "line": 24,
+              "detail": "File exists: services/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 24",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "store_file",
+              "line": 24,
+              "detail": "Referenced symbol exists at line 24"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B3-TC004",
+      "status": "Partial",
+      "confidence": 0.56,
+      "verification_path": "Rule+LLM",
+      "evidence": [
+        {
+          "file": "services/files.py",
+          "symbol": "stream_content",
+          "line": 34,
+          "detail": "File exists: services/files.py"
+        },
+        {
+          "file": "services/files.py",
+          "symbol": "stream_content",
+          "line": 34,
+          "detail": "Referenced symbol exists at line 34"
+        },
+        {
+          "file": "services/files.py",
+          "symbol": "stream_content",
+          "line": 34,
+          "detail": "Behavior analyzed from stream_content"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "stream_content",
+              "line": 34,
+              "detail": "File exists: services/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 34",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "stream_content",
+              "line": 34,
+              "detail": "Referenced symbol exists at line 34"
+            }
+          ]
+        },
+        {
+          "check": "behavior_semantics",
+          "status": "Partial",
+          "detail": "Claimed KeyError for stream_content, but static analysis found no conclusive matching or contradicting path; semantic verification is required.",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "stream_content",
+              "line": 34,
+              "detail": "Behavior analyzed from stream_content"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B3-TC005",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "services/files.py",
+          "symbol": "store_file",
+          "line": 24,
+          "detail": "File exists: services/files.py"
+        },
+        {
+          "file": "services/files.py",
+          "symbol": "store_file",
+          "line": 24,
+          "detail": "Referenced symbol exists at line 24"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "store_file",
+              "line": 24,
+              "detail": "File exists: services/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 24",
+          "evidence": [
+            {
+              "file": "services/files.py",
+              "symbol": "store_file",
+              "line": 24,
+              "detail": "Referenced symbol exists at line 24"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B4-TC001",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B4-TC002",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B4-TC003",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B4-TC005",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "B4-TC006",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "File exists: routers/files.py"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "Referenced symbol exists at line 10"
+        },
+        {
+          "file": "routers/files.py",
+          "symbol": "upload",
+          "line": 10,
+          "detail": "POST /api/files/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "File exists: routers/files.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 10",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "Referenced symbol exists at line 10"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected FileMetadata; code-understanding reports FileMetadata",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "routers/files.py",
+              "symbol": "upload",
+              "line": 10,
+              "detail": "POST /api/files/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "verified": 19,
+    "partial": 1,
+    "failed": 2
+  },
+  "total_verified": 19
+}

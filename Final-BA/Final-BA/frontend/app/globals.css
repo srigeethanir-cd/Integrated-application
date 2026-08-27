@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* ==========================================================================
+     STORYFORGE AI DESIGN SYSTEM TOKENS (Approved Palette)
+     ========================================================================== */
+
+  /* Primary Brand Purples */
+  --primary-500: #7551FF;
+  --primary-600: #4318FF;
+
+  /* Accent Color */
+  --accent-orange: #FF602B;
+
+  /* Dark Theme / Sidebar Colors */
+  --dark-900: #1A1A2E;
+  --dark-800: #1B1B3A;
+  --dark-700: #2D3748;
+  --dark-950: #111827;
+
+  /* Neutral Colors */
+  --neutral-white: #FFFFFF;
+  --neutral-workspace: #F7F9FC;
+  --neutral-muted-button: #F3F4F6;
+  --neutral-border: #E5E7EB;
+  --neutral-muted-text: #A0AEC0;
+  --neutral-subtext: #6B7280;
+  --neutral-black: #000000;
+
+  /* Semantic Colors */
+  --success-500: #10B981;
+  --success-600: #22C55E;
+  --success-light: #D1FAE5;
+
+  --warning-500: #F59E0B;
+
+  --info-500: #3B82F6;
+  --info-light: #D3E4FF;
+  --info-subtle: #D8E2FD;
+
+  --error-light: #F9E0E3;
+
+  /* Canvas Mapping */
+  --background: var(--neutral-workspace);
+  --foreground: var(--dark-950);
+
+  --sidebar-bg: var(--dark-800);
+  --sidebar-foreground: var(--neutral-muted-text);
+  --sidebar-active-bg: linear-gradient(135deg, #FF602B 0%, #4318FF 100%);
+  --sidebar-active-fg: var(--neutral-white);
+
+  --card: var(--neutral-white);
+  --card-foreground: var(--dark-950);
+
+  --primary: var(--primary-500);
+  --primary-foreground: var(--neutral-white);
+  --primary-gradient: linear-gradient(135deg, #FF602B 0%, #4318FF 100%);
+
+  --secondary: var(--info-subtle);
+  --secondary-foreground: var(--primary-600);
+
+  --muted: var(--neutral-muted-button);
+  --muted-foreground: var(--neutral-subtext);
+
+  --border: var(--neutral-border);
+  --input: var(--neutral-muted-button);
+  --ring: var(--primary-500);
+
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: var(--dark-950);
+  --foreground: var(--neutral-white);
+  --sidebar-bg: var(--dark-900);
+  --card: var(--dark-800);
+  --card-foreground: var(--neutral-white);
+  --border: var(--dark-700);
+  --input: var(--dark-700);
+  --muted: var(--dark-700);
+  --muted-foreground: var(--neutral-muted-text);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent-orange);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-sans);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  background-color: transparent;
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}

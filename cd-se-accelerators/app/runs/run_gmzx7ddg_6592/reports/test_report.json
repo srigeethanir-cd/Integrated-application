@@ -1,0 +1,963 @@
+{
+  "pipeline_run_id": "run_gmzx7ddg_6592",
+  "project_id": "proj_c9db1d078f1d",
+  "framework": "Angular",
+  "generated_at": "2026-08-14T09:45:51Z",
+  "quality_score": {
+    "overall_score": 98,
+    "max_score": 100,
+    "execution_score": 100.0,
+    "coverage_score": 91.42,
+    "coverage_status": "available",
+    "generation_score": 100.0,
+    "traceability_score": 100.0,
+    "breakdown": {
+      "test_execution": "100.0% (weight: 40%)",
+      "coverage": "91.42% (weight: 25%)",
+      "generation_completeness": "100.0% (weight: 15%)",
+      "traceability_completeness": "100.0% (weight: 20%)",
+      "coverage_status": "included"
+    }
+  },
+  "execution_summary": {
+    "total_tests": 115,
+    "passed": 115,
+    "failed": 0,
+    "skipped": 0,
+    "pass_rate": 100.0,
+    "execution_time_ms": 78063.64,
+    "execution_time_seconds": 78.06
+  },
+  "coverage": {
+    "statements": 92.5,
+    "branches": 88.0,
+    "functions": 94.2,
+    "lines": 91.0,
+    "coverage_status": "available"
+  },
+  "test_files": [],
+  "passed_tests": [
+    {
+      "test_case_id": "TC-STRAT-Dashboard-REND-COND-loading-MOUNT-STABILITY",
+      "test_name": "Verify Dashboard renders correctly under Dashboard Initial Render",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-REND-EMPTY-PROP-userId-EMPTY",
+      "test_name": "Verify Dashboard renders correctly under userId (empty string)",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-REND-EMPTY-PROP-userId-NULL",
+      "test_name": "Verify Dashboard renders correctly under userId (null)",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-REND-EMPTY-PROP-userId-SPECIAL",
+      "test_name": "Verify Dashboard renders correctly under userId (special characters)",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-REND-EMPTY-PROP-userId-UNDEFINED",
+      "test_name": "Verify Dashboard renders correctly under userId (undefined)",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-REND-INIT-ASYNC-UPDATES",
+      "test_name": "Verify Dashboard renders correctly under Async Updates",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-REND-INIT-INITIAL-STATE",
+      "test_name": "Verify Dashboard renders correctly under Initial State",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-REND-COND-condition-MOUNT-STABILITY",
+      "test_name": "Verify handleSubmit() handles LoginForm Initial Render in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-REND-INIT-ASYNC-UPDATES",
+      "test_name": "Verify handleSubmit() handles Async Updates in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-REND-INIT-INITIAL-STATE",
+      "test_name": "Verify handleSubmit() handles Initial State in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-REND-PROPS-PROP-initialEmail-EMPTY",
+      "test_name": "Verify handleSubmit() handles initialEmail (empty string) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-REND-PROPS-PROP-initialEmail-NULL",
+      "test_name": "Verify handleSubmit() handles initialEmail (null) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-REND-PROPS-PROP-initialEmail-SPECIAL",
+      "test_name": "Verify handleSubmit() handles initialEmail (special characters) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-REND-PROPS-PROP-initialEmail-UNDEFINED",
+      "test_name": "Verify handleSubmit() handles initialEmail (undefined) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-REND-PROPS-PROP-onSubmit-EMPTY",
+      "test_name": "Verify handleSubmit() handles onSubmit (empty string) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-REND-PROPS-PROP-onSubmit-NULL",
+      "test_name": "Verify handleSubmit() handles onSubmit (null) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-REND-PROPS-PROP-onSubmit-SPECIAL",
+      "test_name": "Verify handleSubmit() handles onSubmit (special characters) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-REND-PROPS-PROP-onSubmit-UNDEFINED",
+      "test_name": "Verify handleSubmit() handles onSubmit (undefined) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-UserProfile-REND-COND-isEditing-MOUNT-STABILITY",
+      "test_name": "Verify onChangeHandler() handles UserProfile Initial Render in UserProfile",
+      "component": "UserProfile",
+      "target_function": "onChangeHandler()",
+      "status": "PASSED",
+      "reason": "The UserProfile rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-UserProfile-REND-INIT-INITIAL-STATE",
+      "test_name": "Verify onChangeHandler() handles Initial State in UserProfile",
+      "component": "UserProfile",
+      "target_function": "onChangeHandler()",
+      "status": "PASSED",
+      "reason": "The UserProfile rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-CONTROL-BINDING-SUBMIT-INVALID",
+      "test_name": "Verify handleSubmit() handles Submit in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-RESET",
+      "test_name": "Verify handleSubmit() handles Reset in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-MIN-LENGTH",
+      "test_name": "Verify handleSubmit() handles Min Length in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-MAX-LENGTH",
+      "test_name": "Verify handleSubmit() handles Max Length in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-INVALID-FORMAT",
+      "test_name": "Verify handleSubmit() handles Invalid Input in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-EMPTY-INPUT",
+      "test_name": "Verify handleSubmit() handles Empty Input in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-EMPTY-INPUT-BOUNDARY-VALUES",
+      "test_name": "Verify handleSubmit() handles Boundary Values in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-CONTROL-BINDING",
+      "test_name": "Verify handleSubmit() handles Controlled/Uncontrolled Inputs in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-PREVENT-DEFAULT-PREVENT-DEFAULT",
+      "test_name": "Verify handleSubmit() handles preventDefault in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component completes rendering and behaves as expected.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-PREVENT-DEFAULT-DISABLED-INTERACTION",
+      "test_name": "Verify handleSubmit() handles Disabled Interaction in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The disabled input does not accept the interaction and its handler is not triggered.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-SINGLE-CLICK-RAPID-CLICK",
+      "test_name": "Verify handleSubmit() handles Rapid Click in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component remains stable and only one action is executed during rapid interaction.'."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-EVT-onChange_input_1-SINGLE-CLICK",
+      "test_name": "Verify onChange_input_1() handles Single Click in LoginForm",
+      "component": "LoginForm",
+      "target_function": "onChange_input_1()",
+      "status": "PASSED",
+      "reason": "Entering input on interactive_element triggered onChange_input_1(), updating internal component state to match assertion."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-EVT-onChange_input_1-RAPID-CLICK",
+      "test_name": "Verify onChange_input_1() handles Rapid Click in LoginForm",
+      "component": "LoginForm",
+      "target_function": "onChange_input_1()",
+      "status": "PASSED",
+      "reason": "Entering input on interactive_element triggered onChange_input_1(), updating internal component state to match assertion."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-DISABLED-INTERACTION-SINGLE-CLICK",
+      "test_name": "Verify handleSubmit() handles Single Click in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The disabled input does not accept the interaction and its handler is not triggered.'."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-EVT-onChange_input_1-DISABLED-INTERACTION",
+      "test_name": "Verify onChange_input_1() handles Disabled Interaction in LoginForm",
+      "component": "LoginForm",
+      "target_function": "onChange_input_1()",
+      "status": "PASSED",
+      "reason": "Entering input on interactive_element triggered onChange_input_1(), updating internal component state to match assertion."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-RAPID-CLICK-SINGLE-CLICK",
+      "test_name": "Verify handleSubmit() handles Single Click in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component remains stable and only one action is executed during rapid interaction.'."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-EVT-onChange_input_0-SINGLE-CLICK",
+      "test_name": "Verify onChange_input_0() handles Single Click in LoginForm",
+      "component": "LoginForm",
+      "target_function": "onChange_input_0()",
+      "status": "PASSED",
+      "reason": "Entering input on interactive_element triggered onChange_input_0(), updating internal component state to match assertion."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-DISABLED-INTERACTION-RAPID-CLICK",
+      "test_name": "Verify handleSubmit() handles Rapid Click in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The disabled input does not accept the interaction and its handler is not triggered.'."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-EVT-onChange_input_0-RAPID-CLICK",
+      "test_name": "Verify onChange_input_0() handles Rapid Click in LoginForm",
+      "component": "LoginForm",
+      "target_function": "onChange_input_0()",
+      "status": "PASSED",
+      "reason": "Entering input on interactive_element triggered onChange_input_0(), updating internal component state to match assertion."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-DISABLED-INTERACTION-PREVENT-DEFAULT",
+      "test_name": "Verify handleSubmit() handles preventDefault in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The disabled input does not accept the interaction and its handler is not triggered.'."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-EVT-MOD-handleSubmit-SINGLE-CLICK",
+      "test_name": "Verify handleSubmit() handles Single Click in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component completes rendering and behaves as expected.'."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-EVT-onChange_input_0-DISABLED-INTERACTION",
+      "test_name": "Verify onChange_input_0() handles Disabled Interaction in LoginForm",
+      "component": "LoginForm",
+      "target_function": "onChange_input_0()",
+      "status": "PASSED",
+      "reason": "Entering input on interactive_element triggered onChange_input_0(), updating internal component state to match assertion."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-RAPID-CLICK-PREVENT-DEFAULT",
+      "test_name": "Verify handleSubmit() handles preventDefault in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component remains stable and only one action is executed during rapid interaction.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-DISABLED-INTERACTION-DISABLED-INTERACTION",
+      "test_name": "Verify onChangeHandler() handles Disabled Interaction in UserProfile",
+      "component": "UserProfile",
+      "target_function": "onChangeHandler()",
+      "status": "PASSED",
+      "reason": "Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-DISABLED-INTERACTION-RAPID-CLICK",
+      "test_name": "Verify onChangeHandler() handles Rapid Click in UserProfile",
+      "component": "UserProfile",
+      "target_function": "onChangeHandler()",
+      "status": "PASSED",
+      "reason": "Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-DISABLED-INTERACTION-SINGLE-CLICK",
+      "test_name": "Verify onChangeHandler() handles Single Click in UserProfile",
+      "component": "UserProfile",
+      "target_function": "onChangeHandler()",
+      "status": "PASSED",
+      "reason": "Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-RAPID-CLICK-RAPID-CLICK",
+      "test_name": "Verify onChangeHandler() handles Rapid Click in UserProfile",
+      "component": "UserProfile",
+      "target_function": "onChangeHandler()",
+      "status": "PASSED",
+      "reason": "Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-RAPID-CLICK-SINGLE-CLICK",
+      "test_name": "Verify onChangeHandler() handles Single Click in UserProfile",
+      "component": "UserProfile",
+      "target_function": "onChangeHandler()",
+      "status": "PASSED",
+      "reason": "Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-SINGLE-CLICK-SINGLE-CLICK",
+      "test_name": "Verify onChangeHandler() handles Single Click in UserProfile",
+      "component": "UserProfile",
+      "target_function": "onChangeHandler()",
+      "status": "PASSED",
+      "reason": "Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update."
+    },
+    {
+      "test_case_id": "TC-STRAT-UserProfile-EVT-handleToggleEdit-DISABLED-INTERACTION",
+      "test_name": "Verify handleToggleEdit() handles Disabled Interaction in UserProfile",
+      "component": "UserProfile",
+      "target_function": "handleToggleEdit()",
+      "status": "PASSED",
+      "reason": "Click interaction on interactive_element triggered handleToggleEdit(), causing expected state transition and UI update."
+    },
+    {
+      "test_case_id": "TC-STRAT-UserProfile-EVT-handleToggleEdit-RAPID-CLICK",
+      "test_name": "Verify handleToggleEdit() handles Rapid Click in UserProfile",
+      "component": "UserProfile",
+      "target_function": "handleToggleEdit()",
+      "status": "PASSED",
+      "reason": "Click interaction on interactive_element triggered handleToggleEdit(), causing expected state transition and UI update."
+    },
+    {
+      "test_case_id": "TC-STRAT-UserProfile-EVT-handleToggleEdit-SINGLE-CLICK",
+      "test_name": "Verify handleToggleEdit() handles Single Click in UserProfile",
+      "component": "UserProfile",
+      "target_function": "handleToggleEdit()",
+      "status": "PASSED",
+      "reason": "Click interaction on interactive_element triggered handleToggleEdit(), causing expected state transition and UI update."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-STATE-TRANS-password-STATE-TRANSITION-STATE-TRANSITION",
+      "test_name": "Verify handleSubmit() handles State Transition in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The internal state change successfully propagates to the rendered UI.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-STATE-TRANS-loading-TOGGLE-STATE-TOGGLE-STATE",
+      "test_name": "Verify Dashboard renders correctly under Toggle State",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-STATE-TRANS-loading-TOGGLE-STATE-STATE-TRANSITION",
+      "test_name": "Verify Dashboard renders correctly under State Transition",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-UserProfile-STATE-TRANS-isEditing-STATE-TRANSITION-STATE-TRANSITION",
+      "test_name": "Verify onChangeHandler() handles State Transition in UserProfile",
+      "component": "UserProfile",
+      "target_function": "onChangeHandler()",
+      "status": "PASSED",
+      "reason": "Executing onChangeHandler() in UserProfile satisfied all assertion conditions for 'The internal state change successfully propagates to the rendered UI.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-UserProfile-STATE-TRANS-isEditing-STATE-TRANSITION-TOGGLE-STATE",
+      "test_name": "Verify onChangeHandler() handles Toggle State in UserProfile",
+      "component": "UserProfile",
+      "target_function": "onChangeHandler()",
+      "status": "PASSED",
+      "reason": "Executing onChangeHandler() in UserProfile satisfied all assertion conditions for 'The internal state change successfully propagates to the rendered UI.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-ASYNC-authService.login-FAILURE-500-EMPTY-RESPONSE",
+      "test_name": "Verify handleSubmit() handles Empty Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The application displays the appropriate error state and handles the API failure gracefully.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-ASYNC-authService.login-EMPTY-RESPONSE-TIMEOUT",
+      "test_name": "Verify handleSubmit() handles Timeout in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component completes rendering and behaves as expected.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-ASYNC-authService.login-EMPTY-RESPONSE-SUCCESS",
+      "test_name": "Verify handleSubmit() handles Success in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The API response data is loaded successfully and displayed in the UI.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-ASYNC-authService.login-EMPTY-RESPONSE-NETWORK-FAILURE",
+      "test_name": "Verify handleSubmit() handles Network failure in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The application displays the appropriate error state and handles the API failure gracefully.'."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-SUCCESS-fetch-EMPTY-RESPONSE",
+      "test_name": "Verify fetch() handles Empty Response in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-ASYNC-authService.login-EMPTY-RESPONSE-INVALID-RESPONSE",
+      "test_name": "Verify handleSubmit() handles Invalid Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component completes rendering and behaves as expected.'."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-FAILURE-fetch-TIMEOUT",
+      "test_name": "Verify fetch() handles Timeout in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-ASYNC-authService.login-EMPTY-RESPONSE-FAILURE-500",
+      "test_name": "Verify handleSubmit() handles API Failure (500) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The application displays the appropriate error state and handles the API failure gracefully.'."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-FAILURE-fetch-SUCCESS",
+      "test_name": "Verify fetch() handles Success in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-ASYNC-authService.login-EMPTY-RESPONSE-EMPTY-RESPONSE",
+      "test_name": "Verify handleSubmit() handles Empty Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component completes rendering and behaves as expected.'."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-FAILURE-fetch-NETWORK-FAILURE",
+      "test_name": "Verify fetch() handles Network failure in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-FAILURE-fetch-SUCCESS-TIMEOUT",
+      "test_name": "Verify Dashboard renders correctly under Timeout",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-FAILURE-fetch-INVALID-RESPONSE",
+      "test_name": "Verify fetch() handles Invalid Response in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-FAILURE-fetch-SUCCESS-SUCCESS",
+      "test_name": "Verify Dashboard renders correctly under Success",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-FAILURE-fetch-FAILURE-500",
+      "test_name": "Verify fetch() handles API Failure (500) in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-FAILURE-fetch-SUCCESS-NETWORK-FAILURE",
+      "test_name": "Verify Dashboard renders correctly under Network failure",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-FAILURE-fetch-EMPTY-RESPONSE",
+      "test_name": "Verify fetch() handles Empty Response in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-FAILURE-fetch-SUCCESS-INVALID-RESPONSE",
+      "test_name": "Verify Dashboard renders correctly under Invalid Response",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-ASYNC-fetch-TIMEOUT",
+      "test_name": "Verify fetch() handles Timeout in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-FAILURE-fetch-SUCCESS-FAILURE-500",
+      "test_name": "Verify Dashboard renders correctly under API Failure (500)",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-FAILURE-fetch-SUCCESS-EMPTY-RESPONSE",
+      "test_name": "Verify Dashboard renders correctly under Empty Response",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-FAILURE-fetch-INVALID-RESPONSE-TIMEOUT",
+      "test_name": "Verify Dashboard renders correctly under Timeout",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-ASYNC-fetch-INVALID-RESPONSE",
+      "test_name": "Verify fetch() handles Invalid Response in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-FAILURE-fetch-INVALID-RESPONSE-NETWORK-FAILURE",
+      "test_name": "Verify Dashboard renders correctly under Network failure",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-ASYNC-fetch-EMPTY-RESPONSE",
+      "test_name": "Verify fetch() handles Empty Response in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-FAILURE-fetch-INVALID-RESPONSE-INVALID-RESPONSE",
+      "test_name": "Verify Dashboard renders correctly under Invalid Response",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-FAILURE-authService.login-SUCCESS-TIMEOUT",
+      "test_name": "Verify handleSubmit() handles Timeout in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The API response data is loaded successfully and displayed in the UI.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-FAILURE-fetch-INVALID-RESPONSE-FAILURE-500",
+      "test_name": "Verify Dashboard renders correctly under API Failure (500)",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-FAILURE-fetch-INVALID-RESPONSE-EMPTY-RESPONSE",
+      "test_name": "Verify Dashboard renders correctly under Empty Response",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-FAILURE-authService.login-SUCCESS-NETWORK-FAILURE",
+      "test_name": "Verify handleSubmit() handles Network failure in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The API response data is loaded successfully and displayed in the UI.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-FAILURE-authService.login-SUCCESS-INVALID-RESPONSE",
+      "test_name": "Verify handleSubmit() handles Invalid Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The API response data is loaded successfully and displayed in the UI.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-FAILURE-authService.login-SUCCESS-FAILURE-500",
+      "test_name": "Verify handleSubmit() handles API Failure (500) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The API response data is loaded successfully and displayed in the UI.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-FAILURE-authService.login-SUCCESS-EMPTY-RESPONSE",
+      "test_name": "Verify handleSubmit() handles Empty Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The API response data is loaded successfully and displayed in the UI.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-FAILURE-authService.login-INVALID-RESPONSE-TIMEOUT",
+      "test_name": "Verify handleSubmit() handles Timeout in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The application displays the appropriate error state and handles the API failure gracefully.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-ASYNC-fetch-TIMEOUT-TIMEOUT",
+      "test_name": "Verify Dashboard renders correctly under Timeout",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-LoginForm-API-FAILURE-authService.login-INVALID-RESPONSE-INVALID-RESPONSE",
+      "test_name": "Verify handleSubmit() handles Invalid Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The application displays the appropriate error state and handles the API failure gracefully.'."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-ASYNC-fetch-TIMEOUT-INVALID-RESPONSE",
+      "test_name": "Verify Dashboard renders correctly under Invalid Response",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-Dashboard-API-ASYNC-fetch-TIMEOUT-EMPTY-RESPONSE",
+      "test_name": "Verify Dashboard renders correctly under Empty Response",
+      "component": "Dashboard",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-SUCCESS-fetch-FAILURE-500",
+      "test_name": "Verify fetch() handles API Failure (500) in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-SUCCESS-fetch-TIMEOUT",
+      "test_name": "Verify fetch() handles Timeout in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-ASYNC-authService.login-EMPTY-RESPONSE",
+      "test_name": "Verify authService.login() handles Empty Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-ASYNC-authService.login-FAILURE-500",
+      "test_name": "Verify authService.login() handles API Failure (500) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-ASYNC-authService.login-INVALID-RESPONSE",
+      "test_name": "Verify authService.login() handles Invalid Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-ASYNC-authService.login-NETWORK-FAILURE",
+      "test_name": "Verify authService.login() handles Network failure in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-ASYNC-authService.login-SUCCESS",
+      "test_name": "Verify authService.login() handles Success in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-ASYNC-authService.login-TIMEOUT",
+      "test_name": "Verify authService.login() handles Timeout in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-FAILURE-authService.login-EMPTY-RESPONSE",
+      "test_name": "Verify authService.login() handles Empty Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-FAILURE-authService.login-INVALID-RESPONSE",
+      "test_name": "Verify authService.login() handles Invalid Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-FAILURE-authService.login-TIMEOUT",
+      "test_name": "Verify authService.login() handles Timeout in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-SUCCESS-authService.login-EMPTY-RESPONSE",
+      "test_name": "Verify authService.login() handles Empty Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-SUCCESS-authService.login-FAILURE-500",
+      "test_name": "Verify authService.login() handles API Failure (500) in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-SUCCESS-authService.login-INVALID-RESPONSE",
+      "test_name": "Verify authService.login() handles Invalid Response in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-SUCCESS-authService.login-NETWORK-FAILURE",
+      "test_name": "Verify authService.login() handles Network failure in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-API-SUCCESS-authService.login-TIMEOUT",
+      "test_name": "Verify authService.login() handles Timeout in LoginForm",
+      "component": "LoginForm",
+      "target_function": "authService.login()",
+      "status": "PASSED",
+      "reason": "Async data request in LoginForm handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-SUCCESS-fetch-INVALID-RESPONSE",
+      "test_name": "Verify fetch() handles Invalid Response in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-Dashboard-API-SUCCESS-fetch-NETWORK-FAILURE",
+      "test_name": "Verify fetch() handles Network failure in Dashboard",
+      "component": "Dashboard",
+      "target_function": "fetch()",
+      "status": "PASSED",
+      "reason": "Async data request in Dashboard handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-A11Y-AUDIT-KEYBOARD-NAV",
+      "test_name": "Verify handleSubmit() handles Keyboard navigation in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The element focus and role attributes conform to accessibility criteria.'."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginForm-A11Y-AUDIT-FOCUS-ORDER",
+      "test_name": "Verify handleSubmit() handles Focus order in LoginForm",
+      "component": "LoginForm",
+      "target_function": "handleSubmit()",
+      "status": "PASSED",
+      "reason": "Submitting LoginForm executed handleSubmit() and verified expected form handling 'The element focus and role attributes conform to accessibility criteria.'."
+    }
+  ],
+  "failures": [],
+  "markdown_report": "# Test Execution & Quality Report\n\n**Pipeline Run ID:** `run_gmzx7ddg_6592`  \n**Generated At:** `2026-08-14 09:45:51 UTC`  \n**Framework:** Angular  \n**Overall Quality Score:** **98/100**\n\n---\n\n## TEST EXECUTION SUMMARY\n\n- **Total Tests:** 115\n- **Passed:** 115\n- **Failed:** 0\n- **Skipped:** 0\n- **Pass Rate:** 100.0%\n- **Execution Time:** 78.06s\n- **Overall Quality:** 98/100\n\n### Quality Score Breakdown:\n- **Test Execution:** 100.0% (weight: 40%)\n- **Coverage:** 91.42% (weight: 25%)\n- **Test Generation Completeness:** 100.0% (weight: 15%)\n- **Traceability Completeness:** 100.0% (weight: 20%)\n\n---\n\n## COVERAGE\n\n- **Statements:** 92.5%\n- **Branches:** 88.0%\n- **Functions:** 94.2%\n- **Lines:** 91.0%\n\n---\n\n## TEST FILE SUMMARY\n\n\n---\n\n## WHY TESTS PASSED\n\n\u2713 **[TC-STRAT-Dashboard-REND-COND-loading-MOUNT-STABILITY]** Verify Dashboard renders correctly under Dashboard Initial Render\n  *Reason:* The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-Dashboard-REND-EMPTY-PROP-userId-EMPTY]** Verify Dashboard renders correctly under userId (empty string)\n  *Reason:* The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-Dashboard-REND-EMPTY-PROP-userId-NULL]** Verify Dashboard renders correctly under userId (null)\n  *Reason:* The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-Dashboard-REND-EMPTY-PROP-userId-SPECIAL]** Verify Dashboard renders correctly under userId (special characters)\n  *Reason:* The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-Dashboard-REND-EMPTY-PROP-userId-UNDEFINED]** Verify Dashboard renders correctly under userId (undefined)\n  *Reason:* The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-Dashboard-REND-INIT-ASYNC-UPDATES]** Verify Dashboard renders correctly under Async Updates\n  *Reason:* The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-Dashboard-REND-INIT-INITIAL-STATE]** Verify Dashboard renders correctly under Initial State\n  *Reason:* The Dashboard rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginForm-REND-COND-condition-MOUNT-STABILITY]** Verify handleSubmit() handles LoginForm Initial Render in LoginForm\n  *Reason:* The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginForm-REND-INIT-ASYNC-UPDATES]** Verify handleSubmit() handles Async Updates in LoginForm\n  *Reason:* The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginForm-REND-INIT-INITIAL-STATE]** Verify handleSubmit() handles Initial State in LoginForm\n  *Reason:* The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginForm-REND-PROPS-PROP-initialEmail-EMPTY]** Verify handleSubmit() handles initialEmail (empty string) in LoginForm\n  *Reason:* The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginForm-REND-PROPS-PROP-initialEmail-NULL]** Verify handleSubmit() handles initialEmail (null) in LoginForm\n  *Reason:* The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginForm-REND-PROPS-PROP-initialEmail-SPECIAL]** Verify handleSubmit() handles initialEmail (special characters) in LoginForm\n  *Reason:* The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginForm-REND-PROPS-PROP-initialEmail-UNDEFINED]** Verify handleSubmit() handles initialEmail (undefined) in LoginForm\n  *Reason:* The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginForm-REND-PROPS-PROP-onSubmit-EMPTY]** Verify handleSubmit() handles onSubmit (empty string) in LoginForm\n  *Reason:* The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginForm-REND-PROPS-PROP-onSubmit-NULL]** Verify handleSubmit() handles onSubmit (null) in LoginForm\n  *Reason:* The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginForm-REND-PROPS-PROP-onSubmit-SPECIAL]** Verify handleSubmit() handles onSubmit (special characters) in LoginForm\n  *Reason:* The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginForm-REND-PROPS-PROP-onSubmit-UNDEFINED]** Verify handleSubmit() handles onSubmit (undefined) in LoginForm\n  *Reason:* The LoginForm rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-UserProfile-REND-COND-isEditing-MOUNT-STABILITY]** Verify onChangeHandler() handles UserProfile Initial Render in UserProfile\n  *Reason:* The UserProfile rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-UserProfile-REND-INIT-INITIAL-STATE]** Verify onChangeHandler() handles Initial State in UserProfile\n  *Reason:* The UserProfile rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-CONTROL-BINDING-SUBMIT-INVALID]** Verify handleSubmit() handles Submit in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'.\n\n\u2713 **[TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-RESET]** Verify handleSubmit() handles Reset in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'.\n\n\u2713 **[TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-MIN-LENGTH]** Verify handleSubmit() handles Min Length in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'.\n\n\u2713 **[TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-MAX-LENGTH]** Verify handleSubmit() handles Max Length in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'.\n\n\u2713 **[TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-INVALID-FORMAT]** Verify handleSubmit() handles Invalid Input in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'.\n\n\u2713 **[TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-EMPTY-INPUT]** Verify handleSubmit() handles Empty Input in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'.\n\n\u2713 **[TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-EMPTY-INPUT-BOUNDARY-VALUES]** Verify handleSubmit() handles Boundary Values in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'.\n\n\u2713 **[TC-EC-STRAT-LoginForm-native-FORM-SUCCESS-BOUNDARY-VALUES-CONTROL-BINDING]** Verify handleSubmit() handles Controlled/Uncontrolled Inputs in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The form submission is prevented and the appropriate validation messages are displayed.'.\n\n\u2713 **[TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-PREVENT-DEFAULT-PREVENT-DEFAULT]** Verify handleSubmit() handles preventDefault in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component completes rendering and behaves as expected.'.\n\n\u2713 **[TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-PREVENT-DEFAULT-DISABLED-INTERACTION]** Verify handleSubmit() handles Disabled Interaction in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The disabled input does not accept the interaction and its handler is not triggered.'.\n\n\u2713 **[TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-SINGLE-CLICK-RAPID-CLICK]** Verify handleSubmit() handles Rapid Click in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component remains stable and only one action is executed during rapid interaction.'.\n\n\u2713 **[TC-STRAT-LoginForm-EVT-onChange_input_1-SINGLE-CLICK]** Verify onChange_input_1() handles Single Click in LoginForm\n  *Reason:* Entering input on interactive_element triggered onChange_input_1(), updating internal component state to match assertion.\n\n\u2713 **[TC-STRAT-LoginForm-EVT-onChange_input_1-RAPID-CLICK]** Verify onChange_input_1() handles Rapid Click in LoginForm\n  *Reason:* Entering input on interactive_element triggered onChange_input_1(), updating internal component state to match assertion.\n\n\u2713 **[TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-DISABLED-INTERACTION-SINGLE-CLICK]** Verify handleSubmit() handles Single Click in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The disabled input does not accept the interaction and its handler is not triggered.'.\n\n\u2713 **[TC-STRAT-LoginForm-EVT-onChange_input_1-DISABLED-INTERACTION]** Verify onChange_input_1() handles Disabled Interaction in LoginForm\n  *Reason:* Entering input on interactive_element triggered onChange_input_1(), updating internal component state to match assertion.\n\n\u2713 **[TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-RAPID-CLICK-SINGLE-CLICK]** Verify handleSubmit() handles Single Click in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component remains stable and only one action is executed during rapid interaction.'.\n\n\u2713 **[TC-STRAT-LoginForm-EVT-onChange_input_0-SINGLE-CLICK]** Verify onChange_input_0() handles Single Click in LoginForm\n  *Reason:* Entering input on interactive_element triggered onChange_input_0(), updating internal component state to match assertion.\n\n\u2713 **[TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-DISABLED-INTERACTION-RAPID-CLICK]** Verify handleSubmit() handles Rapid Click in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The disabled input does not accept the interaction and its handler is not triggered.'.\n\n\u2713 **[TC-STRAT-LoginForm-EVT-onChange_input_0-RAPID-CLICK]** Verify onChange_input_0() handles Rapid Click in LoginForm\n  *Reason:* Entering input on interactive_element triggered onChange_input_0(), updating internal component state to match assertion.\n\n\u2713 **[TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-DISABLED-INTERACTION-PREVENT-DEFAULT]** Verify handleSubmit() handles preventDefault in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The disabled input does not accept the interaction and its handler is not triggered.'.\n\n\u2713 **[TC-STRAT-LoginForm-EVT-MOD-handleSubmit-SINGLE-CLICK]** Verify handleSubmit() handles Single Click in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component completes rendering and behaves as expected.'.\n\n\u2713 **[TC-STRAT-LoginForm-EVT-onChange_input_0-DISABLED-INTERACTION]** Verify onChange_input_0() handles Disabled Interaction in LoginForm\n  *Reason:* Entering input on interactive_element triggered onChange_input_0(), updating internal component state to match assertion.\n\n\u2713 **[TC-EC-STRAT-LoginForm-EVT-MOD-handleSubmit-RAPID-CLICK-PREVENT-DEFAULT]** Verify handleSubmit() handles preventDefault in LoginForm\n  *Reason:* Submitting LoginForm executed handleSubmit() and verified expected form handling 'The component remains stable and only one action is executed during rapid interaction.'.\n\n\u2713 **[TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-DISABLED-INTERACTION-DISABLED-INTERACTION]** Verify onChangeHandler() handles Disabled Interaction in UserProfile\n  *Reason:* Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update.\n\n\u2713 **[TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-DISABLED-INTERACTION-RAPID-CLICK]** Verify onChangeHandler() handles Rapid Click in UserProfile\n  *Reason:* Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update.\n\n\u2713 **[TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-DISABLED-INTERACTION-SINGLE-CLICK]** Verify onChangeHandler() handles Single Click in UserProfile\n  *Reason:* Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update.\n\n\u2713 **[TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-RAPID-CLICK-RAPID-CLICK]** Verify onChangeHandler() handles Rapid Click in UserProfile\n  *Reason:* Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update.\n\n\u2713 **[TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-RAPID-CLICK-SINGLE-CLICK]** Verify onChangeHandler() handles Single Click in UserProfile\n  *Reason:* Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update.\n\n\u2713 **[TC-EC-STRAT-UserProfile-EVT-handleToggleEdit-SINGLE-CLICK-SINGLE-CLICK]** Verify onChangeHandler() handles Single Click in UserProfile\n  *Reason:* Click interaction on interactive_element triggered onChangeHandler(), causing expected state transition and UI update.\n\n\u2713 **[TC-STRAT-UserProfile-EVT-handleToggleEdit-DISABLED-INTERACTION]** Verify handleToggleEdit() handles Disabled Interaction in UserProfile\n  *Reason:* Click interaction on interactive_element triggered handleToggleEdit(), causing expected state transition and UI update.\n"
+}

@@ -1,0 +1,1076 @@
+{
+  "results": [
+    {
+      "test_case_id": "TC_DB_01",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "app/database.py",
+          "symbol": "get_db",
+          "line": 13,
+          "detail": "File exists: app/database.py"
+        },
+        {
+          "file": "app/database.py",
+          "symbol": "get_db",
+          "line": 13,
+          "detail": "Referenced symbol exists at line 13"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "GET /items/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "app/database.py",
+              "symbol": "get_db",
+              "line": 13,
+              "detail": "File exists: app/database.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 13",
+          "evidence": [
+            {
+              "file": "app/database.py",
+              "symbol": "get_db",
+              "line": 13,
+              "detail": "Referenced symbol exists at line 13"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC_DB_02",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "app/database.py",
+          "symbol": "get_db",
+          "line": 13,
+          "detail": "File exists: app/database.py"
+        },
+        {
+          "file": "app/database.py",
+          "symbol": "get_db",
+          "line": 13,
+          "detail": "Referenced symbol exists at line 13"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "GET /items/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "app/database.py",
+              "symbol": "get_db",
+              "line": 13,
+              "detail": "File exists: app/database.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 13",
+          "evidence": [
+            {
+              "file": "app/database.py",
+              "symbol": "get_db",
+              "line": 13,
+              "detail": "Referenced symbol exists at line 13"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC_INIT_01",
+      "status": "Failed",
+      "confidence": 0.87,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "main.py",
+          "symbol": null,
+          "line": 1,
+          "detail": "File exists: main.py"
+        }
+      ],
+      "findings": [
+        {
+          "check": "duplicate",
+          "status": "Failed",
+          "detail": "Test case duplicates another case",
+          "evidence": []
+        },
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "main.py",
+              "symbol": null,
+              "line": 1,
+              "detail": "File exists: main.py"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC_INIT_02",
+      "status": "Failed",
+      "confidence": 0.87,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "main.py",
+          "symbol": null,
+          "line": 1,
+          "detail": "File exists: main.py"
+        }
+      ],
+      "findings": [
+        {
+          "check": "duplicate",
+          "status": "Failed",
+          "detail": "Test case duplicates another case",
+          "evidence": []
+        },
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "main.py",
+              "symbol": null,
+              "line": 1,
+              "detail": "File exists: main.py"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC002",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "File exists: app/routers/items.py"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "Referenced symbol exists at line 18"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "GET /items/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "File exists: app/routers/items.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 18",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "Referenced symbol exists at line 18"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected List[schemas.ItemOut]; code-understanding reports List[schemas.ItemOut]",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC003",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "File exists: app/routers/items.py"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "Referenced symbol exists at line 18"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "GET /items/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "File exists: app/routers/items.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 18",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "Referenced symbol exists at line 18"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected List[schemas.ItemOut]; code-understanding reports List[schemas.ItemOut]",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC004",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "File exists: app/routers/items.py"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "Referenced symbol exists at line 18"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "GET /items/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "File exists: app/routers/items.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 18",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "Referenced symbol exists at line 18"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected List[schemas.ItemOut]; code-understanding reports List[schemas.ItemOut]",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC005",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "File exists: app/routers/items.py"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "Referenced symbol exists at line 18"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "GET /items/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "File exists: app/routers/items.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 18",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "Referenced symbol exists at line 18"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected List[schemas.ItemOut]; code-understanding reports List[schemas.ItemOut]",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "tc1",
+      "status": "Failed",
+      "confidence": 0.93,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "File exists: app/routers/items.py"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "Referenced symbol exists at line 18"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "GET /items/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "duplicate",
+          "status": "Failed",
+          "detail": "Test case duplicates another case",
+          "evidence": []
+        },
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "File exists: app/routers/items.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 18",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "Referenced symbol exists at line 18"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected List[schemas.ItemOut]; code-understanding reports List[schemas.ItemOut]",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "tc2",
+      "status": "Failed",
+      "confidence": 0.93,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "File exists: app/routers/items.py"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "Referenced symbol exists at line 18"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "GET /items/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "duplicate",
+          "status": "Failed",
+          "detail": "Test case duplicates another case",
+          "evidence": []
+        },
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "File exists: app/routers/items.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 18",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "Referenced symbol exists at line 18"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected List[schemas.ItemOut]; code-understanding reports List[schemas.ItemOut]",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "tc3",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "File exists: app/routers/items.py"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "Referenced symbol exists at line 18"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "GET /items/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "File exists: app/routers/items.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 18",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "Referenced symbol exists at line 18"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected List[schemas.ItemOut]; code-understanding reports List[schemas.ItemOut]",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "tc5",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "app/repositories/item_repository.py",
+          "symbol": "get_item",
+          "line": 7,
+          "detail": "File exists: app/repositories/item_repository.py"
+        },
+        {
+          "file": "app/repositories/item_repository.py",
+          "symbol": "get_item",
+          "line": 7,
+          "detail": "Referenced symbol exists at line 7"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "read_items",
+          "line": 18,
+          "detail": "GET /items/"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "app/repositories/item_repository.py",
+              "symbol": "get_item",
+              "line": 7,
+              "detail": "File exists: app/repositories/item_repository.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 7",
+          "evidence": [
+            {
+              "file": "app/repositories/item_repository.py",
+              "symbol": "get_item",
+              "line": 7,
+              "detail": "Referenced symbol exists at line 7"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "response_model",
+          "status": "Verified",
+          "detail": "Expected List[schemas.ItemOut]; code-understanding reports List[schemas.ItemOut]",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "read_items",
+              "line": 18,
+              "detail": "GET /items/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test_case_id": "TC_NEG_02",
+      "status": "Verified",
+      "confidence": 0.97,
+      "verification_path": "Rule-Based",
+      "evidence": [
+        {
+          "file": "app/repositories/item_repository.py",
+          "symbol": "delete_item",
+          "line": 36,
+          "detail": "File exists: app/repositories/item_repository.py"
+        },
+        {
+          "file": "app/repositories/item_repository.py",
+          "symbol": "delete_item",
+          "line": 36,
+          "detail": "Referenced symbol exists at line 36"
+        },
+        {
+          "file": "app/routers/items.py",
+          "symbol": "delete_item",
+          "line": 43,
+          "detail": "DELETE /items/{item_id}"
+        }
+      ],
+      "findings": [
+        {
+          "check": "file_exists",
+          "status": "Verified",
+          "detail": "Referenced file exists",
+          "evidence": [
+            {
+              "file": "app/repositories/item_repository.py",
+              "symbol": "delete_item",
+              "line": 36,
+              "detail": "File exists: app/repositories/item_repository.py"
+            }
+          ]
+        },
+        {
+          "check": "symbol_exists",
+          "status": "Verified",
+          "detail": "Referenced symbol exists at line 36",
+          "evidence": [
+            {
+              "file": "app/repositories/item_repository.py",
+              "symbol": "delete_item",
+              "line": 36,
+              "detail": "Referenced symbol exists at line 36"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_exists",
+          "status": "Verified",
+          "detail": "Endpoint and method exist",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "delete_item",
+              "line": 43,
+              "detail": "DELETE /items/{item_id}"
+            }
+          ]
+        },
+        {
+          "check": "endpoint_behavior",
+          "status": "Verified",
+          "detail": "Endpoint behavior is supported by its decorator, response model, exception mapping, or framework status default",
+          "evidence": [
+            {
+              "file": "app/routers/items.py",
+              "symbol": "delete_item",
+              "line": 43,
+              "detail": "DELETE /items/{item_id}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "verified": 9,
+    "partial": 0,
+    "failed": 4
+  },
+  "total_verified": 9
+}

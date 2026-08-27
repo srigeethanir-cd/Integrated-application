@@ -1,0 +1,12 @@
+{
+  "name": "project-parsers",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Node.js parser scripts for the AI Frontend Unit Test Generator. Not a standalone service — invoked via subprocess from Python.",
+  "dependencies": {
+    "@babel/parser": "^7.24.0",
+    "@babel/traverse": "^7.24.0",
+    "typescript": "^5.4.0",
+    "@angular/compiler": "^17.0.0"
+  }
+}

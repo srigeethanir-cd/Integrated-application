@@ -1,0 +1,1832 @@
+{
+  "generated_test_cases": [
+    {
+      "id": "TC_DB_01",
+      "title": "Verify get_db returns a session instance",
+      "description": "Ensure that calling get_db returns a valid SQLAlchemy session object connected to the test database.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Call get_db() function"
+      ],
+      "expected_results": [
+        "A non-null session object is returned",
+        "Session is bound to the test database"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/items/",
+            "handler": "read_items",
+            "file": "app/routers/items.py",
+            "response_type": "List[schemas.ItemOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/items/",
+            "handler": "create_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemCreate",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "DELETE",
+            "route": "/items/{item_id}",
+            "handler": "delete_item",
+            "file": "app/routers/items.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "app/repositories/item_repository.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          },
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /items/",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_items",
+              "Call db.query().offset().limit().all",
+              "Call db.query().offset().limit",
+              "Call db.query().offset",
+              "Call db.query"
+            ],
+            "components": [],
+            "entrypoint": "read_items"
+          },
+          {
+            "name": "GET /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException"
+            ],
+            "components": [],
+            "entrypoint": "read_item"
+          },
+          {
+            "name": "POST /items/",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke create_item",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh"
+            ],
+            "components": [],
+            "entrypoint": "create_item"
+          }
+        ],
+        "source_files": [
+          "app/routers/items.py",
+          "app/repositories/item_repository.py",
+          "app/database.py",
+          "app/services/item_service.py"
+        ],
+        "symbols": [
+          "read_items",
+          "create_item",
+          "delete_item",
+          "get_db",
+          "get_item",
+          "get_items"
+        ],
+        "file": "app/database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC_DB_02",
+      "title": "Handle missing database URL",
+      "description": "Test get_db behavior when DATABASE_URL environment variable is not set.",
+      "category": "negative",
+      "priority": "medium",
+      "severity": "minor",
+      "preconditions": [
+        "Unset DATABASE_URL"
+      ],
+      "steps": [
+        "Call get_db()",
+        "Capture exception"
+      ],
+      "expected_results": [
+        "Raises a ValueError with message indicating missing DATABASE_URL"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "GET",
+            "route": "/items/",
+            "handler": "read_items",
+            "file": "app/routers/items.py",
+            "response_type": "List[schemas.ItemOut]"
+          },
+          {
+            "method": "POST",
+            "route": "/items/",
+            "handler": "create_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemCreate",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "DELETE",
+            "route": "/items/{item_id}",
+            "handler": "delete_item",
+            "file": "app/routers/items.py"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "app/repositories/item_repository.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          },
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "GET /items/",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_items",
+              "Call db.query().offset().limit().all",
+              "Call db.query().offset().limit",
+              "Call db.query().offset",
+              "Call db.query"
+            ],
+            "components": [],
+            "entrypoint": "read_items"
+          },
+          {
+            "name": "GET /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException"
+            ],
+            "components": [],
+            "entrypoint": "read_item"
+          },
+          {
+            "name": "POST /items/",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke create_item",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh"
+            ],
+            "components": [],
+            "entrypoint": "create_item"
+          }
+        ],
+        "source_files": [
+          "app/routers/items.py",
+          "app/repositories/item_repository.py",
+          "app/database.py",
+          "app/services/item_service.py"
+        ],
+        "symbols": [
+          "read_items",
+          "create_item",
+          "delete_item",
+          "get_db",
+          "update_item"
+        ],
+        "file": "app/database.py",
+        "symbol": "get_db"
+      }
+    },
+    {
+      "id": "TC_INIT_01",
+      "title": "Application starts with correct config",
+      "description": "Verify that the main application initializes without errors and loads configuration.",
+      "category": "positive",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [
+        "Proper environment variables set"
+      ],
+      "steps": [
+        "Run the main entry point"
+      ],
+      "expected_results": [
+        "Application starts and logs initialization success"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [],
+        "business_rules": [],
+        "execution_flows": [],
+        "source_files": [
+          "main.py"
+        ],
+        "symbols": [],
+        "file": "main.py"
+      }
+    },
+    {
+      "id": "TC_INIT_02",
+      "title": "Application fails on missing config file",
+      "description": "Ensure that the application raises an error if required configuration file is missing.",
+      "category": "negative",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [
+        "Delete or rename config file"
+      ],
+      "steps": [
+        "Run the main entry point"
+      ],
+      "expected_results": [
+        "Application exits with error code and logs missing config"
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [],
+        "business_rules": [],
+        "execution_flows": [],
+        "source_files": [
+          "main.py"
+        ],
+        "symbols": [],
+        "file": "main.py"
+      }
+    },
+    {
+      "id": "TC002",
+      "title": "Create item missing name field",
+      "description": "Attempt to create an item without the required 'name' field and expect validation failure.",
+      "category": "negative",
+      "priority": "critical",
+      "severity": "blocker",
+      "preconditions": [],
+      "steps": [
+        "Send POST request to /items/ with JSON body {\"description\": \"Missing name\"}.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 422 (Unprocessable Entity) with validation error indicating missing 'name'."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/items/",
+            "handler": "create_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemCreate",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "DELETE",
+            "route": "/items/{item_id}",
+            "handler": "delete_item",
+            "file": "app/routers/items.py"
+          },
+          {
+            "method": "GET",
+            "route": "/items/{item_id}",
+            "handler": "read_item",
+            "file": "app/routers/items.py",
+            "response_type": "schemas.ItemOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: item.name is not None"
+          },
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: item.description is not None"
+          },
+          {
+            "files": [
+              "app/repositories/item_repository.py"
+            ],
+            "symbols": [],
+            "description": "Condition: name is not None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /items/",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke create_item",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh"
+            ],
+            "components": [],
+            "entrypoint": "create_item"
+          },
+          {
+            "name": "DELETE /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke delete_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete_item"
+          },
+          {
+            "name": "GET /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException"
+            ],
+            "components": [],
+            "entrypoint": "read_item"
+          }
+        ],
+        "source_files": [
+          "app/routers/items.py",
+          "app/repositories/item_repository.py",
+          "app/services/item_service.py"
+        ],
+        "symbols": [
+          "create_item",
+          "delete_item",
+          "read_item",
+          "get_items",
+          "update_item"
+        ],
+        "file": "app/routers/items.py",
+        "symbol": "read_items",
+        "route": "/items/",
+        "method": "GET",
+        "response_model": "List[schemas.ItemOut]"
+      }
+    },
+    {
+      "id": "TC003",
+      "title": "Delete non\u2011existent item",
+      "description": "Verify that deleting an item that does not exist returns a 404 error.",
+      "category": "exception/integration",
+      "priority": "medium",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Send DELETE request to /items/9999 where 9999 is an ID not present in the database.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 404 as defined in exception_status_mappings."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "DELETE",
+            "route": "/items/{item_id}",
+            "handler": "delete_item",
+            "file": "app/routers/items.py"
+          },
+          {
+            "method": "GET",
+            "route": "/items/{item_id}",
+            "handler": "read_item",
+            "file": "app/routers/items.py",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "PUT",
+            "route": "/items/{item_id}",
+            "handler": "update_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemUpdate",
+            "response_type": "schemas.ItemOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not item"
+          },
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          },
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: item.name is not None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "DELETE /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke delete_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete_item"
+          },
+          {
+            "name": "GET /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException"
+            ],
+            "components": [],
+            "entrypoint": "read_item"
+          },
+          {
+            "name": "PUT /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke update_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.commit",
+              "Call db.refresh"
+            ],
+            "components": [],
+            "entrypoint": "update_item"
+          }
+        ],
+        "source_files": [
+          "app/routers/items.py",
+          "app/repositories/item_repository.py",
+          "app/services/item_service.py"
+        ],
+        "symbols": [
+          "delete_item",
+          "read_item",
+          "update_item",
+          "get_items",
+          "create_item"
+        ],
+        "file": "app/routers/items.py",
+        "symbol": "read_items",
+        "route": "/items/",
+        "method": "GET",
+        "response_model": "List[schemas.ItemOut]"
+      }
+    },
+    {
+      "id": "TC004",
+      "title": "Delete existing item successfully",
+      "description": "Ensure that deleting an existing item returns a 204 status and removes the record.",
+      "category": "positive",
+      "priority": "high",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Create an item via POST /items/ with valid data.",
+        "Capture the returned item_id.",
+        "Send DELETE request to /items/{item_id}.",
+        "Query the database for the item."
+      ],
+      "expected_results": [
+        "DELETE response status code is 204.",
+        "The item is no longer present in the database."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "DELETE",
+            "route": "/items/{item_id}",
+            "handler": "delete_item",
+            "file": "app/routers/items.py"
+          },
+          {
+            "method": "POST",
+            "route": "/items/",
+            "handler": "create_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemCreate",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "GET",
+            "route": "/items/{item_id}",
+            "handler": "read_item",
+            "file": "app/routers/items.py",
+            "response_type": "schemas.ItemOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not item"
+          },
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          },
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: item.name is not None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "DELETE /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke delete_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete_item"
+          },
+          {
+            "name": "POST /items/",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke create_item",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh"
+            ],
+            "components": [],
+            "entrypoint": "create_item"
+          },
+          {
+            "name": "GET /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException"
+            ],
+            "components": [],
+            "entrypoint": "read_item"
+          }
+        ],
+        "source_files": [
+          "app/routers/items.py",
+          "app/repositories/item_repository.py",
+          "app/services/item_service.py"
+        ],
+        "symbols": [
+          "delete_item",
+          "create_item",
+          "read_item",
+          "get_items"
+        ],
+        "file": "app/routers/items.py",
+        "symbol": "read_items",
+        "route": "/items/",
+        "method": "GET",
+        "response_model": "List[schemas.ItemOut]"
+      }
+    },
+    {
+      "id": "TC005",
+      "title": "Create item with maximum field lengths",
+      "description": "Test boundary conditions by providing maximum allowed lengths for name and description.",
+      "category": "boundary",
+      "priority": "low",
+      "severity": "minor",
+      "preconditions": [],
+      "steps": [
+        "Construct a JSON payload where 'name' and 'description' are at their maximum length limits.",
+        "Send POST request to /items/ with this payload.",
+        "Observe the response."
+      ],
+      "expected_results": [
+        "Response status code is 201 and the item is created successfully without truncation."
+      ],
+      "requirement_ids": [],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/items/",
+            "handler": "create_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemCreate",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "DELETE",
+            "route": "/items/{item_id}",
+            "handler": "delete_item",
+            "file": "app/routers/items.py"
+          },
+          {
+            "method": "GET",
+            "route": "/items/{item_id}",
+            "handler": "read_item",
+            "file": "app/routers/items.py",
+            "response_type": "schemas.ItemOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: item.name is not None"
+          },
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: item.description is not None"
+          },
+          {
+            "files": [
+              "app/repositories/item_repository.py"
+            ],
+            "symbols": [],
+            "description": "Condition: name is not None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /items/",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke create_item",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh"
+            ],
+            "components": [],
+            "entrypoint": "create_item"
+          },
+          {
+            "name": "DELETE /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke delete_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete_item"
+          },
+          {
+            "name": "GET /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException"
+            ],
+            "components": [],
+            "entrypoint": "read_item"
+          }
+        ],
+        "source_files": [
+          "app/routers/items.py",
+          "app/repositories/item_repository.py",
+          "app/services/item_service.py"
+        ],
+        "symbols": [
+          "create_item",
+          "delete_item",
+          "read_item",
+          "get_items",
+          "update_item"
+        ],
+        "file": "app/routers/items.py",
+        "symbol": "read_items",
+        "route": "/items/",
+        "method": "GET",
+        "response_model": "List[schemas.ItemOut]"
+      }
+    },
+    {
+      "id": "tc1",
+      "title": "Delete non-db item positive",
+      "description": "Verify that deleting an item that does not exist returns 204 and no error.",
+      "category": "positive",
+      "priority": "low",
+      "severity": "trivial",
+      "preconditions": [],
+      "steps": [
+        "Send DELETE /items/999",
+        "Receive response"
+      ],
+      "expected_results": [
+        "Response status is 204",
+        "Database unchanged"
+      ],
+      "requirement_ids": [
+        "delete_item|positive|not-db-item"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "DELETE",
+            "route": "/items/{item_id}",
+            "handler": "delete_item",
+            "file": "app/routers/items.py"
+          },
+          {
+            "method": "POST",
+            "route": "/items/",
+            "handler": "create_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemCreate",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "GET",
+            "route": "/items/{item_id}",
+            "handler": "read_item",
+            "file": "app/routers/items.py",
+            "response_type": "schemas.ItemOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          },
+          {
+            "files": [
+              "app/repositories/item_repository.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "DELETE /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke delete_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete_item"
+          },
+          {
+            "name": "POST /items/",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke create_item",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh"
+            ],
+            "components": [],
+            "entrypoint": "create_item"
+          },
+          {
+            "name": "GET /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException"
+            ],
+            "components": [],
+            "entrypoint": "read_item"
+          }
+        ],
+        "source_files": [
+          "app/routers/items.py",
+          "app/repositories/item_repository.py",
+          "app/services/item_service.py"
+        ],
+        "symbols": [
+          "delete_item",
+          "create_item",
+          "read_item",
+          "get_items",
+          "update_item"
+        ],
+        "file": "app/routers/items.py",
+        "symbol": "read_items",
+        "route": "/items/",
+        "method": "GET",
+        "response_model": "List[schemas.ItemOut]",
+        "coverage_requirements": [
+          "delete_item|positive|not-db-item",
+          "delete_item|positive|not-not-db-item"
+        ]
+      }
+    },
+    {
+      "id": "tc2",
+      "title": "Delete non-db item negative",
+      "description": "Attempt to delete a non-existing item and ensure system handles gracefully.",
+      "category": "negative",
+      "priority": "low",
+      "severity": "trivial",
+      "preconditions": [],
+      "steps": [
+        "Send DELETE /items/999",
+        "Receive response"
+      ],
+      "expected_results": [
+        "Response status is 204",
+        "No error thrown"
+      ],
+      "requirement_ids": [
+        "delete_item|negative|not-db-item"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "DELETE",
+            "route": "/items/{item_id}",
+            "handler": "delete_item",
+            "file": "app/routers/items.py"
+          },
+          {
+            "method": "POST",
+            "route": "/items/",
+            "handler": "create_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemCreate",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "GET",
+            "route": "/items/{item_id}",
+            "handler": "read_item",
+            "file": "app/routers/items.py",
+            "response_type": "schemas.ItemOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          },
+          {
+            "files": [
+              "app/repositories/item_repository.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "DELETE /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke delete_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete_item"
+          },
+          {
+            "name": "POST /items/",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke create_item",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh"
+            ],
+            "components": [],
+            "entrypoint": "create_item"
+          },
+          {
+            "name": "GET /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException"
+            ],
+            "components": [],
+            "entrypoint": "read_item"
+          }
+        ],
+        "source_files": [
+          "app/routers/items.py",
+          "app/repositories/item_repository.py",
+          "app/services/item_service.py"
+        ],
+        "symbols": [
+          "delete_item",
+          "create_item",
+          "read_item",
+          "get_items",
+          "update_item"
+        ],
+        "file": "app/routers/items.py",
+        "symbol": "read_items",
+        "route": "/items/",
+        "method": "GET",
+        "response_model": "List[schemas.ItemOut]"
+      }
+    },
+    {
+      "id": "tc3",
+      "title": "Delete item with not-not-db-item positive",
+      "description": "Verify deletion when item exists (not(not db_item))",
+      "category": "positive",
+      "priority": "low",
+      "severity": "trivial",
+      "preconditions": [],
+      "steps": [
+        "Create item via POST",
+        "Send DELETE /items/{id}"
+      ],
+      "expected_results": [
+        "Response status is 204",
+        "Item removed from database"
+      ],
+      "requirement_ids": [
+        "delete_item|positive|not-not-db-item"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "DELETE",
+            "route": "/items/{item_id}",
+            "handler": "delete_item",
+            "file": "app/routers/items.py"
+          },
+          {
+            "method": "POST",
+            "route": "/items/",
+            "handler": "create_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemCreate",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "GET",
+            "route": "/items/{item_id}",
+            "handler": "read_item",
+            "file": "app/routers/items.py",
+            "response_type": "schemas.ItemOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          },
+          {
+            "files": [
+              "app/repositories/item_repository.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /items/",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke create_item",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh"
+            ],
+            "components": [],
+            "entrypoint": "create_item"
+          },
+          {
+            "name": "DELETE /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke delete_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete_item"
+          },
+          {
+            "name": "GET /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException"
+            ],
+            "components": [],
+            "entrypoint": "read_item"
+          }
+        ],
+        "source_files": [
+          "app/routers/items.py",
+          "app/repositories/item_repository.py",
+          "app/services/item_service.py"
+        ],
+        "symbols": [
+          "delete_item",
+          "create_item",
+          "read_item",
+          "get_items",
+          "update_item"
+        ],
+        "file": "app/routers/items.py",
+        "symbol": "read_items",
+        "route": "/items/",
+        "method": "GET",
+        "response_model": "List[schemas.ItemOut]"
+      }
+    },
+    {
+      "id": "tc5",
+      "title": "Get item function positive",
+      "description": "Ensure get_item function returns correct item data",
+      "category": "positive",
+      "priority": "low",
+      "severity": "trivial",
+      "preconditions": [],
+      "steps": [
+        "Create item via POST",
+        "Send GET /items/{id}"
+      ],
+      "expected_results": [
+        "Response status is 200",
+        "Response body matches created item"
+      ],
+      "requirement_ids": [
+        "get_item|positive|function"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "POST",
+            "route": "/items/",
+            "handler": "create_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemCreate",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "GET",
+            "route": "/items/{item_id}",
+            "handler": "read_item",
+            "file": "app/routers/items.py",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "PUT",
+            "route": "/items/{item_id}",
+            "handler": "update_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemUpdate",
+            "response_type": "schemas.ItemOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not item"
+          },
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          },
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: item.name is not None"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "POST /items/",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke create_item",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call app.models.Item",
+              "Call db.add",
+              "Call db.commit",
+              "Call db.refresh"
+            ],
+            "components": [],
+            "entrypoint": "create_item"
+          },
+          {
+            "name": "GET /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException"
+            ],
+            "components": [],
+            "entrypoint": "read_item"
+          },
+          {
+            "name": "DELETE /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke delete_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete_item"
+          }
+        ],
+        "source_files": [
+          "app/routers/items.py",
+          "app/repositories/item_repository.py",
+          "app/services/item_service.py"
+        ],
+        "symbols": [
+          "create_item",
+          "read_item",
+          "update_item",
+          "get_items",
+          "get_item"
+        ],
+        "file": "app/repositories/item_repository.py",
+        "symbol": "get_item",
+        "route": "/items/",
+        "method": "GET",
+        "response_model": "List[schemas.ItemOut]"
+      }
+    },
+    {
+      "id": "TC_NEG_02",
+      "title": "Delete item when database flag is false (not (not db_item))",
+      "description": "Verify that when the system indicates an item exists but the deletion condition fails, the API still returns 404.",
+      "category": "negative",
+      "priority": "medium",
+      "severity": "major",
+      "preconditions": [],
+      "steps": [
+        "Mock database to return a valid item for ID 1234 but set internal flag such that delete condition is negated."
+      ],
+      "expected_results": [
+        "API responds with 404 Not Found status code.",
+        "Response body contains error message indicating deletion condition not met."
+      ],
+      "requirement_ids": [
+        "delete_item|negative|not-not-db-item"
+      ],
+      "business_rule_ids": [],
+      "traceability": {
+        "api_routes": [
+          {
+            "method": "DELETE",
+            "route": "/items/{item_id}",
+            "handler": "delete_item",
+            "file": "app/routers/items.py"
+          },
+          {
+            "method": "GET",
+            "route": "/items/{item_id}",
+            "handler": "read_item",
+            "file": "app/routers/items.py",
+            "response_type": "schemas.ItemOut"
+          },
+          {
+            "method": "PUT",
+            "route": "/items/{item_id}",
+            "handler": "update_item",
+            "file": "app/routers/items.py",
+            "request_type": "ItemUpdate",
+            "response_type": "schemas.ItemOut"
+          }
+        ],
+        "business_rules": [
+          {
+            "files": [
+              "app/repositories/item_repository.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          },
+          {
+            "files": [
+              "app/routers/items.py"
+            ],
+            "symbols": [],
+            "description": "Condition: not db_item"
+          }
+        ],
+        "execution_flows": [
+          {
+            "name": "DELETE /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke delete_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException",
+              "Call db.delete",
+              "Call db.commit",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.delete",
+              "Call db.commit"
+            ],
+            "components": [],
+            "entrypoint": "delete_item"
+          },
+          {
+            "name": "GET /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke read_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException"
+            ],
+            "components": [],
+            "entrypoint": "read_item"
+          },
+          {
+            "name": "PUT /items/{item_id}",
+            "files": [
+              "app/routers/items.py"
+            ],
+            "steps": [
+              "Invoke update_item",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call fastapi.HTTPException",
+              "Call db.commit",
+              "Call db.refresh",
+              "Call db.query().filter().first",
+              "Call db.query().filter",
+              "Call db.query",
+              "Call db.commit",
+              "Call db.refresh"
+            ],
+            "components": [],
+            "entrypoint": "update_item"
+          }
+        ],
+        "source_files": [
+          "app/routers/items.py",
+          "app/repositories/item_repository.py",
+          "app/database.py",
+          "app/services/item_service.py"
+        ],
+        "symbols": [
+          "delete_item",
+          "read_item",
+          "update_item",
+          "create_item",
+          "get_item"
+        ],
+        "file": "app/repositories/item_repository.py",
+        "symbol": "create_item"
+      }
+    }
+  ],
+  "coverage_summary": {
+    "requirement_coverage": 100.0,
+    "category_coverage": 80.0,
+    "function_coverage": 100.0,
+    "branch_coverage": 53.85,
+    "target_coverage": 64.71,
+    "completeness": 71.43
+  },
+  "total_generated": 16,
+  "total_after_deduplication": 13,
+  "generation_status": "partial_coverage_incomplete",
+  "generation_reason": "all_providers_unavailable",
+  "uncovered_requirements": [
+    {
+      "symbol": "update_item",
+      "requirement": "name is not None",
+      "category": "positive",
+      "requirement_id": "update_item|positive|name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "name is not None",
+      "category": "negative",
+      "requirement_id": "update_item|negative|name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (name is not None)",
+      "category": "positive",
+      "requirement_id": "update_item|positive|not-name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (name is not None)",
+      "category": "negative",
+      "requirement_id": "update_item|negative|not-name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "description is not None",
+      "category": "positive",
+      "requirement_id": "update_item|positive|description-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "description is not None",
+      "category": "negative",
+      "requirement_id": "update_item|negative|description-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (description is not None)",
+      "category": "positive",
+      "requirement_id": "update_item|positive|not-description-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (description is not None)",
+      "category": "negative",
+      "requirement_id": "update_item|negative|not-description-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "item.name is not None",
+      "category": "positive",
+      "requirement_id": "update_item|positive|item-name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "item.name is not None",
+      "category": "negative",
+      "requirement_id": "update_item|negative|item-name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (item.name is not None)",
+      "category": "positive",
+      "requirement_id": "update_item|positive|not-item-name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (item.name is not None)",
+      "category": "negative",
+      "requirement_id": "update_item|negative|not-item-name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "item.description is not None",
+      "category": "positive",
+      "requirement_id": "update_item|positive|item-description-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "item.description is not None",
+      "category": "negative",
+      "requirement_id": "update_item|negative|item-description-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (item.description is not None)",
+      "category": "positive",
+      "requirement_id": "update_item|positive|not-item-description-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (item.description is not None)",
+      "category": "negative",
+      "requirement_id": "update_item|negative|not-item-description-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "item.name is not None",
+      "category": "positive",
+      "requirement_id": "update_item|positive|item-name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "item.name is not None",
+      "category": "negative",
+      "requirement_id": "update_item|negative|item-name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (item.name is not None)",
+      "category": "positive",
+      "requirement_id": "update_item|positive|not-item-name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (item.name is not None)",
+      "category": "negative",
+      "requirement_id": "update_item|negative|not-item-name-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "item.description is not None",
+      "category": "positive",
+      "requirement_id": "update_item|positive|item-description-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "item.description is not None",
+      "category": "negative",
+      "requirement_id": "update_item|negative|item-description-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (item.description is not None)",
+      "category": "positive",
+      "requirement_id": "update_item|positive|not-item-description-is-not-none"
+    },
+    {
+      "symbol": "update_item",
+      "requirement": "not (item.description is not None)",
+      "category": "negative",
+      "requirement_id": "update_item|negative|not-item-description-is-not-none"
+    }
+  ]
+}

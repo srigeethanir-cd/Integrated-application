@@ -1,0 +1,1980 @@
+{
+  "project_summary": "Python project with 7 modules, 12 callables, 5 classes, and 2 API endpoints.",
+  "architecture": "FastAPI application with deterministic Python static analysis.",
+  "modules": [
+    {
+      "name": "database",
+      "file": "database.py",
+      "imports": [
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "main",
+      "file": "main.py",
+      "imports": [
+        "database",
+        "fastapi",
+        "routers.profiles"
+      ]
+    },
+    {
+      "name": "models",
+      "file": "models.py",
+      "imports": [
+        "database",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "routers.profiles",
+      "file": "routers/profiles.py",
+      "imports": [
+        "database",
+        "fastapi",
+        "schemas",
+        "services.profiles",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "schemas",
+      "file": "schemas.py",
+      "imports": [
+        "datetime",
+        "pydantic",
+        "pydantic.v1"
+      ]
+    },
+    {
+      "name": "services.profiles",
+      "file": "services/profiles.py",
+      "imports": [
+        "models",
+        "schemas",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "tests.test_api",
+      "file": "tests/test_api.py",
+      "imports": [
+        "fastapi.testclient",
+        "main"
+      ]
+    }
+  ],
+  "imports": [
+    {
+      "module": "sqlalchemy",
+      "file": "database.py",
+      "names": [
+        "create_engine"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "database.py",
+      "names": [
+        "DeclarativeBase",
+        "sessionmaker"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "main.py",
+      "names": [
+        "Base",
+        "engine"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi",
+      "file": "main.py",
+      "names": [
+        "FastAPI"
+      ],
+      "level": 0
+    },
+    {
+      "module": "routers.profiles",
+      "file": "main.py",
+      "names": [
+        "router"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "models.py",
+      "names": [
+        "Base"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy",
+      "file": "models.py",
+      "names": [
+        "JSON",
+        "String"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "models.py",
+      "names": [
+        "Mapped",
+        "mapped_column"
+      ],
+      "level": 0
+    },
+    {
+      "module": "database",
+      "file": "routers/profiles.py",
+      "names": [
+        "get_db"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi",
+      "file": "routers/profiles.py",
+      "names": [
+        "APIRouter",
+        "Depends"
+      ],
+      "level": 0
+    },
+    {
+      "module": "schemas",
+      "file": "routers/profiles.py",
+      "names": [
+        "ProfileCreate",
+        "ProfileOut"
+      ],
+      "level": 0
+    },
+    {
+      "module": "services.profiles",
+      "file": "routers/profiles.py",
+      "names": [
+        "create_profile",
+        "list_profiles"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "routers/profiles.py",
+      "names": [
+        "Session"
+      ],
+      "level": 0
+    },
+    {
+      "module": "datetime",
+      "file": "schemas.py",
+      "names": [
+        "date"
+      ],
+      "level": 0
+    },
+    {
+      "module": "pydantic",
+      "file": "schemas.py",
+      "names": [
+        "BaseModel",
+        "Field",
+        "computed_field",
+        "field_validator",
+        "model_validator"
+      ],
+      "level": 0
+    },
+    {
+      "module": "pydantic.v1",
+      "file": "schemas.py",
+      "names": [
+        "pydantic_v1"
+      ],
+      "level": 0
+    },
+    {
+      "module": "models",
+      "file": "services/profiles.py",
+      "names": [
+        "Profile"
+      ],
+      "level": 0
+    },
+    {
+      "module": "schemas",
+      "file": "services/profiles.py",
+      "names": [
+        "ProfileCreate"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy",
+      "file": "services/profiles.py",
+      "names": [
+        "select"
+      ],
+      "level": 0
+    },
+    {
+      "module": "sqlalchemy.orm",
+      "file": "services/profiles.py",
+      "names": [
+        "Session"
+      ],
+      "level": 0
+    },
+    {
+      "module": "fastapi.testclient",
+      "file": "tests/test_api.py",
+      "names": [
+        "TestClient"
+      ],
+      "level": 0
+    },
+    {
+      "module": "main",
+      "file": "tests/test_api.py",
+      "names": [
+        "app"
+      ],
+      "level": 0
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_db",
+      "qualified_name": "database.get_db",
+      "file": "database.py",
+      "line": 7,
+      "end_line": 12,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "SessionLocal",
+        "db.close"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "SessionLocal()",
+        "db.close",
+        "yield db"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "create",
+      "qualified_name": "routers.profiles.create",
+      "file": "routers/profiles.py",
+      "line": 8,
+      "end_line": 9,
+      "is_async": false,
+      "parameters": [
+        "payload",
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.post('/', response_model=ProfileOut, status_code=201)"
+      ],
+      "calls": [
+        "services.profiles.create_profile"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "list_all",
+      "qualified_name": "routers.profiles.list_all",
+      "file": "routers/profiles.py",
+      "line": 11,
+      "end_line": 12,
+      "is_async": false,
+      "parameters": [
+        "db"
+      ],
+      "return_type": null,
+      "decorators": [
+        "router.get('/', response_model=list[ProfileOut])"
+      ],
+      "calls": [
+        "services.profiles.list_profiles"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "birth_date_matches_age",
+      "qualified_name": "schemas.ProfileCreate.birth_date_matches_age",
+      "file": "schemas.py",
+      "line": 40,
+      "end_line": 43,
+      "is_async": false,
+      "parameters": [
+        "self"
+      ],
+      "return_type": null,
+      "decorators": [
+        "model_validator(mode='after')"
+      ],
+      "calls": [
+        "ValueError",
+        "datetime.date.today"
+      ],
+      "exceptions": [
+        "ValueError"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "display_name",
+      "qualified_name": "schemas.ProfileCreate.display_name",
+      "file": "schemas.py",
+      "line": 47,
+      "end_line": 48,
+      "is_async": false,
+      "parameters": [
+        "self"
+      ],
+      "return_type": "str",
+      "decorators": [
+        "computed_field",
+        "property"
+      ],
+      "calls": [],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "normalize_email",
+      "qualified_name": "schemas.ProfileCreate.normalize_email",
+      "file": "schemas.py",
+      "line": 20,
+      "end_line": 21,
+      "is_async": false,
+      "parameters": [
+        "cls",
+        "value"
+      ],
+      "return_type": "str",
+      "decorators": [
+        "field_validator('email')",
+        "classmethod"
+      ],
+      "calls": [
+        "value.strip",
+        "value.strip().lower"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "strong_password",
+      "qualified_name": "schemas.ProfileCreate.strong_password",
+      "file": "schemas.py",
+      "line": 25,
+      "end_line": 30,
+      "is_async": false,
+      "parameters": [
+        "cls",
+        "value"
+      ],
+      "return_type": "str",
+      "decorators": [
+        "field_validator('password')",
+        "classmethod"
+      ],
+      "calls": [
+        "ValueError",
+        "any",
+        "character.isdigit",
+        "character.isupper"
+      ],
+      "exceptions": [
+        "ValueError"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "unique_tags",
+      "qualified_name": "schemas.ProfileCreate.unique_tags",
+      "file": "schemas.py",
+      "line": 34,
+      "end_line": 37,
+      "is_async": false,
+      "parameters": [
+        "cls",
+        "value"
+      ],
+      "return_type": "list[str]",
+      "decorators": [
+        "field_validator('tags')",
+        "classmethod"
+      ],
+      "calls": [
+        "ValueError",
+        "len",
+        "set"
+      ],
+      "exceptions": [
+        "ValueError"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "create_profile",
+      "qualified_name": "services.profiles.create_profile",
+      "file": "services/profiles.py",
+      "line": 5,
+      "end_line": 7,
+      "is_async": false,
+      "parameters": [
+        "db",
+        "payload"
+      ],
+      "return_type": "Profile",
+      "decorators": [],
+      "calls": [
+        "db.add",
+        "db.commit",
+        "db.refresh",
+        "models.Profile"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.add",
+        "db.commit",
+        "db.refresh"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "list_profiles",
+      "qualified_name": "services.profiles.list_profiles",
+      "file": "services/profiles.py",
+      "line": 8,
+      "end_line": 9,
+      "is_async": false,
+      "parameters": [
+        "db"
+      ],
+      "return_type": "list[Profile]",
+      "decorators": [],
+      "calls": [
+        "db.scalars",
+        "list",
+        "sqlalchemy.select",
+        "sqlalchemy.select().order_by"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [
+        "db.scalars"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "test_lists_profiles",
+      "qualified_name": "tests.test_api.test_lists_profiles",
+      "file": "tests/test_api.py",
+      "line": 6,
+      "end_line": 7,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "client.get"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "test_rejects_invalid_profile",
+      "qualified_name": "tests.test_api.test_rejects_invalid_profile",
+      "file": "tests/test_api.py",
+      "line": 4,
+      "end_line": 5,
+      "is_async": false,
+      "parameters": [],
+      "return_type": null,
+      "decorators": [],
+      "calls": [
+        "client.post"
+      ],
+      "exceptions": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "classes": [
+    {
+      "name": "Base",
+      "qualified_name": "database.Base",
+      "file": "database.py",
+      "line": 5,
+      "end_line": 6,
+      "fields": [],
+      "bases": [
+        "DeclarativeBase"
+      ],
+      "inheritance": [
+        "DeclarativeBase"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "DeclarativeBase"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "Profile",
+      "qualified_name": "models.Profile",
+      "file": "models.py",
+      "line": 4,
+      "end_line": 10,
+      "fields": [
+        "__tablename__",
+        "id",
+        "username",
+        "email",
+        "age",
+        "tags"
+      ],
+      "bases": [
+        "Base"
+      ],
+      "inheritance": [
+        "Base"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "mapped_column"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "LegacyReferral",
+      "qualified_name": "schemas.LegacyReferral",
+      "file": "schemas.py",
+      "line": 5,
+      "end_line": 6,
+      "fields": [
+        "code"
+      ],
+      "bases": [
+        "pydantic_v1.BaseModel"
+      ],
+      "inheritance": [
+        "pydantic_v1.BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "ProfileCreate",
+      "qualified_name": "schemas.ProfileCreate",
+      "file": "schemas.py",
+      "line": 8,
+      "end_line": 48,
+      "fields": [
+        "username",
+        "email",
+        "password",
+        "age",
+        "score",
+        "referral_code",
+        "tags",
+        "birth_date"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [
+        "normalize_email",
+        "strong_password",
+        "unique_tags",
+        "birth_date_matches_age",
+        "display_name"
+      ],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "ProfileOut",
+      "qualified_name": "schemas.ProfileOut",
+      "file": "schemas.py",
+      "line": 50,
+      "end_line": 55,
+      "fields": [
+        "id",
+        "username",
+        "email",
+        "age",
+        "tags"
+      ],
+      "bases": [
+        "BaseModel"
+      ],
+      "inheritance": [
+        "BaseModel"
+      ],
+      "decorators": [],
+      "methods": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "symbol_table": [
+    {
+      "name": "Base",
+      "qualified_name": "database.Base",
+      "kind": "class",
+      "file": "database.py",
+      "line": 5,
+      "end_line": 6,
+      "parent": null
+    },
+    {
+      "name": "get_db",
+      "qualified_name": "database.get_db",
+      "kind": "function",
+      "file": "database.py",
+      "line": 7,
+      "end_line": 12,
+      "parent": null
+    },
+    {
+      "name": "Profile",
+      "qualified_name": "models.Profile",
+      "kind": "class",
+      "file": "models.py",
+      "line": 4,
+      "end_line": 10,
+      "parent": null
+    },
+    {
+      "name": "create",
+      "qualified_name": "routers.profiles.create",
+      "kind": "function",
+      "file": "routers/profiles.py",
+      "line": 8,
+      "end_line": 9,
+      "parent": null
+    },
+    {
+      "name": "list_all",
+      "qualified_name": "routers.profiles.list_all",
+      "kind": "function",
+      "file": "routers/profiles.py",
+      "line": 11,
+      "end_line": 12,
+      "parent": null
+    },
+    {
+      "name": "LegacyReferral",
+      "qualified_name": "schemas.LegacyReferral",
+      "kind": "class",
+      "file": "schemas.py",
+      "line": 5,
+      "end_line": 6,
+      "parent": null
+    },
+    {
+      "name": "ProfileCreate",
+      "qualified_name": "schemas.ProfileCreate",
+      "kind": "class",
+      "file": "schemas.py",
+      "line": 8,
+      "end_line": 48,
+      "parent": null
+    },
+    {
+      "name": "birth_date_matches_age",
+      "qualified_name": "schemas.ProfileCreate.birth_date_matches_age",
+      "kind": "method",
+      "file": "schemas.py",
+      "line": 40,
+      "end_line": 43,
+      "parent": "schemas.ProfileCreate"
+    },
+    {
+      "name": "display_name",
+      "qualified_name": "schemas.ProfileCreate.display_name",
+      "kind": "method",
+      "file": "schemas.py",
+      "line": 47,
+      "end_line": 48,
+      "parent": "schemas.ProfileCreate"
+    },
+    {
+      "name": "normalize_email",
+      "qualified_name": "schemas.ProfileCreate.normalize_email",
+      "kind": "method",
+      "file": "schemas.py",
+      "line": 20,
+      "end_line": 21,
+      "parent": "schemas.ProfileCreate"
+    },
+    {
+      "name": "strong_password",
+      "qualified_name": "schemas.ProfileCreate.strong_password",
+      "kind": "method",
+      "file": "schemas.py",
+      "line": 25,
+      "end_line": 30,
+      "parent": "schemas.ProfileCreate"
+    },
+    {
+      "name": "unique_tags",
+      "qualified_name": "schemas.ProfileCreate.unique_tags",
+      "kind": "method",
+      "file": "schemas.py",
+      "line": 34,
+      "end_line": 37,
+      "parent": "schemas.ProfileCreate"
+    },
+    {
+      "name": "ProfileOut",
+      "qualified_name": "schemas.ProfileOut",
+      "kind": "class",
+      "file": "schemas.py",
+      "line": 50,
+      "end_line": 55,
+      "parent": null
+    },
+    {
+      "name": "create_profile",
+      "qualified_name": "services.profiles.create_profile",
+      "kind": "function",
+      "file": "services/profiles.py",
+      "line": 5,
+      "end_line": 7,
+      "parent": null
+    },
+    {
+      "name": "list_profiles",
+      "qualified_name": "services.profiles.list_profiles",
+      "kind": "function",
+      "file": "services/profiles.py",
+      "line": 8,
+      "end_line": 9,
+      "parent": null
+    },
+    {
+      "name": "test_lists_profiles",
+      "qualified_name": "tests.test_api.test_lists_profiles",
+      "kind": "function",
+      "file": "tests/test_api.py",
+      "line": 6,
+      "end_line": 7,
+      "parent": null
+    },
+    {
+      "name": "test_rejects_invalid_profile",
+      "qualified_name": "tests.test_api.test_rejects_invalid_profile",
+      "kind": "function",
+      "file": "tests/test_api.py",
+      "line": 4,
+      "end_line": 5,
+      "parent": null
+    }
+  ],
+  "call_graph": [
+    {
+      "caller": "database",
+      "callee": "sqlalchemy.create_engine",
+      "file": "database.py",
+      "line": 3
+    },
+    {
+      "caller": "database",
+      "callee": "sqlalchemy.orm.sessionmaker",
+      "file": "database.py",
+      "line": 4
+    },
+    {
+      "caller": "database.get_db",
+      "callee": "SessionLocal",
+      "file": "database.py",
+      "line": 8
+    },
+    {
+      "caller": "database.get_db",
+      "callee": "db.close",
+      "file": "database.py",
+      "line": 12
+    },
+    {
+      "caller": "main",
+      "callee": "database.Base.metadata.create_all",
+      "file": "main.py",
+      "line": 4
+    },
+    {
+      "caller": "main",
+      "callee": "fastapi.FastAPI",
+      "file": "main.py",
+      "line": 5
+    },
+    {
+      "caller": "main",
+      "callee": "app.include_router",
+      "file": "main.py",
+      "line": 6
+    },
+    {
+      "caller": "routers.profiles",
+      "callee": "fastapi.APIRouter",
+      "file": "routers/profiles.py",
+      "line": 6
+    },
+    {
+      "caller": "routers.profiles.create",
+      "callee": "services.profiles.create_profile",
+      "file": "routers/profiles.py",
+      "line": 9
+    },
+    {
+      "caller": "routers.profiles.list_all",
+      "callee": "services.profiles.list_profiles",
+      "file": "routers/profiles.py",
+      "line": 12
+    },
+    {
+      "caller": "schemas.ProfileCreate.birth_date_matches_age",
+      "callee": "datetime.date.today",
+      "file": "schemas.py",
+      "line": 41
+    },
+    {
+      "caller": "schemas.ProfileCreate.birth_date_matches_age",
+      "callee": "ValueError",
+      "file": "schemas.py",
+      "line": 42
+    },
+    {
+      "caller": "schemas.ProfileCreate.normalize_email",
+      "callee": "value.strip",
+      "file": "schemas.py",
+      "line": 21
+    },
+    {
+      "caller": "schemas.ProfileCreate.normalize_email",
+      "callee": "value.strip().lower",
+      "file": "schemas.py",
+      "line": 21
+    },
+    {
+      "caller": "schemas.ProfileCreate.strong_password",
+      "callee": "any",
+      "file": "schemas.py",
+      "line": 26
+    },
+    {
+      "caller": "schemas.ProfileCreate.strong_password",
+      "callee": "any",
+      "file": "schemas.py",
+      "line": 26
+    },
+    {
+      "caller": "schemas.ProfileCreate.strong_password",
+      "callee": "character.isupper",
+      "file": "schemas.py",
+      "line": 26
+    },
+    {
+      "caller": "schemas.ProfileCreate.strong_password",
+      "callee": "character.isdigit",
+      "file": "schemas.py",
+      "line": 27
+    },
+    {
+      "caller": "schemas.ProfileCreate.strong_password",
+      "callee": "ValueError",
+      "file": "schemas.py",
+      "line": 29
+    },
+    {
+      "caller": "schemas.ProfileCreate.unique_tags",
+      "callee": "len",
+      "file": "schemas.py",
+      "line": 35
+    },
+    {
+      "caller": "schemas.ProfileCreate.unique_tags",
+      "callee": "len",
+      "file": "schemas.py",
+      "line": 35
+    },
+    {
+      "caller": "schemas.ProfileCreate.unique_tags",
+      "callee": "set",
+      "file": "schemas.py",
+      "line": 35
+    },
+    {
+      "caller": "schemas.ProfileCreate.unique_tags",
+      "callee": "ValueError",
+      "file": "schemas.py",
+      "line": 36
+    },
+    {
+      "caller": "services.profiles.create_profile",
+      "callee": "models.Profile",
+      "file": "services/profiles.py",
+      "line": 6
+    },
+    {
+      "caller": "services.profiles.create_profile",
+      "callee": "db.add",
+      "file": "services/profiles.py",
+      "line": 7
+    },
+    {
+      "caller": "services.profiles.create_profile",
+      "callee": "db.commit",
+      "file": "services/profiles.py",
+      "line": 7
+    },
+    {
+      "caller": "services.profiles.create_profile",
+      "callee": "db.refresh",
+      "file": "services/profiles.py",
+      "line": 7
+    },
+    {
+      "caller": "services.profiles.list_profiles",
+      "callee": "db.scalars",
+      "file": "services/profiles.py",
+      "line": 9
+    },
+    {
+      "caller": "services.profiles.list_profiles",
+      "callee": "list",
+      "file": "services/profiles.py",
+      "line": 9
+    },
+    {
+      "caller": "services.profiles.list_profiles",
+      "callee": "sqlalchemy.select",
+      "file": "services/profiles.py",
+      "line": 9
+    },
+    {
+      "caller": "services.profiles.list_profiles",
+      "callee": "sqlalchemy.select().order_by",
+      "file": "services/profiles.py",
+      "line": 9
+    },
+    {
+      "caller": "tests.test_api",
+      "callee": "fastapi.testclient.TestClient",
+      "file": "tests/test_api.py",
+      "line": 3
+    },
+    {
+      "caller": "tests.test_api.test_lists_profiles",
+      "callee": "client.get",
+      "file": "tests/test_api.py",
+      "line": 7
+    },
+    {
+      "caller": "tests.test_api.test_rejects_invalid_profile",
+      "callee": "client.post",
+      "file": "tests/test_api.py",
+      "line": 5
+    }
+  ],
+  "sqlalchemy_session_factories": [
+    {
+      "name": "SessionLocal",
+      "file": "database.py",
+      "factory": "sessionmaker",
+      "bind": "engine"
+    }
+  ],
+  "security_findings": [],
+  "components": [
+    {
+      "name": "database",
+      "responsibility": "Python module",
+      "files": [
+        "database.py"
+      ],
+      "dependencies": [
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "main",
+      "responsibility": "Application entrypoint",
+      "files": [
+        "main.py"
+      ],
+      "dependencies": [
+        "database",
+        "fastapi",
+        "routers.profiles"
+      ]
+    },
+    {
+      "name": "models",
+      "responsibility": "Python module",
+      "files": [
+        "models.py"
+      ],
+      "dependencies": [
+        "database",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "routers.profiles",
+      "responsibility": "Python module",
+      "files": [
+        "routers/profiles.py"
+      ],
+      "dependencies": [
+        "database",
+        "fastapi",
+        "schemas",
+        "services.profiles",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "schemas",
+      "responsibility": "Python module",
+      "files": [
+        "schemas.py"
+      ],
+      "dependencies": [
+        "datetime",
+        "pydantic",
+        "pydantic.v1"
+      ]
+    },
+    {
+      "name": "services.profiles",
+      "responsibility": "Python module",
+      "files": [
+        "services/profiles.py"
+      ],
+      "dependencies": [
+        "models",
+        "schemas",
+        "sqlalchemy",
+        "sqlalchemy.orm"
+      ]
+    },
+    {
+      "name": "tests.test_api",
+      "responsibility": "Python module",
+      "files": [
+        "tests/test_api.py"
+      ],
+      "dependencies": [
+        "fastapi.testclient",
+        "main"
+      ]
+    }
+  ],
+  "entrypoints": [
+    {
+      "path": "main.py",
+      "symbol": null,
+      "purpose": "Application entrypoint"
+    },
+    {
+      "path": "routers/profiles.py",
+      "symbol": "list_all",
+      "purpose": "API endpoint"
+    },
+    {
+      "path": "routers/profiles.py",
+      "symbol": "create",
+      "purpose": "API endpoint"
+    }
+  ],
+  "api_endpoints": [
+    {
+      "method": "GET",
+      "route": "/api/profiles/",
+      "handler": "list_all",
+      "file": "routers/profiles.py",
+      "request_type": null,
+      "response_type": "list[ProfileOut]",
+      "request_model": null,
+      "response_model": "list[ProfileOut]",
+      "dependencies": [
+        "get_db"
+      ],
+      "success_status_codes": [
+        200
+      ],
+      "error_status_codes": [],
+      "exception_status_mappings": [],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    },
+    {
+      "method": "POST",
+      "route": "/api/profiles/",
+      "handler": "create",
+      "file": "routers/profiles.py",
+      "request_type": "ProfileCreate",
+      "response_type": "ProfileOut",
+      "request_model": "ProfileCreate",
+      "response_model": "ProfileOut",
+      "dependencies": [
+        "get_db"
+      ],
+      "success_status_codes": [
+        201
+      ],
+      "error_status_codes": [],
+      "exception_status_mappings": [],
+      "authentication": null,
+      "side_effects": [],
+      "security_findings": []
+    }
+  ],
+  "data_models": [
+    {
+      "name": "Base",
+      "file": "database.py",
+      "fields": [],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "DeclarativeBase"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "Profile",
+      "file": "models.py",
+      "fields": [
+        "__tablename__",
+        "id",
+        "username",
+        "email",
+        "age",
+        "tags"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "foreign_keys": [],
+          "nullable": false,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "username",
+          "type": "String(24)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": true,
+          "unique": true
+        },
+        {
+          "name": "email",
+          "type": "String(200)",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "age",
+          "type": "int",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": null,
+          "index": false,
+          "unique": false
+        },
+        {
+          "name": "tags",
+          "type": "JSON",
+          "primary_key": false,
+          "foreign_keys": [],
+          "nullable": null,
+          "default": "list",
+          "index": false,
+          "unique": false
+        }
+      ],
+      "primary_keys": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [
+        "username"
+      ],
+      "indexes": [
+        "username"
+      ],
+      "unique_constraints": [
+        "username"
+      ],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [
+        "Base",
+        "mapped_column"
+      ],
+      "security_findings": []
+    },
+    {
+      "name": "LegacyReferral",
+      "file": "schemas.py",
+      "fields": [
+        "code"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "ProfileCreate",
+      "file": "schemas.py",
+      "fields": [
+        "username",
+        "email",
+        "password",
+        "age",
+        "score",
+        "referral_code",
+        "tags",
+        "birth_date"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [
+        "normalize_email",
+        "strong_password",
+        "unique_tags",
+        "birth_date_matches_age",
+        "display_name"
+      ],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    },
+    {
+      "name": "ProfileOut",
+      "file": "schemas.py",
+      "fields": [
+        "id",
+        "username",
+        "email",
+        "age",
+        "tags"
+      ],
+      "columns": [],
+      "primary_keys": [],
+      "foreign_keys": [],
+      "relationships": [],
+      "constraints": [],
+      "indexes": [],
+      "unique_constraints": [],
+      "check_constraints": [],
+      "methods": [],
+      "decorators": [],
+      "sqlalchemy_model_usage": [],
+      "security_findings": []
+    }
+  ],
+  "pydantic_schemas": [
+    {
+      "name": "LegacyReferral",
+      "file": "schemas.py",
+      "fields": [
+        {
+          "name": "code",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": "^[A-Z]{3}-[0-9]{4}$",
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    },
+    {
+      "name": "ProfileCreate",
+      "file": "schemas.py",
+      "fields": [
+        {
+          "name": "username",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [
+            "ada_1"
+          ],
+          "min_length": 3,
+          "max_length": 24,
+          "pattern": "^[a-z][a-z0-9_]+$",
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": "Public account name",
+          "title": "Username",
+          "default_factory": null
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": 6,
+          "max_length": 200,
+          "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$",
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "password",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": 12,
+          "max_length": 128,
+          "pattern": "^[A-Za-z0-9!@#$%^&*]+$",
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "age",
+          "type": "int",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": 18,
+          "le": 120,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "score",
+          "type": "float",
+          "required": false,
+          "optional": false,
+          "has_default": true,
+          "default": 0,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": -1,
+          "lt": 1001,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "referral_code",
+          "type": "str | None",
+          "required": false,
+          "optional": true,
+          "has_default": true,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": "^[A-Z]{3}-[0-9]{4}$",
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "tags",
+          "type": "list[str]",
+          "required": false,
+          "optional": true,
+          "has_default": true,
+          "default": null,
+          "examples": [],
+          "min_length": 1,
+          "max_length": 5,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": "list"
+        },
+        {
+          "name": "birth_date",
+          "type": "date",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [
+        {
+          "name": "normalize_email",
+          "fields": [
+            "email"
+          ],
+          "mode": null,
+          "decorator": "field_validator('email')",
+          "is_async": false
+        },
+        {
+          "name": "strong_password",
+          "fields": [
+            "password"
+          ],
+          "mode": null,
+          "decorator": "field_validator('password')",
+          "is_async": false
+        },
+        {
+          "name": "unique_tags",
+          "fields": [
+            "tags"
+          ],
+          "mode": null,
+          "decorator": "field_validator('tags')",
+          "is_async": false
+        },
+        {
+          "name": "birth_date_matches_age",
+          "fields": [],
+          "mode": "after",
+          "decorator": "model_validator(mode='after')",
+          "is_async": false
+        }
+      ],
+      "examples": []
+    },
+    {
+      "name": "ProfileOut",
+      "file": "schemas.py",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "username",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "age",
+          "type": "int",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        },
+        {
+          "name": "tags",
+          "type": "list[str]",
+          "required": true,
+          "optional": false,
+          "has_default": false,
+          "default": null,
+          "examples": [],
+          "min_length": null,
+          "max_length": null,
+          "pattern": null,
+          "regex": null,
+          "gt": null,
+          "lt": null,
+          "ge": null,
+          "le": null,
+          "description": null,
+          "title": null,
+          "default_factory": null
+        }
+      ],
+      "validators": [],
+      "examples": []
+    }
+  ],
+  "business_rules": [
+    {
+      "description": "Condition: not any((character.isupper() for character in value)) or not any((character.isdigit() for character in value))",
+      "files": [
+        "schemas.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: len(value) != len(set(value))",
+      "files": [
+        "schemas.py"
+      ],
+      "symbols": []
+    },
+    {
+      "description": "Condition: date.today().year - self.birth_date.year < self.age",
+      "files": [
+        "schemas.py"
+      ],
+      "symbols": []
+    }
+  ],
+  "execution_flows": [
+    {
+      "name": "GET /api/profiles/",
+      "entrypoint": "list_all",
+      "steps": [
+        "Invoke list_all",
+        "Call services.profiles.list_profiles"
+      ],
+      "components": [],
+      "files": [
+        "routers/profiles.py"
+      ]
+    },
+    {
+      "name": "POST /api/profiles/",
+      "entrypoint": "create",
+      "steps": [
+        "Invoke create",
+        "Call services.profiles.create_profile"
+      ],
+      "components": [],
+      "files": [
+        "routers/profiles.py"
+      ]
+    }
+  ],
+  "external_dependencies": [
+    "database",
+    "datetime",
+    "fastapi",
+    "main",
+    "models",
+    "pydantic",
+    "routers",
+    "schemas",
+    "services",
+    "sqlalchemy"
+  ],
+  "test_targets": [
+    {
+      "symbol": "get_db",
+      "file": "database.py",
+      "behavior": "Execute get_db",
+      "dependencies": [
+        "SessionLocal",
+        "close"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "create",
+      "file": "routers/profiles.py",
+      "behavior": "Execute create",
+      "dependencies": [
+        "create_profile"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "list_all",
+      "file": "routers/profiles.py",
+      "behavior": "Execute list_all",
+      "dependencies": [
+        "list_profiles"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "normalize_email",
+      "file": "schemas.py",
+      "behavior": "Execute normalize_email",
+      "dependencies": [
+        "lower",
+        "strip"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "strong_password",
+      "file": "schemas.py",
+      "behavior": "Execute strong_password",
+      "dependencies": [
+        "ValueError",
+        "any",
+        "isdigit",
+        "isupper"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "not any((character.isupper() for character in value)) or not any((character.isdigit() for character in value))",
+        "not (not any((character.isupper() for character in value)) or not any((character.isdigit() for character in value)))"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "unique_tags",
+      "file": "schemas.py",
+      "behavior": "Execute unique_tags",
+      "dependencies": [
+        "ValueError",
+        "len",
+        "set"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "len(value) != len(set(value))",
+        "not (len(value) != len(set(value)))"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "birth_date_matches_age",
+      "file": "schemas.py",
+      "behavior": "Execute birth_date_matches_age",
+      "dependencies": [
+        "ValueError",
+        "today"
+      ],
+      "edge_cases": [],
+      "branches": [
+        "date.today().year - self.birth_date.year < self.age",
+        "not (date.today().year - self.birth_date.year < self.age)"
+      ],
+      "security_findings": []
+    },
+    {
+      "symbol": "display_name",
+      "file": "schemas.py",
+      "behavior": "Execute display_name",
+      "dependencies": [],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "create_profile",
+      "file": "services/profiles.py",
+      "behavior": "Execute create_profile",
+      "dependencies": [
+        "Profile",
+        "add",
+        "commit",
+        "refresh"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "list_profiles",
+      "file": "services/profiles.py",
+      "behavior": "Execute list_profiles",
+      "dependencies": [
+        "list",
+        "order_by",
+        "scalars",
+        "select"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "test_rejects_invalid_profile",
+      "file": "tests/test_api.py",
+      "behavior": "Execute test_rejects_invalid_profile",
+      "dependencies": [
+        "post"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    },
+    {
+      "symbol": "test_lists_profiles",
+      "file": "tests/test_api.py",
+      "behavior": "Execute test_lists_profiles",
+      "dependencies": [
+        "get"
+      ],
+      "edge_cases": [],
+      "branches": [],
+      "security_findings": []
+    }
+  ],
+  "ambiguities": [],
+  "analyzed_files": [
+    {
+      "path": "database.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "Base",
+        "get_db"
+      ]
+    },
+    {
+      "path": "main.py",
+      "purpose": "Python module",
+      "key_symbols": []
+    },
+    {
+      "path": "models.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "Profile"
+      ]
+    },
+    {
+      "path": "routers/profiles.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "create",
+        "list_all"
+      ]
+    },
+    {
+      "path": "schemas.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "LegacyReferral",
+        "ProfileCreate",
+        "normalize_email",
+        "strong_password",
+        "unique_tags",
+        "birth_date_matches_age",
+        "display_name",
+        "ProfileOut"
+      ]
+    },
+    {
+      "path": "services/profiles.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "create_profile",
+        "list_profiles"
+      ]
+    },
+    {
+      "path": "tests/test_api.py",
+      "purpose": "Python module",
+      "key_symbols": [
+        "test_rejects_invalid_profile",
+        "test_lists_profiles"
+      ]
+    }
+  ]
+}

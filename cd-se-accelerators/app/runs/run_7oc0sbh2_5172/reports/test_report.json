@@ -1,0 +1,830 @@
+{
+  "pipeline_run_id": "run_7oc0sbh2_5172",
+  "project_id": "1be621aea74f42cb98b394bbee0c8023",
+  "framework": "Angular",
+  "generated_at": "2026-08-16T14:00:18Z",
+  "quality_score": {
+    "overall_score": 98,
+    "max_score": 100,
+    "execution_score": 100.0,
+    "coverage_score": 91.42,
+    "coverage_status": "available",
+    "generation_score": 100.0,
+    "traceability_score": 100.0,
+    "breakdown": {
+      "test_execution": "100.0% (weight: 40%)",
+      "coverage": "91.42% (weight: 25%)",
+      "generation_completeness": "100.0% (weight: 15%)",
+      "traceability_completeness": "100.0% (weight: 20%)",
+      "coverage_status": "included"
+    }
+  },
+  "execution_summary": {
+    "total_tests": 78,
+    "passed": 78,
+    "failed": 0,
+    "skipped": 0,
+    "pass_rate": 100.0,
+    "execution_time_ms": 2333.19,
+    "execution_time_seconds": 2.33
+  },
+  "coverage": {
+    "statements": 92.5,
+    "branches": 88.0,
+    "functions": 94.2,
+    "lines": 91.0,
+    "coverage_status": "available"
+  },
+  "test_files": [
+    {
+      "file_name": "AppComponent.spec.ts",
+      "file_path": "C:\\Users\\SriGeethani\\Desktop\\ui_testcase\\cd-se-accelerators\\app\\uploads\\1be621aea74f42cb98b394bbee0c8023\\source\\tests\\angular\\AppComponent.spec.ts",
+      "framework": "Angular",
+      "component": "Default",
+      "total_tests": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "test_case_ids": [
+        "TC-STRAT-AppComponent-REND-CHILDREN-MOUNT-STABILITY",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-EMPTY-RESPONSE-EMPTY-RESPONSE",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-FAILURE-500-NETWORK-FAILURE",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-INVALID-RESPONSE-FAILURE-500",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-FAILURE-500-TIMEOUT",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-EMPTY-RESPONSE-TIMEOUT",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS-INVALID-RESPONSE",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-INVALID-RESPONSE-SUCCESS",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-FAILURE-500-INVALID-RESPONSE",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-EMPTY-RESPONSE-INVALID-RESPONSE",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS-FAILURE-500",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS-EMPTY-RESPONSE",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-FAILURE-500-EMPTY-RESPONSE",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS-NETWORK-FAILURE",
+        "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS-TIMEOUT",
+        "TC-STRAT-AppComponent-API-ASYNC-AuthService-EMPTY-RESPONSE",
+        "TC-STRAT-AppComponent-API-ASYNC-AuthService-FAILURE-500",
+        "TC-STRAT-AppComponent-API-ASYNC-AuthService-INVALID-RESPONSE",
+        "TC-STRAT-AppComponent-API-ASYNC-AuthService-NETWORK-FAILURE",
+        "TC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS",
+        "TC-STRAT-AppComponent-API-ASYNC-AuthService-TIMEOUT",
+        "TC-STRAT-AppComponent-API-FAILURE-AuthService-EMPTY-RESPONSE",
+        "TC-STRAT-AppComponent-API-FAILURE-AuthService-INVALID-RESPONSE",
+        "TC-STRAT-AppComponent-API-FAILURE-AuthService-TIMEOUT",
+        "TC-STRAT-AppComponent-API-SUCCESS-AuthService-EMPTY-RESPONSE",
+        "TC-STRAT-AppComponent-API-SUCCESS-AuthService-FAILURE-500",
+        "TC-STRAT-AppComponent-API-SUCCESS-AuthService-INVALID-RESPONSE",
+        "TC-STRAT-AppComponent-API-SUCCESS-AuthService-NETWORK-FAILURE",
+        "TC-STRAT-AppComponent-API-SUCCESS-AuthService-TIMEOUT"
+      ]
+    },
+    {
+      "file_name": "EmailFieldComponent.spec.ts",
+      "file_path": "C:\\Users\\SriGeethani\\Desktop\\ui_testcase\\cd-se-accelerators\\app\\uploads\\1be621aea74f42cb98b394bbee0c8023\\source\\tests\\angular\\EmailFieldComponent.spec.ts",
+      "framework": "Angular",
+      "component": "Default",
+      "total_tests": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "test_case_ids": [
+        "TC-STRAT-EmailFieldComponent-REND-INIT-MOUNT-STABILITY",
+        "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-EMPTY",
+        "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-NULL",
+        "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-SPECIAL",
+        "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-UNDEFINED",
+        "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-EMPTY",
+        "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-SPECIAL",
+        "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-UNDEFINED",
+        "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-NULL",
+        "TC-EMAILFIELDCOMPONENT-TOUCHED-001"
+      ]
+    },
+    {
+      "file_name": "PasswordFieldComponent.spec.ts",
+      "file_path": "C:\\Users\\SriGeethani\\Desktop\\ui_testcase\\cd-se-accelerators\\app\\uploads\\1be621aea74f42cb98b394bbee0c8023\\source\\tests\\angular\\PasswordFieldComponent.spec.ts",
+      "framework": "Angular",
+      "component": "Default",
+      "total_tests": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "test_case_ids": [
+        "TC-STRAT-PasswordFieldComponent-REND-INIT-MOUNT-STABILITY",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-EMPTY",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-NULL",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-SPECIAL",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-UNDEFINED",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-EMPTY",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-NULL",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-SPECIAL",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-UNDEFINED",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-EMPTY",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-NULL",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-SPECIAL",
+        "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-UNDEFINED",
+        "TC-PASSWORDFIELDCOMPONENT-TOUCHED-001"
+      ]
+    },
+    {
+      "file_name": "AuthLinksComponent.spec.ts",
+      "file_path": "C:\\Users\\SriGeethani\\Desktop\\ui_testcase\\cd-se-accelerators\\app\\uploads\\1be621aea74f42cb98b394bbee0c8023\\source\\tests\\angular\\AuthLinksComponent.spec.ts",
+      "framework": "Angular",
+      "component": "Default",
+      "total_tests": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "test_case_ids": [
+        "TC-STRAT-AuthLinksComponent-REND-INIT-MOUNT-STABILITY",
+        "TC-AUTHLINKSCOMPONENT-SIGNUP-001"
+      ]
+    },
+    {
+      "file_name": "LoginAlertComponent.spec.ts",
+      "file_path": "C:\\Users\\SriGeethani\\Desktop\\ui_testcase\\cd-se-accelerators\\app\\uploads\\1be621aea74f42cb98b394bbee0c8023\\source\\tests\\angular\\LoginAlertComponent.spec.ts",
+      "framework": "Angular",
+      "component": "Default",
+      "total_tests": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "test_case_ids": [
+        "TC-STRAT-LoginAlertComponent-REND-INIT-MOUNT-STABILITY",
+        "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-EMPTY",
+        "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-NULL",
+        "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-SPECIAL",
+        "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-EMPTY",
+        "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-NULL",
+        "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-SPECIAL",
+        "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-UNDEFINED",
+        "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-UNDEFINED"
+      ]
+    },
+    {
+      "file_name": "RememberMeComponent.spec.ts",
+      "file_path": "C:\\Users\\SriGeethani\\Desktop\\ui_testcase\\cd-se-accelerators\\app\\uploads\\1be621aea74f42cb98b394bbee0c8023\\source\\tests\\angular\\RememberMeComponent.spec.ts",
+      "framework": "Angular",
+      "component": "Default",
+      "total_tests": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "test_case_ids": [
+        "TC-STRAT-RememberMeComponent-REND-INIT-MOUNT-STABILITY",
+        "TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-EMPTY",
+        "TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-NULL",
+        "TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-SPECIAL",
+        "TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-UNDEFINED"
+      ]
+    },
+    {
+      "file_name": "BrandHeaderComponent.spec.ts",
+      "file_path": "C:\\Users\\SriGeethani\\Desktop\\ui_testcase\\cd-se-accelerators\\app\\uploads\\1be621aea74f42cb98b394bbee0c8023\\source\\tests\\angular\\BrandHeaderComponent.spec.ts",
+      "framework": "Angular",
+      "component": "Default",
+      "total_tests": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "test_case_ids": [
+        "TC-STRAT-BrandHeaderComponent-REND-INIT-MOUNT-STABILITY",
+        "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-EMPTY",
+        "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-NULL",
+        "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-SPECIAL",
+        "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-UNDEFINED",
+        "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-EMPTY",
+        "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-NULL",
+        "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-SPECIAL",
+        "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-UNDEFINED"
+      ]
+    }
+  ],
+  "passed_tests": [
+    {
+      "test_case_id": "TC-STRAT-AppComponent-REND-CHILDREN-MOUNT-STABILITY",
+      "test_name": "Verify AppComponent renders correctly under AppComponent Initial Render",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-EmailFieldComponent-REND-INIT-MOUNT-STABILITY",
+      "test_name": "Verify valueChange() handles EmailFieldComponent Initial Render in EmailFieldComponent",
+      "component": "EmailFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-EMPTY",
+      "test_name": "Verify valueChange() handles error (empty string) in EmailFieldComponent",
+      "component": "EmailFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-NULL",
+      "test_name": "Verify valueChange() handles error (null) in EmailFieldComponent",
+      "component": "EmailFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-SPECIAL",
+      "test_name": "Verify valueChange() handles error (special characters) in EmailFieldComponent",
+      "component": "EmailFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-UNDEFINED",
+      "test_name": "Verify valueChange() handles error (undefined) in EmailFieldComponent",
+      "component": "EmailFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-EMPTY",
+      "test_name": "Verify valueChange() handles value (empty string) in EmailFieldComponent",
+      "component": "EmailFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-SPECIAL",
+      "test_name": "Verify valueChange() handles value (special characters) in EmailFieldComponent",
+      "component": "EmailFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-UNDEFINED",
+      "test_name": "Verify valueChange() handles value (undefined) in EmailFieldComponent",
+      "component": "EmailFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-INIT-MOUNT-STABILITY",
+      "test_name": "Verify valueChange() handles PasswordFieldComponent Initial Render in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-EMPTY",
+      "test_name": "Verify valueChange() handles error (empty string) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-NULL",
+      "test_name": "Verify valueChange() handles error (null) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-SPECIAL",
+      "test_name": "Verify valueChange() handles error (special characters) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-UNDEFINED",
+      "test_name": "Verify valueChange() handles error (undefined) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-EMPTY",
+      "test_name": "Verify valueChange() handles showStrength (empty string) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-NULL",
+      "test_name": "Verify valueChange() handles showStrength (null) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-SPECIAL",
+      "test_name": "Verify valueChange() handles showStrength (special characters) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-UNDEFINED",
+      "test_name": "Verify valueChange() handles showStrength (undefined) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-EMPTY",
+      "test_name": "Verify valueChange() handles value (empty string) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-NULL",
+      "test_name": "Verify valueChange() handles value (null) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-SPECIAL",
+      "test_name": "Verify valueChange() handles value (special characters) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-UNDEFINED",
+      "test_name": "Verify valueChange() handles value (undefined) in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-AuthLinksComponent-REND-INIT-MOUNT-STABILITY",
+      "test_name": "Verify forgotPassword() handles AuthLinksComponent Initial Render in AuthLinksComponent",
+      "component": "AuthLinksComponent",
+      "target_function": "forgotPassword()",
+      "status": "PASSED",
+      "reason": "The AuthLinksComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginAlertComponent-REND-INIT-MOUNT-STABILITY",
+      "test_name": "Verify dismissed() handles LoginAlertComponent Initial Render in LoginAlertComponent",
+      "component": "LoginAlertComponent",
+      "target_function": "dismissed()",
+      "status": "PASSED",
+      "reason": "The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-EMPTY",
+      "test_name": "Verify dismissed() handles message (empty string) in LoginAlertComponent",
+      "component": "LoginAlertComponent",
+      "target_function": "dismissed()",
+      "status": "PASSED",
+      "reason": "The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-NULL",
+      "test_name": "Verify dismissed() handles message (null) in LoginAlertComponent",
+      "component": "LoginAlertComponent",
+      "target_function": "dismissed()",
+      "status": "PASSED",
+      "reason": "The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-SPECIAL",
+      "test_name": "Verify dismissed() handles message (special characters) in LoginAlertComponent",
+      "component": "LoginAlertComponent",
+      "target_function": "dismissed()",
+      "status": "PASSED",
+      "reason": "The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-EMPTY",
+      "test_name": "Verify dismissed() handles title (empty string) in LoginAlertComponent",
+      "component": "LoginAlertComponent",
+      "target_function": "dismissed()",
+      "status": "PASSED",
+      "reason": "The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-NULL",
+      "test_name": "Verify dismissed() handles title (null) in LoginAlertComponent",
+      "component": "LoginAlertComponent",
+      "target_function": "dismissed()",
+      "status": "PASSED",
+      "reason": "The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-SPECIAL",
+      "test_name": "Verify dismissed() handles title (special characters) in LoginAlertComponent",
+      "component": "LoginAlertComponent",
+      "target_function": "dismissed()",
+      "status": "PASSED",
+      "reason": "The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-UNDEFINED",
+      "test_name": "Verify dismissed() handles title (undefined) in LoginAlertComponent",
+      "component": "LoginAlertComponent",
+      "target_function": "dismissed()",
+      "status": "PASSED",
+      "reason": "The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-RememberMeComponent-REND-INIT-MOUNT-STABILITY",
+      "test_name": "Verify checkedChange() handles RememberMeComponent Initial Render in RememberMeComponent",
+      "component": "RememberMeComponent",
+      "target_function": "checkedChange()",
+      "status": "PASSED",
+      "reason": "The RememberMeComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-EMPTY",
+      "test_name": "Verify checkedChange() handles checked (empty string) in RememberMeComponent",
+      "component": "RememberMeComponent",
+      "target_function": "checkedChange()",
+      "status": "PASSED",
+      "reason": "The RememberMeComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-NULL",
+      "test_name": "Verify checkedChange() handles checked (null) in RememberMeComponent",
+      "component": "RememberMeComponent",
+      "target_function": "checkedChange()",
+      "status": "PASSED",
+      "reason": "The RememberMeComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-SPECIAL",
+      "test_name": "Verify checkedChange() handles checked (special characters) in RememberMeComponent",
+      "component": "RememberMeComponent",
+      "target_function": "checkedChange()",
+      "status": "PASSED",
+      "reason": "The RememberMeComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-UNDEFINED",
+      "test_name": "Verify checkedChange() handles checked (undefined) in RememberMeComponent",
+      "component": "RememberMeComponent",
+      "target_function": "checkedChange()",
+      "status": "PASSED",
+      "reason": "The RememberMeComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-BrandHeaderComponent-REND-INIT-MOUNT-STABILITY",
+      "test_name": "Verify BrandHeaderComponent renders correctly under BrandHeaderComponent Initial Render",
+      "component": "BrandHeaderComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-EMPTY",
+      "test_name": "Verify BrandHeaderComponent renders correctly under brandName (empty string)",
+      "component": "BrandHeaderComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-NULL",
+      "test_name": "Verify BrandHeaderComponent renders correctly under brandName (null)",
+      "component": "BrandHeaderComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-SPECIAL",
+      "test_name": "Verify BrandHeaderComponent renders correctly under brandName (special characters)",
+      "component": "BrandHeaderComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-UNDEFINED",
+      "test_name": "Verify BrandHeaderComponent renders correctly under brandName (undefined)",
+      "component": "BrandHeaderComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-EMPTY",
+      "test_name": "Verify BrandHeaderComponent renders correctly under tagline (empty string)",
+      "component": "BrandHeaderComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-NULL",
+      "test_name": "Verify BrandHeaderComponent renders correctly under tagline (null)",
+      "component": "BrandHeaderComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-SPECIAL",
+      "test_name": "Verify BrandHeaderComponent renders correctly under tagline (special characters)",
+      "component": "BrandHeaderComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-UNDEFINED",
+      "test_name": "Verify BrandHeaderComponent renders correctly under tagline (undefined)",
+      "component": "BrandHeaderComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-NULL",
+      "test_name": "Verify valueChange() handles value (null) in EmailFieldComponent",
+      "component": "EmailFieldComponent",
+      "target_function": "valueChange()",
+      "status": "PASSED",
+      "reason": "The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-UNDEFINED",
+      "test_name": "Verify dismissed() handles message (undefined) in LoginAlertComponent",
+      "component": "LoginAlertComponent",
+      "target_function": "dismissed()",
+      "status": "PASSED",
+      "reason": "The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-EMPTY-RESPONSE-EMPTY-RESPONSE",
+      "test_name": "Verify AppComponent renders correctly under Empty Response",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-FAILURE-500-NETWORK-FAILURE",
+      "test_name": "Verify AppComponent renders correctly under Network failure",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-INVALID-RESPONSE-FAILURE-500",
+      "test_name": "Verify AppComponent renders correctly under API Failure (500)",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-FAILURE-500-TIMEOUT",
+      "test_name": "Verify AppComponent renders correctly under Timeout",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-EMPTY-RESPONSE-TIMEOUT",
+      "test_name": "Verify AppComponent renders correctly under Timeout",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS-INVALID-RESPONSE",
+      "test_name": "Verify AppComponent renders correctly under Invalid Response",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-INVALID-RESPONSE-SUCCESS",
+      "test_name": "Verify AppComponent renders correctly under Success",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-FAILURE-500-INVALID-RESPONSE",
+      "test_name": "Verify AppComponent renders correctly under Invalid Response",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-EMPTY-RESPONSE-INVALID-RESPONSE",
+      "test_name": "Verify AppComponent renders correctly under Invalid Response",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS-FAILURE-500",
+      "test_name": "Verify AppComponent renders correctly under API Failure (500)",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS-EMPTY-RESPONSE",
+      "test_name": "Verify AppComponent renders correctly under Empty Response",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-FAILURE-500-EMPTY-RESPONSE",
+      "test_name": "Verify AppComponent renders correctly under Empty Response",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS-NETWORK-FAILURE",
+      "test_name": "Verify AppComponent renders correctly under Network failure",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS-TIMEOUT",
+      "test_name": "Verify AppComponent renders correctly under Timeout",
+      "component": "AppComponent",
+      "target_function": "render()",
+      "status": "PASSED",
+      "reason": "The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-ASYNC-AuthService-EMPTY-RESPONSE",
+      "test_name": "Verify AuthService() handles Empty Response in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-ASYNC-AuthService-FAILURE-500",
+      "test_name": "Verify AuthService() handles API Failure (500) in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-ASYNC-AuthService-INVALID-RESPONSE",
+      "test_name": "Verify AuthService() handles Invalid Response in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-ASYNC-AuthService-NETWORK-FAILURE",
+      "test_name": "Verify AuthService() handles Network failure in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-ASYNC-AuthService-SUCCESS",
+      "test_name": "Verify AuthService() handles Success in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-ASYNC-AuthService-TIMEOUT",
+      "test_name": "Verify AuthService() handles Timeout in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-FAILURE-AuthService-EMPTY-RESPONSE",
+      "test_name": "Verify AuthService() handles Empty Response in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-FAILURE-AuthService-INVALID-RESPONSE",
+      "test_name": "Verify AuthService() handles Invalid Response in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-FAILURE-AuthService-TIMEOUT",
+      "test_name": "Verify AuthService() handles Timeout in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-SUCCESS-AuthService-EMPTY-RESPONSE",
+      "test_name": "Verify AuthService() handles Empty Response in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-SUCCESS-AuthService-FAILURE-500",
+      "test_name": "Verify AuthService() handles API Failure (500) in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-SUCCESS-AuthService-INVALID-RESPONSE",
+      "test_name": "Verify AuthService() handles Invalid Response in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-SUCCESS-AuthService-NETWORK-FAILURE",
+      "test_name": "Verify AuthService() handles Network failure in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-STRAT-AppComponent-API-SUCCESS-AuthService-TIMEOUT",
+      "test_name": "Verify AuthService() handles Timeout in AppComponent",
+      "component": "AppComponent",
+      "target_function": "AuthService()",
+      "status": "PASSED",
+      "reason": "Async data request in AppComponent handled response state successfully without runtime errors."
+    },
+    {
+      "test_case_id": "TC-AUTHLINKSCOMPONENT-SIGNUP-001",
+      "test_name": "Verify signUp() executes handler logic safely in AuthLinksComponent",
+      "component": "AuthLinksComponent",
+      "target_function": "signUp()",
+      "status": "PASSED",
+      "reason": "Executing signUp() in AuthLinksComponent satisfied all assertion conditions for 'signUp() completes execution without errors.'."
+    },
+    {
+      "test_case_id": "TC-EMAILFIELDCOMPONENT-TOUCHED-001",
+      "test_name": "Verify touched() executes handler logic safely in EmailFieldComponent",
+      "component": "EmailFieldComponent",
+      "target_function": "touched()",
+      "status": "PASSED",
+      "reason": "Executing touched() in EmailFieldComponent satisfied all assertion conditions for 'touched() completes execution without errors.'."
+    },
+    {
+      "test_case_id": "TC-PASSWORDFIELDCOMPONENT-TOUCHED-001",
+      "test_name": "Verify touched() executes handler logic safely in PasswordFieldComponent",
+      "component": "PasswordFieldComponent",
+      "target_function": "touched()",
+      "status": "PASSED",
+      "reason": "Executing touched() in PasswordFieldComponent satisfied all assertion conditions for 'touched() completes execution without errors.'."
+    }
+  ],
+  "failures": [],
+  "markdown_report": "# Test Execution & Quality Report\n\n**Pipeline Run ID:** `run_7oc0sbh2_5172`  \n**Generated At:** `2026-08-16 14:00:18 UTC`  \n**Framework:** Angular  \n**Overall Quality Score:** **98/100**\n\n---\n\n## TEST EXECUTION SUMMARY\n\n- **Total Tests:** 78\n- **Passed:** 78\n- **Failed:** 0\n- **Skipped:** 0\n- **Pass Rate:** 100.0%\n- **Execution Time:** 2.33s\n- **Overall Quality:** 98/100\n\n### Quality Score Breakdown:\n- **Test Execution:** 100.0% (weight: 40%)\n- **Coverage:** 91.42% (weight: 25%)\n- **Test Generation Completeness:** 100.0% (weight: 15%)\n- **Traceability Completeness:** 100.0% (weight: 20%)\n\n---\n\n## COVERAGE\n\n- **Statements:** 92.5%\n- **Branches:** 88.0%\n- **Functions:** 94.2%\n- **Lines:** 91.0%\n\n---\n\n## TEST FILE SUMMARY\n\n- \u2713 **AppComponent.spec.ts** \u2014 0/0 passed\n- \u2713 **EmailFieldComponent.spec.ts** \u2014 0/0 passed\n- \u2713 **PasswordFieldComponent.spec.ts** \u2014 0/0 passed\n- \u2713 **AuthLinksComponent.spec.ts** \u2014 0/0 passed\n- \u2713 **LoginAlertComponent.spec.ts** \u2014 0/0 passed\n- \u2713 **RememberMeComponent.spec.ts** \u2014 0/0 passed\n- \u2713 **BrandHeaderComponent.spec.ts** \u2014 0/0 passed\n\n---\n\n## WHY TESTS PASSED\n\n\u2713 **[TC-STRAT-AppComponent-REND-CHILDREN-MOUNT-STABILITY]** Verify AppComponent renders correctly under AppComponent Initial Render\n  *Reason:* The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-EmailFieldComponent-REND-INIT-MOUNT-STABILITY]** Verify valueChange() handles EmailFieldComponent Initial Render in EmailFieldComponent\n  *Reason:* The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-EMPTY]** Verify valueChange() handles error (empty string) in EmailFieldComponent\n  *Reason:* The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-NULL]** Verify valueChange() handles error (null) in EmailFieldComponent\n  *Reason:* The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-SPECIAL]** Verify valueChange() handles error (special characters) in EmailFieldComponent\n  *Reason:* The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-error-UNDEFINED]** Verify valueChange() handles error (undefined) in EmailFieldComponent\n  *Reason:* The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-EMPTY]** Verify valueChange() handles value (empty string) in EmailFieldComponent\n  *Reason:* The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-SPECIAL]** Verify valueChange() handles value (special characters) in EmailFieldComponent\n  *Reason:* The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-UNDEFINED]** Verify valueChange() handles value (undefined) in EmailFieldComponent\n  *Reason:* The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-INIT-MOUNT-STABILITY]** Verify valueChange() handles PasswordFieldComponent Initial Render in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-EMPTY]** Verify valueChange() handles error (empty string) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-NULL]** Verify valueChange() handles error (null) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-SPECIAL]** Verify valueChange() handles error (special characters) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-error-UNDEFINED]** Verify valueChange() handles error (undefined) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-EMPTY]** Verify valueChange() handles showStrength (empty string) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-NULL]** Verify valueChange() handles showStrength (null) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-SPECIAL]** Verify valueChange() handles showStrength (special characters) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-showStrength-UNDEFINED]** Verify valueChange() handles showStrength (undefined) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-EMPTY]** Verify valueChange() handles value (empty string) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-NULL]** Verify valueChange() handles value (null) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-SPECIAL]** Verify valueChange() handles value (special characters) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-PasswordFieldComponent-REND-PROPS-PROP-value-UNDEFINED]** Verify valueChange() handles value (undefined) in PasswordFieldComponent\n  *Reason:* The PasswordFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-AuthLinksComponent-REND-INIT-MOUNT-STABILITY]** Verify forgotPassword() handles AuthLinksComponent Initial Render in AuthLinksComponent\n  *Reason:* The AuthLinksComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginAlertComponent-REND-INIT-MOUNT-STABILITY]** Verify dismissed() handles LoginAlertComponent Initial Render in LoginAlertComponent\n  *Reason:* The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-EMPTY]** Verify dismissed() handles message (empty string) in LoginAlertComponent\n  *Reason:* The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-NULL]** Verify dismissed() handles message (null) in LoginAlertComponent\n  *Reason:* The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-SPECIAL]** Verify dismissed() handles message (special characters) in LoginAlertComponent\n  *Reason:* The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-EMPTY]** Verify dismissed() handles title (empty string) in LoginAlertComponent\n  *Reason:* The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-NULL]** Verify dismissed() handles title (null) in LoginAlertComponent\n  *Reason:* The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-SPECIAL]** Verify dismissed() handles title (special characters) in LoginAlertComponent\n  *Reason:* The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-title-UNDEFINED]** Verify dismissed() handles title (undefined) in LoginAlertComponent\n  *Reason:* The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-RememberMeComponent-REND-INIT-MOUNT-STABILITY]** Verify checkedChange() handles RememberMeComponent Initial Render in RememberMeComponent\n  *Reason:* The RememberMeComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-EMPTY]** Verify checkedChange() handles checked (empty string) in RememberMeComponent\n  *Reason:* The RememberMeComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-NULL]** Verify checkedChange() handles checked (null) in RememberMeComponent\n  *Reason:* The RememberMeComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-SPECIAL]** Verify checkedChange() handles checked (special characters) in RememberMeComponent\n  *Reason:* The RememberMeComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-RememberMeComponent-REND-PROPS-PROP-checked-UNDEFINED]** Verify checkedChange() handles checked (undefined) in RememberMeComponent\n  *Reason:* The RememberMeComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-BrandHeaderComponent-REND-INIT-MOUNT-STABILITY]** Verify BrandHeaderComponent renders correctly under BrandHeaderComponent Initial Render\n  *Reason:* The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-EMPTY]** Verify BrandHeaderComponent renders correctly under brandName (empty string)\n  *Reason:* The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-NULL]** Verify BrandHeaderComponent renders correctly under brandName (null)\n  *Reason:* The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-SPECIAL]** Verify BrandHeaderComponent renders correctly under brandName (special characters)\n  *Reason:* The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-brandName-UNDEFINED]** Verify BrandHeaderComponent renders correctly under brandName (undefined)\n  *Reason:* The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-EMPTY]** Verify BrandHeaderComponent renders correctly under tagline (empty string)\n  *Reason:* The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-NULL]** Verify BrandHeaderComponent renders correctly under tagline (null)\n  *Reason:* The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-SPECIAL]** Verify BrandHeaderComponent renders correctly under tagline (special characters)\n  *Reason:* The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-BrandHeaderComponent-REND-PROPS-PROP-tagline-UNDEFINED]** Verify BrandHeaderComponent renders correctly under tagline (undefined)\n  *Reason:* The BrandHeaderComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-EmailFieldComponent-REND-PROPS-PROP-value-NULL]** Verify valueChange() handles value (null) in EmailFieldComponent\n  *Reason:* The EmailFieldComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-STRAT-LoginAlertComponent-REND-PROPS-PROP-message-UNDEFINED]** Verify dismissed() handles message (undefined) in LoginAlertComponent\n  *Reason:* The LoginAlertComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-EMPTY-RESPONSE-EMPTY-RESPONSE]** Verify AppComponent renders correctly under Empty Response\n  *Reason:* The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-FAILURE-500-NETWORK-FAILURE]** Verify AppComponent renders correctly under Network failure\n  *Reason:* The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n\n\u2713 **[TC-EC-STRAT-AppComponent-API-ASYNC-AuthService-INVALID-RESPONSE-FAILURE-500]** Verify AppComponent renders correctly under API Failure (500)\n  *Reason:* The AppComponent rendered successfully and expected elements/fields were properly mounted in the DOM.\n"
+}

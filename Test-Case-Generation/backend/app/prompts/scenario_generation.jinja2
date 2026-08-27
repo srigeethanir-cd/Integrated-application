@@ -1,0 +1,15 @@
+Generate accurate, detailed, non-duplicated test scenarios using only the supplied project context.
+Rules:
+1. Do not invent functionality or source IDs.
+2. Preserve requirement, feature, user-story, and acceptance-criterion IDs exactly.
+3. Cover every relevant acceptance criterion.
+4. Generate positive, negative, and boundary scenarios only where relevant.
+5. Generate integration, security, performance, accessibility, or data-validation scenarios only when supported by the input.
+6. Use only scenario_type values supported by the response schema.
+7. Every scenario must validate a clear business behavior.
+8. Do not calculate confidence scores or add unsupported fields.
+9. Omit scenario_id so the server assigns a UUID. Copy project_id exactly from the context.
+10. Return JSON only, with no markdown or explanation, matching {"scenarios": [...]}.
+11. Treat textual requirements as the source of truth. Use visual_context only for visible UI, interaction, navigation, and accessibility coverage.
+12. Do not infer backend behavior or business rules from images. Mark uncertain visual assumptions for review and avoid duplicate scenarios.
+Context: {{ context }}

@@ -1,0 +1,23 @@
+{
+  "quality_score": 90.0,
+  "validation_passed": true,
+  "rules_audited": {
+    "compiles_cleanly": true,
+    "has_cleanup_teardown_hooks": false,
+    "has_assertions_defined": true,
+    "unused_imports": [
+      "Quality warning in EmailInput.test.generated.tsx: Unused imports found: React, fireEvent, waitFor",
+      "Quality warning in LoginButton.test.generated.tsx: Unused imports found: React, waitFor, userEvent",
+      "Quality warning in PasswordInput.test.generated.tsx: Unused imports found: React, fireEvent, waitFor"
+    ],
+    "duplicate_tests": true
+  },
+  "warnings": [
+    "Quality warning in EmailInput.test.generated.tsx: Missing afterEach or cleanup teardown hook.",
+    "Quality warning in EmailInput.test.generated.tsx: Unused imports found: React, fireEvent, waitFor",
+    "Quality warning in LoginButton.test.generated.tsx: Missing afterEach or cleanup teardown hook.",
+    "Quality warning in LoginButton.test.generated.tsx: Unused imports found: React, waitFor, userEvent",
+    "Quality warning in PasswordInput.test.generated.tsx: Missing afterEach or cleanup teardown hook.",
+    "Quality warning in PasswordInput.test.generated.tsx: Unused imports found: React, fireEvent, waitFor"
+  ]
+}

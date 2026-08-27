@@ -1,0 +1,9 @@
+rules:
+  - id: audit.python.eval
+    message: Avoid dynamic eval
+    severity: ERROR
+    languages: [python]
+    metadata:
+      cwe: CWE-95
+      owasp: A03:2021
+    pattern: eval(...)
