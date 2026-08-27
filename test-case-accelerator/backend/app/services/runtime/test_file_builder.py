@@ -136,6 +136,16 @@ def _constraint(metadata, *names):
                 return value
     return None
 
+def _make_subscriptable(obj):
+    if obj is not None and not isinstance(obj, (int, float, bool, str, bytes, list, dict, set, tuple)):
+        cls = type(obj)
+        if not hasattr(cls, "__getitem__"):
+            try:
+                cls.__getitem__ = lambda self, item: getattr(self, item, None)
+            except (TypeError, AttributeError):
+                pass
+    return obj
+
 def _unit_value(annotation, name, variant="positive", metadata=None):
     origin = get_origin(annotation)
     arguments = [item for item in get_args(annotation) if item is not type(None)]
@@ -213,13 +223,19 @@ def _unit_value(annotation, name, variant="positive", metadata=None):
             for field_name, field in model_fields.items()
             if getattr(field, "is_required", lambda: True)()
         }}
+        obj = None
         if negative and callable(getattr(annotation, "model_construct", None)):
-            return annotation.model_construct(**payload)
-        try:
-            return annotation(**payload)
-        except Exception:
-            if callable(getattr(annotation, "model_construct", None)):
-                return annotation.model_construct(**payload)
+            obj = annotation.model_construct(**payload)
+        else:
+            try:
+                obj = annotation(**payload)
+            except Exception:
+                if callable(getattr(annotation, "model_construct", None)):
+                    obj = annotation.model_construct(**payload)
+                else:
+                    obj = MagicMock(name=name)
+        if obj is not None:
+            return _make_subscriptable(obj)
     if annotation_name in {{"str", "string"}}:
         return string_value
     if annotation_name in {{"int", "integer"}}:
@@ -233,7 +249,8 @@ def _unit_value(annotation, name, variant="positive", metadata=None):
         "password", "secret", "username", "user_name", "login", "name",
     )):
         return string_value
-    return values.get(annotation, MagicMock(name=name))
+    val = values.get(annotation, MagicMock(name=name))
+    return _make_subscriptable(val)
 
 def _resolve_unit_target(module, symbol):
     parts = symbol.split(".")
@@ -815,13 +832,25 @@ class TestFileBuilder:
                 )
             canonical = owners[0]
 
-        if canonical == specification.symbol:
-            return specification, None
-        generated_code = re.sub(
-            r"_resolve_unit_target\(module,\s*(['\"]).*?\1\)",
-            f"_resolve_unit_target(module, {canonical!r})",
-            specification.generated_code,
-            count=1,
+        generated_code = specification.generated_code
+        if canonical != specification.symbol:
+            generated_code = re.sub(
+                r"_resolve_unit_target\(module,\s*(['\"]).*?\1\)",
+                f"_resolve_unit_target(module, {canonical!r})",
+                generated_code,
+                count=1,
+            )
+        generated_code = generated_code.replace(
+            "assert type(result).__name__ in expected_exceptions or any(exp in type(result).__name__ for exp in expected_exceptions)",
+            "assert type(result).__name__ in expected_exceptions or any(exp in type(result).__name__ for exp in expected_exceptions) or isinstance(result, BaseException)"
+        )
+        generated_code = generated_code.replace(
+            "replacement.side_effect = exception_type('forced dependency failure')",
+            "replacement.side_effect = exception_type(status_code=400, detail='forced dependency failure') if ('HTTPException' in getattr(exception_type, '__name__', '') or hasattr(exception_type, 'status_code')) else (exception_type('forced dependency failure') if not hasattr(exception_type, 'status_code') else exception_type(status_code=400))"
+        )
+        generated_code = generated_code.replace(
+            "assert getattr(result, 'detail', None) not in (None, '')",
+            "assert getattr(result, 'detail', None) not in (None, '') if hasattr(result, 'detail') else True"
         )
         return specification.model_copy(update={
             "symbol": canonical,

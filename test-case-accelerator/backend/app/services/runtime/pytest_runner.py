@@ -23,6 +23,14 @@ class PytestRunResult:
     coverage_percent: float | None = None
 
 
+def _has_pytest_cov() -> bool:
+    try:
+        import pytest_cov  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
 class PytestRunner:
     def run(
         self, test_file: Path, *, timeout_seconds: int,
@@ -30,10 +38,11 @@ class PytestRunner:
         dependency_path: Path | None = None,
     ) -> PytestRunResult:
         junit_path = test_file.parent / "runtime-results.xml"
+        cov_args = ["--cov", "--cov-report=json:coverage.json"] if _has_pytest_cov() else []
         command = [
             sys.executable, "-m", "pytest", str(test_file.name), "-q", "-s",
             f"--junitxml={junit_path}",
-            "--cov", "--cov-report=json:coverage.json",
+            *cov_args,
         ]
         environment = {
             key: value for key, value in os.environ.items()
@@ -64,6 +73,23 @@ class PytestRunner:
                 timeout=timeout_seconds,
                 check=False,
             )
+            # Automatic fallback if --cov fails due to missing plugin
+            if completed.returncode != 0 and "--cov" in (completed.stderr or ""):
+                logger.warning("pytest-cov plugin missing; retrying pytest without --cov arguments")
+                command_no_cov = [
+                    sys.executable, "-m", "pytest", str(test_file.name), "-q", "-s",
+                    f"--junitxml={junit_path}",
+                ]
+                completed = subprocess.run(
+                    command_no_cov,
+                    cwd=test_file.parent,
+                    env=environment,
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout_seconds,
+                    check=False,
+                )
+
             for line in (completed.stdout or "").splitlines():
                 if line.startswith("TESTFORGE_IMPORT_DIAGNOSTIC"):
                     logger.info("%s", line)
