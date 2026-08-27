@@ -1,0 +1,14 @@
+.env
+*.env
+.env.local
+**/__pycache__/
+**/*.py[cod]
+**/node_modules/
+**/.pytest_cache/
+**/generated_tests/
+**/temp/
+**/*.db
+**/*.sqlite3
+cd-se-accelerators/scratch/test_workspace/
+cd-se-accelerators/app/uploads/
+cd-se-accelerators/scratch/*.zip

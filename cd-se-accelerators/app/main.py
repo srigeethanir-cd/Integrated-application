@@ -92,18 +92,13 @@ app.include_router(project_router)
 
 @app.on_event("startup")
 def on_startup():
-    """Initialize database tables on application startup and seed initial mock projects."""
+    """Initialize database tables and pre-warm Redis demo cache on startup."""
     init_db()
     try:
-        from app.db.seed import seed_initial_mock_projects
-        from app.db.database import SessionLocal
-        db = SessionLocal()
-        try:
-            seed_initial_mock_projects(db)
-        finally:
-            db.close()
+        from app.services.cache_service import redis_pipeline_cache
+        redis_pipeline_cache.seed_mock_projects_to_redis()
     except Exception as exc:
-        logger.error("Error during startup database seeding: %s", exc)
+        logger.warning("Error initializing Redis demo project cache: %s", exc)
 
 
 @app.get("/", tags=["Health"])

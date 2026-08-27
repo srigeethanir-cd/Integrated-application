@@ -7,6 +7,8 @@ import ViewContainer from './components/ViewContainer';
 import NewProjectModal from './components/NewProjectModal';
 import {
   Plus,
+  Search,
+  Bell,
   Server,
   Zap,
   LayoutDashboard,
@@ -498,15 +500,16 @@ export default function App() {
   ];
 
   return (
-    <div className={`h-screen max-h-screen overflow-hidden flex bg-[#F7F9FC] dark:bg-[#11142D] text-[#111827] dark:text-slate-100 transition-colors duration-200 ${darkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen flex bg-[#F7F9FC] dark:bg-[#11142D] text-[#111827] dark:text-slate-100 transition-colors duration-200 ${darkMode ? 'dark' : ''}`}>
       {/* Universal StoryForge AI Sidebar */}
       <Sidebar />
 
       {/* Main Content Area */}
-      <div className="flex-1 h-screen overflow-y-auto flex flex-col min-w-0">
+      <div className="flex-1 min-h-screen flex flex-col min-w-0">
         {/* Top Header Bar Standard */}
         <header className="sticky top-0 z-20 flex items-center justify-between px-8 py-4 bg-white dark:bg-[#1B1E3A] border-b border-[#E5E7EB] dark:border-[#2D3748] shrink-0 shadow-xs">
           <div className="flex-1 max-w-md relative">
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A0AEC0]" />
             <input
               type="text"
               placeholder="Search projects, test cases..."
@@ -515,6 +518,12 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Notification Bell with Badge */}
+            <button className="p-2 text-[#6B7280] dark:text-[#A0AEC0] hover:text-[#111827] dark:hover:text-white hover:bg-[#F3F4F6] dark:hover:bg-white/10 rounded-full transition-colors relative cursor-pointer">
+              <Bell className="w-4.5 h-4.5" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF602B] rounded-full" />
+            </button>
+
             {/* Backend Live Indicator Badge */}
             <span
               className={`text-[10px] font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5 border ${
@@ -632,9 +641,9 @@ export default function App() {
 
         {/* Dashboard View */}
         {activeTab === 'dashboard' ? (
-          <div className="flex-1 flex flex-col gap-3 min-h-0 overflow-hidden justify-between">
+          <div className="flex flex-col gap-6">
             {/* Top Card: Pipeline Progress */}
-            <div className="shrink-0">
+            <div>
               <PipelineProgressCard
                 currentStageIndex={currentStageIndex}
                 progressPercent={progressPercent}
@@ -648,7 +657,7 @@ export default function App() {
 
             {/* Dynamic Framework Detection Result Card — visible ONLY when Stage 2 (Framework Detection) is in progress */}
             {currentStageIndex === 1 && (isExecuting || pipelineStatus === 'running') && (
-              <div className="shrink-0">
+              <div>
                 <FrameworkDetectionCard
                   framework={frameworkDetectionResult?.framework || detectedFramework || 'React'}
                   version={frameworkDetectionResult?.version || frameworkVersion}
@@ -659,7 +668,7 @@ export default function App() {
             )}
 
             {/* Bottom Content Section: Dynamic Stage Content (Requirements 3, 4, 5, 7, 8) */}
-            <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+            <div className="flex flex-col">
               <DynamicStageContent
                 pipelineStatus={pipelineStatus}
                 currentStageIndex={currentStageIndex}

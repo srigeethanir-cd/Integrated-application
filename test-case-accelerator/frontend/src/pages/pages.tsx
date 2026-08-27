@@ -254,41 +254,7 @@ export function Dashboard() {
   }
 
   return (
-    <div style={{ maxWidth: '1280px', width: '100%', margin: '0 auto', padding: '24px 32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* Welcome Banner & Action Button */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
-        <div>
-          <h1 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--text, #111827)', letterSpacing: '-0.025em', margin: 0 }}>
-            Good morning, Sarah
-          </h1>
-          <p style={{ fontSize: '13px', color: 'var(--muted, #6B7280)', marginTop: '4px', margin: 0 }}>
-            Welcome back to your workspace. Let&apos;s forge some amazing unit tests today.
-          </p>
-        </div>
-
-        <button
-          onClick={() => state.openUpload('zip')}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '10px 24px',
-            background: 'linear-gradient(to right, #FF602B, #4318FF)',
-            color: '#ffffff',
-            fontSize: '12px',
-            fontWeight: 800,
-            borderRadius: '9999px',
-            border: 'none',
-            boxShadow: '0 4px 16px rgba(255, 96, 43, 0.35)',
-            cursor: 'pointer',
-            transition: 'opacity 0.2s'
-          }}
-        >
-          <Sparkles size={15} />
-          New Project
-        </button>
-      </div>
-
+    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '20px' }}>
       {/* 4 Metric Cards in User Story Grid Standard */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
         {/* Card 1: Repositories Analyzed */}

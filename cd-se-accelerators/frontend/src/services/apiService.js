@@ -27,58 +27,40 @@ export async function uploadProjectZip(file) {
   const formData = new FormData();
   formData.append('file', file);
 
-  try {
-    const res = await fetch(`${API_BASE_URL}/source/upload`, {
-      method: 'POST',
-      body: formData,
-    });
+  const res = await fetch(`${API_BASE_URL}/source/upload`, {
+    method: 'POST',
+    body: formData,
+  });
 
-    if (!res.ok) {
-      const errData = await res.json().catch(() => ({}));
-      throw new Error(errData.detail || `Upload failed with status ${res.status}`);
-    }
-
-    return await res.json();
-  } catch (err) {
-    console.warn('API Service: Backend ZIP upload fallback triggered:', err.message);
-    return {
-      project_id: 'demo-project-' + Date.now(),
-      project_path: 'scratch/test_workspace/react_large',
-      message: 'Project ZIP ingested successfully'
-    };
+  if (!res.ok) {
+    const errData = await res.json().catch(() => ({}));
+    throw new Error(errData.detail || `Upload failed with status ${res.status}`);
   }
+
+  return await res.json();
 }
 
 /**
  * Detect frontend framework from project path
  * POST /framework/detect
  */
-export async function detectFrontendFramework(projectPath = 'scratch/test_workspace/react_large') {
-  try {
-    const res = await fetch(`${API_BASE_URL}/framework/detect`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        project_path: projectPath,
-      }),
-    });
+export async function detectFrontendFramework(projectPath) {
+  const res = await fetch(`${API_BASE_URL}/framework/detect`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      project_path: projectPath,
+    }),
+  });
 
-    if (!res.ok) {
-      const errData = await res.json().catch(() => ({}));
-      throw new Error(errData.detail || `Framework detection failed with status ${res.status}`);
-    }
-
-    return await res.json();
-  } catch (err) {
-    console.warn('API Service: /framework/detect endpoint call fallback:', err.message);
-    return {
-      framework: 'React',
-      confidence: 100,
-      reason: "Found 'react' and 'react-dom' in package.json dependencies."
-    };
+  if (!res.ok) {
+    const errData = await res.json().catch(() => ({}));
+    throw new Error(errData.detail || `Framework detection failed with status ${res.status}`);
   }
+
+  return await res.json();
 }
 
 /**

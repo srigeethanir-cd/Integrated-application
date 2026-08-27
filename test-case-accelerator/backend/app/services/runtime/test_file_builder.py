@@ -154,10 +154,12 @@ def _unit_value(annotation, name, variant="positive", metadata=None):
         string_value = (
             "not-a-url" if negative else "https" + "://example.com/resource"
         )
-    elif any(token in lowered for token in ("encoded", "hash", "digest")):
-        string_value = "invalid" if negative else "00:" + "00" * 32
+    elif any(token in lowered for token in ("token", "jwt")):
+        string_value = "invalid-token" if negative else "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0X3VzZXIiLCJleHAiOjE5OTk5OTk5OTl9.signature"
+    elif any(token in lowered for token in ("encoded", "hash", "digest", "hashed")):
+        string_value = "invalid-hash" if negative else "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW"
     elif any(token in lowered for token in ("password", "secret")):
-        string_value = "" if negative else "ValidPass123!"
+        string_value = "" if negative else "secret"
     elif any(token in lowered for token in ("username", "user_name", "login")):
         string_value = "" if negative else "test_user"
     elif "name" in lowered:

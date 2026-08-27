@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 import {
+  Bell,
   Folder,
   FileText,
   BookOpen,
@@ -338,6 +339,12 @@ export function FeatureShell({ children }: { children: ReactNode }) {
               className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#FF602B] to-[#4318FF] px-4 py-2 text-xs font-bold text-white shadow-md shadow-[#FF602B]/25 hover:opacity-95 transition cursor-pointer"
             >
               <Plus className="h-3.5 w-3.5" /> New Project
+            </button>
+
+            {/* Notification Bell with Badge */}
+            <button className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-full transition-colors relative cursor-pointer">
+              <Bell className="h-4 w-4" />
+              <span className="absolute top-1.5 right-1.5 h-2 w-2 bg-[#FF602B] rounded-full" />
             </button>
 
             <ThemeToggle />

@@ -100,6 +100,53 @@ export function GenerateWorkspace({ job, project, dependency, understanding, sec
       {generation && <section className="console-tests"><header><h2>Generated Tests</h2><small>{tests.length} tests</small></header><TestExplorer tests={tests} verification={verification ?? null} runtime={runtime} coverage={coverage} generationStatus={generation.generation_status} generationTimestamp={[...activities].reverse().find((event) => /generated|generation complete/i.test(`${event.label} ${event.detail}`))?.at ?? null} projectName={job.projectName} projectId={project?.id} onOpenRuntime={onRuntime} /></section>}
     </main>
 
-    <footer className="console-actions">{generation && <Button variant="secondary" onClick={onExport}><Download size={15} /> Export Tests</Button>}{job.status === 'paused' ? <Button onClick={onResume}><Play size={15} /> Continue</Button> : generation && verification ? <Button onClick={onRuntime}><Play size={15} /> Run Runtime Validation</Button> : null}</footer>
+    <footer className="console-actions">
+      {generation && (
+        <Button variant="secondary" onClick={onExport} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '9999px', padding: '10px 22px', fontWeight: 700, fontSize: '12px' }}>
+          <Download size={15} /> Export Tests
+        </Button>
+      )}
+      {job.status === 'paused' ? (
+        <Button
+          onClick={onResume}
+          style={{
+            background: 'linear-gradient(to right, #FF602B, #4318FF)',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: '9999px',
+            padding: '10px 24px',
+            fontWeight: 800,
+            fontSize: '12px',
+            boxShadow: '0 4px 16px rgba(255, 96, 43, 0.35)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            cursor: 'pointer'
+          }}
+        >
+          <Play size={15} /> Continue
+        </Button>
+      ) : generation && verification ? (
+        <Button
+          onClick={onRuntime}
+          style={{
+            background: 'linear-gradient(to right, #FF602B, #4318FF)',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: '9999px',
+            padding: '10px 24px',
+            fontWeight: 800,
+            fontSize: '12px',
+            boxShadow: '0 4px 16px rgba(255, 96, 43, 0.35)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            cursor: 'pointer'
+          }}
+        >
+          <Play size={15} /> Run Runtime Validation
+        </Button>
+      ) : null}
+    </footer>
   </section>
 }

@@ -54,7 +54,11 @@ class LLMTestWriter:
         for idx, tc in enumerate(test_cases, 1):
             test_specs_str += f"\nTest Case {idx}: {tc.title}\n"
             test_specs_str += f"  Objective: {tc.objective}\n"
-            test_specs_str += f"  Steps: {', '.join(tc.steps)}\n"
+            raw_steps = []
+            for s in (tc.steps or []):
+                raw_steps.append(s.action if hasattr(s, "action") else str(s))
+            steps_joined = ", ".join(raw_steps)
+            test_specs_str += f"  Steps: {steps_joined}\n"
             test_specs_str += f"  Expected Result: {tc.expected_result}\n"
 
         source_code_snippet = component_source or f"// Component source for {component_name}\nexport default function {component_name}(props) {{ return <div>{component_name}</div>; }}"

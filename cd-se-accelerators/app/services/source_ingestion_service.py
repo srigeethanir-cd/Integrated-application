@@ -149,10 +149,13 @@ class SourceIngestionService:
             )
             zf.close()
 
-            # Save project_meta.json with original uploaded filename
+            # Save project_meta.json with original uploaded filename and hash
             try:
+                from app.services.cache_service import compute_project_content_hash, redis_pipeline_cache
+                zip_hash = compute_project_content_hash(file_bytes)
+                redis_pipeline_cache.link_project_to_hash(project_id, zip_hash)
                 with open(source_dir / "project_meta.json", "w", encoding="utf-8") as f:
-                    json.dump({"original_filename": filename}, f, indent=2)
+                    json.dump({"original_filename": filename, "zip_hash": zip_hash}, f, indent=2)
             except Exception as exc:
                 logger.warning("Could not write project_meta.json: %s", exc)
 

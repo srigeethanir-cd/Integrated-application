@@ -17,23 +17,26 @@ from typing import Any, Dict, List, Optional
 logger = logging.getLogger(__name__)
 
 # Default Groq Models
-PRIMARY_MODEL = "llama-3.3-70b-versatile"
-FALLBACK_MODEL = "llama-3.1-8b-instant"
+PRIMARY_MODEL = os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b")
+FALLBACK_MODEL = os.getenv("GROQ_FALLBACK_MODEL", "qwen/qwen3.6-27b")
 GROQ_COMPLETIONS_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 
 def get_groq_api_key() -> Optional[str]:
-    """Retrieve Groq API key from environment variables or app/.env file."""
-    # 1. Environment variable check
-    key = os.getenv("GROQ_API_KEY") or os.getenv("groq_api_key")
-    if key and key.strip():
-        return key.strip()
+    """Retrieve Groq API key from environment variables or .env file."""
+    # 1. Check OS environment case-insensitively
+    for k, v in os.environ.items():
+        if k.lower() == "groq_api_key" and v and v.strip() and not v.startswith("your_groq"):
+            return v.strip().strip('"').strip("'")
 
-    # 2. Check app/.env file
+    # 2. Check various .env paths
     env_paths = [
+        os.path.join(os.path.dirname(__file__), "..", "..", ".env"),
         os.path.join(os.path.dirname(__file__), "..", ".env"),
-        os.path.join(os.getcwd(), "app", ".env"),
         os.path.join(os.getcwd(), ".env"),
+        os.path.join(os.getcwd(), "app", ".env"),
+        "/workspace/.env",
+        "/workspace/app/.env",
     ]
 
     for ep in env_paths:
@@ -42,10 +45,14 @@ def get_groq_api_key() -> Optional[str]:
                 with open(ep, "r", encoding="utf-8") as f:
                     for line in f:
                         line = line.strip()
-                        if line.startswith("groq_api_key=") or line.startswith("GROQ_API_KEY="):
-                            k = line.split("=", 1)[1].strip().strip('"').strip("'")
-                            if k:
-                                return k
+                        if line.startswith("#") or not line:
+                            continue
+                        if "=" in line:
+                            var_name, var_val = line.split("=", 1)
+                            if var_name.strip().lower() == "groq_api_key":
+                                k = var_val.strip().strip('"').strip("'")
+                                if k and not k.startswith("your_groq"):
+                                    return k
             except Exception as exc:
                 logger.debug("Error reading %s: %s", ep, exc)
 
@@ -79,6 +86,7 @@ class GroqLLMClient:
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         }
 
         payload: Dict[str, Any] = {

@@ -21,6 +21,7 @@ from app.db.database import get_db
 from app.db.repository import ProjectRepository
 from app.models.pipeline_models import PipelineRunRequest, PipelineRunResponse
 from app.services.pipeline_orchestrator_service import PipelineOrchestratorService
+from app.services.cache_service import redis_pipeline_cache
 
 logger = logging.getLogger(__name__)
 
@@ -127,6 +128,16 @@ def list_projects(db: Session = Depends(get_db)) -> Dict[str, Any]:
             "created_at": p.created_at.isoformat() if p.created_at else None,
         })
 
+    # Merge cached demo mock projects from Redis memory
+    try:
+        demo_projs = redis_pipeline_cache.get_mock_projects_from_redis()
+        existing_ids = {p["id"] for p in result}
+        for dp in demo_projs:
+            if dp.get("id") and dp["id"] not in existing_ids:
+                result.append(dp)
+    except Exception as exc:
+        logger.debug("Error merging Redis demo projects: %s", exc)
+
     return {"total_projects": len(result), "projects": result}
 
 
@@ -136,6 +147,26 @@ def get_project_details(project_id: str, db: Session = Depends(get_db)) -> Dict[
     repo = ProjectRepository(db)
     proj = repo.get_project(project_id)
     if not proj:
+        # Check Redis demo cache
+        demo = redis_pipeline_cache.get_mock_project_details_from_redis(project_id)
+        if demo:
+            return {
+                "project": {
+                    "id": demo["id"],
+                    "project_name": demo["project_name"],
+                    "framework": demo["framework"],
+                    "project_path": "",
+                    "workspace_path": "",
+                    "status": demo.get("status", "completed"),
+                    "source_file_count": demo.get("source_file_count", 0),
+                    "created_at": demo.get("created_at"),
+                    "updated_at": demo.get("created_at"),
+                },
+                "pipeline_runs": [demo.get("latest_run")] if demo.get("latest_run") else [],
+                "test_cases_count": demo.get("test_cases_count", 0),
+                "test_files_count": demo.get("test_files_count", 0),
+                "latest_report": demo.get("latest_report"),
+            }
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Project '{project_id}' not found.")
 
     runs = repo.list_project_pipeline_runs(proj.id)
@@ -299,6 +330,16 @@ def get_project_test_cases(
             }
         })
 
+    if not res_cases:
+        demo = redis_pipeline_cache.get_mock_project_details_from_redis(project_id)
+        if demo and demo.get("test_cases"):
+            return {
+                "project_id": target_pid,
+                "pipeline_run_id": pipeline_run_id,
+                "total_test_cases": len(demo["test_cases"]),
+                "test_cases": demo["test_cases"],
+            }
+
     return {
         "project_id": target_pid,
         "pipeline_run_id": pipeline_run_id,
@@ -340,6 +381,16 @@ def get_project_test_files(
             "content": content or f"// Generated unit test file for {tf.file_name}\n// Component: {comp_name}\n\ndescribe('{comp_name} Suite', () => {{\n  it('renders component cleanly', () => {{\n    // Assertions\n  }});\n}});\n",
             "generated_at": tf.generated_at.isoformat() if tf.generated_at else None,
         })
+
+    if not res_files:
+        demo = redis_pipeline_cache.get_mock_project_details_from_redis(project_id)
+        if demo and demo.get("test_files"):
+            return {
+                "project_id": target_pid,
+                "pipeline_run_id": pipeline_run_id,
+                "total_test_files": len(demo["test_files"]),
+                "test_files": demo["test_files"],
+            }
 
     if not res_files:
         # Fallback: Synthesize test files directly from stored test cases for project

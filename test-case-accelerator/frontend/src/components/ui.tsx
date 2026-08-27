@@ -1,8 +1,80 @@
 import { AlertCircle, LoaderCircle, type LucideIcon } from 'lucide-react'
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
-export function Button({ variant = 'primary', className = '', loading = false, children, disabled, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'icon'; loading?: boolean }) {
-  return <button className={`button button-${variant} ${className}`} aria-busy={loading || undefined} disabled={disabled || loading} {...props}>{loading && <LoaderCircle className="spin" size={16} aria-hidden="true" />}{children}</button>
+export function Button({
+  variant = 'primary',
+  className = '',
+  loading = false,
+  children,
+  disabled,
+  style,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'icon'
+  loading?: boolean
+}) {
+  const baseStyles: React.CSSProperties = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    borderRadius: '9999px',
+    fontSize: '12px',
+    fontWeight: variant === 'primary' ? 800 : 700,
+    minHeight: '38px',
+    padding: '0 20px',
+    transition: 'all 0.15s ease',
+    cursor: disabled || loading ? 'not-allowed' : 'pointer',
+    opacity: disabled ? 0.5 : 1,
+    whiteSpace: 'nowrap'
+  }
+
+  const variantStyles: Record<string, React.CSSProperties> = {
+    primary: {
+      background: 'linear-gradient(to right, #FF602B, #4318FF)',
+      color: '#ffffff',
+      border: 'none',
+      boxShadow: '0 4px 14px rgba(255, 96, 43, 0.35)'
+    },
+    secondary: {
+      backgroundColor: '#ffffff',
+      color: '#111827',
+      border: '1px solid var(--border, #E5E7EB)',
+      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.03)'
+    },
+    ghost: {
+      backgroundColor: 'transparent',
+      color: '#6B7280',
+      border: 'none'
+    },
+    danger: {
+      backgroundColor: '#FEF2F2',
+      color: '#EE5D50',
+      border: '1px solid #FED7D7'
+    },
+    icon: {
+      width: '36px',
+      height: '36px',
+      padding: 0,
+      borderRadius: '50%',
+      backgroundColor: '#ffffff',
+      border: '1px solid var(--border, #E5E7EB)',
+      color: '#6B7280'
+    }
+  }
+
+  return (
+    <button
+      className={`button button-${variant} ${className}`}
+      aria-busy={loading || undefined}
+      disabled={disabled || loading}
+      style={{ ...baseStyles, ...variantStyles[variant], ...style }}
+      {...props}
+    >
+      {loading && <LoaderCircle className="spin" size={16} aria-hidden="true" />}
+      {children}
+    </button>
+  )
 }
 export function PageHeader({ title, subtitle, action }: { title: string; subtitle: string; action?: ReactNode }) {
   return <div className="page-header"><div><h1>{title}</h1><p>{subtitle}</p></div>{action}</div>

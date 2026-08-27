@@ -14,6 +14,7 @@ import {
   Loader2,
   Play,
   Folder,
+  UploadCloud,
   FileCode2,
   ArrowRight,
   Sparkles,
@@ -388,16 +389,16 @@ export default function DynamicStageContent({
   // 4. INITIAL IDLE / UPLOAD STATE VIEW
   // ---------------------------------------------------------------------------
   return (
-    <div className="bg-white dark:bg-[#1B1E3A] rounded-2xl border border-[#E0E5F2] dark:border-slate-800 p-3 sm:p-4 shadow-sm flex-1 min-h-0 flex flex-col justify-between overflow-hidden transition-colors duration-200">
+    <div className="bg-white dark:bg-[#1B1E3A] rounded-2xl border border-[#E0E5F2] dark:border-slate-800 p-6 shadow-sm flex flex-col justify-between transition-colors duration-200">
       {/* Outer Dashed Card Container */}
       <div
         onDragOver={handleDragOver}
         onDragLeave={handleDragOver}
         onDrop={handleDrop}
-        className={`border-2 border-dashed rounded-xl p-3 sm:p-4 flex-1 min-h-0 flex flex-col items-center justify-center text-center transition-all duration-200 relative overflow-hidden ${
+        className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center transition-all duration-200 relative overflow-hidden ${
           uploadedFile
             ? 'border-[#4318FF]/40 dark:border-[#4318FF]/60 bg-[#F4F7FE] dark:bg-[#11142D]/40'
-            : 'border-[#E0E5F2] dark:border-slate-800 bg-[#F4F7FE]/60 dark:bg-[#11142D]/40'
+            : 'border-[#E0E5F2] dark:border-slate-800 bg-[#F4F7FE]/60 dark:bg-[#11142D]/40 hover:border-[#7357FF]/60'
         }`}
       >
         <input
@@ -409,32 +410,32 @@ export default function DynamicStageContent({
         />
 
         {/* Center Graphic */}
-        <div className="w-full max-w-xs flex items-center justify-center my-1 select-none">
-          <div className="w-16 h-12 bg-gradient-to-br from-[#7357FF] to-[#4318FF] rounded-xl shadow-md flex items-center justify-center relative transform hover:scale-105 transition-transform">
-            <Folder className="w-8 h-8 text-white stroke-[2]" />
+        <div className="flex items-center justify-center mb-3 select-none">
+          <div className="w-16 h-16 bg-gradient-to-br from-[#7357FF] to-[#4318FF] rounded-2xl shadow-lg shadow-[#4318FF]/25 flex items-center justify-center relative transform hover:scale-105 transition-transform">
+            <UploadCloud className="w-8 h-8 text-white stroke-[2.2]" />
           </div>
         </div>
 
         {currentProject && (
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#4318FF]/10 text-[#4318FF] dark:text-[#7357FF] rounded-full text-[11px] font-bold border border-[#4318FF]/20 mb-2">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-[#4318FF]/10 text-[#4318FF] dark:text-[#7357FF] rounded-full text-xs font-bold border border-[#4318FF]/20 mb-2.5">
             <Folder className="w-3.5 h-3.5" />
             <span>Target Project: {currentProject.project_name}</span>
           </div>
         )}
 
-        <h3 className="font-bold text-[#1B2559] dark:text-slate-100 text-sm sm:text-base mt-0.5">
+        <h3 className="font-bold text-[#1B2559] dark:text-slate-100 text-base sm:text-lg">
           {currentProject ? `Upload Workspace for "${currentProject.project_name}"` : 'Upload Frontend Project'}
         </h3>
-        <p className="text-[#707EAE] dark:text-[#A3AED0] text-[11px] mt-0.5 mb-2 font-medium">
+        <p className="text-[#707EAE] dark:text-[#A3AED0] text-xs mt-1 mb-5 max-w-md font-medium">
           Upload your React or Angular project to execute end-to-end unit test case generation
         </p>
 
         {/* Selected File / Choose Folder Controls */}
         {uploadedFile ? (
-          <div className="flex items-center gap-3 bg-white dark:bg-slate-800 border border-[#E0E5F2] dark:border-slate-700 px-3.5 py-1.5 rounded-xl shadow-xs mb-1">
-            <FileCode2 className="w-4 h-4 text-[#4318FF] dark:text-[#7357FF]" />
+          <div className="flex items-center gap-3 bg-white dark:bg-slate-800 border border-[#E0E5F2] dark:border-slate-700 px-4 py-2.5 rounded-xl shadow-xs mb-2">
+            <FileCode2 className="w-5 h-5 text-[#4318FF] dark:text-[#7357FF]" />
             <div className="text-left">
-              <p className="text-xs font-bold text-[#1B2559] dark:text-slate-100 truncate max-w-[220px]">
+              <p className="text-xs font-bold text-[#1B2559] dark:text-slate-100 truncate max-w-[240px]">
                 {uploadedFile.name}
               </p>
               <p className="text-[10px] text-[#A3AED0]">
@@ -443,7 +444,7 @@ export default function DynamicStageContent({
             </div>
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="text-xs text-[#4318FF] font-semibold hover:underline ml-2"
+              className="text-xs text-[#4318FF] dark:text-[#7357FF] font-bold hover:underline ml-3 cursor-pointer"
             >
               Change
             </button>
@@ -452,35 +453,35 @@ export default function DynamicStageContent({
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="bg-[#4318FF] hover:bg-[#3311CC] active:bg-[#280CA0] text-white font-medium px-4 py-1.5 rounded-xl text-xs flex items-center gap-2 shadow-md shadow-[#4318FF]/20 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+            className="bg-[#4318FF] hover:bg-[#3311CC] active:bg-[#280CA0] text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2.5 shadow-lg shadow-[#4318FF]/25 transition-all transform hover:-translate-y-0.5 cursor-pointer"
           >
-            <Folder className="w-3.5 h-3.5 fill-white/20 stroke-[2]" />
+            <UploadCloud className="w-4 h-4 stroke-[2.5]" />
             <span>Choose Folder / ZIP</span>
           </button>
         )}
 
-        <p className="text-[10px] text-[#A3AED0] dark:text-[#707EAE] mt-1">
+        <p className="text-[11px] text-[#A3AED0] dark:text-[#707EAE] mt-2.5">
           or drag and drop your project ZIP file here
         </p>
       </div>
 
       {/* Action Bar: Start Pipeline Progress */}
-      <div className="mt-2 flex flex-col items-center justify-center border-t border-[#E0E5F2] dark:border-slate-800/60 pt-2 shrink-0">
+      <div className="mt-5 flex flex-col items-center justify-center border-t border-[#E0E5F2] dark:border-slate-800/60 pt-4 shrink-0">
         <button
           type="button"
           disabled={isExecuting}
           onClick={onStartPipeline}
-          className={`font-semibold px-6 py-2 rounded-xl text-xs flex items-center gap-2 transition-all shadow-md ${
+          className={`font-extrabold px-8 py-3 rounded-xl text-xs sm:text-sm flex items-center gap-2.5 transition-all shadow-md ${
             !isExecuting
-              ? 'bg-[#FF5523] hover:bg-[#E0481B] text-white shadow-[#FF5523]/25 hover:shadow-[#FF5523]/35 transform hover:-translate-y-0.5 cursor-pointer'
+              ? 'bg-[#FF5523] hover:bg-[#E0481B] text-white shadow-[#FF5523]/30 hover:shadow-[#FF5523]/40 transform hover:-translate-y-0.5 cursor-pointer'
               : 'bg-[#FF5523]/80 text-white cursor-wait shadow-none'
           }`}
         >
-          <Play className={`w-3.5 h-3.5 fill-current ${isExecuting ? 'animate-spin' : ''}`} />
+          <Play className={`w-4 h-4 fill-current ${isExecuting ? 'animate-spin' : ''}`} />
           <span>{isExecuting ? 'Pipeline Execution Running...' : 'Start to Test'}</span>
         </button>
 
-        <p className="text-[10px] text-[#A3AED0] dark:text-slate-500 mt-0.5 font-medium">
+        <p className="text-[11px] text-[#A3AED0] dark:text-slate-500 mt-1.5 font-medium">
           Click to run all 9 pipeline stages sequentially
         </p>
       </div>
