@@ -1,0 +1,10 @@
+# Guidelines for Pytest Unit & Integration Tests
+
+1. Structure:
+   - Provide comprehensive `pytest` test functions testing the service and router endpoints.
+   - Use `FastAPI` `TestClient` or direct service instantiation.
+   - Test cases:
+     * Happy path test verifying successful creation/operation.
+     * Validation failure test (e.g. invalid email format, missing required field).
+     * Boundary / duplicate or not found error test.
+   - Use clear `assert` statements checking status codes and returned payload keys.

@@ -1,0 +1,15 @@
+{
+  "project_name": "94effe0b-28cf-4adf-babd-bd75e9efb013",
+  "generated_at": "2026-08-25T12:36:41.483405+00:00",
+  "promoted_shared_modules_count": 0,
+  "merged_files_count": 1,
+  "promoted_modules": [],
+  "merged_records": [
+    {
+      "story_key": "US001",
+      "action_type": "CREATE",
+      "relative_path": "backend\\tests\\test_dummy.py",
+      "status": "SUCCESS"
+    }
+  ]
+}

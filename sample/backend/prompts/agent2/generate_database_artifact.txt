@@ -1,0 +1,9 @@
+# Guidelines for Database SQL Schema Generation
+
+1. Structure:
+   - Provide clean PostgreSQL and SQLite compatible `CREATE TABLE IF NOT EXISTS` DDL statements.
+   - Use `UUID` or `VARCHAR(36)` primary key with `id`.
+   - Include columns for each field in the user story (e.g. `email VARCHAR(255)`, `password_hash VARCHAR(255)`, `status VARCHAR(50)`).
+   - Add audit columns: `created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP`, `updated_at TIMESTAMP WITH TIME ZONE`.
+   - Add indexes for lookups: `CREATE INDEX IF NOT EXISTS idx_... ON ... (...)`.
+   - Add clear SQL comments describing table purpose and column constraints.

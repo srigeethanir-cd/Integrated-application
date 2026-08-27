@@ -1,0 +1,1 @@
+﻿# Prompt: Generate Database Artifact

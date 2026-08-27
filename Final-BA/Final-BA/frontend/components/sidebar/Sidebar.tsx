@@ -175,23 +175,8 @@ export const Sidebar: React.FC = () => {
         </nav>
       </div>
 
-      {/* Bottom Forge Stories Promo & Settings */}
+      {/* Bottom Settings */}
       <div className={`space-y-3 pt-3 border-t border-white/10 flex flex-col ${collapsed ? 'items-center' : ''}`}>
-        {!collapsed && (
-          <div className="mx-1 p-3.5 rounded-2xl bg-gradient-to-br from-[#2D225A] to-[#1E1B4B] border border-white/10 text-white relative overflow-hidden shadow-md">
-            <div className="relative z-10 space-y-1">
-              <h4 className="text-xs font-extrabold text-white tracking-tight">Forge Stories</h4>
-              <p className="text-[10px] text-[#A0AEC0] leading-tight">Generate AI-powered stories faster</p>
-              <Link 
-                href="/dashboard"
-                className="mt-2 inline-block px-3 py-1 bg-white text-gray-900 font-bold text-[10px] rounded-lg shadow-sm hover:bg-gray-100 transition-colors"
-              >
-                Try Now
-              </Link>
-            </div>
-            <div className="absolute -right-2 -bottom-2 w-12 h-12 bg-gradient-to-br from-[#7551FF]/40 to-[#FF602B]/30 rounded-xl pointer-events-none" />
-          </div>
-        )}
 
         <Link
           href="/settings"

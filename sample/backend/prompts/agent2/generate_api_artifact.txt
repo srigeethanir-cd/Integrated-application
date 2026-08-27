@@ -1,0 +1,8 @@
+# Guidelines for FastAPI Router & Endpoint Generation
+
+1. Structure:
+   - Create a typed FastAPI `APIRouter` with prefix `/{module_name}` and tags `["{story_key}"]`.
+   - Define Pydantic v2 `BaseModel` schemas for Request and Response with explicit types and field descriptions.
+   - Include HTTP endpoints matching the user story (e.g. `POST /`, `GET /{id}`, `PUT /{id}`).
+   - Return structured response models with HTTP 200, 201, 400, 404, or 500 status codes.
+   - Add HTTPException handling and descriptive Swagger docstrings.

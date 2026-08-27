@@ -1,0 +1,13 @@
+# Guidelines for FastAPI Service Generation
+
+1. Structure:
+   - Create a clean Python service class matching the domain (e.g. `UserRegistrationService`, `LeaveManagementService`).
+   - Include clear typing with `typing.Dict`, `typing.List`, `typing.Optional`, `typing.Any`.
+   - Implement business logic methods covering every acceptance criteria requirement.
+   - Use `logging.getLogger(__name__)` for traceable operational logging.
+   - Include validation checks: check for empty inputs, required fields, domain constraints, and raise `ValueError` or return structured dictionaries.
+   - Ensure all timestamps use timezone-aware `datetime.now(timezone.utc)`.
+
+2. Return Contracts:
+   - Methods should return dictionaries with `{"status": "success", ...}` or raise appropriate exceptions.
+   - Never use `pass` or incomplete dummy snippets.

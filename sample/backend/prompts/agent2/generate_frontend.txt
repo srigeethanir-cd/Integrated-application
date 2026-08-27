@@ -1,0 +1,15 @@
+# Guidelines for React TypeScript Component Generation
+
+1. Structure:
+   - Export a functional React component named after the component name (e.g. `export const UserRegistrationComponent: React.FC = () => { ... }`).
+   - Use `useState` for form fields, loading states, error messages, and success feedback.
+   - Match all extracted input fields (inputs, select dropdowns, textareas, datepickers, buttons).
+   - Use modern Tailwind CSS classes with vibrant, clean styling (indigo/emerald/orange accents, rounded cards, subtle shadows).
+   - Include realistic validation before submit (e.g. email regex, password length, required checks).
+   - Provide an async submit handler calling the API with `fetch` and handling response states gracefully.
+   - Include success confirmation cards, alert banners, and reset buttons.
+
+2. Compatibility:
+   - Standard React import: `import React, { useState } from 'react';`
+   - Use Lucide icon names if needed or standard clean SVG/HTML icons.
+   - Export both named and default component.
