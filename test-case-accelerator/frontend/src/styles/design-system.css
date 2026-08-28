@@ -23,7 +23,7 @@ p { line-height:1.6; } small,.muted { color:var(--muted); }
 :where(button,a,input,textarea,select,summary):focus-visible { outline:2px solid var(--primary); outline-offset:2px; }
 :where(button,a,summary) { -webkit-tap-highlight-color:transparent; }
 
-.page { width:100%; max-width:1440px; padding:var(--tf-space-8) var(--tf-space-8) var(--tf-space-16); }
+.page { width:100%; max-width:none; padding:0 0 var(--tf-space-16); }
 .page-header { align-items:center; margin-bottom:var(--tf-space-8); }
 .page-header h1 { margin-bottom:var(--tf-space-1); }
 .page-header p { max-width:720px; font-size:var(--tf-font-body); }

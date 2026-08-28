@@ -572,7 +572,7 @@ export default function App() {
         </header>
 
         {/* Main Workspace Body */}
-        <main className="flex-1 px-8 py-6 space-y-6 max-w-7xl w-full mx-auto flex flex-col min-h-0">
+        <main className="flex-1 px-8 py-6 space-y-6 w-full flex flex-col min-h-0">
           {/* Welcome Banner & Action Button */}
           <div className="flex items-start justify-between flex-wrap gap-4 shrink-0">
             <div>

@@ -6,7 +6,7 @@ import { RuntimeValidationPage } from './pages/RuntimeValidationPage'
 import { AITestDetailsPage, AITestExplorerPage, AITestExportPage, AITestResultsOverview } from './pages/AITestResultsPages'
 
 export default function App() {
-  return <BrowserRouter><AppStateProvider><Routes><Route element={<AppShell />}>
+  return <BrowserRouter basename="/backend-unit-testcase-generator"><AppStateProvider><Routes><Route element={<AppShell />}>
     <Route index element={<Dashboard />} />
     <Route path="projects" element={<Projects />} />
     <Route path="projects/:id" element={<ProjectRedirect />} />

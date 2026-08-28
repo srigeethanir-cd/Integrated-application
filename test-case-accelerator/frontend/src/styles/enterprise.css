@@ -53,9 +53,8 @@ summary:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }
 .icon-button, .mobile-menu, .profile { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 9px; background: #fff; color: #6b7280; display: grid; place-items: center; }
 .profile { padding: 0; }
 
-/* Shared page and primitives */
-.page { max-width: 1280px; padding: 40px 40px 80px; }
-.page.narrow { max-width: 780px; }
+.page { width: 100%; max-width: none; padding: 0 0 40px; }
+.page.narrow { width: 100%; max-width: none; }
 .page-header { margin-bottom: 32px; }
 .page-header h1 { margin-bottom: 6px; color: #111827; font-size: 27px; font-weight: 690; line-height: 1.2; letter-spacing: -.035em; }
 .page-header p { color: #7b828d; font-size: 12px; line-height: 1.55; }
@@ -89,7 +88,7 @@ tbody tr:hover { background: #fafbfc; }
 .error-notice { border: 0; border-left: 3px solid #dc3545; border-radius: 8px; background: #fff1f2; }
 
 /* Landing and project surfaces */
-.landing-page { min-height: calc(100vh - 64px); padding: 64px 32px; background: radial-gradient(circle at 50% 0,#eef4ff 0,transparent 34%); }
+.landing-page { min-height: calc(100vh - 64px); padding: 64px 32px; background: #F7F9FC; }
 .landing-content h1 { color: #101318; font-size: clamp(38px,5vw,58px); font-weight: 720; line-height: 1.02; }
 .landing-content > p { color: #747c88; font-size: 15px; }
 .eyebrow { border: 0; background: #edf3ff; }

@@ -17,17 +17,29 @@ interface UniversalSidebarProps {
 }
 
 export function UniversalSidebar({ collapsed = false, onToggleCollapse }: UniversalSidebarProps) {
-  const [isCollapsed, setIsCollapsed] = useState(collapsed);
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    try {
+      const saved = localStorage.getItem('sidebar_collapsed');
+      if (saved !== null) return saved === 'true';
+    } catch {}
+    return collapsed;
+  });
 
   useEffect(() => {
-    setIsCollapsed(collapsed);
-  }, [collapsed]);
+    try {
+      const saved = localStorage.getItem('sidebar_collapsed');
+      if (saved !== null) setIsCollapsed(saved === 'true');
+    } catch {}
+  }, []);
 
   const toggle = () => {
+    const next = !isCollapsed;
+    setIsCollapsed(next);
+    try {
+      localStorage.setItem('sidebar_collapsed', String(next));
+    } catch {}
     if (onToggleCollapse) {
       onToggleCollapse();
-    } else {
-      setIsCollapsed((prev) => !prev);
     }
   };
 
@@ -47,7 +59,7 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
     { 
       label: 'API Code', 
       icon: FileText, 
-      path: '/api-code',
+      path: '/api-code/',
     },
     { 
       label: 'Unit Test Cases', 
@@ -170,6 +182,11 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
                 key={item.label}
                 href={item.path}
                 title={isCollapsed ? item.label : undefined}
+                onClick={(e) => {
+                  if (isActive) {
+                    e.preventDefault();
+                  }
+                }}
                 style={{
                   display: 'flex',
                   alignItems: 'center',

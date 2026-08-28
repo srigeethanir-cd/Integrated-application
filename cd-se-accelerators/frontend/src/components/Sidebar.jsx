@@ -51,7 +51,7 @@ export default function Sidebar() {
     { 
       label: 'API Code', 
       icon: FileText, 
-      path: '/api-code',
+      path: '/api-code/',
     },
     { 
       label: 'Unit Test Cases', 
@@ -121,6 +121,11 @@ export default function Sidebar() {
               <a
                 key={item.label}
                 href={item.path}
+                onClick={(e) => {
+                  if (isActive) {
+                    e.preventDefault();
+                  }
+                }}
                 className={`flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-3.5 py-3'} rounded-xl text-xs transition-all duration-200 group relative ${
                   isActive
                     ? 'bg-gradient-to-r from-[#FF5722] via-[#7B3FE4] to-[#5924E1] text-white shadow-md'

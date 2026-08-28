@@ -20,7 +20,8 @@ import {
   Terminal,
   CheckSquare,
   PanelLeftClose,
-  PanelLeftOpen
+  PanelLeftOpen,
+  Bell
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { NewProjectModal } from '@/components/projects/NewProjectModal';
@@ -30,7 +31,7 @@ import styles from './PremiumShell.module.css';
 const universalMenuItems = [
   { label: 'User Story', icon: LayoutGrid, path: '/dashboard' },
   { label: 'UI Code', icon: Folder, path: '/ui-code' },
-  { label: 'API Code', icon: FileText, path: '/api-code' },
+  { label: 'API Code', icon: FileText, path: '/api-code/' },
   { label: 'Unit Test Cases', icon: BookOpen, path: '/unit-test-cases/' },
   { label: 'Application Testing', icon: Layers, path: '/application-testing/' },
   { label: 'Backend Unit-Testcase Generator', icon: Sparkles, path: '/backend-unit-testcase-generator/' },
@@ -69,20 +70,6 @@ export function FeatureShell({ children }: { children: ReactNode }) {
   };
 
   const reducedMotion = useReducedMotion();
-  const pointerX = useMotionValue(0);
-  const pointerY = useMotionValue(0);
-  const x = useSpring(pointerX, { stiffness: 38, damping: 24, mass: 1.2 });
-  const y = useSpring(pointerY, { stiffness: 38, damping: 24, mass: 1.2 });
-
-  useEffect(() => {
-    if (reducedMotion) return;
-    const move = (event: PointerEvent) => {
-      pointerX.set((event.clientX / window.innerWidth - 0.5) * 34);
-      pointerY.set((event.clientY / window.innerHeight - 0.5) * 34);
-    };
-    window.addEventListener('pointermove', move, { passive: true });
-    return () => window.removeEventListener('pointermove', move);
-  }, [pointerX, pointerY, reducedMotion]);
 
   const handleGlobalSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,12 +81,7 @@ export function FeatureShell({ children }: { children: ReactNode }) {
   const activeAccelerator = 'Application Testing';
 
   return (
-    <div className={styles.experience} style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--background)' }}>
-      <div className={styles.ambient} aria-hidden="true">
-        <div className={styles.grid} />
-        <motion.div className={styles.orb} style={reducedMotion ? undefined : { x, y }} />
-        <div className={styles.ring} />
-      </div>
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#F7F9FC' }} className="dark:bg-[#0B1121]">
 
       {/* UNIVERSAL STORYFORGE AI SIDEBAR */}
       <aside
@@ -205,6 +187,11 @@ export function FeatureShell({ children }: { children: ReactNode }) {
                   key={item.label}
                   href={item.path}
                   title={sidebarCollapsed ? item.label : undefined}
+                  onClick={(e) => {
+                    if (isActive) {
+                      e.preventDefault();
+                    }
+                  }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -284,81 +271,74 @@ export function FeatureShell({ children }: { children: ReactNode }) {
 
       {/* TOP NAVIGATION BAR & CONTENT WRAPPER */}
       <div style={{ marginLeft: sidebarCollapsed ? '78px' : '260px', flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', transition: 'margin-left 0.2s ease' }}>
-        {/* Top Header */}
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/60 bg-background/90 px-6 backdrop-blur-md transition-colors gap-4">
-          {/* Top Module Navigation Tabs */}
-          <nav className="flex items-center gap-1.5 p-1 bg-muted/60 dark:bg-muted/30 border border-border/60 rounded-2xl">
-            {moduleTabs.map(({ href, label, icon: Icon, exact }) => {
-              const cleanCurrent = (pathname || '').replace(/^\/application-testing/, '').replace(/\/$/, '') || '/';
-              const cleanTarget = href.replace(/\/$/, '') || '/';
-              const active = exact ? cleanCurrent === cleanTarget : cleanCurrent.startsWith(cleanTarget);
+        {/* Top Header (Matching User Story Reference exactly) */}
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-[#E5E7EB] dark:border-gray-800 bg-white/95 dark:bg-[#111827]/95 px-8 backdrop-blur-md transition-colors gap-4">
+          {/* Global Search Input on the Left (Matching User Story Reference) */}
+          <form onSubmit={handleGlobalSearch} className="relative flex-1 max-w-md">
+            <Search className="absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#A0AEC0] pointer-events-none" />
+            <input
+              type="text"
+              value={globalQuery}
+              onChange={(e) => setGlobalQuery(e.target.value)}
+              placeholder="Search projects, stories..."
+              className="w-full pl-10 pr-4 py-2 text-xs bg-[#F8F9FC] border border-[#E5E7EB] rounded-xl text-[#111827] dark:text-white dark:bg-[#1E293B] dark:border-gray-700 outline-none focus:ring-2 focus:ring-[#7551FF]/20 focus:border-[#7551FF] transition"
+            />
+          </form>
 
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  style={
-                    active
-                      ? {
-                          backgroundColor: '#FF5523',
-                          color: '#ffffff',
-                          boxShadow: '0 4px 14px rgba(255, 85, 35, 0.35)',
-                        }
-                      : undefined
-                  }
-                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    active
-                      ? 'bg-[#FF5523] hover:bg-[#E0481B] text-white shadow-md shadow-[#FF5523]/30'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-background/60'
-                  }`}
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                  <span>{label}</span>
-                </Link>
-              );
-            })}
-          </nav>
-
+          {/* Right Controls: Bell notification, ThemeToggle, Sarah Jenkins profile */}
           <div className="flex items-center gap-3 ml-auto">
-            {/* Search Input */}
-            <form onSubmit={handleGlobalSearch} className="relative w-64 hidden xl:block">
-              <Search className="absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="text"
-                value={globalQuery}
-                onChange={(e) => setGlobalQuery(e.target.value)}
-                placeholder="Search projects..."
-                className="h-9 w-full rounded-full border border-border/70 bg-card/60 pl-9 pr-4 text-xs text-foreground placeholder:text-muted-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition"
-              />
-            </form>
-
-            {/* Quick Create Action */}
+            {/* Notification Bell with Orange Dot */}
             <button
-              onClick={() => setShowNewProjectModal(true)}
-              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#FF602B] to-[#4318FF] px-4 py-2 text-xs font-bold text-white shadow-md shadow-[#FF602B]/25 hover:opacity-95 transition cursor-pointer"
+              aria-label="Notifications"
+              className="relative p-2 text-[#6B7280] hover:text-[#111827] dark:hover:text-white rounded-xl transition cursor-pointer"
             >
-              <Plus className="h-3.5 w-3.5" /> New Project
+              <Bell className="w-4 h-4" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF602B] rounded-full" />
             </button>
 
             <ThemeToggle />
 
             {/* Profile Section Standard */}
-            <div className="flex items-center gap-2.5 pl-2 border-l border-border/60">
+            <div className="flex items-center gap-2.5 pl-3 border-l border-[#E5E7EB] dark:border-gray-700">
               <img
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120"
                 alt="Sarah Jenkins"
-                className="h-8 w-8 rounded-full object-cover border border-border/70 shadow-xs"
+                className="h-8 w-8 rounded-full object-cover border border-[#E5E7EB] shadow-xs"
               />
               <div className="hidden lg:flex flex-col text-left">
-                <span className="text-xs font-bold text-foreground leading-tight">Sarah Jenkins</span>
-                <span className="text-[10px] font-medium text-muted-foreground">Product Owner</span>
+                <span className="text-xs font-bold text-[#111827] dark:text-white leading-tight">Sarah Jenkins</span>
+                <span className="text-[10px] font-medium text-[#A0AEC0]">Product Owner</span>
               </div>
             </div>
           </div>
         </header>
 
         {/* Route Content Container */}
-        <main className="flex-1 px-8 py-6 max-w-7xl w-full mx-auto">
+        <main className="flex-1 px-8 py-5 space-y-4 w-full bg-[#F7F9FC] dark:bg-[#0B1121] min-h-[calc(100vh-64px)]">
+          {/* If NOT on dashboard, render Workflow Tabs at top of main */}
+          {!((pathname || '').replace(/^\/application-testing/, '').replace(/\/$/, '') === '' || (pathname || '').replace(/^\/application-testing/, '').replace(/\/$/, '') === '/dashboard') && (
+            <div className="pt-2 pb-0 flex items-center gap-2 overflow-x-auto border-b border-[#E5E7EB]/80 mb-4">
+              {moduleTabs.map(({ href, label, exact }) => {
+                const cleanCurrent = (pathname || '').replace(/^\/application-testing/, '').replace(/\/$/, '') || '/';
+                const cleanTarget = href.replace(/\/$/, '') || '/';
+                const active = exact ? cleanCurrent === cleanTarget : cleanCurrent.startsWith(cleanTarget);
+
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={`px-5 py-2.5 text-xs font-bold rounded-t-lg rounded-b-none transition-all duration-150 whitespace-nowrap cursor-pointer ${
+                      active
+                        ? 'bg-[#FF602B] text-white shadow-none'
+                        : 'bg-[#EAEBED] text-[#505D6F] hover:bg-[#DFE1E6] hover:text-[#111827]'
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={pathname}

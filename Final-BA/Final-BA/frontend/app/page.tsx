@@ -7,8 +7,12 @@ export default function RootPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // Starts directly from Login Page
-    router.replace('/login');
+    const token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null;
+    if (token) {
+      router.replace('/dashboard');
+    } else {
+      router.replace('/login');
+    }
   }, [router]);
 
   return null;

@@ -1735,7 +1735,49 @@ export default function App({ initialTab }: { initialTab?: string } = {}) {
 
         {/* ── MAIN WORKSPACE CONTAINER ── */}
         <main className="flex-1 overflow-y-auto px-8 py-6 min-h-0 bg-[#F7F9FB]">
-          <div className="max-w-6xl mx-auto space-y-4">
+          <div className="w-full space-y-4">
+
+            {/* Welcome Banner & Action Button (Exact User Story Reference) */}
+            <div className="flex items-start justify-between">
+              <div>
+                <h1 className="text-2xl font-bold text-[#111827] tracking-tight">
+                  Good morning, Sarah
+                </h1>
+                <p className="text-xs text-[#6B7280] mt-1">
+                  Welcome back to your workspace. Let&apos;s forge some amazing stories today.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('config');
+                  setProjectDetails({
+                    name: '',
+                    id: '',
+                    description: '',
+                    frontend: 'React + TypeScript',
+                    backend: 'FastAPI',
+                    database: 'PostgreSQL',
+                    orm: 'SQLAlchemy',
+                    version: '1.0.0'
+                  });
+                  setStoriesText('');
+                  setUploadedRequirementsFile(null);
+                  setUploadedDesignZip(null);
+                  setMasterBlueprint(null);
+                  setStories([]);
+                  setUserApprovedStoryIds([]);
+                  setActiveStoryId('');
+                  setWorkspaceExplorerTree(null);
+                  setWorkspaceSelectedFile('');
+                  setWorkspaceFileContent('');
+                }}
+                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-bold rounded-xl shadow-sm hover:opacity-95 transition-opacity cursor-pointer"
+              >
+                + New Project
+              </button>
+            </div>
 
             {/* ── STAGE NAVIGATION BUTTONS (Image 1 reference: rounded-t-lg rounded-b-none, unnumbered, Core removed) ── */}
             <div className="flex items-center gap-2 overflow-x-auto border-b border-[#E5E7EB]/80 pb-0">
@@ -1772,7 +1814,7 @@ export default function App({ initialTab }: { initialTab?: string } = {}) {
 
           {/* SCREEN 1: PROJECT CONFIGURATION */}
           {activeTab === 'config' && (
-            <div className="max-w-6xl mx-auto flex flex-col h-[calc(100vh-140px)] overflow-hidden animate-fade-in">
+            <div className="w-full flex flex-col h-[calc(100vh-140px)] overflow-hidden animate-fade-in">
               {/* Fixed Header Layout */}
               <div className="flex justify-between items-center flex-wrap gap-4 border-b border-[#E1D6D5]/50 pb-3 shrink-0 bg-[#F7F9FB] z-10">
                 <div>
@@ -2167,7 +2209,7 @@ export default function App({ initialTab }: { initialTab?: string } = {}) {
           {activeTab === 'blueprint' && (() => {
             if (!masterBlueprint) {
               return (
-                <div className="max-w-6xl mx-auto space-y-6 animate-fade-in pb-10">
+                <div className="w-full space-y-6 animate-fade-in pb-10">
                   <div className="flex justify-between items-center">
                     <div>
                       <h2 className="text-xl font-black text-[#1F232A]">Blueprint Overview</h2>
@@ -3329,7 +3371,7 @@ export default function App({ initialTab }: { initialTab?: string } = {}) {
             });
 
             return (
-              <div className="max-w-7xl mx-auto flex flex-col h-[calc(100vh-140px)] overflow-hidden animate-fade-in">
+              <div className="w-full flex flex-col h-[calc(100vh-140px)] overflow-hidden animate-fade-in">
                 {/* Unified Fixed Header Layout */}
                 <div className="flex justify-between items-center border-b border-[#E1D6D5]/40 pb-3 flex-wrap gap-4 shrink-0 bg-[#F7F9FB] z-10">
                   <div className="space-y-1.5">
@@ -4004,7 +4046,7 @@ export default function App({ initialTab }: { initialTab?: string } = {}) {
 
           {/* SCREEN 7: MERGE PREVIEW */}
           {activeTab === 'merge' && (
-            <div className="max-w-7xl mx-auto flex flex-col h-[calc(100vh-140px)] overflow-hidden animate-fade-in">
+            <div className="w-full flex flex-col h-[calc(100vh-140px)] overflow-hidden animate-fade-in">
               {/* Fixed Header Layout */}
               <div className="flex justify-between items-center flex-wrap gap-4 border-b border-[#E1D6D5]/40 pb-3 shrink-0 bg-[#F7F9FB] z-10">
                 <div>
@@ -4259,7 +4301,7 @@ export default function App({ initialTab }: { initialTab?: string } = {}) {
 
           {/* SCREEN 8: FINAL PROJECT / EXPORT */}
           {activeTab === 'final' && (
-            <div className="max-w-6xl mx-auto space-y-6 animate-fade-in pb-10">
+            <div className="w-full space-y-6 animate-fade-in pb-10">
               <div className="bg-[#FFFDFB] border border-[#E1D6D5] rounded-2xl p-8 shadow-md text-center space-y-5">
                 <CheckCircle2 size={48} className="mx-auto text-[#1CAB5F]" />
 
@@ -4856,7 +4898,7 @@ export default function App({ initialTab }: { initialTab?: string } = {}) {
 
           {/* SYSTEM CONFIG: SECURITY SETTINGS */}
           {activeTab === 'settings' && (
-            <div className="max-w-6xl mx-auto space-y-6 animate-fade-in pb-10">
+            <div className="w-full space-y-6 animate-fade-in pb-10">
               <div>
                 <h2 className="text-xl font-black text-[#1F232A]">Security Settings</h2>
                 <p className="text-xs text-slate-500">Configure JWT signing, security tokens scopes, and workspace policies.</p>
@@ -4904,7 +4946,7 @@ export default function App({ initialTab }: { initialTab?: string } = {}) {
 
           {/* SYSTEM CONFIG: AI PROVIDERS & PROMPTS */}
           {activeTab === 'providers' && (
-            <div className="max-w-6xl mx-auto space-y-6 animate-fade-in pb-10">
+            <div className="w-full space-y-6 animate-fade-in pb-10">
               <div className="flex justify-between items-center flex-wrap gap-4 border-b border-[#E1D6D5]/50 pb-3">
                 <div>
                   <div className="flex items-center gap-2.5">

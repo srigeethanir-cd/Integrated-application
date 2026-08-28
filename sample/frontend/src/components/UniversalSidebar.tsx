@@ -92,7 +92,6 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
   return (
     <aside 
       style={{
-        viewTransitionName: 'universal-sidebar',
         width: isCollapsed ? '78px' : '260px',
         height: '100vh',
         backgroundColor: '#1B1B3A',

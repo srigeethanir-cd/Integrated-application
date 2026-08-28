@@ -70,7 +70,7 @@ export const Sidebar: React.FC = () => {
     { 
       label: 'API Code', 
       icon: FileText, 
-      path: '/api-code',
+      path: '/api-code/',
     },
     { 
       label: 'Unit Test Cases', 
@@ -136,7 +136,7 @@ export const Sidebar: React.FC = () => {
         <nav className="space-y-2">
           {menuItems.map((item) => {
             const isActive = activeAccelerator === item.label;
-            const isNginxRoute = item.path.startsWith('/unit-test-cases') || item.path.startsWith('/application-testing') || item.path.startsWith('/backend-unit-testcase-generator');
+            const isNginxRoute = item.path.startsWith('/api-code') || item.path.startsWith('/unit-test-cases') || item.path.startsWith('/application-testing') || item.path.startsWith('/backend-unit-testcase-generator');
 
             const content = (
               <>
@@ -160,14 +160,34 @@ export const Sidebar: React.FC = () => {
 
             if (isNginxRoute) {
               return (
-                <a key={item.label} href={item.path} className={className} title={collapsed ? item.label : undefined}>
+                <a
+                  key={item.label}
+                  href={item.path}
+                  className={className}
+                  title={collapsed ? item.label : undefined}
+                  onClick={(e) => {
+                    if (isActive) {
+                      e.preventDefault();
+                    }
+                  }}
+                >
                   {content}
                 </a>
               );
             }
 
             return (
-              <Link key={item.label} href={item.path} className={className} title={collapsed ? item.label : undefined}>
+              <Link
+                key={item.label}
+                href={item.path}
+                className={className}
+                title={collapsed ? item.label : undefined}
+                onClick={(e) => {
+                  if (isActive) {
+                    e.preventDefault();
+                  }
+                }}
+              >
                 {content}
               </Link>
             );
