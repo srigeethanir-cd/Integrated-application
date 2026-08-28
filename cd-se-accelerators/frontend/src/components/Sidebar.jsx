@@ -23,6 +23,40 @@ export default function Sidebar() {
     }
   }, []);
 
+  const [themeSidebarBg, setThemeSidebarBg] = useState(() => {
+    try {
+      return localStorage.getItem('storyforge_sidebar_bg') || '#1B1B3A';
+    } catch {
+      return '#1B1B3A';
+    }
+  });
+  const [themeGradient, setThemeGradient] = useState(() => {
+    try {
+      const start = localStorage.getItem('storyforge_gradient_start') || '#FF5722';
+      const end = localStorage.getItem('storyforge_gradient_end') || '#5924E1';
+      return `linear-gradient(to right, ${start}, ${end})`;
+    } catch {
+      return 'linear-gradient(to right, #FF5722, #7B3FE4, #5924E1)';
+    }
+  });
+
+  useEffect(() => {
+    const syncTheme = () => {
+      try {
+        const bg = localStorage.getItem('storyforge_sidebar_bg');
+        if (bg) setThemeSidebarBg(bg);
+        const start = localStorage.getItem('storyforge_gradient_start');
+        const end = localStorage.getItem('storyforge_gradient_end');
+        if (start && end) {
+          setThemeGradient(`linear-gradient(to right, ${start}, ${end})`);
+        }
+      } catch {}
+    };
+    syncTheme();
+    window.addEventListener('storage', syncTheme);
+    return () => window.removeEventListener('storage', syncTheme);
+  }, []);
+
   const toggleCollapsed = () => {
     setCollapsed((prev) => {
       const next = !prev;
@@ -70,10 +104,13 @@ export default function Sidebar() {
     },
   ];
 
+  const isEmbedded = typeof window !== 'undefined' && (window.self !== window.top || window.location.search.includes('embedded=true'));
+  if (isEmbedded) return null;
+
   return (
     <aside 
       className={`${collapsed ? 'w-[78px]' : 'w-[260px]'} h-screen select-none shrink-0 z-30 flex flex-col justify-between py-6 px-3 relative border-r border-[#2D3748]/50 transition-all duration-200`} 
-      style={{ backgroundColor: '#1B1B3A' }}
+      style={{ backgroundColor: themeSidebarBg }}
     >
       <div className="space-y-7">
         {/* StoryForge AI Header with Collapse Toggle */}
@@ -126,9 +163,10 @@ export default function Sidebar() {
                     e.preventDefault();
                   }
                 }}
+                style={isActive ? { background: themeGradient } : undefined}
                 className={`flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-3.5 py-3'} rounded-xl text-xs transition-all duration-200 group relative ${
                   isActive
-                    ? 'bg-gradient-to-r from-[#FF5722] via-[#7B3FE4] to-[#5924E1] text-white shadow-md'
+                    ? 'text-white shadow-md'
                     : 'text-[#8F9BBA] hover:text-white hover:bg-white/10'
                 }`}
                 title={collapsed ? item.label : undefined}

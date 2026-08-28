@@ -49,14 +49,15 @@ export function AppShell() {
   const activeProject = state.projects.find((project) => project.id === state.activeProjectId)
   const projectStatus = activeProject?.status === 'FAILED' ? 'Failed' : activeProject?.status === 'PROCESSING' ? 'Running' : 'Ready'
   const statusTone = projectStatus.toLowerCase()
+  const isEmbedded = typeof window !== 'undefined' && (window.self !== window.top || window.location.search.includes('embedded=true'))
 
   return (
     <div className="app-shell" style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--canvas, #F7F9FC)' }}>
       {/* StoryForge AI Universal Sidebar */}
-      <UniversalSidebar collapsed={sidebarCollapsed} onToggleCollapse={toggleSidebar} />
+      {!isEmbedded && <UniversalSidebar collapsed={sidebarCollapsed} onToggleCollapse={toggleSidebar} />}
 
       {/* Main Content Area with Fixed Navigation & Scrollable Body */}
-      <div className="app-body" style={{ marginLeft: sidebarCollapsed ? '78px' : '260px', flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', height: '100vh', overflowY: 'auto', transition: 'margin-left 0.2s ease' }}>
+      <div className="app-body" style={{ marginLeft: isEmbedded ? 0 : (sidebarCollapsed ? '78px' : '260px'), flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', height: '100vh', overflowY: 'auto', transition: 'margin-left 0.2s ease' }}>
         {/* Sticky Top Header with Search Bar (Matching Reference Image 2) */}
         <header
           className="topbar"

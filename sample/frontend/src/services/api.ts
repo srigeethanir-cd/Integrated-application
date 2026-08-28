@@ -77,9 +77,7 @@ export interface MergeStatus {
   preview_url?: string;
 }
 
-export const API_BASE = (import.meta.env && import.meta.env.VITE_API_BASE_URL)
-  ? import.meta.env.VITE_API_BASE_URL
-  : '/api-code';
+export const API_BASE = '/api-code';
 
 async function safeJsonParse(res: Response): Promise<any> {
   if (!res.ok) return null;

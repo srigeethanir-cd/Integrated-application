@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { 
   LayoutGrid, 
   Folder,
@@ -17,31 +17,74 @@ interface UniversalSidebarProps {
 }
 
 export function UniversalSidebar({ collapsed = false, onToggleCollapse }: UniversalSidebarProps) {
-  const [isCollapsed, setIsCollapsed] = useState(() => {
+  const isEmbedded = typeof window !== 'undefined' && (window.self !== window.top || window.location.search.includes('embedded=true'));
+  if (isEmbedded) return null;
+
+  const [internalCollapsed, setInternalCollapsed] = useState(() => {
     try {
       const saved = localStorage.getItem('sidebar_collapsed');
       if (saved !== null) return saved === 'true';
-    } catch {}
+    } catch (error) {
+      void error;
+    }
     return collapsed;
   });
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem('sidebar_collapsed');
-      if (saved !== null) setIsCollapsed(saved === 'true');
-    } catch {}
-  }, []);
+    setInternalCollapsed(collapsed);
+  }, [collapsed]);
+
+  const isCollapsed = onToggleCollapse ? collapsed : internalCollapsed;
 
   const toggle = () => {
-    const next = !isCollapsed;
-    setIsCollapsed(next);
-    try {
-      localStorage.setItem('sidebar_collapsed', String(next));
-    } catch {}
     if (onToggleCollapse) {
       onToggleCollapse();
+    } else {
+      setInternalCollapsed((prev) => {
+        const next = !prev;
+        try {
+          localStorage.setItem('sidebar_collapsed', String(next));
+        } catch (error) {
+          void error;
+        }
+        return next;
+      });
     }
   };
+
+  const [themeSidebarBg, setThemeSidebarBg] = useState(() => {
+    try {
+      return localStorage.getItem('storyforge_sidebar_bg') || '#1B1B3A';
+    } catch {
+      return '#1B1B3A';
+    }
+  });
+  const [themeGradient, setThemeGradient] = useState(() => {
+    try {
+      const start = localStorage.getItem('storyforge_gradient_start') || '#FF5722';
+      const end = localStorage.getItem('storyforge_gradient_end') || '#5924E1';
+      return `linear-gradient(to right, ${start}, ${end})`;
+    } catch {
+      return 'linear-gradient(to right, #FF5722, #7B3FE4, #5924E1)';
+    }
+  });
+
+  useEffect(() => {
+    const syncTheme = () => {
+      try {
+        const bg = localStorage.getItem('storyforge_sidebar_bg');
+        if (bg) setThemeSidebarBg(bg);
+        const start = localStorage.getItem('storyforge_gradient_start');
+        const end = localStorage.getItem('storyforge_gradient_end');
+        if (start && end) {
+          setThemeGradient(`linear-gradient(to right, ${start}, ${end})`);
+        }
+      } catch {}
+    };
+    syncTheme();
+    window.addEventListener('storage', syncTheme);
+    return () => window.removeEventListener('storage', syncTheme);
+  }, []);
 
   const activeAccelerator = 'Backend Unit-Testcase Generator';
 
@@ -83,7 +126,7 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
       style={{
         width: isCollapsed ? '78px' : '260px',
         height: '100vh',
-        backgroundColor: '#1B1B3A',
+        backgroundColor: themeSidebarBg,
         position: 'fixed',
         top: 0,
         left: 0,
@@ -197,7 +240,7 @@ export function UniversalSidebar({ collapsed = false, onToggleCollapse }: Univer
                   fontWeight: 600,
                   textDecoration: 'none',
                   transition: 'all 0.2s',
-                  background: isActive ? 'linear-gradient(to right, #FF5722, #7B3FE4, #5924E1)' : 'transparent',
+                  background: isActive ? themeGradient : 'transparent',
                   color: isActive ? '#ffffff' : '#8F9BBA',
                   boxShadow: isActive ? '0 4px 14px rgba(91, 50, 245, 0.35)' : 'none'
                 }}

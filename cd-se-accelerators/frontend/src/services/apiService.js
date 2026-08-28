@@ -3,7 +3,17 @@
  * Connects directly to FastAPI backend endpoints running on http://localhost:8000.
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const getApiBaseUrl = () => {
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+  if (typeof window !== 'undefined') {
+    return '/unit-test-cases/api';
+  }
+  return 'http://localhost:8001';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 /**
  * Health check probe
@@ -40,12 +50,8 @@ export async function uploadProjectZip(file) {
 
     return await res.json();
   } catch (err) {
-    console.warn('API Service: Backend ZIP upload fallback triggered:', err.message);
-    return {
-      project_id: 'demo-project-' + Date.now(),
-      project_path: 'scratch/test_workspace/react_large',
-      message: 'Project ZIP ingested successfully'
-    };
+    console.error('API Service: Backend ZIP upload error:', err.message);
+    throw err;
   }
 }
 
@@ -72,12 +78,8 @@ export async function detectFrontendFramework(projectPath = 'scratch/test_worksp
 
     return await res.json();
   } catch (err) {
-    console.warn('API Service: /framework/detect endpoint call fallback:', err.message);
-    return {
-      framework: 'React',
-      confidence: 100,
-      reason: "Found 'react' and 'react-dom' in package.json dependencies."
-    };
+    console.error('API Service: /framework/detect endpoint call error:', err.message);
+    throw err;
   }
 }
 

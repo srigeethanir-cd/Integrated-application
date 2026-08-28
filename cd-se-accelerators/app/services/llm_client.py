@@ -16,9 +16,9 @@ from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
-# Default Groq Models
-PRIMARY_MODEL = "llama-3.3-70b-versatile"
-FALLBACK_MODEL = "llama-3.1-8b-instant"
+# Default Groq Models (verified active on Groq API)
+PRIMARY_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+FALLBACK_MODEL = os.getenv("GROQ_FALLBACK_MODEL", "openai/gpt-oss-20b")
 GROQ_COMPLETIONS_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 
@@ -26,7 +26,7 @@ def get_groq_api_key() -> Optional[str]:
     """Retrieve Groq API key from environment variables or app/.env file."""
     # 1. Environment variable check
     key = os.getenv("GROQ_API_KEY") or os.getenv("groq_api_key")
-    if key and key.strip():
+    if key and key.strip() and not key.strip().startswith("your_"):
         return key.strip()
 
     # 2. Check app/.env file
@@ -79,6 +79,7 @@ class GroqLLMClient:
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         }
 
         payload: Dict[str, Any] = {
@@ -103,7 +104,11 @@ class GroqLLMClient:
                 result = json.loads(resp.read().decode("utf-8"))
                 choices = result.get("choices", [])
                 if choices:
-                    return choices[0].get("message", {}).get("content", "")
+                    msg = choices[0].get("message", {})
+                    content = msg.get("content", "")
+                    if (not content or not content.strip()) and "reasoning" in msg:
+                        content = msg.get("reasoning", "")
+                    return content.strip() if content else ""
         except urllib.error.HTTPError as exc:
             err_body = exc.read().decode("utf-8") if hasattr(exc, "read") else str(exc)
             logger.warning("Groq API HTTPError (%d) with model %s: %s", exc.code, model, err_body)

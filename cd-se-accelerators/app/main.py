@@ -92,18 +92,9 @@ app.include_router(project_router)
 
 @app.on_event("startup")
 def on_startup():
-    """Initialize database tables on application startup and seed initial mock projects."""
+    """Initialize database tables on application startup."""
     init_db()
-    try:
-        from app.db.seed import seed_initial_mock_projects
-        from app.db.database import SessionLocal
-        db = SessionLocal()
-        try:
-            seed_initial_mock_projects(db)
-        finally:
-            db.close()
-    except Exception as exc:
-        logger.error("Error during startup database seeding: %s", exc)
+    logger.info("Database initialized successfully on startup.")
 
 
 @app.get("/", tags=["Health"])

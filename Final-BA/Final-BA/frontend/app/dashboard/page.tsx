@@ -8,9 +8,11 @@ import {
   ArrowUpRight, FileText, Sparkles, ChevronDown, BookOpen, GitBranch, 
   ListChecks, ShieldCheck, History, Download, Upload, Database, Cloud, 
   CheckCircle2, AlertTriangle, ArrowLeft, Sliders, RotateCw, Loader2, Trash2,
-  BarChart3, Bot, Check, AlertOctagon, Send, Mic, XCircle, Globe, LayoutGrid
+  BarChart3, Bot, Check, AlertOctagon, Send, Mic, XCircle, Globe, LayoutGrid,
+  Settings
 } from 'lucide-react';
 import { useWorkspaceStore } from '@/store/workspaceStore';
+import { useTheme } from '@/components/theme/ThemeContext';
 import { api } from '@/services/api';
 
 import RequirementsPage from '@/app/projects/[projectId]/requirements/page';
@@ -23,6 +25,7 @@ import ProcessingPage from '@/app/projects/[projectId]/processing/page';
 
 function DashboardContent() {
   const { workspaces, addWorkspace, removeWorkspace, updateWorkspaceTab } = useWorkspaceStore();
+  const { openSettings } = useTheme();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -418,10 +421,25 @@ function DashboardContent() {
           />
         </div>
 
-        <div className="flex items-center gap-4">
-          <button className="p-2 text-[#6B7280] hover:text-[#111827] hover:bg-[#F3F4F6] rounded-xl transition-colors relative cursor-pointer">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            className="p-2 text-[#6B7280] hover:text-[#111827] hover:bg-[#F3F4F6] rounded-xl transition-colors relative cursor-pointer"
+            aria-label="Notifications"
+          >
             <Bell className="w-4.5 h-4.5" />
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF602B] rounded-full" />
+          </button>
+
+          {/* Top-Right Settings Icon (Slide-in panel trigger) */}
+          <button
+            type="button"
+            onClick={openSettings}
+            title="Appearance Settings"
+            aria-label="Open Appearance Settings"
+            className="p-2 text-[#6B7280] hover:text-[#111827] hover:bg-[#F3F4F6] rounded-xl transition-colors cursor-pointer"
+          >
+            <Settings className="w-4.5 h-4.5" />
           </button>
           
           <div className="flex items-center gap-3 pl-3 border-l border-[#E5E7EB]">
@@ -453,7 +471,8 @@ function DashboardContent() {
 
             <button 
               onClick={() => setIsCreatingNewProject(true)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-bold rounded-xl shadow-sm hover:opacity-95 transition-opacity cursor-pointer"
+              style={{ background: 'var(--theme-gradient)' }}
+              className="flex items-center gap-2 px-5 py-2.5 text-white text-xs font-bold rounded-xl shadow-sm hover:opacity-95 transition-opacity cursor-pointer"
             >
               + New Project
             </button>

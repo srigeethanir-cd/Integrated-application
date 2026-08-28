@@ -48,6 +48,7 @@ from app.services.frontend_context.context_engine import FrontendContextEngine
 from app.services.frontend_context.models import FrontendContextResponse
 from app.services.framework_strategy import build_default_framework_registry, FrameworkRegistry
 from app.db.repository import ProjectRepository
+from app.services.redis_pipeline_cache import RedisPipelineCacheManager
 
 from app.utils.input_preprocessor import get_project_workspace
 
@@ -139,6 +140,7 @@ class PipelineOrchestratorService:
         self._validation_service = ValidationService()
         self._cache_manager = AnalysisCacheManager()
         self._index_cache: Dict[str, Any] = {}
+        self._redis_cache = RedisPipelineCacheManager()
 
 
     async def run_pipeline(self, request: PipelineRunRequest) -> PipelineRunResponse:
@@ -201,6 +203,16 @@ class PipelineOrchestratorService:
                 ("validation", self._run_validation),
             ]
 
+            # Check if previous context state exists in Redis
+            cached_ctx = self._redis_cache.get_pipeline_context(pipeline_run_id)
+            if cached_ctx:
+                if cached_ctx.get("project_id"):
+                    context.project_id = cached_ctx["project_id"]
+                if cached_ctx.get("framework"):
+                    context.framework = cached_ctx["framework"]
+                if cached_ctx.get("framework_version"):
+                    context.framework_version = cached_ctx["framework_version"]
+
             for stage_idx, (stage_name, handler) in enumerate(stage_handlers):
                 if stage_idx > max_stage_idx:
                     logger.info("Reached run_until limit ('%s'). Stopping pipeline execution.", target_stage_key)
@@ -210,11 +222,20 @@ class PipelineOrchestratorService:
                 s_start = time.perf_counter()
 
                 try:
-                    await handler(context)
+                    # Check if intermediate stage output can be restored from Redis (if prior stage)
+                    restored = False
+                    if stage_idx < max_stage_idx:
+                        restored = self._try_restore_stage_from_redis(context, stage_name)
+
+                    if not restored:
+                        await handler(context)
+                        # Save stage output and context to Redis
+                        self._save_stage_to_redis(context, stage_name)
+
                     s_duration = (time.perf_counter() - s_start) * 1000.0
                     stage_timings[stage_name] = round(s_duration, 2)
                     completed_stages.append(stage_name)
-                    logger.info("Stage '%s' completed successfully in %.2f ms", stage_name, s_duration)
+                    logger.info("Stage '%s' completed successfully in %.2f ms%s", stage_name, s_duration, " (restored from Redis)" if restored else "")
                 except Exception as exc:
                     s_duration = (time.perf_counter() - s_start) * 1000.0
                     stage_timings[stage_name] = round(s_duration, 2)
@@ -794,6 +815,150 @@ class PipelineOrchestratorService:
             repo.update_pipeline_run_stage(context.pipeline_run_id, "validation", progress=1.0, status="completed")
         except Exception as exc:
             logger.warning("DB persistence error in _run_validation: %s", exc)
+
+    def _save_stage_to_redis(self, context: PipelineContext, stage_name: str) -> None:
+        """Save stage output and updated pipeline context to Redis cache."""
+        try:
+            # 1. Update pipeline context in Redis
+            self._redis_cache.save_pipeline_context(
+                context.pipeline_run_id,
+                {
+                    "project_id": context.project_id,
+                    "pipeline_run_id": context.pipeline_run_id,
+                    "framework": context.framework,
+                    "framework_version": context.framework_version,
+                    "workspace_path": context.workspace_path,
+                    "project_path": context.project_path,
+                    "original_project_path": getattr(context, "original_project_path", None),
+                }
+            )
+
+            # 2. Save stage-specific output
+            if stage_name == "source_ingestion":
+                self._redis_cache.save_stage_output(
+                    context.pipeline_run_id,
+                    stage_name,
+                    {
+                        "project_id": context.project_id,
+                        "workspace_path": context.workspace_path,
+                        "framework": context.framework,
+                    }
+                )
+            elif stage_name == "project_scanner" and context.project_index:
+                self._redis_cache.save_stage_output(context.pipeline_run_id, stage_name, context.project_index)
+            elif stage_name == "framework_detection":
+                self._redis_cache.save_stage_output(
+                    context.pipeline_run_id,
+                    stage_name,
+                    {
+                        "framework": context.framework,
+                        "framework_version": context.framework_version,
+                    }
+                )
+            elif stage_name == "project_analyzer" and context.analysis:
+                self._redis_cache.save_stage_output(context.pipeline_run_id, stage_name, context.analysis)
+                if context.frontend_context:
+                    self._redis_cache.save_stage_output(context.pipeline_run_id, "frontend_context", context.frontend_context)
+                if context.behavior_inventory:
+                    self._redis_cache.save_stage_output(context.pipeline_run_id, "behavior_inventory", context.behavior_inventory)
+            elif stage_name == "ir_generator" and context.ir:
+                self._redis_cache.save_stage_output(context.pipeline_run_id, stage_name, context.ir)
+            elif stage_name == "strategy_generator" and context.strategy_plan:
+                self._redis_cache.save_stage_output(context.pipeline_run_id, stage_name, context.strategy_plan)
+            elif stage_name == "edge_case_generator" and context.edge_case_plan:
+                self._redis_cache.save_stage_output(context.pipeline_run_id, stage_name, context.edge_case_plan)
+            elif stage_name == "test_case_generator" and context.test_case_plan:
+                self._redis_cache.save_stage_output(context.pipeline_run_id, stage_name, context.test_case_plan)
+            elif stage_name == "test_writer" and context.test_writer_output:
+                self._redis_cache.save_stage_output(context.pipeline_run_id, stage_name, context.test_writer_output)
+            elif stage_name == "test_execution" and context.execution_report:
+                self._redis_cache.save_stage_output(context.pipeline_run_id, stage_name, context.execution_report)
+            elif stage_name == "validation" and context.validation_report:
+                self._redis_cache.save_stage_output(context.pipeline_run_id, stage_name, context.validation_report)
+        except Exception as exc:
+            logger.warning("Redis save error for stage '%s': %s", stage_name, exc)
+
+    def _try_restore_stage_from_redis(self, context: PipelineContext, stage_name: str) -> bool:
+        """Attempt to restore stage output from Redis cache into context."""
+        try:
+            cached = self._redis_cache.get_stage_output(context.pipeline_run_id, stage_name)
+            if not cached:
+                return False
+
+            if stage_name == "source_ingestion":
+                context.project_id = cached.get("project_id", context.project_id)
+                ws = cached.get("workspace_path")
+                if ws and os.path.exists(ws):
+                    context.workspace_path = ws
+                    context.project_path = ws
+                if cached.get("framework") and cached.get("framework") != "Unknown":
+                    context.framework = cached.get("framework")
+                return True
+
+            elif stage_name == "project_scanner":
+                from app.models.scanner_models import ProjectIndex
+                context.project_index = ProjectIndex.model_validate(cached)
+                self._index_cache[context.pipeline_run_id] = context.project_index
+                return True
+
+            elif stage_name == "framework_detection":
+                context.framework = cached.get("framework", context.framework or "React")
+                context.framework_version = cached.get("framework_version", context.framework_version)
+                context.framework_strategy = self._framework_registry.get_strategy(context.framework)
+                return True
+
+            elif stage_name == "project_analyzer":
+                from app.models.analyzer_models import ProjectAnalysis
+                context.analysis = ProjectAnalysis.model_validate(cached)
+                fce_cached = self._redis_cache.get_stage_output(context.pipeline_run_id, "frontend_context")
+                if fce_cached:
+                    context.frontend_context = FrontendContextResponse.model_validate(fce_cached)
+                bhv_cached = self._redis_cache.get_stage_output(context.pipeline_run_id, "behavior_inventory")
+                if bhv_cached:
+                    context.behavior_inventory = BehaviorInventoryResponse.model_validate(bhv_cached)
+                return True
+
+            elif stage_name == "ir_generator":
+                from app.models.ir_models import FrameworkAgnosticIR
+                context.ir = FrameworkAgnosticIR.model_validate(cached)
+                from app.utils.ir_cache import cache_ir
+                cache_ir(context.ir, key=context.pipeline_run_id or context.project_id)
+                return True
+
+            elif stage_name == "strategy_generator":
+                from app.models.strategy_models import StrategyPlanResponse
+                context.strategy_plan = StrategyPlanResponse.model_validate(cached)
+                return True
+
+            elif stage_name == "edge_case_generator":
+                from app.models.edge_case_models import EdgeCasePlanResponse
+                context.edge_case_plan = EdgeCasePlanResponse.model_validate(cached)
+                return True
+
+            elif stage_name == "test_case_generator":
+                from app.models.test_case_models import TestCasePlanResponse
+                context.test_case_plan = TestCasePlanResponse.model_validate(cached)
+                return True
+
+            elif stage_name == "test_writer":
+                from app.models.test_writer_models import TestWriterResponse
+                context.test_writer_output = TestWriterResponse.model_validate(cached)
+                return True
+
+            elif stage_name == "test_execution":
+                from app.models.execution_models import ExecutionReport
+                context.execution_report = ExecutionReport.model_validate(cached)
+                return True
+
+            elif stage_name == "validation":
+                from app.models.validation_models import ValidationReport
+                context.validation_report = ValidationReport.model_validate(cached)
+                return True
+
+        except Exception as exc:
+            logger.warning("Redis restore error for stage '%s': %s", stage_name, exc)
+
+        return False
 
     def _compute_performance_metrics(
         self,

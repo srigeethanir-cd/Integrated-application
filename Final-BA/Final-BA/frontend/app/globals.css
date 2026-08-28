@@ -46,9 +46,18 @@
   --background: var(--neutral-workspace);
   --foreground: var(--dark-950);
 
-  --sidebar-bg: var(--dark-800);
+  /* Dynamic Theme Tokens */
+  --theme-sidebar-bg: #1B1B3A;
+  --theme-gradient-start: #FF602B;
+  --theme-gradient-end: #4318FF;
+  --theme-gradient: linear-gradient(90deg, var(--theme-gradient-start), var(--theme-gradient-end));
+  --theme-gradient-vertical: linear-gradient(180deg, var(--theme-gradient-start), var(--theme-gradient-end));
+  --theme-accent: #FF602B;
+  --theme-border-selected: #EA580C;
+
+  --sidebar-bg: var(--theme-sidebar-bg);
   --sidebar-foreground: var(--neutral-muted-text);
-  --sidebar-active-bg: linear-gradient(135deg, #FF602B 0%, #4318FF 100%);
+  --sidebar-active-bg: var(--theme-gradient);
   --sidebar-active-fg: var(--neutral-white);
 
   --card: var(--neutral-white);
@@ -56,7 +65,7 @@
 
   --primary: var(--primary-500);
   --primary-foreground: var(--neutral-white);
-  --primary-gradient: linear-gradient(135deg, #FF602B 0%, #4318FF 100%);
+  --primary-gradient: var(--theme-gradient);
 
   --secondary: var(--info-subtle);
   --secondary-foreground: var(--primary-600);

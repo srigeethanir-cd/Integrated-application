@@ -275,12 +275,19 @@ def create_full_mock_project(
 
 
 def seed_initial_mock_projects(db: Session) -> None:
-    """Pre-populate the database layout with 3 gorgeous, premium mock projects."""
-    # First, run clean up to remove empty clutter
-    clean_empty_projects(db)
-
-    # 1. React E-Commerce Portal
-    ecommerce_cases = [
+    """Clean up any legacy mock projects to ensure zero mock data."""
+    try:
+        mock_pids = ["proj_mock_react_ecommerce", "proj_mock_angular_customer", "proj_mock_vue_task"]
+        for pid in mock_pids:
+            p = db.query(Project).filter(Project.id == pid).first()
+            if p:
+                db.delete(p)
+        db.commit()
+        logger.info("Legacy mock projects cleaned up.")
+    except Exception as exc:
+        db.rollback()
+        logger.warning("Error cleaning legacy mock projects: %s", exc)
+    return
         {
             "component": "ShoppingCart",
             "title": "Verify Shopping Cart rendering with items",

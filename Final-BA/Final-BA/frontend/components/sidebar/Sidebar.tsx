@@ -5,24 +5,38 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   LayoutGrid, 
-  Folder,
-  FileText, 
   BookOpen, 
   Layers, 
   Settings as SettingsIcon, 
   Sparkles,
+  FileText,
+  Folder,
   PanelLeftClose,
   PanelLeftOpen
 } from 'lucide-react';
+import { useTheme } from '@/components/theme/ThemeContext';
 
 export const Sidebar: React.FC = () => {
   const pathname = usePathname();
-  const [collapsed, setCollapsed] = useState(false);
+  const { openSettings } = useTheme();
+  const [collapsed, setCollapsed] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem('sidebar_collapsed');
+      if (saved !== null) {
+        return saved === 'true';
+      }
+    } catch {
+      // Ignore localStorage errors
+    }
+    return false;
+  });
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem('sidebar_collapsed');
-      if (saved !== null) setCollapsed(saved === 'true');
+      if (saved !== null) {
+        setCollapsed(saved === 'true');
+      }
     } catch {
       // Ignore localStorage errors
     }
@@ -43,8 +57,8 @@ export const Sidebar: React.FC = () => {
   // Active accelerator determination
   const isUiCode = pathname.startsWith('/ui-code');
   const isApiCode = pathname.startsWith('/api-code');
-  const isUnitTests = pathname.startsWith('/unit-test-cases');
-  const isTesting = pathname.startsWith('/application-testing');
+  const isUnitTests = pathname.startsWith('/unit-test-cases') || pathname.startsWith('/unit-tests');
+  const isTesting = pathname.startsWith('/application-testing') || pathname.startsWith('/testing');
   const isBackendGen = pathname.startsWith('/backend-unit-testcase-generator');
   const isSettings = pathname.startsWith('/settings');
 
@@ -70,29 +84,29 @@ export const Sidebar: React.FC = () => {
     { 
       label: 'API Code', 
       icon: FileText, 
-      path: '/api-code/',
+      path: '/api-code',
     },
     { 
       label: 'Unit Test Cases', 
       icon: BookOpen, 
-      path: '/unit-test-cases/',
+      path: '/unit-test-cases',
     },
     { 
       label: 'Application Testing', 
       icon: Layers, 
-      path: '/application-testing/',
+      path: '/application-testing',
     },
     { 
       label: 'Backend Unit-Testcase Generator', 
       icon: Sparkles, 
-      path: '/backend-unit-testcase-generator/',
+      path: '/backend-unit-testcase-generator',
     },
   ];
 
   return (
     <aside 
       className={`${collapsed ? 'w-[78px]' : 'w-[260px]'} h-screen select-none shrink-0 z-30 flex flex-col justify-between py-6 px-3 relative border-r border-[#2D3748]/50 transition-all duration-200`} 
-      style={{ backgroundColor: '#1B1B3A' }}
+      style={{ backgroundColor: 'var(--theme-sidebar-bg, #1B1B3A)' }}
     >
       <div className="space-y-7">
         
@@ -136,7 +150,6 @@ export const Sidebar: React.FC = () => {
         <nav className="space-y-2">
           {menuItems.map((item) => {
             const isActive = activeAccelerator === item.label;
-            const isNginxRoute = item.path.startsWith('/api-code') || item.path.startsWith('/unit-test-cases') || item.path.startsWith('/application-testing') || item.path.startsWith('/backend-unit-testcase-generator');
 
             const content = (
               <>
@@ -154,33 +167,18 @@ export const Sidebar: React.FC = () => {
 
             const className = `flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-3.5 py-3'} rounded-xl text-xs transition-all duration-200 group relative ${
               isActive
-                ? 'bg-gradient-to-r from-[#FF5722] via-[#7B3FE4] to-[#5924E1] text-white shadow-md'
+                ? 'text-white shadow-md'
                 : 'text-[#8F9BBA] hover:text-white hover:bg-white/10'
             }`;
 
-            if (isNginxRoute) {
-              return (
-                <a
-                  key={item.label}
-                  href={item.path}
-                  className={className}
-                  title={collapsed ? item.label : undefined}
-                  onClick={(e) => {
-                    if (isActive) {
-                      e.preventDefault();
-                    }
-                  }}
-                >
-                  {content}
-                </a>
-              );
-            }
+            const activeStyle = isActive ? { background: 'var(--theme-gradient)' } : undefined;
 
             return (
               <Link
                 key={item.label}
                 href={item.path}
                 className={className}
+                style={activeStyle}
                 title={collapsed ? item.label : undefined}
                 onClick={(e) => {
                   if (isActive) {
@@ -195,26 +193,19 @@ export const Sidebar: React.FC = () => {
         </nav>
       </div>
 
-      {/* Bottom Settings */}
+      {/* Bottom Settings Button (Slides in Appearance Settings drawer) */}
       <div className={`space-y-3 pt-3 border-t border-white/10 flex flex-col ${collapsed ? 'items-center' : ''}`}>
-
-        <Link
-          href="/settings"
-          title={collapsed ? 'Settings' : undefined}
-          className={`flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-4 py-2.5'} rounded-xl text-xs font-semibold transition-all duration-200 w-full group ${
-            activeAccelerator === 'Settings'
-              ? 'bg-gradient-to-r from-[#FF5722] to-[#5924E1] text-white shadow-md'
-              : 'text-[#8F9BBA] hover:text-white hover:bg-white/10'
-          }`}
+        <button
+          type="button"
+          onClick={openSettings}
+          title={collapsed ? 'Appearance Settings' : undefined}
+          className={`flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-4 py-2.5'} rounded-xl text-xs font-semibold transition-all duration-200 w-full group cursor-pointer text-[#8F9BBA] hover:text-white hover:bg-white/10`}
         >
           <div className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'}`}>
             <SettingsIcon className="w-5 h-5 shrink-0 text-[#8F9BBA] group-hover:text-white" />
             {!collapsed && <span>Settings</span>}
           </div>
-          {activeAccelerator === 'Settings' && !collapsed && (
-            <span className="w-1.5 h-4 bg-white rounded-full shrink-0 shadow-xs" />
-          )}
-        </Link>
+        </button>
       </div>
 
     </aside>

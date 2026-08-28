@@ -645,12 +645,12 @@ export default function UploadProjectCard({
       </div>
 
       {/* COMPACT Start Pipeline Progress Action Bar */}
-      <div className="mt-2 flex flex-col items-center justify-center border-t border-[#E0E5F2] dark:border-slate-800/60 pt-2 shrink-0">
+      <div className="mt-3 flex flex-col items-center justify-center border-t border-[#E0E5F2] dark:border-slate-800/60 pt-3 shrink-0">
         <button
           type="button"
           disabled={isExecuting}
           onClick={onStartPipeline}
-          className={`font-semibold px-6 py-2 rounded-xl text-xs flex items-center gap-2 transition-all shadow-md ${
+          className={`font-extrabold px-8 py-2.5 rounded-xl text-xs flex items-center gap-2 transition-all shadow-md ${
             !isExecuting
               ? 'bg-[#FF5523] hover:bg-[#E0481B] text-white shadow-[#FF5523]/25 hover:shadow-[#FF5523]/35 transform hover:-translate-y-0.5 cursor-pointer'
               : 'bg-[#FF5523]/80 text-white cursor-wait shadow-none'
@@ -660,7 +660,7 @@ export default function UploadProjectCard({
           <span>{isExecuting ? 'Pipeline Execution Running...' : 'Start to Test'}</span>
         </button>
 
-        <p className="text-[10px] text-[#A3AED0] dark:text-slate-500 mt-0.5 font-medium">
+        <p className="text-[10px] text-[#A3AED0] dark:text-slate-500 mt-1 font-medium">
           {isExecuting
             ? 'Running pipeline execution across stages...'
             : 'Click to begin pipeline execution'}

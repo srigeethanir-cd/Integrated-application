@@ -632,7 +632,7 @@ export default function App() {
 
         {/* Dashboard View */}
         {activeTab === 'dashboard' ? (
-          <div className="flex-1 flex flex-col gap-3 min-h-0 overflow-hidden justify-between">
+          <div className="flex-1 flex flex-col gap-4 min-h-0 overflow-y-auto custom-scrollbar pb-6">
             {/* Top Card: Pipeline Progress */}
             <div className="shrink-0">
               <PipelineProgressCard
@@ -659,7 +659,7 @@ export default function App() {
             )}
 
             {/* Bottom Content Section: Dynamic Stage Content (Requirements 3, 4, 5, 7, 8) */}
-            <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+            <div className="flex-1 min-h-[380px] flex flex-col">
               <DynamicStageContent
                 pipelineStatus={pipelineStatus}
                 currentStageIndex={currentStageIndex}

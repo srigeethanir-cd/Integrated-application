@@ -52,11 +52,43 @@ export function FeatureShell({ children }: { children: ReactNode }) {
   const [globalQuery, setGlobalQuery] = useState('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
+  const [themeSidebarBg, setThemeSidebarBg] = useState(() => {
+    try {
+      return localStorage.getItem('storyforge_sidebar_bg') || '#1B1B3A';
+    } catch {
+      return '#1B1B3A';
+    }
+  });
+  const [themeGradient, setThemeGradient] = useState(() => {
+    try {
+      const start = localStorage.getItem('storyforge_gradient_start') || '#FF5722';
+      const end = localStorage.getItem('storyforge_gradient_end') || '#5924E1';
+      return `linear-gradient(to right, ${start}, ${end})`;
+    } catch {
+      return 'linear-gradient(to right, #FF5722, #7B3FE4, #5924E1)';
+    }
+  });
+
   useEffect(() => {
     try {
       const saved = localStorage.getItem('sidebar_collapsed');
       if (saved !== null) setSidebarCollapsed(saved === 'true');
     } catch {}
+
+    const syncTheme = () => {
+      try {
+        const bg = localStorage.getItem('storyforge_sidebar_bg');
+        if (bg) setThemeSidebarBg(bg);
+        const start = localStorage.getItem('storyforge_gradient_start');
+        const end = localStorage.getItem('storyforge_gradient_end');
+        if (start && end) {
+          setThemeGradient(`linear-gradient(to right, ${start}, ${end})`);
+        }
+      } catch {}
+    };
+    syncTheme();
+    window.addEventListener('storage', syncTheme);
+    return () => window.removeEventListener('storage', syncTheme);
   }, []);
 
   const toggleSidebar = () => {
@@ -79,16 +111,18 @@ export function FeatureShell({ children }: { children: ReactNode }) {
   };
 
   const activeAccelerator = 'Application Testing';
+  const isEmbedded = typeof window !== 'undefined' && (window.self !== window.top || window.location.search.includes('embedded=true'));
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#F7F9FC' }} className="dark:bg-[#0B1121]">
 
       {/* UNIVERSAL STORYFORGE AI SIDEBAR */}
+      {!isEmbedded && (
       <aside
         style={{
           width: sidebarCollapsed ? '78px' : '260px',
           height: '100vh',
-          backgroundColor: '#1B1B3A',
+          backgroundColor: themeSidebarBg,
           position: 'fixed',
           top: 0,
           left: 0,
@@ -202,7 +236,7 @@ export function FeatureShell({ children }: { children: ReactNode }) {
                     fontWeight: 600,
                     textDecoration: 'none',
                     transition: 'all 0.2s',
-                    background: isActive ? 'linear-gradient(to right, #FF5722, #7B3FE4, #5924E1)' : 'transparent',
+                    background: isActive ? themeGradient : 'transparent',
                     color: isActive ? '#ffffff' : '#8F9BBA',
                     boxShadow: isActive ? '0 4px 14px rgba(91, 50, 245, 0.35)' : 'none'
                   }}
@@ -268,9 +302,10 @@ export function FeatureShell({ children }: { children: ReactNode }) {
           </div>
         </div>
       </aside>
+      )}
 
       {/* TOP NAVIGATION BAR & CONTENT WRAPPER */}
-      <div style={{ marginLeft: sidebarCollapsed ? '78px' : '260px', flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', transition: 'margin-left 0.2s ease' }}>
+      <div style={{ marginLeft: isEmbedded ? 0 : (sidebarCollapsed ? '78px' : '260px'), flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', transition: 'margin-left 0.2s ease' }}>
         {/* Top Header (Matching User Story Reference exactly) */}
         <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-[#E5E7EB] dark:border-gray-800 bg-white/95 dark:bg-[#111827]/95 px-8 backdrop-blur-md transition-colors gap-4">
           {/* Global Search Input on the Left (Matching User Story Reference) */}
