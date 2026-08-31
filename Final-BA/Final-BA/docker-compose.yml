@@ -192,6 +192,35 @@ services:
       - testcase-accelerator-backend
     restart: unless-stopped
 
+  apicode-backend:
+    build:
+      context: ../../sample/backend
+      dockerfile: Dockerfile
+    container_name: apicode-backend
+    env_file:
+      - path: ../../sample/backend/.env
+        required: false
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/cd_se_accelerators
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  apicode-frontend:
+    build:
+      context: ../../sample/frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: /api-code
+    container_name: apicode-frontend
+    depends_on:
+      - apicode-backend
+    restart: unless-stopped
+
   nginx:
     build:
       context: ./nginx
@@ -208,6 +237,8 @@ services:
       - testcase-backend
       - testcase-accelerator-frontend
       - testcase-accelerator-backend
+      - apicode-frontend
+      - apicode-backend
     restart: unless-stopped
 
 volumes:
