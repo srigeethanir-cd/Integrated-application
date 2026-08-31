@@ -190,6 +190,11 @@ export interface RuntimeValidationSummary {
   not_executable: number
   total: number
   pass_rate: number
+  quality_percent?: number
+  test_quality_score?: number
+  developer_code_issues?: number
+  test_infrastructure_issues?: number
+  test_generation_issues?: number
 }
 
 export interface RuntimeExecutionResult {
@@ -198,6 +203,9 @@ export interface RuntimeExecutionResult {
   expected_result: Record<string, unknown> | null
   actual_result: Record<string, unknown> | null
   assertion_failure: string | null
+  failure_category?: string | null
+  developer_action?: string | null
+  suggested_fix?: string | null
   logs: string | null
   execution_time_ms: number
 }

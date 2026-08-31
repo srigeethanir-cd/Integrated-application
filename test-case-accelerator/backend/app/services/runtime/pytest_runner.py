@@ -33,11 +33,14 @@ class PytestRunner:
         command = [
             sys.executable, "-m", "pytest", str(test_file.name), "-q", "-s",
             f"--junitxml={junit_path}",
-            "--cov", "--cov-report=json:coverage.json",
         ]
         environment = {
             key: value for key, value in os.environ.items()
-            if key.upper() in {"PATH", "SYSTEMROOT", "WINDIR", "TEMP", "TMP"}
+            if key.upper() in {
+                "PATH", "SYSTEMROOT", "WINDIR", "TEMP", "TMP",
+                "GROQ_API_KEY", "GROQ_MODEL", "PRIMARY_LLM_PROVIDER",
+                "CEREBRAS_API_KEY", "CEREBRAS_MODEL"
+            } or key.startswith("TESTFORGE_") or key.startswith("APP_")
         }
         if python_path is not None:
             runtime_root = str(python_path.resolve())
@@ -47,6 +50,8 @@ class PytestRunner:
             environment["PYTHONPATH"] = os.pathsep.join(paths)
             environment["TESTFORGE_RUNTIME_SOURCE_ROOT"] = runtime_root
             environment["PYTHONNOUSERSITE"] = "1"
+        if self._has_pytest_cov(environment):
+            command.extend(["--cov", "--cov-report=json:coverage.json"])
         logger.info(
             "Runtime pytest launch cwd=%s pythonpath=%s command=%s",
             test_file.parent.resolve(),
@@ -92,3 +97,17 @@ class PytestRunner:
             return float(payload["totals"]["percent_covered"])
         except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError):
             return None
+
+    @staticmethod
+    def _has_pytest_cov(environment: dict[str, str]) -> bool:
+        try:
+            res = subprocess.run(
+                [sys.executable, "-m", "pytest", "--help"],
+                env=environment,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            return "--cov" in (res.stdout or "")
+        except Exception:
+            return False

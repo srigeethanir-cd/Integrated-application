@@ -227,21 +227,21 @@ function DashboardContent() {
         </button>
       </div>
 
-      {/* Workflow Tab Navigation Bar (Placed directly BELOW Welcome Banner, matching User Story) */}
-      <div className="pt-2 pb-0 flex items-center gap-2 overflow-x-auto border-b border-[#E5E7EB]/80">
+      {/* Workflow Tab Navigation Bar (Exact User Story Reference: rounded-t-lg rounded-b-none, px-5 py-2.5, text-xs font-bold) */}
+      <div className="pt-2 pb-0 flex items-center gap-2 overflow-x-auto border-b border-[#E5E7EB]/80 mb-4">
         {moduleTabs.map(({ href, label, exact }) => {
           const cleanCurrent = (pathname || '').replace(/^\/application-testing/, '').replace(/\/$/, '') || '/';
           const cleanTarget = href.replace(/\/$/, '') || '/';
-          const active = exact ? cleanCurrent === cleanTarget : cleanCurrent.startsWith(cleanTarget);
+          const active = exact ? (cleanCurrent === cleanTarget || (cleanCurrent === '' && cleanTarget === '/dashboard')) : cleanCurrent.startsWith(cleanTarget);
 
           return (
             <Link
               key={href}
               href={href}
-              className={`px-5 py-2.5 text-xs font-bold rounded-t-lg rounded-b-none transition-all duration-150 whitespace-nowrap cursor-pointer ${
+              className={`px-5 py-2.5 text-xs font-bold rounded-t-lg rounded-b-none transition-all duration-150 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                 active
                   ? 'bg-[#FF602B] text-white shadow-none'
-                  : 'bg-[#EAEBED] text-[#505D6F] hover:bg-[#DFE1E6] hover:text-[#111827]'
+                  : 'bg-[#EAEBED] text-[#505D6F] hover:bg-[#DFE1E6] hover:text-[#111827] dark:bg-[#1E293B] dark:text-gray-300'
               }`}
             >
               {label}

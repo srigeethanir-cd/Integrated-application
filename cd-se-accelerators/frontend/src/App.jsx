@@ -586,15 +586,15 @@ export default function App() {
 
             <button
               onClick={handleNewRun}
-              className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-extrabold rounded-full shadow-[0_4px_16px_rgba(255,96,43,0.35)] hover:opacity-95 transition-opacity cursor-pointer shrink-0"
+              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#FF602B] to-[#4318FF] text-white text-xs font-bold rounded-xl shadow-xs hover:opacity-95 transition-opacity cursor-pointer shrink-0"
             >
               <Plus className="w-4 h-4 stroke-[2.5]" />
-              <span>New Test Project</span>
+              <span>+ New Test Project</span>
             </button>
           </div>
 
-          {/* Sticky Top Module Navigation Tabs Bar */}
-          <div className="sticky top-0 z-10 bg-[#F7F9FC]/95 dark:bg-[#11142D]/95 backdrop-blur-md py-1 flex items-center gap-2 overflow-x-auto shrink-0 border-b border-[#E5E7EB]/60 dark:border-[#2D3748]/60">
+          {/* Sticky Top Module Navigation Tabs Bar (Matching User Story Reference: rounded-t-lg rounded-b-none, px-5 py-2.5, text-xs font-bold) */}
+          <div className="pt-2 pb-0 flex items-center gap-2 overflow-x-auto shrink-0 border-b border-[#E5E7EB]/80 mb-4">
             {navTabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -602,10 +602,10 @@ export default function App() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                  className={`px-5 py-2.5 text-xs font-bold rounded-t-lg rounded-b-none transition-all duration-150 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                     isActive
-                      ? 'bg-[#FF602B] text-white shadow-sm'
-                      : 'bg-white dark:bg-[#1B1E3A] text-[#6B7280] dark:text-[#A0AEC0] hover:bg-[#F3F4F6] dark:hover:bg-[#1B1E3A]/70 hover:text-[#111827] dark:hover:text-white'
+                      ? 'bg-[#FF602B] text-white shadow-none'
+                      : 'bg-[#EAEBED] text-[#505D6F] hover:bg-[#DFE1E6] hover:text-[#111827] dark:bg-[#1E293B] dark:text-gray-300'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />

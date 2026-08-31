@@ -8,17 +8,20 @@ import { UniversalSidebar } from './UniversalSidebar'
 type NavigationItem = {
   label: string
   to: string
-  projectRoute?: boolean
+  key: string
+  projectRouteKey?: 'processing' | 'overview' | 'tests' | 'runtime-validation' | 'export'
 }
 
 const navTabs: NavigationItem[] = [
-  { label: 'Dashboard', to: '/' },
-  { label: 'Projects', to: '/projects' },
-  { label: 'AI Workspace', to: '/processing', projectRoute: true },
-  { label: 'Runtime Validation', to: '/runtime-validation', projectRoute: true },
-  { label: 'Reports', to: '/reports' },
-  { label: 'History', to: '/history' },
-  { label: 'Settings', to: '/settings' },
+  { label: 'Dashboard', to: '/', key: 'dashboard' },
+  { label: 'Projects', to: '/projects', key: 'projects' },
+  { label: 'AI Workspace', to: '/processing', key: 'workspace', projectRouteKey: 'processing' },
+  { label: 'Overview', to: '/ai-test-results', key: 'overview', projectRouteKey: 'overview' },
+  { label: 'Test Explorer', to: '/ai-test-results', key: 'tests', projectRouteKey: 'tests' },
+  { label: 'Runtime Validation', to: '/runtime-validation', key: 'runtime', projectRouteKey: 'runtime-validation' },
+  { label: 'Reports', to: '/reports', key: 'reports' },
+  { label: 'History', to: '/history', key: 'history' },
+  { label: 'Settings', to: '/settings', key: 'settings' },
 ]
 
 export function AppShell() {
@@ -252,6 +255,7 @@ export function AppShell() {
 
           {/* Workflow Tab Navigation Bar (Placed BELOW Good morning, Sarah as in Image 2 & 3) */}
           <div
+            className="workflow-tabs-bar"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -259,20 +263,52 @@ export function AppShell() {
               overflowX: 'auto',
               borderBottom: '1px solid var(--border, #E5E7EB)',
               paddingBottom: '0',
-              width: '100%'
+              width: '100%',
+              minHeight: '44px',
+              flexShrink: 0,
+              boxSizing: 'border-box'
             }}
           >
-            {navTabs.map(({ label, to, projectRoute }) => {
-              const target = projectRoute ? (state.activeProjectId ? `${to}/${state.activeProjectId}` : '/projects') : to
+            {navTabs.map(({ label, to, key, projectRouteKey }) => {
+              let target = to
+              if (projectRouteKey) {
+                if (state.activeProjectId) {
+                  if (projectRouteKey === 'processing') target = `/processing/${state.activeProjectId}`
+                  else if (projectRouteKey === 'overview') target = `/ai-test-results/${state.activeProjectId}`
+                  else if (projectRouteKey === 'tests') target = `/ai-test-results/${state.activeProjectId}/tests`
+                  else if (projectRouteKey === 'runtime-validation') target = `/runtime-validation/${state.activeProjectId}`
+                  else if (projectRouteKey === 'export') target = `/ai-test-results/${state.activeProjectId}/export`
+                } else {
+                  target = '/projects'
+                }
+              }
+
+              let isActive = false
+              if (key === 'dashboard') {
+                isActive = location.pathname === '/' || location.pathname === ''
+              } else if (key === 'overview') {
+                isActive = location.pathname.startsWith('/ai-test-results/') && !location.pathname.includes('/tests') && !location.pathname.includes('/export')
+              } else if (key === 'tests') {
+                isActive = location.pathname.includes('/ai-test-results/') && location.pathname.includes('/tests')
+              } else if (key === 'runtime') {
+                isActive = location.pathname.startsWith('/runtime-validation')
+              } else if (key === 'workspace') {
+                isActive = location.pathname.startsWith('/processing')
+              } else {
+                isActive = location.pathname.startsWith(to) && to !== '/'
+              }
+
               return (
                 <NavLink
-                  end={to === '/'}
-                  key={label}
+                  key={key}
                   to={target}
-                  style={({ isActive }) => ({
+                  style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    padding: '10px 20px',
+                    justifyContent: 'center',
+                    padding: '10px 22px',
+                    height: '38px',
+                    minHeight: '38px',
                     borderRadius: '8px 8px 0 0',
                     fontSize: '12px',
                     fontWeight: 700,
@@ -280,9 +316,10 @@ export function AppShell() {
                     whiteSpace: 'nowrap',
                     transition: 'all 0.15s ease',
                     backgroundColor: isActive ? '#FF602B' : '#EAEBED',
-                    color: isActive ? '#ffffff' : '#505D6F',
-                    cursor: 'pointer'
-                  })}
+                    color: isActive ? '#ffffff' : '#334155',
+                    cursor: 'pointer',
+                    boxSizing: 'border-box'
+                  }}
                 >
                   <span>{label}</span>
                 </NavLink>

@@ -694,7 +694,7 @@ class RequirementAnalysisAgent(BaseAgent):
     def _serialize_chunks(chunks: list[dict[str, Any]] | str) -> str:
         if isinstance(chunks, str):
             return chunks
-        return json.dumps(chunks, ensure_ascii=False, indent=2)
+        return json.dumps(chunks, ensure_ascii=False, indent=2, default=str)
 
     @staticmethod
     def _get_chunk_ref(chunk: Any) -> str:

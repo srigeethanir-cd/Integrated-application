@@ -282,8 +282,20 @@ class EpicGenerationAgent(
                 indent=2,
             )
 
+        def _json_default(obj: Any) -> Any:
+            if isinstance(obj, BaseModel):
+                return obj.model_dump(mode="json")
+            if hasattr(obj, "model_dump"):
+                return obj.model_dump(mode="json")
+            if hasattr(obj, "dict"):
+                return obj.dict()
+            if hasattr(obj, "__dict__"):
+                return obj.__dict__
+            return str(obj)
+
         return json.dumps(
             data,
+            default=_json_default,
             ensure_ascii=False,
             indent=2,
         )

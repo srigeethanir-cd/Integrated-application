@@ -41,7 +41,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-cd_se_accelerators}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_MULTIPLE_DATABASES: testcase_generator,testcase_generation_db,test_case_accelerator
+      POSTGRES_MULTIPLE_DATABASES: testcase_generator,testcase_generation_db,test_case_accelerator,apicode_db
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
@@ -135,6 +135,12 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/testcase_generation_db
       REDIS_URL: redis://redis:6379/0
+      GROQ_MODEL: llama-3.3-70b-versatile
+      GROQ_FALLBACK_MODEL: llama-3.1-8b-instant
+      GROQ_GENERATION_MODEL: llama-3.3-70b-versatile
+      GROQ_VALIDATION_MODEL: llama-3.3-70b-versatile
+      GROQ_REGENERATION_MODEL: llama-3.3-70b-versatile
+      APP_MOCK_MODE: "false"
     volumes:
       - testcase_backend_storage:/app/backend/storage
       - testcase_backend_artifacts:/app/backend/artifacts
@@ -201,7 +207,7 @@ services:
       - path: ../../sample/backend/.env
         required: false
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/cd_se_accelerators
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/apicode_db
       REDIS_URL: redis://redis:6379/0
     depends_on:
       postgres:

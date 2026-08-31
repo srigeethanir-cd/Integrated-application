@@ -1523,20 +1523,19 @@ export default function App({ initialTab }: { initialTab?: string } = {}) {
       setMergeProgressPercent(90);
       setMergeProgressStep('Finalizing integrated standalone repository...');
 
-      // Complete and navigate to export page
+      // Complete and stay on Merge Preview page
       setTimeout(() => {
         setMergeProgressPercent(100);
         setMergeProgressStep('Project integrated and merged successfully.');
         setMergeStatus({ status: 'MERGED', merged_count: stories.length || 1 });
-        showToast('Workspace merged successfully! Moving to Final Project Core & Export...', 'success');
+        showToast('Workspace merged successfully!', 'success');
         setIsMerging(false);
-        setActiveTab('final');
       }, 1000);
     } catch (err: any) {
       showToast(`Merge complete with notice: ${err.message}`, 'info');
       setTimeout(() => {
+        setMergeStatus({ status: 'MERGED', merged_count: stories.length || 1 });
         setIsMerging(false);
-        setActiveTab('final');
       }, 1200);
     }
   };
@@ -4058,10 +4057,24 @@ export default function App({ initialTab }: { initialTab?: string } = {}) {
                     type="button"
                     disabled={isMerging}
                     onClick={handleIntegrateAndMerge}
-                    className="bg-[#FF602B] disabled:opacity-50 hover:bg-[#E04F1D] text-white text-xs font-bold px-5 py-2.5 rounded-lg shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+                    className={`${
+                      mergeStatus?.status === 'MERGED'
+                        ? 'bg-[#1CAB5F] hover:bg-[#189652]'
+                        : 'bg-[#FF602B] hover:bg-[#E04F1D]'
+                    } disabled:opacity-50 text-white text-xs font-bold px-5 py-2.5 rounded-lg shadow-xs transition-all flex items-center gap-2 cursor-pointer`}
                   >
-                    <GitMerge size={15} className={isMerging ? "animate-spin" : ""} />
-                    <span>{isMerging ? 'Merging & Validating...' : 'Generate & Merge'}</span>
+                    {mergeStatus?.status === 'MERGED' ? (
+                      <CheckCircle2 size={15} />
+                    ) : (
+                      <GitMerge size={15} className={isMerging ? "animate-spin" : ""} />
+                    )}
+                    <span>
+                      {isMerging
+                        ? 'Merging & Validating...'
+                        : mergeStatus?.status === 'MERGED'
+                        ? 'Merged'
+                        : 'Generate & Merge'}
+                    </span>
                   </button>
 
                   <button
@@ -4069,10 +4082,10 @@ export default function App({ initialTab }: { initialTab?: string } = {}) {
                     disabled={isExporting}
                     onClick={handleExportZip}
                     title="Download Merged Project ZIP"
-                    className="bg-white border border-[#E1D6D5] hover:bg-slate-50 text-slate-700 hover:text-slate-900 text-xs font-bold px-3 py-2.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                    className="bg-white border border-[#E1D6D5] hover:bg-slate-50 text-slate-700 hover:text-slate-900 text-xs font-bold px-3.5 py-2.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
                   >
                     <Download size={15} className={isExporting ? "animate-bounce text-[#FF602B]" : "text-slate-700"} />
-                    <span className="hidden sm:inline">{isExporting ? 'Packaging...' : 'Download'}</span>
+                    <span>{isExporting ? 'Packaging...' : 'Download'}</span>
                   </button>
                 </div>
               </div>

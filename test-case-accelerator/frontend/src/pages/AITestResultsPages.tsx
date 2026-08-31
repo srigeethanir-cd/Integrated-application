@@ -28,7 +28,7 @@ function pythonLine(line: string) {
 }
 
 function ResultsNav({ projectId }: { projectId: string }) {
-  return <nav className="results-nav" aria-label="AI Test Results"><span>AI Test Results</span><NavLink end to={`/ai-test-results/${projectId}`}>Overview</NavLink><NavLink to={`/ai-test-results/${projectId}/tests`}>Test Explorer</NavLink><NavLink to={`/runtime-validation/${projectId}`}>Runtime Validation</NavLink><NavLink to={`/ai-test-results/${projectId}/export`}>Export</NavLink></nav>
+  return null
 }
 
 function useResultsProject() {

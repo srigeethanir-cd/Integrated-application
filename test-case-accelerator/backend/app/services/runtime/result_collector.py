@@ -31,29 +31,46 @@ class ResultCollector:
                 skipped = node.find("skipped")
                 status = "Skipped" if skipped is not None else "Failed" if failure is not None else "Passed"
                 sidecar = self._sidecar(result_directory, specification.result_key)
+                failure_text = (
+                    (failure.text or failure.attrib.get("message")) if failure is not None
+                    else skipped.attrib.get("message") if skipped is not None else None
+                )
+                category = None
+                action = None
+                if status == "Failed":
+                    category = "Developer Code Issue"
+                    action = "Review the target function implementation to ensure it satisfies expected return types, status codes, and exception contracts."
+                elif status == "NotExecutable":
+                    category = "Test Generation Issue"
+                    action = "Check test specification, module import path, and function signature."
+
                 collected[specification.case_id] = {
                     "test_case_id": specification.case_id,
                     "runtime_status": status,
                     "expected_result": specification.expected_result,
                     "actual_result": sidecar.get("actual_result"),
-                    "assertion_failure": (
-                        (failure.text or failure.attrib.get("message")) if failure is not None
-                        else skipped.attrib.get("message") if skipped is not None else None
-                    ),
+                    "assertion_failure": failure_text,
+                    "failure_category": category,
+                    "developer_action": action,
+                    "suggested_fix": action,
                     "logs": self._logs(run),
                     "execution_time_ms": float(node.attrib.get("time", 0)) * 1000,
                 }
         for specification in executable:
             if specification.case_id not in collected:
+                failure_text = (
+                    "Runtime validation timed out"
+                    if run.timed_out else "Pytest did not produce a result for this test"
+                )
                 collected[specification.case_id] = {
                     "test_case_id": specification.case_id,
                     "runtime_status": "Skipped" if run.timed_out else "Failed",
                     "expected_result": specification.expected_result,
                     "actual_result": self._sidecar(result_directory, specification.result_key).get("actual_result"),
-                    "assertion_failure": (
-                        "Runtime validation timed out"
-                        if run.timed_out else "Pytest did not produce a result for this test"
-                    ),
+                    "assertion_failure": failure_text,
+                    "failure_category": "Test Infrastructure Issue" if run.timed_out else "Developer Code Issue",
+                    "developer_action": "Verify execution timeout and system resources." if run.timed_out else "Review target function implementation for runtime failure.",
+                    "suggested_fix": "Verify execution timeout and system resources." if run.timed_out else "Review target function implementation for runtime failure.",
                     "logs": self._logs(run),
                     "execution_time_ms": 0.0,
                 }

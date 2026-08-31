@@ -349,31 +349,7 @@ export function FeatureShell({ children }: { children: ReactNode }) {
         </header>
 
         {/* Route Content Container */}
-        <main className="flex-1 px-8 py-5 space-y-4 w-full bg-[#F7F9FC] dark:bg-[#0B1121] min-h-[calc(100vh-64px)]">
-          {/* If NOT on dashboard, render Workflow Tabs at top of main */}
-          {!((pathname || '').replace(/^\/application-testing/, '').replace(/\/$/, '') === '' || (pathname || '').replace(/^\/application-testing/, '').replace(/\/$/, '') === '/dashboard') && (
-            <div className="pt-2 pb-0 flex items-center gap-2 overflow-x-auto border-b border-[#E5E7EB]/80 mb-4">
-              {moduleTabs.map(({ href, label, exact }) => {
-                const cleanCurrent = (pathname || '').replace(/^\/application-testing/, '').replace(/\/$/, '') || '/';
-                const cleanTarget = href.replace(/\/$/, '') || '/';
-                const active = exact ? cleanCurrent === cleanTarget : cleanCurrent.startsWith(cleanTarget);
-
-                return (
-                  <Link
-                    key={href}
-                    href={href}
-                    className={`px-5 py-2.5 text-xs font-bold rounded-t-lg rounded-b-none transition-all duration-150 whitespace-nowrap cursor-pointer ${
-                      active
-                        ? 'bg-[#FF602B] text-white shadow-none'
-                        : 'bg-[#EAEBED] text-[#505D6F] hover:bg-[#DFE1E6] hover:text-[#111827]'
-                    }`}
-                  >
-                    {label}
-                  </Link>
-                );
-              })}
-            </div>
-          )}
+        <main className="flex-1 px-8 py-5 space-y-4 w-full bg-[#F7F8FC] dark:bg-[#0B1121] min-h-[calc(100vh-64px)]">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={pathname}

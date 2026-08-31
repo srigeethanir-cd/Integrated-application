@@ -1,81 +1,85 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* LIGHT THEME (Elegant & Professional) */
-  --background: #ffffff;
-  --foreground: #0F172A; /* Deep Navy */
+  /* STORYFORGE AI COLOR PALETTE - LIGHT THEME */
+  --background: #F7F8FC; /* Workspace BG Gray 50 */
+  --foreground: #111827; /* Rich Dark 950 */
   
-  --card: #F8FAFC;
-  --card-foreground: #0F172A;
+  --card: #ffffff; /* Card BG Neutral White */
+  --card-foreground: #111827;
   
   --popover: #ffffff;
-  --popover-foreground: #0F172A;
+  --popover-foreground: #111827;
   
-  --primary: #0284C7; /* Sky Blue */
+  --primary: #7551FF; /* Primary Violet 500 */
+  --primary-deep: #4318FF; /* Primary Deep Indigo 600 */
   --primary-foreground: #ffffff;
   
-  --secondary: #E0F2FE; /* Light Blue */
-  --secondary-foreground: #0369A1;
+  --secondary: #F3F4F8; /* Gray 100 Muted */
+  --secondary-foreground: #111827;
   
-  --muted: #F1F5F9;
-  --muted-foreground: #64748B;
+  --muted: #F3F4F8; /* Gray 100 Muted Button */
+  --muted-foreground: #6B7280; /* Gray 500 Subtext Medium */
   
-  --accent: #F0F9FF;
-  --accent-foreground: #0284C7;
+  --accent: #FF602B; /* Accent Orange / CTA */
+  --accent-foreground: #ffffff;
   
-  --border: #E2E8F0;
-  --input: #E2E8F0;
-  --ring: #0284C7;
+  --border: #E5E7EB; /* Gray 200 Standard Border */
+  --input: #E5E7EB;
+  --ring: #7551FF;
   
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
-  /* Legacy / App-specific tokens */
-  --color-bg-deep: #f8f9fa;
+  /* StoryForge AI Palette App Tokens */
+  --color-bg-deep: #F7F8FC;
   --color-bg-card: #ffffff;
-  --color-bg-sidebar-iconbar: #0e0f12;
-  --color-bg-sidebar: #161719;
-  --color-accent-app: #111827;
-  --color-accent-hover: #1f2937;
+  --color-bg-sidebar: #111827;
+  --color-bg-sidebar-main: #1A1A2E;
+  --color-accent-app: #FF602B;
   --color-text-primary: #111827;
-  --color-text-secondary: #4b5563;
-  --color-text-muted: #9ca3af;
-  --color-border-app: #e5e7eb;
-  --color-border-hover: #d1d5db;
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-processing: #3b82f6;
+  --color-text-secondary: #4B5563;
+  --color-text-muted: #9CA3AF;
+  --color-border-app: #E5E7EB;
+  --color-success: #10B981;
+  --color-success-bright: #22C55E;
+  --color-success-tint: #D1FAE5;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-error-tint: #FEE2E2;
+  --color-info: #3B82F6;
+  --color-info-tint: #DCE4FF;
 }
 
 .dark {
-  /* DARK THEME (ChatGPT Elite with Deep Blues) */
-  --background: #0B1121; /* Very Dark Blue/Navy */
-  --foreground: #F8FAFC; /* Soft White */
+  /* STORYFORGE AI COLOR PALETTE - DARK THEME */
+  --background: #0B1121;
+  --foreground: #F8FAFC;
   
-  --card: #111827; /* Elevated Navy */
+  --card: #111827;
   --card-foreground: #F8FAFC;
   
-  --popover: #0F172A;
+  --popover: #1A1A2E;
   --popover-foreground: #F8FAFC;
   
-  --primary: #3B82F6; /* Vibrant Blue */
+  --primary: #7551FF;
+  --primary-deep: #4318FF;
   --primary-foreground: #ffffff;
   
   --secondary: #1E293B;
   --secondary-foreground: #F8FAFC;
   
   --muted: #1E293B;
-  --muted-foreground: #94A3B8;
+  --muted-foreground: #9CA3AF;
   
-  --accent: #1E293B;
-  --accent-foreground: #3B82F6;
+  --accent: #FF602B;
+  --accent-foreground: #ffffff;
   
-  --border: #1E293B;
-  --input: #1E293B;
-  --ring: #3B82F6;
+  --border: #2D3748;
+  --input: #2D3748;
+  --ring: #7551FF;
 }
 
 @theme inline {
@@ -104,8 +108,16 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: 'Outfit', 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+*, *::before, *::after, html, body, button, input, select, textarea, p, span, div, h1, h2, h3, h4, h5, h6, table, td, th, a, label {
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+code, pre, kbd, samp, .font-mono {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
 }
 
 * {
@@ -126,7 +138,7 @@ body {
   overflow-x: hidden;
   background-color: transparent;
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif !important;
   line-height: 1.5;
   transition: color 0.3s ease;
 }

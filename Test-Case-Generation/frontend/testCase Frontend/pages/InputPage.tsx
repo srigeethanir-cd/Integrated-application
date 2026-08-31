@@ -139,16 +139,16 @@ export function InputPage() {
 
   return (
     <div className="space-y-6">
-      <div className="relative flex min-h-[56vh] overflow-hidden rounded-[2rem] border border-primary/20 bg-gradient-to-br from-primary/15 via-card/90 to-card p-6 shadow-2xl shadow-primary/10 sm:p-10 lg:p-14">
-        <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full border border-primary/20 bg-primary/5 shadow-[0_0_100px_rgba(14,165,233,.16)]" aria-hidden="true" />
-        <div className="absolute bottom-10 right-10 hidden grid-cols-3 gap-3 lg:grid" aria-hidden="true">{Array.from({ length: 9 }).map((_, index) => <span key={index} className="h-2 w-2 rounded-full bg-primary/30" />)}</div>
+      <div className="relative flex min-h-[50vh] overflow-hidden rounded-[2rem] border border-[#7551FF]/20 bg-gradient-to-br from-[#7551FF]/10 via-card/95 to-card p-6 shadow-xl shadow-[#7551FF]/5 sm:p-10 lg:p-12">
+        <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full border border-[#7551FF]/20 bg-[#7551FF]/5 shadow-[0_0_100px_rgba(117,81,255,.12)]" aria-hidden="true" />
+        <div className="absolute bottom-10 right-10 hidden grid-cols-3 gap-3 lg:grid" aria-hidden="true">{Array.from({ length: 9 }).map((_, index) => <span key={index} className="h-2 w-2 rounded-full bg-[#3B82F6]/30" />)}</div>
         <div className="relative z-10 flex max-w-5xl items-start gap-4 self-center">
-          <div className="rounded-xl bg-primary p-3 text-primary-foreground shadow-xl shadow-primary/30"><Sparkles className="h-6 w-6" /></div>
+          <div className="rounded-xl bg-[#3B82F6] p-3 text-white shadow-lg shadow-[#3B82F6]/30"><Sparkles className="h-6 w-6" /></div>
           <div className="min-w-0">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">AI workflow</p>
-            <h1 className="mt-4 font-bold">Turn product intent into executable confidence.</h1>
-            <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">Provide user stories and acceptance criteria to generate test scenarios, traceable test cases, and production-ready automation evidence.</p>
-            <div className="mt-8 flex flex-wrap gap-3 text-xs font-bold uppercase tracking-wider text-muted-foreground"><span>01 · Define</span><span className="text-primary">→</span><span>02 · Generate</span><span className="text-primary">→</span><span>03 · Validate</span><span className="text-primary">→</span><span>04 · Automate</span></div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B82F6]">AI workflow</p>
+            <h1 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-white tracking-tight">Turn product intent into executable confidence.</h1>
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-[#6B7280] dark:text-gray-300 sm:text-base">Provide user stories and acceptance criteria to generate test scenarios, traceable test cases, and production-ready automation evidence.</p>
+            <div className="mt-6 flex flex-wrap gap-3 text-xs font-bold uppercase tracking-wider text-[#9CA3AF]"><span>01 · Define</span><span className="text-[#3B82F6]">—</span><span>02 · Generate</span><span className="text-[#3B82F6]">—</span><span>03 · Validate</span><span className="text-[#3B82F6]">—</span><span>04 · Automate</span></div>
           </div>
         </div>
       </div>
@@ -157,12 +157,12 @@ export function InputPage() {
         {error && <div role="alert" className="rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-600 dark:text-red-300">{error}</div>}
         
         {/* Project Name Input Card */}
-        <section className="rounded-2xl border border-primary/20 bg-card p-5 shadow-sm sm:p-6">
+        <section className="rounded-2xl border border-[#E5E7EB] bg-white dark:bg-[#111827] p-5 shadow-xs sm:p-6">
           <div className="flex items-center gap-3 mb-3">
-            <FolderKanban className="h-5 w-5 text-primary" />
+            <FolderKanban className="h-5 w-5 text-[#3B82F6]" />
             <div>
-              <h2 className="font-semibold text-foreground">Project Name</h2>
-              <p className="mt-0.5 text-xs text-muted-foreground">Give your test generation scope a descriptive title to organize your dashboard.</p>
+              <h2 className="font-bold text-[#111827] dark:text-white">Project Name</h2>
+              <p className="mt-0.5 text-xs text-[#6B7280]">Give your test generation scope a descriptive title to organize your dashboard.</p>
             </div>
           </div>
           <input
@@ -170,16 +170,16 @@ export function InputPage() {
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
             placeholder="e.g., E-Commerce Checkout & Payment Gateway Test Suite"
-            className="w-full rounded-xl border border-input bg-background p-3.5 text-sm font-semibold outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition placeholder:text-muted-foreground/60"
+            className="w-full rounded-xl border border-[#E5E7EB] bg-[#FFFFFF] dark:bg-[#1E293B] p-3.5 text-sm font-semibold text-[#111827] dark:text-white outline-none focus:border-[#7551FF] focus:ring-2 focus:ring-[#7551FF]/20 transition placeholder:text-[#9CA3AF]"
           />
         </section>
-        <section className="rounded-2xl border border-primary/20 bg-card p-5 shadow-sm sm:p-6" aria-labelledby="confidence-threshold-title">
+        <section className="rounded-2xl border border-[#E5E7EB] bg-white dark:bg-[#111827] p-5 shadow-xs sm:p-6" aria-labelledby="confidence-threshold-title">
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center">
-            <div className="max-w-2xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Global quality gate</p><h2 id="confidence-threshold-title" className="mt-2 text-xl font-bold">Confidence threshold</h2><p className="mt-1 text-sm leading-6 text-muted-foreground">This threshold controls scenario validation, test-case validation, regeneration decisions, manual-review gates, and automation evidence analysis for the entire workflow.</p></div>
+            <div className="max-w-2xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#7551FF]">Global quality gate</p><h2 id="confidence-threshold-title" className="mt-2 text-xl font-bold text-[#111827] dark:text-white">Confidence threshold</h2><p className="mt-1 text-sm leading-6 text-[#6B7280]">This threshold controls scenario validation, test-case validation, regeneration decisions, manual-review gates, and automation evidence analysis for the entire workflow.</p></div>
             <output htmlFor="confidence-threshold" className="shrink-0"><ConfidenceRing value={confidenceThreshold} threshold={confidenceThreshold} label="Required threshold" size="lg" /></output>
           </div>
-          <input id="confidence-threshold" type="range" min="1" max="100" step="1" value={confidenceThreshold} onChange={(event) => setConfidenceThreshold(Number(event.target.value))} className="mt-6 h-2 w-full cursor-pointer accent-primary" aria-valuetext={`${confidenceThreshold}% confidence`} />
-          <div className="mt-2 flex justify-between text-xs font-medium text-muted-foreground"><span>Flexible · 1%</span><span>Balanced · 80%</span><span>Strict · 100%</span></div>
+          <input id="confidence-threshold" type="range" min="1" max="100" step="1" value={confidenceThreshold} onChange={(event) => setConfidenceThreshold(Number(event.target.value))} className="mt-6 h-2 w-full cursor-pointer accent-[#7551FF]" aria-valuetext={`${confidenceThreshold}% confidence`} />
+          <div className="mt-2 flex justify-between text-xs font-medium text-[#6B7280]"><span>Flexible · 1%</span><span>Balanced · 80%</span><span>Strict · 100%</span></div>
         </section>
         <div className="flex items-center justify-between rounded-2xl border border-border bg-card p-4 shadow-sm">
           <div><p className="font-semibold">Generation mode</p><p className="text-xs text-muted-foreground">Mock uses local sample output. When off, the configured live LLM is used.</p></div>
