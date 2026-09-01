@@ -65,7 +65,21 @@ class RuntimeValidationRepository:
         self, run: RuntimeValidationRun, *, results: list[dict[str, Any]],
         summary: dict[str, Any], duration_ms: float,
     ) -> None:
-        run.results.extend(RuntimeExecutionResult(run_id=run.id, **item) for item in results)
+        valid_fields = {
+            "id",
+            "test_case_id",
+            "runtime_status",
+            "expected_result",
+            "actual_result",
+            "assertion_failure",
+            "logs",
+            "execution_time_ms",
+        }
+        cleaned_results = [
+            RuntimeExecutionResult(run_id=run.id, **{k: v for k, v in item.items() if k in valid_fields})
+            for item in results
+        ]
+        run.results.extend(cleaned_results)
         run.summary = summary
         run.duration_ms = duration_ms
         run.status = (

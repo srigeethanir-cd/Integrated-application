@@ -135,11 +135,11 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/testcase_generation_db
       REDIS_URL: redis://redis:6379/0
-      GROQ_MODEL: llama-3.3-70b-versatile
-      GROQ_FALLBACK_MODEL: llama-3.1-8b-instant
-      GROQ_GENERATION_MODEL: llama-3.3-70b-versatile
-      GROQ_VALIDATION_MODEL: llama-3.3-70b-versatile
-      GROQ_REGENERATION_MODEL: llama-3.3-70b-versatile
+      GROQ_MODEL: ${GROQ_MODEL:-groq/compound}
+      GROQ_FALLBACK_MODEL: groq/compound
+      GROQ_GENERATION_MODEL: ${GROQ_MODEL:-groq/compound}
+      GROQ_VALIDATION_MODEL: ${GROQ_MODEL:-groq/compound}
+      GROQ_REGENERATION_MODEL: ${GROQ_MODEL:-groq/compound}
       APP_MOCK_MODE: "false"
     volumes:
       - testcase_backend_storage:/app/backend/storage

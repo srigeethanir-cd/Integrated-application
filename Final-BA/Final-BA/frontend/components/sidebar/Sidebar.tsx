@@ -15,10 +15,21 @@ import {
   PanelLeftOpen
 } from 'lucide-react';
 import { useTheme } from '@/components/theme/ThemeContext';
+import { useLanguage } from '@/components/i18n/LanguageContext';
 
 export const Sidebar: React.FC = () => {
   const pathname = usePathname();
   const { openSettings } = useTheme();
+  const { t } = useLanguage();
+
+  const [isEmbedded, setIsEmbedded] = useState(false);
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window.self !== window.top || window.location.search.includes('embedded=true'))) {
+      setIsEmbedded(true);
+    }
+  }, []);
+
+  if (isEmbedded) return null;
   const [collapsed, setCollapsed] = useState<boolean>(() => {
     try {
       const saved = localStorage.getItem('sidebar_collapsed');
@@ -30,6 +41,22 @@ export const Sidebar: React.FC = () => {
     }
     return false;
   });
+
+  const [customLogo, setCustomLogo] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadLogo = () => {
+      try {
+        const saved = localStorage.getItem('app_logo_url');
+        setCustomLogo(saved);
+      } catch {
+        // Ignore localStorage errors
+      }
+    };
+    loadLogo();
+    window.addEventListener('app_logo_updated', loadLogo);
+    return () => window.removeEventListener('app_logo_updated', loadLogo);
+  }, []);
 
   useEffect(() => {
     try {
@@ -72,32 +99,38 @@ export const Sidebar: React.FC = () => {
 
   const menuItems = [
     { 
-      label: 'User Story', 
+      label: t('userStory'), 
+      key: 'User Story',
       icon: LayoutGrid, 
       path: '/dashboard',
     },
     { 
-      label: 'UI Code', 
+      label: t('uiCode'), 
+      key: 'UI Code',
       icon: Folder, 
       path: '/ui-code',
     },
     { 
-      label: 'API Code', 
+      label: t('apiCode'), 
+      key: 'API Code',
       icon: FileText, 
       path: '/api-code',
     },
     { 
-      label: 'Unit Test Cases', 
+      label: t('unitTestCases'), 
+      key: 'Unit Test Cases',
       icon: BookOpen, 
       path: '/unit-test-cases',
     },
     { 
-      label: 'Application Testing', 
+      label: t('appTesting'), 
+      key: 'Application Testing',
       icon: Layers, 
       path: '/application-testing',
     },
     { 
-      label: 'Backend Unit-Testcase Generator', 
+      label: t('backendGenerator'), 
+      key: 'Backend Unit-Testcase Generator',
       icon: Sparkles, 
       path: '/backend-unit-testcase-generator',
     },
@@ -113,9 +146,18 @@ export const Sidebar: React.FC = () => {
         {/* StoryForge AI Header with Collapse Toggle */}
         <div className={`flex items-center ${collapsed ? 'justify-center' : 'justify-between'} px-1`}>
           <Link href="/dashboard" className="flex items-center gap-3 group" title="StoryForge AI">
-            <div className="w-8.5 h-8.5 rounded-2xl bg-gradient-to-r from-[#FF602B] to-[#4318FF] flex items-center justify-center shrink-0 shadow-lg shadow-purple-950/60 group-hover:scale-105 transition-transform">
-              <Sparkles className="w-4.5 h-4.5 text-white fill-white" />
-            </div>
+            {customLogo ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={customLogo}
+                alt="StoryForge Logo"
+                className="w-8.5 h-8.5 rounded-2xl object-cover shrink-0 shadow-lg shadow-purple-950/40 group-hover:scale-105 transition-transform"
+              />
+            ) : (
+              <div className="w-8.5 h-8.5 rounded-2xl bg-gradient-to-r from-[#FF602B] to-[#4318FF] flex items-center justify-center shrink-0 shadow-lg shadow-purple-950/60 group-hover:scale-105 transition-transform">
+                <Sparkles className="w-4.5 h-4.5 text-white fill-white" />
+              </div>
+            )}
             {!collapsed && (
               <span className="text-lg font-extrabold text-white tracking-tight font-sans whitespace-nowrap">
                 StoryForge AI
@@ -149,7 +191,7 @@ export const Sidebar: React.FC = () => {
         {/* Sidebar Menu Items */}
         <nav className="space-y-2">
           {menuItems.map((item) => {
-            const isActive = activeAccelerator === item.label;
+            const isActive = activeAccelerator === item.key;
 
             const content = (
               <>
@@ -175,7 +217,7 @@ export const Sidebar: React.FC = () => {
 
             return (
               <Link
-                key={item.label}
+                key={item.key}
                 href={item.path}
                 className={className}
                 style={activeStyle}
@@ -198,12 +240,12 @@ export const Sidebar: React.FC = () => {
         <button
           type="button"
           onClick={openSettings}
-          title={collapsed ? 'Appearance Settings' : undefined}
+          title={collapsed ? t('settings') : undefined}
           className={`flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-4 py-2.5'} rounded-xl text-xs font-semibold transition-all duration-200 w-full group cursor-pointer text-[#8F9BBA] hover:text-white hover:bg-white/10`}
         >
           <div className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'}`}>
             <SettingsIcon className="w-5 h-5 shrink-0 text-[#8F9BBA] group-hover:text-white" />
-            {!collapsed && <span>Settings</span>}
+            {!collapsed && <span>{t('settings')}</span>}
           </div>
         </button>
       </div>

@@ -79,12 +79,13 @@ class RuntimeValidationService:
             if code_understanding_run_id is not None
             else self._code_runs.get_latest_completed_by_project_id(project_id)
         )
+        if source_run is None:
+            source_run = self._code_runs.get_latest_by_project_id(project_id)
+
         if source_run is None or source_run.project_id != project_id:
             raise RuntimeSourceRunNotFoundError("Stage 6 source run not found")
-        if source_run.status != CodeUnderstandingStatus.COMPLETED and not (
-            source_run.status == CodeUnderstandingStatus.RUNNING
-            and source_run.failed_stage == "runtime_validation"
-        ):
+
+        if source_run.status not in (CodeUnderstandingStatus.COMPLETED, CodeUnderstandingStatus.FAILED, CodeUnderstandingStatus.RUNNING):
             raise RuntimeArtifactNotReadyError("Stage 6 source run is not completed")
 
         result = dict(source_run.result or {})

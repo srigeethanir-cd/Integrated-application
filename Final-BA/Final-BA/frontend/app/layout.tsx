@@ -6,6 +6,7 @@ import { Outfit, Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ThemeContextProvider } from '@/components/theme/ThemeContext';
+import { LanguageProvider } from '@/components/i18n/LanguageContext';
 import { AppearanceSettingsDrawer } from '@/components/settings/AppearanceSettingsDrawer';
 import { ConnectionToast } from '@/components/common/ConnectionToast';
 import { Sidebar } from '@/components/sidebar/Sidebar';
@@ -40,32 +41,42 @@ export default function RootLayout({
     }
   }, []);
 
-  // Hide sidebar on Auth pages (/login, /register, /)
+  // Check if embedded in iframe or on auth page
+  const [isEmbedded, setIsEmbedded] = React.useState(false);
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && (window.self !== window.top || window.location.search.includes('embedded=true'))) {
+      setIsEmbedded(true);
+    }
+  }, []);
+
   const isAuthPage = pathname === '/login' || pathname === '/register' || pathname === '/';
+  const showSidebar = !isAuthPage && !isEmbedded;
 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`min-h-screen antialiased text-foreground bg-[#f8f9fc] ${outfit.className} ${outfit.variable} ${geistSans.variable} ${geistMono.variable}`}>
-        <ThemeContextProvider>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-            {isAuthPage ? (
-              // Auth Layout (No Sidebar)
-              <div className="min-h-screen w-screen overflow-x-hidden bg-[#f8f9fc]">
-                {children}
-              </div>
-            ) : (
-              // App Layout (With Single Global Sidebar)
-              <div className="flex h-screen w-screen overflow-hidden bg-[#f8f9fc]">
-                <Sidebar />
-                <main className="flex-1 flex flex-col h-full overflow-y-auto relative bg-[#f8f9fc]">
+        <LanguageProvider>
+          <ThemeContextProvider>
+            <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+              {!showSidebar ? (
+                // Fullscreen Layout (No Sidebar)
+                <div className="min-h-screen w-screen overflow-x-hidden bg-[#f8f9fc]">
                   {children}
-                </main>
-              </div>
-            )}
-            <AppearanceSettingsDrawer />
-            <ConnectionToast />
-          </ThemeProvider>
-        </ThemeContextProvider>
+                </div>
+              ) : (
+                // App Layout (With Single Global Sidebar)
+                <div className="flex h-screen w-screen overflow-hidden bg-[#f8f9fc]">
+                  <Sidebar />
+                  <main className="flex-1 flex flex-col h-full overflow-y-auto relative bg-[#f8f9fc]">
+                    {children}
+                  </main>
+                </div>
+              )}
+              <AppearanceSettingsDrawer />
+              <ConnectionToast />
+            </ThemeProvider>
+          </ThemeContextProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

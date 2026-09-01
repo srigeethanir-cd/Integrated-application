@@ -437,8 +437,8 @@ class LLMService:
             elif provider == "groq":
                 groq_url = "https://api.groq.com/openai/v1"
                 resolved_model = model_name
-                if any(x in model_name.lower() for x in ["gpt-4", "gpt-3.5", "claude-", "gemini-"]):
-                    resolved_model = os.getenv("MODEL_NAME") or "openai/gpt-oss-120b"
+                if any(x in model_name.lower() for x in ["gpt-4", "gpt-3.5", "claude-", "gemini-", "llama-3.3-70b-versatile", "llama-70b"]):
+                    resolved_model = os.getenv("MODEL_NAME") or "groq/compound"
                 
                 client = openai.AsyncOpenAI(api_key=api_key, base_url=groq_url, timeout=timeout)
                 messages = []
@@ -617,6 +617,35 @@ class LLMService:
                     **fallback_kwargs,
                 )
             
+            if (
+                provider == "groq"
+                and (status == 404 or "model_not_found" in str(exc).lower() or isinstance(exc, openai.NotFoundError))
+            ):
+                fallback_model = "groq/compound"
+                logger.warning(
+                    "Groq model '%s' returned 404 Not Found; retrying request with fallback model '%s'.",
+                    model_name,
+                    fallback_model,
+                )
+                fallback_kwargs = dict(kwargs)
+                fallback_kwargs.update(
+                    {
+                        "provider": "groq",
+                        "model_name": fallback_model,
+                        "timeout": timeout,
+                        "temperature": temperature,
+                        "max_tokens": max_tokens,
+                        "top_p": top_p,
+                    }
+                )
+                return await self.execute(
+                    prompt=prompt,
+                    system_prompt=system_prompt,
+                    response_schema=response_schema,
+                    prompt_version=prompt_version,
+                    **fallback_kwargs,
+                )
+
             if status == 413:
                 error_msg = f"LLM request failed (413 Payload Too Large). Prompt tokens exceeded provider limits. Provider: {provider}"
                 logger.error(error_msg)
