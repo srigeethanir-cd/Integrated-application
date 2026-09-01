@@ -10,7 +10,7 @@ import {
   Settings as SettingsIcon, 
   Sparkles,
   FileText,
-  Folder,
+  Code2,
   PanelLeftClose,
   PanelLeftOpen
 } from 'lucide-react';
@@ -103,12 +103,6 @@ export const Sidebar: React.FC = () => {
       key: 'User Story',
       icon: LayoutGrid, 
       path: '/dashboard',
-    },
-    { 
-      label: t('uiCode'), 
-      key: 'UI Code',
-      icon: Folder, 
-      path: '/ui-code',
     },
     { 
       label: t('apiCode'), 
@@ -233,6 +227,26 @@ export const Sidebar: React.FC = () => {
             );
           })}
         </nav>
+
+        {/* UI Code — Disabled / Coming Soon */}
+        <div className="pt-3 mt-2 border-t border-white/10">
+          <button
+            type="button"
+            disabled
+            title={collapsed ? `${t('uiCode')} — Coming Soon` : 'Coming Soon'}
+            className={`flex items-center ${collapsed ? 'justify-center p-3' : 'justify-between px-3.5 py-3'} rounded-xl text-xs w-full cursor-not-allowed opacity-50 text-[#636e82]`}
+          >
+            <div className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'}`}>
+              <Code2 className="w-5 h-5 shrink-0 text-[#636e82]" />
+              {!collapsed && <span className="font-semibold text-sm text-[#636e82]">{t('uiCode')}</span>}
+            </div>
+            {!collapsed && (
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#636e82] bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">
+                Soon
+              </span>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Bottom Settings Button (Slides in Appearance Settings drawer) */}
